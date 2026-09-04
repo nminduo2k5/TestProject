@@ -21,9 +21,9 @@ function DinhMucTien() {
 
   const dinhMucColumns = [
     { title: 'Loại tiết', dataIndex: 'loaiTiet', key: 'loaiTiet', render: (text) => "Tiết chuẩn" },
-    { title: 'Số tiền (VNĐ)', dataIndex: 'soTien', key: 'soTien', render: (value) => value?.toLocaleString('vi-VN') },
+    { title: 'Số tiền (VNĐ)', dataIndex: 'soTien', key: 'soTien', render: (value) => value?.toLocaleString('vi-VN') || '0' },
 
-    { title: 'Ngày cập nhật', dataIndex: 'ngayCapNhat', key: 'ngayCapNhat', render: (date) => new Date(date)?.toLocaleDateString('vi-VN') },
+    { title: 'Ngày cập nhật', dataIndex: 'ngayCapNhat', key: 'ngayCapNhat', render: (date) => date ? new Date(date)?.toLocaleDateString('vi-VN') : '-' },
     {
       title: 'Thao tác', key: 'action',
       render: () => (
@@ -37,10 +37,10 @@ function DinhMucTien() {
   ];
 
   const lichSuColumns = [
-    { title: 'Số tiền (VNĐ)', dataIndex: 'soTien', key: 'soTien', render: (value) => value.toLocaleString('vi-VN') },
-    { title: 'Ngày cập nhật', dataIndex: 'ngayCapNhat', key: 'ngayCapNhat', render: (date) => new Date(date).toLocaleDateString('vi-VN') },
+    { title: 'Số tiền (VNĐ)', dataIndex: 'soTien', key: 'soTien', render: (value) => value?.toLocaleString('vi-VN') || '0' },
+    { title: 'Ngày cập nhật', dataIndex: 'ngayCapNhat', key: 'ngayCapNhat', render: (date) => date ? new Date(date).toLocaleDateString('vi-VN') : '-' },
     {
-      title: 'Trạng thái', dataIndex: 'soTien', key: 'soTien',
+      title: 'Trạng thái', dataIndex: 'soTien', key: 'trangThai',
       render: (value, entry, i) => i == 0 ? <Tag color='green'>Đang áp dụng</Tag> : <Tag color='red'>Dừng áp dụng</Tag>
     },
     { title: 'Lý do', dataIndex: 'lyDo', key: 'lyDo', }
@@ -72,7 +72,7 @@ function DinhMucTien() {
     <>
       <div className='p-5'>
         <Card title="Định mức tiền theo tiết chuẩn hiện tại">
-          <Table columns={dinhMucColumns} dataSource={[data[0]]} pagination={false} size="middle" />
+          <Table columns={dinhMucColumns} dataSource={data && data.length > 0 ? [data[0]] : []} pagination={false} size="middle" />
         </Card>
         <Card title="Lịch sử cập nhật định mức " style={{ marginTop: '16px' }}>
           <Table size="middle" columns={lichSuColumns} dataSource={data} pagination={{ pageSize: 5 }} />

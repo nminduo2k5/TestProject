@@ -40,7 +40,7 @@ function OverallStats() {
         {JSON.stringify(filteredData, null, 2)} */}
         <Card>
           <Statistic title="Số học phần" prefix={<BookOutlined />} valueStyle={{ color: '#eb2f96' }}
-            value={selectedKhoa == 'all' ? thongKeHocPhan.length : filteredData[0]?.soLopHocPhan} />
+            value={filteredData.length} />
         </Card>
       </Col>
     </Row>

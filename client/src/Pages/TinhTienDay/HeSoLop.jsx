@@ -22,12 +22,13 @@ const colors = [
 // ]
 
 function HeSoBangCap(value, colors = [], range = []) {
+  if (!colors || colors.length === 0) return 0;
   const colorNum = colors.length
   const div = Math.abs(range[1] - range[0]) / colorNum
   const min = Math.min(...range)
   const steps = new Array(colorNum).fill(0).map((_, i) => min + i * div)
-  return steps.findIndex(i => i >= value)
-
+  const idx = steps.findIndex(i => i >= value)
+  return idx >= 0 ? idx : colors.length - 1
 }
 
 function HeSoLop() {
@@ -60,7 +61,7 @@ function HeSoLop() {
 
     GetNamHocList().then(async data => {
       setNamHoc(data)
-      setSelectedNamHoc(data[0].nam || new Date().getFullYear())
+      setSelectedNamHoc(data[0]?.nam || new Date().getFullYear())
     })
 
     GetHeSoBangCapNam({ nam: new Date().getFullYear() }).then(setHeSoBangCap)
@@ -97,7 +98,7 @@ function HeSoLop() {
           <Popconfirm title="Bạn có chắc chắn muốn xóa?" okText="Có" cancelText="Không"
             onConfirm={async () => {
               await DeleteHeSoLopHocPhan({ id: item.id })
-              GetHeSoLopHocPhan().then(setHeSoLop)
+              GetHeSoLopHocPhanTheoNam({ nam: selectedNamHoc }).then(setHeSoLop)
               message.info("Xoá hệ số thành công!")
             }}>
             <Button disabled={selectedNamHoc < new Date().getFullYear()} variant="outlined" color="red" icon={<FontAwesomeIcon icon={faTrash} />} />

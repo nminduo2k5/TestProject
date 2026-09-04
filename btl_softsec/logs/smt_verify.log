@@ -1,0 +1,23 @@
+=================================================================
+  CHUONG 3: KIEM CHUNG FORMAL VOI Z3 SMT SOLVER (DuongUniversity)
+=================================================================
+
+[Check 1A] Overflow Test on Unbounded Accumulation / Multi-class Semester Total:
+  --> RESULT: SAT (32-bit Integer Overflow IS POSSIBLE on semester total accumulation!)
+  Counterexample values:
+    - soTiet           = 2000
+    - heSoHocPhan      = 12582911/4194304
+    - heSoQuyMoLop     = 4194303/8388608
+    - heSoBangCap      = 524287/262144
+    - dinhMucTienChuan = 153392 VND
+  --> DE XUAT: Dung long (int64) hoac double trong C de dam bao an toan tuyet doi.
+
+[Check 1B] Overflow Test on Single Class Bounds (soTiet <= 500, dmt <= 200,000 VND):
+  --> RESULT: UNSAT (Single class fits within 32-bit integer).
+    Max single class tienDay = 700,000,000 VND (< 2,147,483,647)
+
+[Check 2] 64-bit Integer Overflow Verification (long / int64):
+  --> RESULT: UNSAT (64-bit long is PROVEN SAFE within all enterprise bounds).
+    Limit INT64_MAX = 9,223,372,036,854,775,807 VND
+  --> KET LUAN: Code C sau khi fix sang 64-bit (long long/double) phat huy an toan tuyet doi.
+

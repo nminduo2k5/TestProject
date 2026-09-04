@@ -1,0 +1,12 @@
+=================================================================
+  MO-DUN CH2_MEMSAFE: PATTERN SCANNER TINH (SoftSec Toolkit)
+=================================================================
+
+== Quet tep: salary_calc.c ==
+salary_calc.c:33: cảnh báo [strcpy] Không kiểm tra độ dài đích - nên dùng strncpy/snprintf
+    strcpy(gv->hoTen, hoTen);
+salary_calc.c:37: cảnh báo [strcpy] Không kiểm tra độ dài đích - nên dùng strncpy/snprintf
+    strcpy(gv->bangCap, bangCap);
+salary_calc.c:51: cảnh báo [int_overflow_cast] Ép kiểu (int) trong phép nhân có nguy cơ Tràn số nguyên (Integer Overflow)
+    int soTietQuyDoi = (int)(lhp->soTiet * (lhp->heSoHocPhan + cfg->heSoQuyMoLop));
+

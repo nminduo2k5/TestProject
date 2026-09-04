@@ -1,0 +1,25 @@
+=================================================================
+  CHUONG 4: WHITE-BOX FUZZING VOI Z3 CONSTRAINT SOLVER (Z3-Guided)
+=================================================================
+
+[Constraint 1] Solver searching for Buffer Overflow input condition...
+  --> RESULT: SAT (Found Crash Input in 1 attempt!)
+  Input condition generated:
+    - Ho ten length = 81 characters
+    - Executed crash target: parse_lecturer() -> strcpy(gv->hoTen, hoTen)
+    - Crash impact: Stack Buffer Overflow / Memory Corruption
+
+[Constraint 2] Solver analyzing unvalidated degree branch logic...
+  - Valid degree set: ['GS', 'PGS', 'TIEN_SI', 'THAC_SI', 'CU_NHAN']
+  - Target logic condition: degree NOT in valid_degrees
+  --> RESULT: SAT (Logic Fault target found in 2 attempts!)
+    - Testcase input: bangCap = 'XYZ_INVALID_DEGREE'
+    - Expected behavior: System should reject invalid degree with error
+    - Actual code behavior: Silent fallthrough to default heSoBangCap = 1.0f (CU_NHAN)
+
+--> BANG KET QUA WHITE-BOX FUZZING:
+    - Tong so lan thu (Attempts):  2 lan (giai truc tiep Z3)
+    - So lan phat hien crash:      2 / 2 dieu kien target
+    - Tong thoi gian thuc thi:      0.0265 giay (< 0.06s)
+    - Do chinh xac:                 100% (Khong thu ngau nhien)
+

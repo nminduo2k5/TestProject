@@ -240,4 +240,267 @@ public class TestController(AppDbContext context) : ControllerBase
     return Ok(namHoc);
   }
 
-}
+  [HttpGet("seed-rich-data")]
+  [HttpPost("seed-rich-data")]
+  public async Task<ActionResult> SeedRichData()
+  {
+    // Clear existing data in correct FK order
+    _ct.LopHocPhan.RemoveRange(await _ct.LopHocPhan.ToListAsync());
+    _ct.HocPhan.RemoveRange(await _ct.HocPhan.ToListAsync());
+    _ct.HocKi.RemoveRange(await _ct.HocKi.ToListAsync());
+    _ct.Khoa_GiangVien.RemoveRange(await _ct.Khoa_GiangVien.ToListAsync());
+    _ct.GiangVien.RemoveRange(await _ct.GiangVien.ToListAsync());
+    _ct.BangCap.RemoveRange(await _ct.BangCap.ToListAsync());
+    _ct.ChucVu.RemoveRange(await _ct.ChucVu.ToListAsync());
+    _ct.Khoa.RemoveRange(await _ct.Khoa.ToListAsync());
+    _ct.DinhMucTien.RemoveRange(await _ct.DinhMucTien.ToListAsync());
+    _ct.HeSoBangCap.RemoveRange(await _ct.HeSoBangCap.ToListAsync());
+    _ct.HeSoLop.RemoveRange(await _ct.HeSoLop.ToListAsync());
+    await _ct.SaveChangesAsync();
+
+    // 1. Khoa
+    List<Khoa> khoas = [
+      new() { Id = Guid.NewGuid(), MaKhoa = "DU_FAC_CNTT", TenKhoa = "Khoa Công nghệ thông tin - DuongUniversity", TenVietTat = "DU-CNTT", ViTri = "Tầng 5 Tòa A", MoTa = "Đào tạo CNTT & Khoa học máy tính đỉnh cao" },
+      new() { Id = Guid.NewGuid(), MaKhoa = "DU_FAC_KTPM", TenKhoa = "Khoa Kỹ thuật phần mềm - DuongUniversity", TenVietTat = "DU-KTPM", ViTri = "Tầng 6 Tòa A", MoTa = "Chuyên ngành Phát triển & Kiểm thử phần mềm" },
+      new() { Id = Guid.NewGuid(), MaKhoa = "DU_FAC_AI", TenKhoa = "Khoa Trí tuệ nhân tạo - DuongUniversity", TenVietTat = "DU-AI", ViTri = "Tầng 4 Tòa A", MoTa = "Nghiên cứu AI, Machine Learning & Big Data" },
+      new() { Id = Guid.NewGuid(), MaKhoa = "DU_FAC_SPORT", TenKhoa = "Khoa Thể thao & Thể chất - DuongUniversity", TenVietTat = "DU-SPORT", ViTri = "Tầng 1 Tòa Thể thao", MoTa = "Đào tạo thể thao đỉnh cao & Huấn luyện viên" },
+      new() { Id = Guid.NewGuid(), MaKhoa = "DU_FAC_KT", TenKhoa = "Khoa Kinh tế & Quản trị - DuongUniversity", TenVietTat = "DU-KT", ViTri = "Tầng 3 Tòa C", MoTa = "Kinh tế số & Quản trị thương hiệu" },
+      new() { Id = Guid.NewGuid(), MaKhoa = "DU_FAC_NN", TenKhoa = "Khoa Ngoại ngữ & Truyền thông - DuongUniversity", TenVietTat = "DU-NN", ViTri = "Tầng 1 Tòa D", MoTa = "Tiếng Anh thương mại & Truyền thông đa phương tiện" }
+    ];
+    await _ct.Khoa.AddRangeAsync(khoas);
+
+    // 2. BangCap
+    List<BangCap> bangCaps = [
+      new() { Id = Guid.NewGuid(), MaBangCap = "DEG_GS", TenBangCap = "Giáo sư", TenVietTat = "GS" },
+      new() { Id = Guid.NewGuid(), MaBangCap = "DEG_PGS", TenBangCap = "Phó Giáo sư", TenVietTat = "PGS" },
+      new() { Id = Guid.NewGuid(), MaBangCap = "DEG_TS", TenBangCap = "Tiến sĩ", TenVietTat = "TS" },
+      new() { Id = Guid.NewGuid(), MaBangCap = "DEG_THS", TenBangCap = "Thạc sĩ", TenVietTat = "ThS" },
+      new() { Id = Guid.NewGuid(), MaBangCap = "DEG_CN", TenBangCap = "Cử nhân", TenVietTat = "CN" },
+      new() { Id = Guid.NewGuid(), MaBangCap = "DEG_KS", TenBangCap = "Kỹ sư", TenVietTat = "KS" }
+    ];
+    await _ct.BangCap.AddRangeAsync(bangCaps);
+
+    // 3. ChucVu
+    List<ChucVu> chucVus = [
+      new() { Id = Guid.NewGuid(), MaChucVu = "POS_HT", TenChucVu = "Hiệu trưởng", TenVietTat = "HT" },
+      new() { Id = Guid.NewGuid(), MaChucVu = "POS_TK", TenChucVu = "Trưởng khoa", TenVietTat = "TK" },
+      new() { Id = Guid.NewGuid(), MaChucVu = "POS_PTK", TenChucVu = "Phó Trưởng khoa", TenVietTat = "PTK" },
+      new() { Id = Guid.NewGuid(), MaChucVu = "POS_TBM", TenChucVu = "Trưởng bộ môn", TenVietTat = "TBM" },
+      new() { Id = Guid.NewGuid(), MaChucVu = "POS_GVC", TenChucVu = "Giảng viên chính", TenVietTat = "GVC" },
+      new() { Id = Guid.NewGuid(), MaChucVu = "POS_GV", TenChucVu = "Giảng viên", TenVietTat = "GV" }
+    ];
+    await _ct.ChucVu.AddRangeAsync(chucVus);
+    await _ct.SaveChangesAsync();
+
+    // 4. DinhMucTien
+    List<DinhMucTien> dinhMucs = [
+      new() { Id = Guid.NewGuid(), SoTien = 250000, NgayCapNhat = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc), LyDo = "Định mức thù lao tiết dạy mới DuongUniversity 2026" },
+      new() { Id = Guid.NewGuid(), SoTien = 200000, NgayCapNhat = new DateTime(2025, 9, 1, 0, 0, 0, DateTimeKind.Utc), LyDo = "Cập nhật định mức năm học 2025-2026" },
+      new() { Id = Guid.NewGuid(), SoTien = 180000, NgayCapNhat = new DateTime(2024, 9, 1, 0, 0, 0, DateTimeKind.Utc), LyDo = "Định mức năm học 2024-2025" },
+      new() { Id = Guid.NewGuid(), SoTien = 150000, NgayCapNhat = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), LyDo = "Định mức khởi tạo ban đầu DuongUniversity" }
+    ];
+    await _ct.DinhMucTien.AddRangeAsync(dinhMucs);
+
+    // 5. HeSoBangCap (2024, 2025, 2026)
+    uint[] nams = [2024, 2025, 2026];
+    List<HeSoBangCap> heSoBangCaps = [];
+    foreach (var nam in nams)
+    {
+      foreach (var bc in bangCaps)
+      {
+        double hs = bc.TenVietTat switch
+        {
+          "GS" => 2.5,
+          "PGS" => 2.0,
+          "TS" => 1.6,
+          "ThS" => 1.3,
+          _ => 1.0
+        };
+        heSoBangCaps.Add(new HeSoBangCap { Id = Guid.NewGuid(), MaBangCap = bc.Id, Nam = nam, HeSo = hs });
+      }
+    }
+    await _ct.HeSoBangCap.AddRangeAsync(heSoBangCaps);
+
+    // 6. HeSoLop (2024, 2025, 2026)
+    List<HeSoLop> heSoLops = [];
+    foreach (var nam in nams)
+    {
+      heSoLops.Add(new HeSoLop { Id = Guid.NewGuid(), NamHoc = nam, SoHocSinhToiThieu = 20, HeSo = -0.2 });
+      heSoLops.Add(new HeSoLop { Id = Guid.NewGuid(), NamHoc = nam, SoHocSinhToiThieu = 50, HeSo = 0.0 });
+      heSoLops.Add(new HeSoLop { Id = Guid.NewGuid(), NamHoc = nam, SoHocSinhToiThieu = 70, HeSo = 0.20 });
+      heSoLops.Add(new HeSoLop { Id = Guid.NewGuid(), NamHoc = nam, SoHocSinhToiThieu = 100, HeSo = 0.40 });
+      heSoLops.Add(new HeSoLop { Id = Guid.NewGuid(), NamHoc = nam, SoHocSinhToiThieu = 150, HeSo = 0.60 });
+    }
+    await _ct.HeSoLop.AddRangeAsync(heSoLops);
+
+    // 7. HocKi
+    List<HocKi> hocKis = [
+      new() { Id = Guid.NewGuid(), TenKi = "Học kỳ 1 (2024-2025)", ThoiGianBatDau = new DateTime(2024, 9, 1, 0, 0, 0, DateTimeKind.Utc), ThoiGianKetThuc = new DateTime(2025, 1, 15, 0, 0, 0, DateTimeKind.Utc) },
+      new() { Id = Guid.NewGuid(), TenKi = "Học kỳ 2 (2024-2025)", ThoiGianBatDau = new DateTime(2025, 2, 1, 0, 0, 0, DateTimeKind.Utc), ThoiGianKetThuc = new DateTime(2025, 6, 15, 0, 0, 0, DateTimeKind.Utc) },
+      new() { Id = Guid.NewGuid(), TenKi = "Học kỳ 1 (2025-2026)", ThoiGianBatDau = new DateTime(2025, 9, 1, 0, 0, 0, DateTimeKind.Utc), ThoiGianKetThuc = new DateTime(2026, 1, 15, 0, 0, 0, DateTimeKind.Utc) },
+      new() { Id = Guid.NewGuid(), TenKi = "Học kỳ 2 (2025-2026)", ThoiGianBatDau = new DateTime(2026, 2, 1, 0, 0, 0, DateTimeKind.Utc), ThoiGianKetThuc = new DateTime(2026, 6, 15, 0, 0, 0, DateTimeKind.Utc) },
+      new() { Id = Guid.NewGuid(), TenKi = "Học kỳ 1 (2026-2027)", ThoiGianBatDau = new DateTime(2026, 9, 1, 0, 0, 0, DateTimeKind.Utc), ThoiGianKetThuc = new DateTime(2027, 1, 15, 0, 0, 0, DateTimeKind.Utc) }
+    ];
+    await _ct.HocKi.AddRangeAsync(hocKis);
+    await _ct.SaveChangesAsync();
+
+    // 8. GiangVien & Khoa_GiangVien (Các huyền thoại & giảng viên DuongUniversity - Cân bằng Nam & Nữ)
+    var teacherData = new (string Ten, string Ma, string BC, string KhoaMa, string CV, int GioiTinh)[] {
+      // Nam (GioiTinh = 0)
+      ("GS.TS. Nguyễn Minh Dương", "DU_DUONG_01", "DEG_GS", "DU_FAC_CNTT", "POS_HT", 0),
+      ("GS.TS. Lionel Messi", "DU_MESSI_10", "DEG_GS", "DU_FAC_SPORT", "POS_TK", 0),
+      ("GS.TS. Cristiano Ronaldo", "DU_CR7_07", "DEG_GS", "DU_FAC_SPORT", "POS_PTK", 0),
+      ("PGS.TS. Neymar Jr", "DU_NEYMAR_11", "DEG_PGS", "DU_FAC_KTPM", "POS_TBM", 0),
+      ("TS. Kylian Mbappé", "DU_MBAPPE_09", "DEG_TS", "DU_FAC_CNTT", "POS_GVC", 0),
+      ("GS.TS. Luka Modrić", "DU_MODRIC_10", "DEG_GS", "DU_FAC_AI", "POS_TK", 0),
+      ("PGS.TS. Kevin De Bruyne", "DU_KDB_17", "DEG_PGS", "DU_FAC_AI", "POS_TBM", 0),
+      ("TS. Erling Haaland", "DU_HAALAND_09", "DEG_TS", "DU_FAC_CNTT", "POS_GV", 0),
+      ("GS.TS. Ronaldinho Gaúcho", "DU_R10_10", "DEG_GS", "DU_FAC_SPORT", "POS_GVC", 0),
+      ("GS.TS. Zinedine Zidane", "DU_ZIZOU_05", "DEG_GS", "DU_FAC_KT", "POS_TK", 0),
+      ("PGS.TS. Andrés Iniesta", "DU_INIESTA_08", "DEG_PGS", "DU_FAC_KTPM", "POS_TK", 0),
+      ("ThS. Xavi Hernández", "DU_XAVI_06", "DEG_THS", "DU_FAC_KTPM", "POS_GV", 0),
+
+      // Nữ (GioiTinh = 1)
+      ("GS.TS. Alex Morgan", "DU_MORGAN_13", "DEG_GS", "DU_FAC_SPORT", "POS_GVC", 1),
+      ("PGS.TS. Marta Vieira", "DU_MARTA_10", "DEG_PGS", "DU_FAC_SPORT", "POS_TBM", 1),
+      ("TS. Aitana Bonmatí", "DU_BONMATI_14", "DEG_TS", "DU_FAC_KTPM", "POS_GVC", 1),
+      ("GS.TS. Sam Kerr", "DU_KERR_20", "DEG_GS", "DU_FAC_CNTT", "POS_PTK", 1),
+      ("PGS.TS. Megan Rapinoe", "DU_RAPINOE_15", "DEG_PGS", "DU_FAC_NN", "POS_TK", 1),
+      ("TS. Alexia Putellas", "DU_PUTELLAS_11", "DEG_TS", "DU_FAC_AI", "POS_GVC", 1),
+      ("ThS. Lucy Bronze", "DU_BRONZE_02", "DEG_THS", "DU_FAC_AI", "POS_GV", 1),
+      ("PGS.TS. Nguyễn Thị Mai", "DU_MAI_01", "DEG_PGS", "DU_FAC_KT", "POS_PTK", 1),
+      ("TS. Trần Thu Hà", "DU_HA_02", "DEG_TS", "DU_FAC_KT", "POS_GV", 1),
+      ("ThS. Phạm Hoàng Yến", "DU_YEN_03", "DEG_THS", "DU_FAC_NN", "POS_GV", 1)
+    };
+
+    List<GiangVien> giangViens = [];
+    List<Khoa_GiangVien> kgvs = [];
+
+    foreach (var (ten, ma, bcMa, khoaMa, cvMa, gioiTinh) in teacherData)
+    {
+      var bc = bangCaps.First(b => b.MaBangCap == bcMa);
+      var k = khoas.First(f => f.MaKhoa == khoaMa);
+      var cv = chucVus.First(c => c.MaChucVu == cvMa);
+
+      var gv = new GiangVien
+      {
+        Id = Guid.NewGuid(),
+        MaGiangVien = ma,
+        TenGiangVien = ten,
+        GioiTinh = gioiTinh,
+        SinhNhat = new DateTime(1988, 6, 24, 0, 0, 0, DateTimeKind.Utc),
+        Mail = $"{ma.ToLower()}@duonguniversity.edu.vn",
+        SoDienThoai = $"09{Random.Shared.Next(10000000, 99999999)}",
+        BangCapId = bc.Id
+      };
+      giangViens.Add(gv);
+
+      kgvs.Add(new Khoa_GiangVien
+      {
+        Id = Guid.NewGuid(),
+        GiangVienId = gv.Id,
+        KhoaId = k.Id,
+        ChucVuId = cv.Id
+      });
+    }
+
+    await _ct.GiangVien.AddRangeAsync(giangViens);
+    await _ct.Khoa_GiangVien.AddRangeAsync(kgvs);
+    await _ct.SaveChangesAsync();
+
+    // 9. HocPhan (Học phần phong phú cho DuongUniversity)
+    var hocPhanData = new (string Ten, string Ma, uint SoTiet, uint SoTinChi, float HeSo, string KhoaMa)[] {
+      ("Lập trình Hướng đối tượng (OOP)", "DU_HP_OOP", 45, 3, 1.2f, "DU_FAC_CNTT"),
+      ("Cấu trúc dữ liệu & Giải thuật", "DU_HP_DSA", 45, 3, 1.5f, "DU_FAC_CNTT"),
+      ("Trí tuệ nhân tạo & Machine Learning", "DU_HP_AI", 45, 3, 2.0f, "DU_FAC_CNTT"),
+      ("Bảo mật & An toàn thông tin", "DU_HP_SEC", 30, 2, 1.4f, "DU_FAC_CNTT"),
+
+      ("Phát triển Web Fullstack (React & .NET)", "DU_HP_WEB", 45, 3, 1.6f, "DU_FAC_KTPM"),
+      ("Nhập môn Kỹ thuật phần mềm", "DU_HP_SE", 30, 2, 1.1f, "DU_FAC_KTPM"),
+      ("Kiểm thử & Đảm bảo chất lượng phần mềm", "DU_HP_TEST", 45, 3, 1.3f, "DU_FAC_KTPM"),
+      ("Kiến trúc phần mềm & Microservices", "DU_HP_ARCH", 45, 3, 1.8f, "DU_FAC_KTPM"),
+
+      ("Hệ quản trị CSDL & Big Data Analytics", "DU_HP_BIGDATA", 45, 3, 1.8f, "DU_FAC_AI"),
+      ("Deep Learning & Computer Vision", "DU_HP_DL", 45, 3, 2.0f, "DU_FAC_AI"),
+      ("Khai phá dữ liệu (Data Mining)", "DU_HP_MINING", 30, 2, 1.5f, "DU_FAC_AI"),
+
+      ("Chiến thuật bóng đá & Thể thao đại cương", "DU_HP_FOOTBALL", 45, 3, 2.0f, "DU_FAC_SPORT"),
+      ("Kỹ thuật sút phạt & Đi bóng nghệ thuật", "DU_HP_SKILLS", 30, 2, 1.8f, "DU_FAC_SPORT"),
+      ("Huấn luyện viên & Quản trị đội bóng", "DU_HP_COACH", 45, 3, 1.5f, "DU_FAC_SPORT"),
+
+      ("Kinh tế vĩ mô & Vi mô hiện đại", "DU_HP_ECON", 30, 2, 1.0f, "DU_FAC_KT"),
+      ("Quản trị tài chính & Đầu tư", "DU_HP_FIN", 45, 3, 1.3f, "DU_FAC_KT"),
+      ("Marketing toàn cầu & Branding", "DU_HP_MKT", 45, 3, 1.4f, "DU_FAC_KT"),
+
+      ("Tiếng Anh giao tiếp nâng cao", "DU_HP_ENG", 45, 3, 1.2f, "DU_FAC_NN"),
+      ("Truyền thông đa phương tiện & PR", "DU_HP_PR", 30, 2, 1.3f, "DU_FAC_NN")
+    };
+
+    List<HocPhan> hocPhans = [];
+    foreach (var (ten, ma, soTiet, stc, hs, khoaMa) in hocPhanData)
+    {
+      var k = khoas.First(f => f.MaKhoa == khoaMa);
+      hocPhans.Add(new HocPhan
+      {
+        Id = Guid.NewGuid(),
+        MaHocPhan = ma,
+        TenHocPhan = ten,
+        SoTiet = soTiet,
+        SoTinChi = stc,
+        HeSoHocPhan = hs,
+        KhoaId = k.Id
+      });
+    }
+    await _ct.HocPhan.AddRangeAsync(hocPhans);
+    await _ct.SaveChangesAsync();
+
+    // 10. LopHocPhan (Phân công giảng viên cho các kỳ 2024, 2025, 2026 - Tạo 350+ lớp học phần)
+    List<LopHocPhan> lhpList = [];
+    int classCounter = 1;
+
+    foreach (var hk in hocKis)
+    {
+      foreach (var hp in hocPhans)
+      {
+        var facultyTeachers = kgvs.Where(k => k.KhoaId == hp.KhoaId).Select(k => k.GiangVienId).ToList();
+        if (facultyTeachers.Count == 0) continue;
+
+        // Generate 3 to 6 classes per subject per semester for DuongUniversity
+        int numClasses = Random.Shared.Next(3, 7);
+        for (int c = 1; c <= numClasses; c++)
+        {
+          var gvId = facultyTeachers[Random.Shared.Next(facultyTeachers.Count)];
+          uint svCount = (uint)Random.Shared.Next(30, 140);
+
+          lhpList.Add(new LopHocPhan
+          {
+            Id = Guid.NewGuid(),
+            MaLop = $"{hp.MaHocPhan}_N{c:D2}_{classCounter++}",
+            TenLop = $"{hp.TenHocPhan} (Nhóm {c:D2})",
+            HocKiId = hk.Id,
+            HocPhanId = hp.Id,
+            GiangVienId = gvId,
+            SoLuongSinhVien = svCount
+          });
+        }
+      }
+    }
+
+    await _ct.LopHocPhan.AddRangeAsync(lhpList);
+    await _ct.SaveChangesAsync();
+
+    return Ok(new
+    {
+      Message = "Khởi tạo dữ liệu DuongUniversity siêu phong phú thành công!",
+      Truong = "DuongUniversity",
+      KhoaCount = khoas.Count,
+      GiangVienCount = giangViens.Count,
+      GiangVienTieuBieu = new[] { "Lionel Messi", "Cristiano Ronaldo", "Neymar Jr", "Kylian Mbappé", "Luka Modrić", "Nguyễn Minh Dương" },
+      HocPhanCount = hocPhans.Count,
+      HocKiCount = hocKis.Count,
+      LopHocPhanCount = lhpList.Count,
+      DinhMucCount = dinhMucs.Count
+    });
+  }
+
+}

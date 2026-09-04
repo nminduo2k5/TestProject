@@ -72,7 +72,7 @@ public class GiangVien : GiangVienDto, IEntityPostgre
     {
       MaGiangVien = $"PU_{khoa}_{count}",
       TenGiangVien = name,
-      GioiTinh = random.NextDouble() < 0.7 ? 1 : 0, // 70% nam (1), 30% nữ (0)
+      GioiTinh = random.NextDouble() < 0.5 ? 0 : 1, // 50% Nam (0), 50% Nữ (1)
       SinhNhat = GenerateRandomDate(),
       SoDienThoai = GenerateRandomVietnamPhoneNumber(),
       Mail = GenerateRandomEmail(name),

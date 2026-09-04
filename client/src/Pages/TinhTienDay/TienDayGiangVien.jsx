@@ -110,13 +110,19 @@ function TienDayGiangVien() {
 
     for (const item of tienDayData) {
       const namHoc = new Date(item.thoiGianBatDau).getFullYear()
-      if (filterForm.khoa != 'all' && item.khoaId != filterForm.khoa) continue
-      if (namHoc != filterForm?.namHoc) continue
-      if (filterForm.kyHoc && item.maHocKi != filterForm.kyHoc) continue
+      if (filterForm.khoa !== 'all' && item.khoaId !== filterForm.khoa) continue
+      if (filterForm.namHoc !== 'all' && namHoc !== filterForm?.namHoc) continue
+      if (filterForm.kyHoc && filterForm.kyHoc !== 'all' && item.maHocKi !== filterForm.kyHoc) continue
+
+      const tienDayCuaLop = item.soTiet * (
+        item.heSoHocPhan
+        + LayHeSoDinhMucSinhVien(heSoLopHocPhan, item.soLuongSinhVien, namHoc)
+      ) * item.heSoBangCap * LayDinhMuc(dinhMucSoTietChuan, namHoc);
 
       if (result[item.id] != null) {
         result[item.id].soLop += 1;
-        continue
+        result[item.id].tienDay += tienDayCuaLop;
+        continue;
       }
 
       result[item.id] = {
@@ -132,15 +138,11 @@ function TienDayGiangVien() {
         tenGiangVien: item.tenGiangVien,
         maBangCap: item.maBangCap,
         tenBangCap: item.tenBangCap,
-        tienDay: item.soTiet * (
-          item.heSoHocPhan
-          + LayHeSoDinhMucSinhVien(heSoLopHocPhan, item.soLuongSinhVien, namHoc)
-        ) * item.heSoBangCap * LayDinhMuc(dinhMucSoTietChuan, namHoc)
+        tienDay: tienDayCuaLop
       }
     }
     return Object.values(result)
   }, [dinhMucSoTietChuan, filterForm, heSoLopHocPhan, tienDayData])
-  // filterForm
 
   useEffect(function () {
     // fetch data
@@ -152,7 +154,7 @@ function TienDayGiangVien() {
     })
     GetHocKyList().then(data => {
       setKyHoc(data)
-      setFilterForm(e => ({ ...e, kyHoc: data[0]?.id || null }))
+      setFilterForm(e => ({ ...e, kyHoc: 'all' }))
     })
     TinhTienDay().then(setTienDayData)
     GetDinhMuc().then(setDinhMucSoTienChuan)
@@ -186,7 +188,7 @@ function TienDayGiangVien() {
               chiTiet: tienDayData
                 ?.filter(i => i.id == record.id
                   && (filterForm.namHoc == 'all' || new Date(i.thoiGianBatDau).getFullYear() == filterForm.namHoc)
-                  && (filterForm.kyHoc == null || i.maHocKi == filterForm.kyHoc)
+                  && (filterForm.kyHoc == null || filterForm.kyHoc == 'all' || i.maHocKi == filterForm.kyHoc)
                   && (filterForm.khoa == 'all' || i.khoaId == filterForm.khoa))
                 .map(i => ({
                   ...i,
@@ -233,7 +235,7 @@ function TienDayGiangVien() {
                   setFilterForm({
                     ...filterForm,
                     namHoc: value,
-                    kyHoc: kyHoc.find(i => GetYear(i.thoiGianBatDau) == value)?.id || null
+                    kyHoc: 'all'
                   })
                 }}
                 options={[
@@ -247,45 +249,37 @@ function TienDayGiangVien() {
                   setFilterForm({ ...filterForm, kyHoc: value })
                 }}
                 options={[
+                  { value: "all", label: "Tất cả học kỳ" },
                   ...kyHoc
                     .filter(i => GetYear(i.thoiGianBatDau) == filterForm.namHoc)
                     .map(i => ({ value: i.id, label: i.tenKi }))
                 ]} />
             </Col>
-            <Col span={3}>
+            <Col span={6}>
               <Button variant='solid' style={{ width: '100%', backgroundColor: '#19A10A', color: 'white' }}
                 icon={<FontAwesomeIcon icon={faFileExcel} />}
                 onClick={() => {
                   const mapping = {
-
-                    "id": "Mã giảng viên",
-                    // "khoaId": "Mã khoa",
-                    "maKhoa": "Mã khoa",
-                    "tenKhoa": "Tên khoa",
-                    // "maHocKi": "ddd2503b-df17-4a92-a280-cbdc3a0bffa0",
-                    "namHoc": "Năm học",
-                    "soLop": "Số lớp dạy",
                     "maGiangVien": "Mã giảng viên",
                     "tenGiangVien": "Họ tên giảng viên",
-                    "maBangCap": "Mã bằng cấp",
                     "tenBangCap": "Tên bằng cấp",
-                    "tienDay": "Tiền dạy"
-
+                    "tenKhoa": "Tên khoa",
+                    "namHoc": "Năm học",
+                    "soLop": "Số lớp dạy",
+                    "tienDay": "Tổng tiền dạy (VNĐ)"
                   }
-                  // console.log(tinhTienTableData
-                  //   .map(i => Object.fromEntries(Object
-                  //     .entries(i)
-                  //     .map(([key, value]) => [mapping[key], value])
-                  //     .filter(([key]) => key)
-                  //   )))
                   exportToExcel(
                     tinhTienTableData
-                      .map(i => Object.fromEntries(Object
-                        .entries(i)
-                        .map(([key, value]) => [mapping[key], value])
-                        .filter(([key]) => key)
-                      )),
-                    'tinh-tien-day.xlsx')
+                      .map(i => ({
+                        "Mã giảng viên": i.maGiangVien,
+                        "Họ tên giảng viên": i.tenGiangVien,
+                        "Tên bằng cấp": i.tenBangCap,
+                        "Tên khoa": i.tenKhoa,
+                        "Năm học": i.namHoc,
+                        "Số lớp dạy": i.soLop,
+                        "Tổng tiền dạy (VNĐ)": i.tienDay
+                      })),
+                    `tinh-tien-day-${filterForm.namHoc || 'all'}.xlsx`)
                 }}>
                 Xuất file excel
               </Button>

@@ -1,0 +1,18 @@
+=================================================================
+  CHUONG 4: BLACK-BOX FUZZING TREN salary_calc.exe (200 runs)
+=================================================================
+
+--> Target Binary Executable: K:\TestProject\btl_softsec\salary_calc.exe
+
+--> BANG KET QUA BLACK-BOX FUZZING:
+    - Tong so lan thu (Attempts):  200
+    - So lan Crash (Buffer/EOF):   60
+    - So lan Logic Error (BangCap): 71
+    - Tong thoi gian thuc thi:      86.45 giay
+    - Toc do fuzzing:               2.3 execs/sec
+
+--> MAU CAC TESTCASE GAY CRASH PHAT HIEN:
+    Sample #1: Attempt #5 | Ten Do Dai=157 chars | BangCap='CU_NHAN' | Nguyen Nhan: ExitCode=3221225477
+    Sample #2: Attempt #7 | Ten Do Dai=135 chars | BangCap='CU_NHAN' | Nguyen Nhan: ExitCode=3221225477
+    Sample #3: Attempt #9 | Ten Do Dai=142 chars | BangCap='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' | Nguyen Nhan: ExitCode=3221225477
+

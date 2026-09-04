@@ -1,0 +1,27 @@
+
+=======================================================
+  RUNNING BMC CHECK ON: DuongUniversity_Kripke_BUGGY (k=5)
+=======================================================
+
+[Property 1] Safety: G(calculated -> assigned)
+  --> RESULT: SAT (Counterexample Trace Found!)
+  Counterexample Trace:
+    Step 0: S0_INIT [Labels: ['init']]
+    Step 1: S5_INVALID_CALC [Labels: ['calculated', 'error']]
+    Step 2: S4_ERROR [Labels: ['error']]
+    Step 3: S0_INIT [Labels: ['init']]
+    Step 4: S5_INVALID_CALC [Labels: ['calculated', 'error']]
+    Step 5: S4_ERROR [Labels: ['error']]
+
+[Property 2] Safety: G(exported -> calculated)
+  --> RESULT: UNSAT (Property Holds up to k=5)
+
+=======================================================
+  RUNNING BMC CHECK ON: DuongUniversity_Kripke_FIXED (k=5)
+=======================================================
+
+[Property 1] Safety: G(calculated -> assigned)
+  --> RESULT: UNSAT (Property Holds up to k=5)
+
+[Property 2] Safety: G(exported -> calculated)
+  --> RESULT: UNSAT (Property Holds up to k=5)
