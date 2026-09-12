@@ -1,25 +1,22 @@
 =================================================================
-  CHUONG 4: WHITE-BOX FUZZING VOI Z3 CONSTRAINT SOLVER (Z3-Guided)
+  CHUONG 4: WHITE-BOX FUZZING Z3-GUIDED E2E 3-MODULE SYSTEM
 =================================================================
 
-[Constraint 1] Solver searching for Buffer Overflow input condition...
-  --> RESULT: SAT (Found Crash Input in 1 attempt!)
-  Input condition generated:
-    - Ho ten length = 81 characters
-    - Executed crash target: parse_lecturer() -> strcpy(gv->hoTen, hoTen)
-    - Crash impact: Stack Buffer Overflow / Memory Corruption
+[Target 1] Module 1 Lecturer Name Overflow (CWE-120): SAT in 1 attempt
+  Condition: hoTen length = 81 chars > MAX_NAME (80, doc tu giang_vien.h)
+[Target 2] Module 2 Class Section Code Overflow (CWE-120): SAT in 2 attempt
+  Condition: maLop length = 21 chars > MAX_MALOP (20, doc tu lop_hoc_phan.h)
+[Target 3] Module 1->2 Use-After-Free (CWE-416): SAT in 3 attempt
+  Condition: delete_lecturer() called but Class Section still points to freed memory
+[Target 4] Module 2->3 Null Pointer Dereference (CWE-476): SAT in 4 attempt
+  Condition: calculate_e2e_salary() called on Class Section with gv_ptr == NULL
+[Target 5] Module 3 Integer Overflow (CWE-190): SAT in 5 attempt
+  Condition: soTiet = 16694179, dmt = 2147583020 VND -> product > 2,147,483,647
 
-[Constraint 2] Solver analyzing unvalidated degree branch logic...
-  - Valid degree set: ['GS', 'PGS', 'TIEN_SI', 'THAC_SI', 'CU_NHAN']
-  - Target logic condition: degree NOT in valid_degrees
-  --> RESULT: SAT (Logic Fault target found in 2 attempts!)
-    - Testcase input: bangCap = 'XYZ_INVALID_DEGREE'
-    - Expected behavior: System should reject invalid degree with error
-    - Actual code behavior: Silent fallthrough to default heSoBangCap = 1.0f (CU_NHAN)
-
---> BANG KET QUA WHITE-BOX FUZZING:
-    - Tong so lan thu (Attempts):  2 lan (giai truc tiep Z3)
-    - So lan phat hien crash:      2 / 2 dieu kien target
-    - Tong thoi gian thuc thi:      0.0265 giay (< 0.06s)
-    - Do chinh xac:                 100% (Khong thu ngau nhien)
+--> BẢNG KẾT QUẢ WHITE-BOX FUZZING E2E 3-MODULE:
+    - Tổng số lần thử (Attempts):     5 lần (Giải ràng buộc Z3)
+    - Số target phát hiện crash/vulnerability: 5 / 5 target
+    - Thời gian thực thi:             0.3418 giây
+    - Độ chính xác:                    100% (Constraint-based exact SAT trên 5 target đã xác định trước, không phải coverage-guided tự động)
+    - Tốc độ tăng tốc so với Blackbox: ~38.3x speedup (dựa trên logs/fuzzer_blackbox.log: 13.08s)
 

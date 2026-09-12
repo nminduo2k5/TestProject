@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoftSec Toolkit — Trực quan hoá kết quả BTL</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #eef1ec;
+      --surface: #ffffff;
+      --surface-2: #e3e9e0;
+      --ink: #141b16;
+      --ink-2: #4b564e;
+      --ink-muted: #7c877e;
+      --border: #d2d9ce;
+      --accent: #0f6b5c;
+      --accent-soft: #dcece7;
+      --warm: #b5471b;
+      --warm-soft: #f3e3da;
+      --cat-1: #2a78d6;
+      --cat-2: #eb6834;
+      --status-good: #0ca30c;
+      --status-critical: #d03b3b;
+      --status-good-soft: #dcf1dc;
+      --status-critical-soft: #f8dede;
+      --shadow: 0 1px 2px rgba(20, 27, 22, 0.06), 0 8px 24px -12px rgba(20, 27, 22, 0.18);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --page: #0f1512;
+        --surface: #161d19;
+        --surface-2: #1d2620;
+        --ink: #e8ede7;
+        --ink-2: #b9c4bb;
+        --ink-muted: #7e8a80;
+        --border: #2a342c;
+        --accent: #3fd9b9;
+        --accent-soft: #163b33;
+        --warm: #e08a52;
+        --warm-soft: #3a2418;
+        --cat-1: #3987e5;
+        --cat-2: #d95926;
+        --status-good-soft: #113a17;
+        --status-critical-soft: #3d1414;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --page: #0f1512;
+      --surface: #161d19;
+      --surface-2: #1d2620;
+      --ink: #e8ede7;
+      --ink-2: #b9c4bb;
+      --ink-muted: #7e8a80;
+      --border: #2a342c;
+      --accent: #3fd9b9;
+      --accent-soft: #163b33;
+      --warm: #e08a52;
+      --warm-soft: #3a2418;
+      --cat-1: #3987e5;
+      --cat-2: #d95926;
+      --status-good-soft: #113a17;
+      --status-critical-soft: #3d1414;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--page);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    img,
+    [style*="aspect-ratio"] {
+      max-width: 100%;
+    }
+
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding-inline: 20px;
+      padding-block: 40px 64px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Source Serif 4", Georgia, serif;
+      text-wrap: balance;
+      margin: 0;
+    }
+
+    .mono {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+    }
+
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+
+    p.explain {
+      color: var(--ink-2);
+      max-width: 70ch;
+      margin: 0 0 14px;
+      font-size: 14.5px;
+    }
+
+    p.explain b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    p.explain code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      background: var(--surface-2);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    header.top {
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--status-critical);
+      box-shadow: 0 0 0 3px var(--status-critical-soft);
+    }
+
+    header.top h1 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 600;
+    }
+
+    header.top p.sub {
+      margin: 12px 0 0;
+      color: var(--ink-2);
+      max-width: 66ch;
+      font-size: 15.5px;
+    }
+
+    header.top .meta {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12.5px;
+      color: var(--ink-muted);
+    }
+
+    header.top .meta b {
+      color: var(--ink-2);
+      font-weight: 500;
+    }
+
+    .intro-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .intro-box h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .intro-box p.explain:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary a {
+      background: var(--surface);
+      padding: 18px 16px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .summary .num {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .summary .label {
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .summary .result {
+      font-size: 12.5px;
+      color: var(--ink-2);
+    }
+
+    @media (max-width: 720px) {
+      .summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    section.chapter {
+      margin-bottom: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    section.chapter .chapter-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    section.chapter .chapter-head .idx {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 9px;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+
+    section.chapter h2 {
+      font-size: 21px;
+      font-weight: 600;
+    }
+
+    section.chapter .tool {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    section.chapter .lede {
+      margin-bottom: 18px;
+    }
+
+    .explain-block {
+      background: var(--surface-2);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 16px 0;
+    }
+
+    .explain-block p.explain {
+      margin-bottom: 0;
+    }
+
+    .explain-block+.explain-block {
+      margin-top: -8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 3px 9px 3px 7px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .pill::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex: none;
+    }
+
+    .pill.good {
+      background: var(--status-good-soft);
+      color: var(--status-good);
+    }
+
+    .pill.good::before {
+      background: var(--status-good);
+    }
+
+    .pill.critical {
+      background: var(--status-critical-soft);
+      color: var(--status-critical);
+    }
+
+    .pill.critical::before {
+      background: var(--status-critical);
+    }
+
+    .state-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 4px 0;
+    }
+
+    .state-row .row-label {
+      width: 96px;
+      flex: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.5px;
+      color: var(--ink-muted);
+    }
+
+    .state-track {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .state-chip {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+
+    .state-chip.bad {
+      background: var(--status-critical-soft);
+      border-color: color-mix(in srgb, var(--status-critical) 35%, var(--border));
+      color: var(--status-critical);
+      font-weight: 600;
+    }
+
+    .state-arrow {
+      color: var(--ink-muted);
+      margin: 0 6px;
+      font-size: 13px;
+    }
+
+    .state-note {
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: var(--warm);
+      background: var(--warm-soft);
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    table.props {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      font-size: 13.5px;
+    }
+
+    table.props th {
+      text-align: left;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      font-weight: 500;
+      padding: 0 12px 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.props td {
+      padding: 10px 12px 10px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      color: var(--ink-2);
+    }
+
+    table.props td.prop-name {
+      color: var(--ink);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    table.props tr:last-child td {
+      border-bottom: none;
+    }
+
+    .finding-group {
+      margin-bottom: 18px;
+    }
+
+    .finding-group .fname {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12.5px;
+      color: var(--ink-2);
+      margin-bottom: 8px;
+    }
+
+    .finding {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-left: 3px solid var(--status-critical);
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 4px;
+      box-shadow: var(--shadow);
+    }
+
+    .finding.clean {
+      border-left-color: var(--status-good);
+    }
+
+    .finding .line {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      flex: none;
+      width: 40px;
+    }
+
+    .finding code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12.5px;
+      color: var(--ink);
+      flex: 1;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .finding .cwe {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--status-critical);
+      background: var(--status-critical-soft);
+      padding: 2px 7px;
+      border-radius: 4px;
+      flex: none;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 720px) {
+      .proof-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .proof-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .proof-card .ptitle {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .proof-card dl {
+      margin: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+
+    .proof-card dl div {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 3px 0;
+      color: var(--ink-2);
+    }
+
+    .proof-card dl div b {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .proof-card .verdict {
+      margin-top: auto;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .chart-wrap {
+      display: flex;
+      gap: 32px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .bars {
+      flex: 1 1 380px;
+      min-width: 260px;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .bar-row .swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex: none;
+    }
+
+    .bar-row .bname {
+      font-size: 12.5px;
+      color: var(--ink-2);
+      width: 110px;
+      flex: none;
+    }
+
+    .bar-track {
+      flex: 1;
+      background: var(--surface-2);
+      border-radius: 4px;
+      height: 26px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px 2px 2px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+      min-width: 3px;
+    }
+
+    .bar-fill span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .speedup-callout {
+      flex: 1 1 220px;
+      background: var(--accent-soft);
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .speedup-callout .big {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 34px;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .speedup-callout .cap {
+      font-size: 12.5px;
+      color: var(--ink-2);
+      margin-top: 6px;
+    }
+
+    .stat-pair {
+      display: flex;
+      gap: 14px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pair .tile {
+      flex: 1 1 220px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-pair .tile .k {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .stat-pair .tile .d {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 3px;
+    }
+
+    .verdict-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .verdict-box h3 {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .verdict-box ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink-2);
+      font-size: 13.5px;
+    }
+
+    .verdict-box li {
+      margin-bottom: 6px;
+    }
+
+    .verdict-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .chart-caption {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin: 20px 0 10px;
+    }
+
+    .heat-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .heat-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .heat-label {
+      width: 58px;
+      flex: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+
+    .heat-cell {
+      flex: 1;
+      text-align: center;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 9px 4px;
+      border-radius: 6px;
+    }
+
+    .heat-cell.good {
+      background: var(--status-good-soft);
+      color: var(--status-good);
+    }
+
+    .heat-cell.bad {
+      background: var(--status-critical-soft);
+      color: var(--status-critical);
+    }
+
+    .heat-axis {
+      display: flex;
+      gap: 6px;
+      margin: 2px 0 14px;
+    }
+
+    .heat-axis span {
+      flex: 1;
+      text-align: center;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10.5px;
+      color: var(--ink-muted);
+    }
+
+    .heat-axis .heat-label-spacer {
+      width: 58px;
+      flex: none;
+    }
+
+    footer {
+      margin-top: 52px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="top">
+      <div class="eyebrow"><span class="dot"></span>BÁO CÁO TRỰC QUAN &middot; BTL AN TOÀN PHẦN MỀM</div>
+      <h1>SoftSec Toolkit — DuongUniversity</h1>
+      <p class="sub">Bốn phương pháp kiểm chứng an toàn bộ nhớ &amp; dữ liệu áp dụng lên module tính lương giảng viên
+        (<span class="mono">ch2_memsafe</span>) của DuongUniversity Management System — từ mô hình hoá hình thức đến
+        fuzzing thực thi. Toàn bộ số liệu trên trang này lấy trực tiếp từ log thực thi trong <span
+          class="mono">logs/</span>, không phải minh hoạ.</p>
+      <div class="meta">
+        <span><b>Học phần</b> CSE703093 — An toàn phần mềm</span>
+        <span><b>Đối tượng</b> giang_vien.c / lop_hoc_phan.c / tinh_tien_day.c</span>
+        <span><b>Báo cáo đầy đủ</b> BAO_CAO_BTL_SOFTSEC.md</span>
+      </div>
+    </header>
+
+    <div class="intro-box">
+      <h3>Vì sao 4 chương này, và chúng liên hệ với nhau thế nào?</h3>
+      <p class="explain">Cùng một module C (quản lý giảng viên → lớp học phần → tính lương) được soi bằng 4 lăng kính
+        khác nhau, theo đúng thứ tự "trừu tượng → cụ thể" của kiểm chứng phần mềm: <b>Chương 1</b> mô hình hoá hành vi
+        hệ thống thành đồ thị trạng thái rồi <b>chứng minh toán học</b> (không chạy code) xem có vi phạm quy tắc nghiệp
+        vụ không; <b>Chương 2</b> quét trực tiếp mã nguồn C tìm mẫu lỗi đã biết mà <b>không cần biên dịch</b>; <b>Chương
+          3</b> dùng bộ giải ràng buộc Z3 để chứng minh công thức tính lương an toàn hay không <b>trên toàn miền giá
+          trị</b> (không phải test vài mẫu); <b>Chương 4</b> thực sự <b>chạy chương trình đã biên dịch</b> với hàng trăm
+        input để xem lỗi có biểu hiện ra ngoài hay không. Bốn góc nhìn này bổ sung cho nhau: cái Chương 2 bỏ sót thì
+        Chương 1 vẫn có thể phát hiện qua mô hình, và ngược lại.</p>
+    </div>
+
+    <div class="summary">
+      <a href="#ch1"><span class="num">CH.1</span><span class="label">Kripke &amp; BMC</span><span class="result">4
+          thuộc tính LTL, k=5</span></a>
+      <a href="#ch2"><span class="num">CH.2</span><span class="label">Pattern Scanner</span><span class="result">8 cảnh
+          báo / 3 file</span></a>
+      <a href="#ch3"><span class="num">CH.3</span><span class="label">Z3 SMT Solver</span><span class="result">int32 vs
+          int64</span></a>
+      <a href="#ch4"><span class="num">CH.4</span><span class="label">Fuzzing</span><span class="result">~38× nhanh
+          hơn</span></a>
+    </div>
+
+    <section class="chapter" id="ch1">
+      <div class="chapter-head">
+        <span class="idx">01</span>
+        <h2>Mô hình hoá Kripke &amp; Bounded Model Checking</h2>
+      </div>
+      <div class="tool lede">ch1_models/kripke_bmc.py</div>
+
+      <div class="explain-block">
+        <p class="explain"><b>Kripke structure</b> là gì? Một bộ 4 thành phần M = (S, S₀, R, L): tập trạng thái
+          <code>S</code>, trạng thái khởi tạo <code>S₀</code>, quan hệ chuyển tiếp <code>R</code> (trạng thái nào được
+          phép đi tới trạng thái nào), và hàm gán nhãn <code>L</code> (mỗi trạng thái mang những thuộc tính gì, ví dụ
+          "đã phân công", "đã tính tiền"). Đây là cách toán học biểu diễn "mọi luồng thực thi có thể xảy ra" của hệ
+          thống, thay vì chỉ một vài kịch bản test cụ thể.</p>
+      </div>
+      <div class="explain-block">
+        <p class="explain"><b>Bounded Model Checking (BMC)</b>: thay vì duyệt mô hình vô hạn bước, ta "duỗi" (unroll)
+          quan hệ chuyển tiếp đúng <code>k=5</code> bước rồi nhờ Z3 tìm xem có tồn tại một chuỗi 5 bước nào vi phạm
+          thuộc tính an toàn hay không. Nếu Z3 trả lời <b>SAT</b> — nó vừa tìm ra một <b>phản ví dụ cụ thể</b>
+          (counterexample), tức là lỗi có thật. Nếu trả lời <b>UNSAT</b> — không tồn tại vi phạm nào trong phạm vi 5
+          bước đó (chứng minh có điều kiện, không phải "an toàn tuyệt đối mãi mãi").</p>
+      </div>
+
+      <div class="state-row">
+        <span class="row-label">Luồng chính</span>
+        <div class="state-track">
+          <span class="state-chip">S0_INIT</span><span class="state-arrow">→</span>
+          <span class="state-chip">S1_GV_ASSIGNED</span><span class="state-arrow">→</span>
+          <span class="state-chip">S2_SALARY_CALC</span><span class="state-arrow">→</span>
+          <span class="state-chip">S3_EXPORTED</span>
+        </div>
+      </div>
+      <div class="state-row">
+        <span class="row-label">Nhánh lỗi</span>
+        <div class="state-track">
+          <span class="state-chip">S4_ERROR</span>
+          <span style="font-size:11.5px; color:var(--ink-muted); margin-left:10px;">rẽ nhánh từ S1 hoặc S2 — có ở cả 2
+            bản</span>
+        </div>
+      </div>
+      <div class="state-row">
+        <span class="row-label">Vết BMC</span>
+        <div class="state-track">
+          <span class="state-chip">S0_INIT</span><span class="state-arrow">→</span>
+          <span class="state-chip bad">S5_INVALID_CALC</span><span class="state-arrow">→</span>
+          <span class="state-chip">S4_ERROR</span>
+        </div>
+      </div>
+      <span class="state-note">S5_INVALID_CALC chỉ tồn tại ở bản BUGGY (6 trạng thái, so với 5 ở bản FIXED) — đây là vết
+        phản ví dụ thật do Z3 tìm ra cho Property 1: nhảy thẳng từ "chưa phân công" sang "đã tính tiền", bỏ qua bước
+        phân công giảng viên (S1)</span>
+
+      <div class="chart-caption">Kết quả BMC theo từng thuộc tính (k=5)</div>
+      <div class="heat-axis"><span
+          class="heat-label-spacer"></span><span>P1</span><span>P2</span><span>P3</span><span>P4</span></div>
+      <div class="heat-grid">
+        <div class="heat-row">
+          <span class="heat-label">BUGGY</span>
+          <span class="heat-cell bad">SAT</span>
+          <span class="heat-cell good">UNSAT</span>
+          <span class="heat-cell bad">SAT</span>
+          <span class="heat-cell good">UNSAT</span>
+        </div>
+        <div class="heat-row">
+          <span class="heat-label">FIXED</span>
+          <span class="heat-cell good">UNSAT</span>
+          <span class="heat-cell good">UNSAT</span>
+          <span class="heat-cell bad">SAT</span>
+          <span class="heat-cell good">UNSAT</span>
+        </div>
+      </div>
+
+      <table class="props">
+        <thead>
+          <tr>
+            <th>Thuộc tính</th>
+            <th>Ý nghĩa</th>
+            <th>BUGGY</th>
+            <th>FIXED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prop-name">P1 · Safety</td>
+            <td>G(calculated → assigned)</td>
+            <td><span class="pill critical">SAT — vi phạm</span></td>
+            <td><span class="pill good">UNSAT — an toàn</span></td>
+          </tr>
+          <tr>
+            <td class="prop-name">P2 · Safety</td>
+            <td>G(exported → calculated)</td>
+            <td><span class="pill good">UNSAT — an toàn</span></td>
+            <td><span class="pill good">UNSAT — an toàn</span></td>
+          </tr>
+          <tr>
+            <td class="prop-name">P3 · Liveness</td>
+            <td>G(assigned → F calculated)</td>
+            <td><span class="pill critical">SAT — hạn chế BMC</span></td>
+            <td><span class="pill critical">SAT — hạn chế BMC</span></td>
+          </tr>
+          <tr>
+            <td class="prop-name">P4 · Safety</td>
+            <td>G(error → ¬exported)</td>
+            <td><span class="pill good">UNSAT — an toàn</span></td>
+            <td><span class="pill good">UNSAT — an toàn</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="verdict-box">
+        <h3>Đọc kết quả này thế nào?</h3>
+        <ul>
+          <li><b>P1 khác biệt rõ giữa 2 bản</b> — đúng như kỳ vọng: bản BUGGY có đường tắt S0→S5 nên vi phạm, bản FIXED
+            không có đường đó nên an toàn. Đây là bằng chứng hình thức (không phải chạy thử) rằng bản vá loại bỏ đúng
+            lỗi.</li>
+          <li><b>P3 ra SAT ở cả 2 bản</b> — không phải lỗi mã nguồn, mà là <b>giới hạn kỹ thuật của BMC</b>: với
+            liveness ("cuối cùng phải xảy ra"), BMC hữu hạn k bước luôn có thể tìm ra một vết dừng sớm ở nhánh lỗi trước
+            khi kịp thoả mãn — cần k-induction hoặc Büchi automata mới chứng minh liveness vô hạn triệt để.</li>
+          <li><b>Đối chiếu tự động với Chương 2:</b> script còn tự gọi lại <span class="mono">pattern_scanner.py</span>
+            để xác nhận trạng thái lỗi S4_ERROR khớp với đúng lỗ hổng thật (CWE-416 tại <span
+              class="mono">giang_vien.c:32</span>) — tránh việc mô hình Kripke chỉ tồn tại trên giấy, tách rời code
+            thật.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter" id="ch2">
+      <div class="chapter-head">
+        <span class="idx">02</span>
+        <h2>Quét tĩnh an toàn bộ nhớ liên mô-đun</h2>
+      </div>
+      <div class="tool lede">ch2_memsafe/pattern_scanner.py</div>
+
+      <div class="explain-block">
+        <p class="explain">Công cụ này quét <b>trực tiếp mã nguồn C dạng văn bản</b> — không biên dịch, không chạy
+          chương trình — tìm 4 mẫu lỗi: gọi <code>strcpy</code> không giới hạn độ dài (CWE-120), <code>free()</code> mà
+          không huỷ liên kết con trỏ ở module khác (CWE-416), truy cập con trỏ lồng <code>gv_ptr-&gt;</code> chưa kiểm
+          tra NULL (CWE-476), và ép kiểu <code>(int)</code> trong phép nhân có nguy cơ tràn số (CWE-190).</p>
+      </div>
+      <div class="explain-block">
+        <p class="explain"><b>Một lỗi thật đã được tìm và vá trong chính công cụ này:</b> heuristic "đã được bảo vệ" ban
+          đầu so khớp chuỗi thô (<code>NULL</code>, <code>if (!</code>) trên cả phần <b>comment giải thích lỗi</b> — vì
+          comment tiếng Việt mô tả đúng lỗi lại vô tình chứa đúng các từ khoá đó, khiến scanner tưởng nhầm code đã an
+          toàn và <b>bỏ sót hoàn toàn</b> 2 lỗi CWE-416/476 bên dưới. Đã sửa bằng hàm <code>_code_part()</code> cắt bỏ
+          phần sau <code>//</code> trước khi so khớp.</p>
+      </div>
+
+      <div class="chart-caption">Số cảnh báo bảo mật theo file (thang 0–4)</div>
+      <div style="margin-bottom: 22px;">
+        <div class="bar-row"><span class="bname" style="width:140px;">giang_vien.c</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:var(--status-critical);"><span>4</span></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="bname" style="width:140px;">lop_hoc_phan.c</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:25%; background:var(--status-critical);"><span>1</span></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="bname" style="width:140px;">tinh_tien_day.c</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:75%; background:var(--status-critical);"><span>3</span></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="bname" style="width:140px;">main_fixed.c</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:1.5%; background:var(--status-good);"></div><span class="mono tabular"
+              style="position:absolute; left:calc(1.5% + 8px); top:50%; transform:translateY(-50%); font-size:11.5px; font-weight:600; color:var(--ink);">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding-group">
+        <div class="fname">giang_vien.c</div>
+        <div class="finding"><span class="line">12</span><code>strcpy(gv-&gt;maGiangVien, maGV);</code><span
+            class="cwe">CWE-120</span></div>
+        <div class="finding"><span class="line">15</span><code>strcpy(gv-&gt;hoTen, hoTen);</code><span
+            class="cwe">CWE-120</span></div>
+        <div class="finding"><span class="line">18</span><code>strcpy(gv-&gt;bangCap, bangCap);</code><span
+            class="cwe">CWE-120</span></div>
+        <div class="finding"><span class="line">32</span><code>free(gv); // khong cap nhat con tro Module 2</code><span
+            class="cwe">CWE-416</span></div>
+      </div>
+      <div class="finding-group">
+        <div class="fname">lop_hoc_phan.c</div>
+        <div class="finding"><span class="line">13</span><code>strcpy(lhp-&gt;maLop, maLop);</code><span
+            class="cwe">CWE-120</span></div>
+      </div>
+      <div class="finding-group">
+        <div class="fname">tinh_tien_day.c</div>
+        <div class="finding"><span
+            class="line">12</span><code>int soTietQuyDoi = (int)(lhp-&gt;soTiet * ...);</code><span
+            class="cwe">CWE-190</span></div>
+        <div class="finding"><span class="line">13</span><code>(int)lhp-&gt;gv_ptr-&gt;heSoBangCap ...</code><span
+            class="cwe">CWE-190</span></div>
+        <div class="finding"><span
+            class="line">13</span><code>lhp-&gt;gv_ptr-&gt;heSoBangCap (chưa kiểm tra NULL)</code><span
+            class="cwe">CWE-476</span></div>
+      </div>
+      <div class="finding-group">
+        <div class="fname">main_fixed.c</div>
+        <div class="finding clean"><span class="line">—</span><code>[CLEAN] Không phát hiện vi phạm nào</code></div>
+      </div>
+
+      <div class="verdict-box">
+        <h3>Đọc kết quả này thế nào?</h3>
+        <ul>
+          <li><b>8/8 cảnh báo</b> nằm đúng trên 3 file module chứa hàm <code>*_VULN</code>; file
+            <code>main_fixed.c</code> (chỉ gọi hàm <code>*_SAFE</code>) sạch tuyệt đối — chứng minh scanner phân biệt
+            đúng code lỗi và code đã vá, không phải false positive tràn lan.</li>
+          <li>Scanner vẫn là công cụ so khớp chuỗi/regex, không phải phân tích AST/data-flow đầy đủ — nên phù hợp bổ trợ
+            cho <code>cppcheck</code> thật (Lab 4), không thay thế.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter" id="ch3">
+      <div class="chapter-head">
+        <span class="idx">03</span>
+        <h2>Kiểm chứng hình thức bằng Z3 SMT</h2>
+      </div>
+      <div class="tool lede">ch3_staticsat/smt_verify.py</div>
+
+      <div class="explain-block">
+        <p class="explain">Khác với test thông thường (thử một vài bộ input), <b>SMT solver</b> chứng minh một mệnh đề
+          đúng hoặc sai <b>trên toàn miền giá trị hợp lệ</b> cùng lúc. Ở đây: liệu công thức
+          <code>tổng lương = Σ (số tiết × hệ số) × hệ số bằng cấp × đơn giá</code> có thể tràn số nguyên 32-bit không,
+          xét trên mọi tổ hợp giá trị doanh nghiệp hợp lý (1-20 lớp, 15-120 tiết, đơn giá 85.000-500.000đ...).</p>
+      </div>
+
+      <div class="proof-grid">
+        <div class="proof-card">
+          <div class="ptitle">Check 1 — Tổng lương int32</div>
+          <span class="pill critical">SAT — tràn số có thể xảy ra</span>
+          <dl>
+            <div><span>numClasses</span><b>20</b></div>
+            <div><span>soTiet</span><b>120</b></div>
+            <div><span>dinhMucTienChuan</span><b>127.827đ</b></div>
+          </dl>
+          <p class="verdict">Z3 tự tìm ra bộ giá trị cụ thể này khiến tổng lương vượt INT32_MAX — không phải giả định,
+            mà là một bộ số thật thoả mãn mọi ràng buộc nghiệp vụ.</p>
+        </div>
+        <div class="proof-card">
+          <div class="ptitle">Check 2 — Tổng lương int64</div>
+          <span class="pill good">UNSAT — chứng minh an toàn</span>
+          <dl>
+            <div><span>Giới hạn</span><b>INT64_MAX</b></div>
+            <div><span>Phạm vi</span><b>toàn bộ ràng buộc</b></div>
+          </dl>
+          <p class="verdict">Z3 không tìm được bộ giá trị nào (dù đã nới ràng buộc rộng hơn Check 1) gây tràn — chứng
+            minh long long/double an toàn tuyệt đối trong phạm vi doanh nghiệp.</p>
+        </div>
+        <div class="proof-card">
+          <div class="ptitle">Check 3 — Chưa gán giảng viên</div>
+          <span class="pill good">UNSAT — chứng minh an toàn</span>
+          <dl>
+            <div><span>Điều kiện</span><b>gv_ptr = NULL</b></div>
+            <div><span>Kết quả bắt buộc</span><b>lương = 0đ</b></div>
+          </dl>
+          <p class="verdict">Mô hình hoá bằng đúng công thức thật trong <code>calculate_e2e_salary_SAFE()</code> (không
+            phải mệnh đề Boolean trừu tượng tách rời code), rồi chứng minh guard-check không thể bị vượt qua.</p>
+        </div>
+      </div>
+
+      <div class="verdict-box">
+        <h3>Đọc kết quả này thế nào?</h3>
+        <ul>
+          <li>Check 1 + Check 2 tạo thành một cặp <b>trước/sau</b> hoàn chỉnh: SAT trên kiểu 32-bit chứng minh lỗ hổng
+            CWE-190 có thật, UNSAT trên 64-bit chứng minh bản vá triệt để — không chỉ "chạy thử thấy ổn" mà là chứng
+            minh toán học không tồn tại phản ví dụ.</li>
+          <li>Check 3 từng dùng biến Boolean trừu tượng không liên quan code thật (một lỗi đã tìm và sửa) — nay dùng
+            đúng công thức và biến số của Module 3, nên kết quả UNSAT phản ánh đúng hành vi mã nguồn thật, không phải
+            một tautology tự dựng.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter" id="ch4">
+      <div class="chapter-head">
+        <span class="idx">04</span>
+        <h2>Fuzzing: Hộp đen đối chứng Hộp trắng</h2>
+      </div>
+      <div class="tool lede">ch4_dynafuzz/fuzzer_blackbox.py &amp; fuzzer_whitebox.py</div>
+
+      <div class="explain-block">
+        <p class="explain"><b>Black-box fuzzing</b>: sinh input hoàn toàn ngẫu nhiên (tên dài ngẫu nhiên, bằng cấp ngẫu
+          nhiên...) rồi chạy thật <code>salary_calc.exe</code>, đếm số lần crash. <b>White-box fuzzing</b> ở đây là giải
+          trực tiếp 5 ràng buộc Z3 tương ứng 5 lỗ hổng đã biết trước (không phải symbolic execution duyệt toàn bộ luồng
+          thực thi) — nên nhanh hơn nhiều lần nhưng đổi lại chỉ tìm đúng cái đã biết trước, không tự khám phá lỗ hổng
+          mới.</p>
+      </div>
+      <div class="explain-block">
+        <p class="explain"><b>Một con số đã từng sai và được sửa:</b> bản gốc in cứng "~982× speedup" — một số cố định
+          không tính từ thời gian chạy thật, nên sai lệch xa mỗi khi tốc độ máy thay đổi. Đã sửa bằng cách đọc thời gian
+          thật từ log Black-box và tính tỉ lệ <b>động</b> tại thời điểm chạy — số liệu dưới đây là con số thật của lần
+          chạy gần nhất, không phải giá trị suy diễn.</p>
+      </div>
+
+      <div class="chart-wrap">
+        <div class="bars">
+          <div class="bar-row">
+            <span class="swatch" style="background:var(--cat-1)"></span>
+            <span class="bname">Black-box</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:100%; background:var(--cat-1);"><span>13.08s</span></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <span class="swatch" style="background:var(--cat-2)"></span>
+            <span class="bname">White-box</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:2.6%; background:var(--cat-2);"></div>
+              <span class="mono tabular"
+                style="position:absolute; left:calc(2.6% + 8px); top:50%; transform:translateY(-50%); font-size:11.5px; font-weight:600; color:var(--ink);">0.34s</span>
+            </div>
+          </div>
+          <p style="font-size:11.5px; color:var(--ink-muted); margin-top:2px;">Thời gian để phủ hết mục tiêu lỗ hổng đã
+            biết (200 lần thử ngẫu nhiên so với 5 lần giải Z3 trực tiếp)</p>
+        </div>
+        <div class="speedup-callout">
+          <div class="big tabular">~38.3×</div>
+          <div class="cap">nhanh hơn — White-box giải đúng 5/5 mục tiêu trong 5 lần thử, Black-box cần tới 200 lần thử
+            ngẫu nhiên trên bản có lỗi</div>
+        </div>
+      </div>
+
+      <div class="chart-caption">Số lần crash trên 200 lần thử Black-box</div>
+      <div style="margin-bottom: 4px;">
+        <div class="bar-row"><span class="bname" style="width:160px;">salary_calc.exe</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:var(--status-critical);"><span>93 / 200</span></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="bname" style="width:160px;">salary_calc_fixed.exe</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:2%; background:var(--status-good);"></div><span class="mono tabular"
+              style="position:absolute; left:calc(2% + 8px); top:50%; transform:translateY(-50%); font-size:11.5px; font-weight:600; color:var(--ink);">0
+              / 200</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-pair">
+        <div class="tile">
+          <div class="k tabular">5 / 5</div>
+          <div class="d">mục tiêu CWE xác nhận đúng bằng Z3 (White-box)</div>
+        </div>
+        <div class="tile">
+          <div class="k tabular">53 / 200</div>
+          <div class="d">lần thử rơi vào lỗi logic bằng cấp không hợp lệ (bản lỗi)</div>
+        </div>
+        <div class="tile">
+          <div class="k tabular">124 / 200</div>
+          <div class="d">lần thử rơi vào lỗi logic bằng cấp không hợp lệ (bản vá — không còn crash nên tỉ lệ lỗi logic
+            tăng)</div>
+        </div>
+      </div>
+
+      <div class="verdict-box">
+        <h3>Đọc kết quả này thế nào?</h3>
+        <ul>
+          <li>Bản lỗi crash gần một nửa số lần thử ngẫu nhiên (93/200); bản đã vá <b>0 crash</b> trong đúng 200 lần thử
+            với cùng bộ sinh input — bằng chứng thực nghiệm bổ sung, độc lập với 3 chương chứng minh hình thức ở trên.
+          </li>
+          <li>Tốc độ ~38× không phải "white-box luôn thắng tuyệt đối": nó nhanh vì đã biết trước 5 mục tiêu cần tìm; nếu
+            có lỗ hổng chưa từng nghĩ tới, black-box vẫn có cơ hội tình cờ phát hiện còn white-box thì không. Đây chính
+            là trade-off cần cân nhắc khi chọn công cụ cho CI/CD.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <span>Nguồn: btl_softsec/logs/{kripke_bmc,pattern_scanner,smt_verify,fuzzer_blackbox,fuzzer_whitebox}.log</span>
+      <span>Sinh viên: Nguyễn Minh Duong · DuongUniversity CNTT K68</span>
+    </footer>
+
+  </div>
+</body>
+
+</html>

@@ -1,12 +1,29 @@
 =================================================================
-  MO-DUN CH2_MEMSAFE: PATTERN SCANNER TINH (SoftSec Toolkit)
+  CHUONG 2: MO-DUN CH2_MEMSAFE PATTERN SCANNER TINH E2E
 =================================================================
 
-== Quet tep: salary_calc.c ==
-salary_calc.c:33: cảnh báo [strcpy] Không kiểm tra độ dài đích - nên dùng strncpy/snprintf
+== Quét tệp: giang_vien.c ==
+K:\TestProject\btl_softsec\ch2_memsafe\giang_vien.c:12: cảnh báo [strcpy] Không kiểm tra độ dài đích - nên dùng strncpy/snprintf (CWE-120)
+    strcpy(gv->maGiangVien, maGV);
+K:\TestProject\btl_softsec\ch2_memsafe\giang_vien.c:15: cảnh báo [strcpy] Không kiểm tra độ dài đích - nên dùng strncpy/snprintf (CWE-120)
     strcpy(gv->hoTen, hoTen);
-salary_calc.c:37: cảnh báo [strcpy] Không kiểm tra độ dài đích - nên dùng strncpy/snprintf
+K:\TestProject\btl_softsec\ch2_memsafe\giang_vien.c:18: cảnh báo [strcpy] Không kiểm tra độ dài đích - nên dùng strncpy/snprintf (CWE-120)
     strcpy(gv->bangCap, bangCap);
-salary_calc.c:51: cảnh báo [int_overflow_cast] Ép kiểu (int) trong phép nhân có nguy cơ Tràn số nguyên (Integer Overflow)
-    int soTietQuyDoi = (int)(lhp->soTiet * (lhp->heSoHocPhan + cfg->heSoQuyMoLop));
+K:\TestProject\btl_softsec\ch2_memsafe\giang_vien.c:32: cảnh báo [dangling_free] Giải phóng free() bộ nhớ mà không gán NULL hoặc hủy liên kết con trỏ treo (CWE-416 UAF)
+    free(gv); // LOI CWE-416: free(gv) nhung khong cap nhat con tro o Module 2 thanh NULL!
+
+== Quét tệp: lop_hoc_phan.c ==
+K:\TestProject\btl_softsec\ch2_memsafe\lop_hoc_phan.c:13: cảnh báo [strcpy] Không kiểm tra độ dài đích - nên dùng strncpy/snprintf (CWE-120)
+    strcpy(lhp->maLop, maLop);
+
+== Quét tệp: tinh_tien_day.c ==
+K:\TestProject\btl_softsec\ch2_memsafe\tinh_tien_day.c:12: cảnh báo [int_overflow_cast] Ép kiểu (int) trong phép nhân có nguy cơ Tràn số nguyên 32-bit (CWE-190)
+    int soTietQuyDoi = (int)(lhp->soTiet * (lhp->heSoHocPhan + heSoQuyMo));
+K:\TestProject\btl_softsec\ch2_memsafe\tinh_tien_day.c:13: cảnh báo [int_overflow_cast] Ép kiểu (int) trong phép nhân có nguy cơ Tràn số nguyên 32-bit (CWE-190)
+    int tienDay32 = (int)soTietQuyDoi * (int)lhp->gv_ptr->heSoBangCap * (int)cfg->dinhMucTienChuan;
+K:\TestProject\btl_softsec\ch2_memsafe\tinh_tien_day.c:13: cảnh báo [unchecked_nested_deref] Truy cập con trỏ lồng (gv_ptr->) mà không kiểm tra NULL trước (CWE-476 Null Pointer Dereference)
+    int tienDay32 = (int)soTietQuyDoi * (int)lhp->gv_ptr->heSoBangCap * (int)cfg->dinhMucTienChuan;
+
+== Quét tệp: main_fixed.c ==
+  --> [CLEAN] Không phát hiện vi phạm quy tắc an toàn bộ nhớ nào.
 

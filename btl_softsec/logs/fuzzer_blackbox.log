@@ -1,17 +1,33 @@
 =================================================================
-  CHUONG 4: BLACK-BOX FUZZING TREN salary_calc.exe (200 runs)
+  CHUONG 4: BLACK-BOX FUZZING E2E 3-MODULE SYSTEM
 =================================================================
 
---> Target Binary Executable: K:\TestProject\btl_softsec\salary_calc.exe
+=================================================================
+  BLACK-BOX FUZZING TREN salary_calc.exe (200 runs)
+=================================================================
+--> Target Binary Executable: K:\TestProject\btl_softsec\ch2_memsafe\salary_calc.exe
 
---> BANG KET QUA BLACK-BOX FUZZING:
-    - Tong so lan thu (Attempts):  200
-    - So lan Crash (Buffer/EOF):   57 (28.5%)
-    - So lan Logic Error (BangCap): 76 (38.0%)
-    - Tong thoi gian thuc thi:      50.30 giay
-    - Toc do fuzzing:               4.0 execs/sec
+--> KẾT QUẢ BLACK-BOX FUZZING TREN salary_calc.exe:
+    - Tổng số lần thử (Attempts):   200
+    - Số lần Crash (Buffer Overflow): 93
+    - Số lần Logic Error (Bằng cấp):  53
+    - Thời gian thực thi:            13.08 giây
+    - Tốc độ fuzzing:                 15.3 execs/sec
+--> MẪU TESTCASE GÂY CRASH PHÁT HIỆN:
+    Sample #1: Attempt #1 | TenLen=155 | LopLen=49 | BangCap='' | Reason: ExitCode=3221226356
+    Sample #2: Attempt #3 | TenLen=179 | LopLen=16 | BangCap='INVALID_DEGREE' | Reason: ExitCode=3221226356
+    Sample #3: Attempt #5 | TenLen=122 | LopLen=45 | BangCap='PGS' | Reason: ExitCode=3221226356
 
---> MAU CAC TESTCASE GAY CRASH PHAT HIEN:
-    Sample #1: Attempt #3 | Ten Do Dai=179 chars | BangCap='' | Nguyen Nhan: TimeoutExpired
-    Sample #2: Attempt #10 | Ten Do Dai=149 chars | BangCap='123' | Nguyen Nhan: ExitCode=3221225477
-    Sample #3: Attempt #11 | Ten Do Dai=169 chars | BangCap='GS' | Nguyen Nhan: ExitCode=3221225477
+
+=================================================================
+  BLACK-BOX FUZZING TREN salary_calc_fixed.exe (200 runs)
+=================================================================
+--> Target Binary Executable: K:\TestProject\btl_softsec\ch2_memsafe\salary_calc_fixed.exe
+
+--> KẾT QUẢ BLACK-BOX FUZZING TREN salary_calc_fixed.exe:
+    - Tổng số lần thử (Attempts):   200
+    - Số lần Crash (Buffer Overflow): 0
+    - Số lần Logic Error (Bằng cấp):  124
+    - Thời gian thực thi:            5.71 giây
+    - Tốc độ fuzzing:                 35.0 execs/sec
+

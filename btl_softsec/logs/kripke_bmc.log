@@ -1,9 +1,13 @@
+=========================================================
+  CHUONG 1: MO HINH HOA KRIPKE & BMC (k=5)
+  Ban FIXED: 5 trang thai (S0-S4) | Ban BUGGY: 6 trang thai (S0-S5)
+=========================================================
 
 =======================================================
-  RUNNING BMC CHECK ON: DuongUniversity_Kripke_BUGGY (k=5)
+  RUNNING BMC CHECK ON: DuongUniversity_Kripke_BUGGY (6 trang thai, k=5)
 =======================================================
 
-[Property 1] Safety: G(calculated -> assigned)
+[Property 1] Safety: G(calculated -> assigned) [Chưa phân công -> Không tính tiền]
   --> RESULT: SAT (Counterexample Trace Found!)
   Counterexample Trace:
     Step 0: S0_INIT [Labels: ['init']]
@@ -13,15 +17,35 @@
     Step 4: S5_INVALID_CALC [Labels: ['calculated', 'error']]
     Step 5: S4_ERROR [Labels: ['error']]
 
-[Property 2] Safety: G(exported -> calculated)
+[Property 2] Safety: G(exported -> calculated) [Chưa tính tiền -> Không xuất báo cáo]
+  --> RESULT: UNSAT (Property Holds up to k=5)
+
+[Property 3] Liveness: G(assigned -> F calculated) [Phân công -> Cuối cùng tính tiền]
+  --> RESULT: SAT (Counterexample Trace Found!)
+
+[Property 4] Safety: G(error -> NOT exported) [Hệ thống Lỗi -> Không xuất báo cáo]
   --> RESULT: UNSAT (Property Holds up to k=5)
 
 =======================================================
-  RUNNING BMC CHECK ON: DuongUniversity_Kripke_FIXED (k=5)
+  RUNNING BMC CHECK ON: DuongUniversity_Kripke_FIXED (5 trang thai, k=5)
 =======================================================
 
-[Property 1] Safety: G(calculated -> assigned)
+[Property 1] Safety: G(calculated -> assigned) [Chưa phân công -> Không tính tiền]
   --> RESULT: UNSAT (Property Holds up to k=5)
 
-[Property 2] Safety: G(exported -> calculated)
+[Property 2] Safety: G(exported -> calculated) [Chưa tính tiền -> Không xuất báo cáo]
   --> RESULT: UNSAT (Property Holds up to k=5)
+
+[Property 3] Liveness: G(assigned -> F calculated) [Phân công -> Cuối cùng tính tiền]
+  --> RESULT: SAT (Counterexample Trace Found!)
+
+[Property 4] Safety: G(error -> NOT exported) [Hệ thống Lỗi -> Không xuất báo cáo]
+  --> RESULT: UNSAT (Property Holds up to k=5)
+
+=======================================================
+  DOI CHIEU MO HINH KRIPKE VOI KET QUA QUET TINH CHUONG 2 (Traceability Check)
+=======================================================
+  [OK] S4_ERROR <-> ch2_memsafe/giang_vien.c:32 [dangling_free] (xac nhan boi pattern_scanner.py)
+  [OK] S4_ERROR <-> ch2_memsafe/tinh_tien_day.c:13 [unchecked_nested_deref] (xac nhan boi pattern_scanner.py)
+  --> KET LUAN: Trang thai loi (S4_ERROR) trong mo hinh Kripke duoc xac nhan boi
+      it nhat 1 lo hong THAT (CWE-416/CWE-476) do Chuong 2 quet duoc tren code C hien tai.

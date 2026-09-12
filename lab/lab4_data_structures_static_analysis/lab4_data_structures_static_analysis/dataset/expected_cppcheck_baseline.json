@@ -1,0 +1,143 @@
+{
+  "buggy_file": "booklist_v1_buggy.c",
+  "fixed_file": "booklist_v2_fixed.c",
+  "buggy_findings": [
+    {
+      "id": "nullPointerOutOfMemory",
+      "severity": "warning",
+      "cwe": "476",
+      "message": "If memory allocation fails, then there is a possible null pointer dereference: node",
+      "line": "40"
+    },
+    {
+      "id": "nullPointerOutOfMemory",
+      "severity": "warning",
+      "cwe": "476",
+      "message": "If memory allocation fails, then there is a possible null pointer dereference: node",
+      "line": "41"
+    },
+    {
+      "id": "nullPointerOutOfMemory",
+      "severity": "warning",
+      "cwe": "476",
+      "message": "If memory allocation fails, then there is a possible null pointer dereference: node",
+      "line": "42"
+    },
+    {
+      "id": "constVariablePointer",
+      "severity": "style",
+      "cwe": "398",
+      "message": "Variable 'cur' can be declared as pointer to const",
+      "line": "71"
+    },
+    {
+      "id": "constVariablePointer",
+      "severity": "style",
+      "cwe": "398",
+      "message": "Variable 'cur' can be declared as pointer to const",
+      "line": "84"
+    },
+    {
+      "id": "uninitvar",
+      "severity": "warning",
+      "cwe": "457",
+      "message": "Uninitialized variable: count",
+      "line": "73"
+    },
+    {
+      "id": "unassignedVariable",
+      "severity": "style",
+      "cwe": "665",
+      "message": "Variable 'count' is not assigned a value.",
+      "line": "70"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_insert_front' should have static linkage since it is not used outside of its translation unit.",
+      "line": "34"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_remove_by_name' should have static linkage since it is not used outside of its translation unit.",
+      "line": "47"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_count_UNSAFE' should have static linkage since it is not used outside of its translation unit.",
+      "line": "69"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_print' should have static linkage since it is not used outside of its translation unit.",
+      "line": "83"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_free_all' should have static linkage since it is not used outside of its translation unit.",
+      "line": "89"
+    }
+  ],
+  "fixed_findings": [
+    {
+      "id": "constVariablePointer",
+      "severity": "style",
+      "cwe": "398",
+      "message": "Variable 'cur' can be declared as pointer to const",
+      "line": "51"
+    },
+    {
+      "id": "constVariablePointer",
+      "severity": "style",
+      "cwe": "398",
+      "message": "Variable 'cur' can be declared as pointer to const",
+      "line": "58"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_insert_front' should have static linkage since it is not used outside of its translation unit.",
+      "line": "19"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_remove_by_name' should have static linkage since it is not used outside of its translation unit.",
+      "line": "31"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_count_SAFE' should have static linkage since it is not used outside of its translation unit.",
+      "line": "49"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_print' should have static linkage since it is not used outside of its translation unit.",
+      "line": "57"
+    },
+    {
+      "id": "staticFunction",
+      "severity": "style",
+      "cwe": "",
+      "message": "The function 'list_free_all' should have static linkage since it is not used outside of its translation unit.",
+      "line": "63"
+    }
+  ],
+  "buggy_security_count": 4,
+  "fixed_security_count": 0
+}
