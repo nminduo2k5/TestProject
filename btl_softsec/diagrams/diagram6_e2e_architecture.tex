@@ -1,0 +1,41 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage[utf8]{vntex,inputenc}
+\usepackage[T5]{fontenc}
+\usepackage{tgtermes}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{xcolor}
+
+%% ===== COLOR PALETTE (khop dashboard.html: --status-critical / --accent-soft) =====
+\definecolor{sevhigh}{HTML}{D03B3B}
+\definecolor{accentsoft}{HTML}{DCECE7}
+
+\begin{document}
+%% ===========================================================
+%% DIAGRAM 6: KIEN TRUC TONG QUAN DUONGUNIVERSITY MANAGEMENT SYSTEM
+%% Frontend -> Backend -> {PostgreSQL, Tang tinh toan C (pham vi kiem chung)}
+%% ===========================================================
+\begin{tikzpicture}[
+    node distance=7mm and 6mm,
+    box/.style={draw, rounded corners, align=center, font=\small, minimum width=6.4cm, minimum height=0.9cm},
+    cbox/.style={draw, rounded corners, align=center, font=\scriptsize, minimum width=3cm, minimum height=0.8cm, fill=accentsoft},
+    arr/.style={-{Triangle[length=2.2mm]}, thick, gray!40!black},
+    lbl/.style={font=\tiny, gray!30!black}
+  ]
+  \node[box, fill=blue!7] (fe) {React 19 + Vite 6 + Ant Design v5 \\ (Frontend)};
+  \node[box, fill=blue!14, below=of fe] (be) {.NET 9 Web API + EF Core 9 \\ (Backend)};
+  \node[box, fill=gray!10, below left=13mm and -5mm of be] (db) {PostgreSQL \\ (Cơ sở dữ liệu)};
+
+  \node[draw=sevhigh, dashed, thick, rounded corners, below right=13mm and -13mm of be,
+        minimum width=7.6cm, minimum height=2.4cm, label={[font=\scriptsize\bfseries,sevhigh,align=center]above:Tầng tính toán thù lao (C) -- PHẠM VI KIỂM CHỨNG CỦA ĐỀ TÀI}] (cwrap) {};
+  \node[cbox, anchor=north west, xshift=6mm, yshift=-9mm] at (cwrap.north west) (m1) {\texttt{giang\_vien.c} \\ Module 1};
+  \node[cbox, right=4mm of m1] (m2) {\texttt{lop\_hoc\_phan.c} \\ Module 2};
+  \node[cbox, right=4mm of m2] (m3) {\texttt{tinh\_tien\_day.c} \\ Module 3};
+
+  \draw[arr] (fe) -- (be) node[lbl, midway, right, xshift=1mm] {HTTP/REST (JSON)};
+  \draw[arr] (be.south) -| ($(db.north)+(0,0)$) node[lbl, pos=0.78, above, xshift=-4mm] {SQL};
+  \draw[arr] (be.south) -| ($(cwrap.north)+(0,0)$) node[lbl, pos=0.78, above, xshift=4mm, align=center] {gọi trực tiếp \\ (biên dịch độc lập)};
+  \draw[arr] (m1) -- (m2) node[lbl, midway, below] {\texttt{gv\_ptr}};
+  \draw[arr] (m2) -- (m3) node[lbl, midway, below] {\texttt{lhp}};
+\end{tikzpicture}
+\end{document}

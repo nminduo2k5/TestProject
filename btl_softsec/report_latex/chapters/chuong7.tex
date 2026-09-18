@@ -1,0 +1,8 @@
+\section{Kết luận}
+\label{sec:ketluan}
+
+Đề tài đã phân tích và kiểm chứng an toàn mô-đun tính thù lao giảng viên của hệ thống DuongUniversity Management System bằng 4 kỹ thuật kiểm chứng bổ sung cho nhau -- mô hình hóa hình thức (Kripke/BMC), phân tích tĩnh (pattern scanner), kiểm chứng hình thức bằng SMT (Z3), và kiểm thử động (fuzzing black-box/white-box) -- áp dụng đồng nhất trên cùng một hệ thống E2E 3 module thay vì các ví dụ minh họa rời rạc.
+
+Kết quả đạt được: phát hiện và khắc phục thành công \textbf{6 lớp lỗ hổng} (\textbf{CWE-120, CWE-416, CWE-476, CWE-190, CWE-1288, CWE-197}), xác nhận bằng \textbf{9/9 cảnh báo tĩnh} đúng vị trí trên code VULN và \textbf{0 cảnh báo} trên \texttt{main\_fixed.c}; \textbf{5/5 thuộc tính BMC an toàn} trên bản FIXED (chỉ $P_3$ Liveness còn giới hạn kỹ thuật đã giải thích ở \Cref{sec:thaoluan}); \textbf{6 phép chứng minh Z3} xác nhận hình thức cả tồn tại lỗi (Check 1, 4, 6 SAT) lẫn loại trừ hoàn toàn lỗi sau vá (Check 2, 3, 5 UNSAT); và bằng chứng thực nghiệm động qua fuzzing (72/200 crash trên bản lỗi, 0/200 trên bản vá) cùng chẩn đoán thật từ AddressSanitizer (\texttt{heap-use-after-free} được công cụ độc lập xác nhận, không phải tự báo cáo).
+
+Điểm mấu chốt về phương pháp luận: \textbf{4 tầng kiểm chứng cùng đi đến một kết luận nhất quán} -- Chương 1 chứng minh vi phạm ở mức logic điều khiển, Chương 2 chỉ đúng vị trí trên mã nguồn, Chương 3 chứng minh toán học trên toàn miền giá trị, Chương 4 xác nhận biểu hiện thật trên binary đã biên dịch. Không một kỹ thuật nào trong 4 kỹ thuật trên đủ để tự mình bao phủ toàn bộ không gian lỗi có thể có (mỗi kỹ thuật có giới hạn riêng, đã nêu ở \Cref{sec:thaoluan}); sự kết hợp của cả 4 mới tạo thành một quy trình kiểm chứng an toàn phần mềm đáng tin cậy.

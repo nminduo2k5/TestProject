@@ -1,0 +1,52 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage[utf8]{vntex,inputenc}
+\usepackage[T5]{fontenc}
+\usepackage{tgtermes}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{xcolor}
+
+%% ===== COLOR PALETTE (khop dashboard.html: --status-critical / --accent) =====
+\definecolor{sevhigh}{HTML}{D03B3B}
+\definecolor{accentteal}{HTML}{0F6B5C}
+
+\begin{document}
+%% ===========================================================
+%% DIAGRAM 5: BLACK-BOX vs WHITE-BOX -- (a) thoi gian thuc thi, (b) so lan thu
+%% (Bang 5.3, tab:fuzz)
+%% ===========================================================
+\begin{tikzpicture}
+  % ---- (a) Thoi gian thuc thi (s): Black-box 11.90s vs White-box 0.39s ----
+  \begin{scope}[x=1.2cm,y=0.36cm]
+    \node[font=\small\bfseries] at (1.6,14.2) {(a) Thời gian thực thi (s)};
+    \draw[gray!70,-{Triangle[length=2mm]}] (-0.3,0) -- (-0.3,13.4);
+    \draw[gray!70,-{Triangle[length=2mm]}] (0,-0.3) -- (3.2,-0.3);
+    \foreach \y in {2,4,6,8,10} {
+      \draw[gray!25,dashed] (0,\y) -- (3,\y);
+      \node[left,font=\tiny,gray!50!black] at (-0.15,\y) {\y};
+    }
+    \draw[fill=sevhigh] (0.65,0) rectangle (1.35,11.90);
+    \draw[fill=accentteal] (1.85,0) rectangle (2.55,0.39);
+    \node[above,font=\scriptsize\bfseries] at (1,11.90) {11.90};
+    \node[above,font=\scriptsize\bfseries] at (2.2,0.39) {0.39};
+    \node[below,font=\scriptsize] at (1,-0.45) {Black-box};
+    \node[below,font=\scriptsize] at (2.2,-0.45) {White-box};
+  \end{scope}
+  % ---- (b) So lan thu: Black-box 200 vs White-box 7 ----
+  \begin{scope}[x=1.2cm,y=0.0198cm,xshift=6.4cm]
+    \node[font=\small\bfseries] at (1.6,248) {(b) Số lần thử};
+    \draw[gray!70,-{Triangle[length=2mm]}] (-0.3,0) -- (-0.3,232);
+    \draw[gray!70,-{Triangle[length=2mm]}] (0,-6) -- (3.2,-6);
+    \foreach \y in {50,100,150,200} {
+      \draw[gray!25,dashed] (0,\y) -- (3,\y);
+      \node[left,font=\tiny,gray!50!black] at (-0.15,\y) {\y};
+    }
+    \draw[fill=sevhigh] (0.65,0) rectangle (1.35,200);
+    \draw[fill=accentteal] (1.85,0) rectangle (2.55,7);
+    \node[above,font=\scriptsize\bfseries] at (1,200) {200};
+    \node[above,font=\scriptsize\bfseries] at (2.2,7) {7};
+    \node[below,font=\scriptsize] at (1,-9) {Black-box};
+    \node[below,font=\scriptsize] at (2.2,-9) {White-box};
+  \end{scope}
+\end{tikzpicture}
+\end{document}

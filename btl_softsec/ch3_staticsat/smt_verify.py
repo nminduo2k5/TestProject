@@ -136,6 +136,78 @@ def run_smt_verification_e2e():
         print("  --> RESULT: UNSAT (Safe code strictly enforces: NO/DELETED LECTURER -> SALARY = 0 VND,")
         print("      da kiem chung tren chinh cong thuc tinh luong that dung trong Module 3).\n")
 
+    print("[Check 4] E2E Numeric Truncation Error int -> char tren So Luong Sinh Vien (CWE-197):")
+    # Mo hinh hoa DUNG ham that pack_class_size_byte_VULN() (ch2_memsafe/tinh_tien_day.c):
+    #   return (char)soLuongSinhVien;  <- khong kiem tra pham vi truoc khi ep kieu
+    # Ep kieu (char) tren so nguyen duoc mo phong bang so hoc modulo 256 voi wrap ve mien
+    # co dau [-128, 127], dung cach bieu dien two's-complement chuan cua signed char.
+    soLuongSinhVien4 = Int('soLuongSinhVien4')
+    s_trunc = Solver()
+    # Pham vi thuc te: lop dai cuong tai DuongUniversity co the len toi vai tram sinh vien
+    s_trunc.add(soLuongSinhVien4 >= 0, soLuongSinhVien4 <= 300)
+    raw_byte4 = soLuongSinhVien4 % 256
+    truncated_signed4 = If(raw_byte4 > 127, raw_byte4 - 256, raw_byte4)
+    s_trunc.add(truncated_signed4 != soLuongSinhVien4)
+    res_trunc = s_trunc.check()
+
+    if res_trunc == sat:
+        print("  --> RESULT: SAT (Numeric truncation CO THE xay ra - ep (char) khong kiem tra pham vi!)")
+        m = s_trunc.model()
+        print(f"    - soLuongSinhVien (int)      = {m[soLuongSinhVien4]}")
+        print(f"    - Byte da ep kieu (char)     = {m.eval(truncated_signed4)}  <- SAI LECH so voi gia tri that")
+        print("  --> DE XUAT: Kiem tra pham vi (0..127) TRUOC khi ep kieu (char), giong pack_class_size_byte_SAFE().\n")
+    else:
+        print("  --> RESULT: UNSAT\n")
+
+    print("[Check 5] E2E Numeric Truncation SAU KHI FIX (guard 0..127 truoc khi ep kieu, CWE-197):")
+    # Mo hinh hoa DUNG guard that trong pack_class_size_byte_SAFE() (ch2_memsafe/tinh_tien_day.c):
+    #   if (soLuongSinhVien < 0 || soLuongSinhVien > 127) { ...tu choi... }
+    #   *out_byte = (char)soLuongSinhVien;   <- chi chay khi guard o tren KHONG chan
+    soLuongSinhVien5 = Int('soLuongSinhVien5')
+    s_trunc_fixed = Solver()
+    s_trunc_fixed.add(soLuongSinhVien5 >= 0, soLuongSinhVien5 <= 300)
+    guard_cho_phep_ep_kieu = And(soLuongSinhVien5 >= 0, soLuongSinhVien5 <= 127)
+    raw_byte5 = soLuongSinhVien5 % 256
+    truncated_signed5 = If(raw_byte5 > 127, raw_byte5 - 256, raw_byte5)
+    s_trunc_fixed.add(guard_cho_phep_ep_kieu)
+    s_trunc_fixed.add(truncated_signed5 != soLuongSinhVien5)
+    res_trunc_fixed = s_trunc_fixed.check()
+
+    if res_trunc_fixed == sat:
+        print("  --> RESULT: SAT (Loi van con ton tai sau fix!)")
+    else:
+        print("  --> RESULT: UNSAT (Da chung minh: voi guard 0..127 dung TRUOC khi ep kieu, gia tri")
+        print("      sau ep kieu LUON BANG gia tri int goc - khong bao gio xay ra Numeric Truncation).\n")
+
+    print("[Check 6] E2E Numeric Truncation COLLISION - 2 gia tri KHAC NHAU cung cho 1 byte (CWE-197):")
+    # Day la lop nguy hiem NHAT cua CWE-197: khong phai "gia tri sai" (de phat hien) ma la
+    # "gia tri hop le nay GIA MAO gia tri hop le khac" sau khi xuat bao cao - vd 1 lop 256 sinh
+    # vien THAT bi ep kieu thanh byte=0, giong het 1 lop THAT SU rong (0 sinh vien). Neu module
+    # sau nay co quy tac "byte=0 -> coi la lop chua mo, khong duyet luong", ca 2 tinh huong
+    # (that su rong VA 256 sinh vien that) se bi xu ly SAI GIONG HET NHAU.
+    a6 = Int('soLuongSinhVien_a')
+    b6 = Int('soLuongSinhVien_b')
+    s_collision = Solver()
+    s_collision.add(a6 >= 0, a6 <= 300, b6 >= 0, b6 <= 300, a6 != b6)
+    raw_a6 = a6 % 256
+    byte_a6 = If(raw_a6 > 127, raw_a6 - 256, raw_a6)
+    raw_b6 = b6 % 256
+    byte_b6 = If(raw_b6 > 127, raw_b6 - 256, raw_b6)
+    s_collision.add(byte_a6 == byte_b6)
+    s_collision.add(a6 == 0)  # gan 1 ve = 0 (lop THAT SU rong) de tim doi thu gay nham lan cu the
+    res_collision = s_collision.check()
+
+    if res_collision == sat:
+        m = s_collision.model()
+        print("  --> RESULT: SAT (Ton tai 2 lop hoc phan HOAN TOAN KHAC NHAU nhung xuat ra CUNG 1 byte!)")
+        print(f"    - Lop A: soLuongSinhVien = {m[a6]}  (lop that su rong)")
+        print(f"    - Lop B: soLuongSinhVien = {m[b6]}  (lop CO THAT {m[b6]} sinh vien)")
+        print(f"    - Ca 2 deu xuat ra byte = {m.eval(byte_a6)}  <- KHONG THE PHAN BIET duoc sau khi ep kieu!")
+        print("  --> DE XUAT: Day chinh la ly do phai chan TRUOC khi ep kieu (pack_class_size_byte_SAFE), khong")
+        print("      the chi dua vao gia tri byte da xuat de suy nguoc lai so sinh vien that.\n")
+    else:
+        print("  --> RESULT: UNSAT\n")
+
 
 if __name__ == '__main__':
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

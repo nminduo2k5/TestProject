@@ -1,0 +1,63 @@
+\section{Phương pháp Thực hiện}
+\label{sec:phuongphap}
+
+\subsection{Chương 1 -- Mô hình hóa Kripke \& Kiểm chứng BMC}
+\label{sec:ch1}
+
+\textbf{Module:} \texttt{ch1\_models/kripke\_bmc.py}.
+
+Kripke structure $M = (S, S_0, R, L)$ được dựng với \textbf{5 trạng thái ở bản FIXED} ($S_0$ INIT $\to$ $S_1$ GV\_ASSIGNED $\to$ $S_2$ SALARY\_CALC $\to$ $S_3$ EXPORTED, và $S_4$ ERROR) và \textbf{6 trạng thái ở bản BUGGY} (thêm $S_5$ INVALID\_CALC -- đường tắt nhảy trực tiếp từ $S_0$ sang tính tiền, bỏ qua bước phân công giảng viên). \Cref{fig:kripke} minh họa sơ đồ chuyển trạng thái cùng kết quả BMC $P_1$--$P_4$ (thuộc tính $P_5$ được bổ sung sau, trình bày tại \Cref{sec:ketqua}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{diagram1_state_transition.png}
+  \caption{Sơ đồ chuyển trạng thái Kripke và kết quả BMC $k=5$ (thuộc tính $P_1$--$P_4$)}
+  \label{fig:kripke}
+\end{figure}
+
+\textbf{5 thuộc tính LTL/CTL} được kiểm chứng bằng BMC với $k=5$:
+\begin{itemize}
+  \item $P_1$ (Safety): $G(\text{calculated} \to \text{assigned})$ -- chưa phân công thì không được tính tiền.
+  \item $P_2$ (Safety): $G(\text{exported} \to \text{calculated})$ -- chưa tính tiền thì không được xuất báo cáo.
+  \item $P_3$ (Liveness): $G(\text{assigned} \to F\,\text{calculated})$ -- đã phân công thì cuối cùng phải tính tiền.
+  \item $P_4$ (Safety): $G(\text{error} \to \lnot\,\text{exported})$ -- hệ thống lỗi thì không được xuất báo cáo.
+  \item $P_5$ (Safety, bổ sung cho CWE-197): $G(\text{exported} \to \lnot\,\text{byte\_truncated})$ -- báo cáo xuất ra không được mang dữ liệu ép kiểu sai lệch.
+\end{itemize}
+
+Hàm \texttt{cross\_validate\_with\_pattern\_scanner()} gọi lại chính \texttt{pattern\_scanner.py} của Chương 2 để tự động xác nhận trạng thái lỗi $S_4$/$S_3$\_EXPORTED\_TRUNCATED trong mô hình Kripke trừu tượng khớp với đúng vị trí lỗ hổng thật trên mã nguồn C -- liên kết Chương 1 $\leftrightarrow$ Chương 2, tránh việc mô hình hình thức tồn tại độc lập, tách rời code thật.
+
+\subsection{Chương 2 -- Kiểm toán an toàn bộ nhớ}
+\label{sec:ch2}
+
+\textbf{Module:} \texttt{ch2\_memsafe/pattern\_scanner.py}.
+
+Công cụ quét trực tiếp mã nguồn C dạng văn bản (regex/so khớp chuỗi, không phải phân tích AST/data-flow đầy đủ) trên 3 file \texttt{giang\_vien.c}, \texttt{lop\_hoc\_phan.c}, \texttt{tinh\_tien\_day.c} và driver \texttt{main\_fixed.c}, với 5 quy tắc phát hiện: \texttt{strcpy} (CWE-120), \texttt{dangling\_free} (CWE-416), \texttt{unchecked\_nested\_deref} (CWE-476), \texttt{int\_overflow\_cast} (CWE-190), \texttt{unchecked\_numeric\_truncation} (CWE-197). Phạm vi tìm ``đã được bảo vệ'' (guard-check) được scope đúng theo \emph{hàm bao quanh} thay vì cửa sổ N dòng cố định, tránh bỏ sót guard nằm xa vị trí truy cập trong hàm dài.
+
+\textbf{Bổ sung bằng chứng động (\texttt{memory\_trace\_demo.py}):} phân tích tĩnh không thể trả lời câu hỏi ``bộ nhớ thực sự được dùng ra sao khi chương trình chạy''. Script này biên dịch cùng một luồng E2E 7 bước bằng 2 trình biên dịch: \textbf{Plain GCC} (chỉ in địa chỉ con trỏ thật, không phát hiện lỗi) và \textbf{Clang64 + AddressSanitizer thật}~\cite{clangasan} (công cụ độc lập tự phát hiện \texttt{heap-use-after-free}), cho phép đối chiếu hành vi ``im lặng'' (nguy hiểm) và hành vi ``bị công cụ chặn'' trên cùng một lỗi.
+
+\subsection{Chương 3 -- Kiểm chứng hình thức SMT/Z3}
+\label{sec:ch3}
+
+\textbf{Module:} \texttt{ch3\_staticsat/smt\_verify.py}.
+
+Khác với test thông thường (thử một vài input), Z3 SMT solver~\cite{demoura2008z3} chứng minh một mệnh đề đúng/sai trên \emph{toàn miền giá trị hợp lệ} cùng lúc, với 6 phép kiểm chứng:
+
+\begin{itemize}
+  \item \textbf{Check 1}: $\exists$ input hợp lệ ($\text{numClasses}\in[1,20]$, $\text{soTiet}\in[15,120]$,\dots) : $\text{tienDay} > \text{INT32\_MAX}$? $\Rightarrow$ \textbf{SAT} -- CWE-190 có thật.
+  \item \textbf{Check 2}: cùng câu hỏi với ngưỡng \texttt{INT64\_MAX} trên kiểu \texttt{long long} $\Rightarrow$ \textbf{UNSAT} -- an toàn tuyệt đối.
+  \item \textbf{Check 3}: $\text{gv\_ptr} = \text{NULL} \lor \text{is\_deleted} \to \text{tienDay} = 0$? -- mô hình hóa bằng \emph{đúng công thức thật} trong \texttt{calculate\_e2e\_salary\_SAFE()} $\Rightarrow$ \textbf{UNSAT} -- guard hoạt động đúng.
+  \item \textbf{Check 4}: $\exists\, \text{soLuongSinhVien}\in[0,300]$ : ép kiểu \texttt{(char)} (mô phỏng bằng số học modulo 256) cho giá trị khác giá trị gốc? $\Rightarrow$ \textbf{SAT} -- phản ví dụ $128 \to -128$.
+  \item \textbf{Check 5}: cùng câu hỏi nhưng với guard $0 \le n \le 127$ đứng trước $\Rightarrow$ \textbf{UNSAT} -- chứng minh bản vá loại trừ hoàn toàn CWE-197.
+  \item \textbf{Check 6}: $\exists\, a \ne b \in [0,300]$ : ép kiểu cho ra cùng 1 byte? $\Rightarrow$ \textbf{SAT} -- phản ví dụ $a=0, b=256$ cùng cho byte $=0$ (lớp nguy hiểm nhất: 2 lớp học hoàn toàn khác nhau bị nhầm thành một).
+\end{itemize}
+
+Các ràng buộc nghiệp vụ dùng đúng con số đã đặc tả tại \Cref{tab:range} ($\text{soTiet}\in[1,500]$, $\text{dinhMucTienChuan}\in[50\,000,200\,000]$ VNĐ).
+
+\subsection{Chương 4 -- Dynamic Fuzzing}
+\label{sec:ch4}
+
+\textbf{Module:} \texttt{ch4\_dynafuzz/fuzzer\_blackbox.py} và \texttt{fuzzer\_whitebox.py}.
+
+\textbf{Black-box}: sinh 200 input ngẫu nhiên (tên/bằng cấp/mã lớp qua \texttt{stdin}), đo crash rate thật trên \texttt{salary\_calc.exe} (VULN) đối chứng \texttt{salary\_calc\_fixed.exe} (SAFE). Riêng CWE-197 được fuzz qua subcommand \texttt{e2e\_byte\_truncate <n>} với 2 chiến lược: (a) 200 giá trị ngẫu nhiên trong $[-50,400]$, và (b) \textbf{Boundary Value Analysis} -- 17 giá trị biên \emph{thiết kế sẵn} (quanh mép \texttt{char} $\{-129,\dots,129\}$, quanh mép chu kỳ 256 $\{-256,\dots,257\}$, và giá trị lớp đại cương $\{300,384\}$) chạy tất định thay vì phó mặc ngẫu nhiên -- đảm bảo luôn phát hiện được lớp lỗi nguy hiểm nhất (trùng lặp byte).
+
+\textbf{White-box (Z3-guided)}: giải trực tiếp 7 ràng buộc Z3 tương ứng 6 lỗ hổng CWE đã biết trước (không phải symbolic execution duyệt CFG tự động) -- hằng số \texttt{MAX\_NAME}/\texttt{MAX\_MALOP} được đọc trực tiếp từ header \texttt{.h} qua \texttt{read\_header\_define()} thay vì hard-code, nên ràng buộc Z3 tự động bám theo đúng source hiện tại nếu hằng số đổi.

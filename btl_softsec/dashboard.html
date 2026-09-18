@@ -307,6 +307,37 @@
       margin-top: -8px;
     }
 
+    .concept-box {
+      background: var(--warm-soft);
+      border-left: 3px solid var(--warm);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+      margin: 16px 0 20px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .concept-box h4 {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin: 0 0 2px;
+      font-weight: 600;
+    }
+
+    .concept-item {
+      font-size: 13.5px;
+      color: var(--ink-2);
+      line-height: 1.55;
+    }
+
+    .concept-item b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
     .pill {
       display: inline-flex;
       align-items: center;
@@ -691,6 +722,34 @@
       margin-bottom: 0;
     }
 
+    .pdf-figure {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      margin: 4px 0;
+    }
+
+    .pdf-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    figure.diagram figcaption {
+      font-size: 12px;
+      color: var(--ink-2);
+      margin-top: 10px;
+      max-width: 70ch;
+    }
+
+    figure.diagram figcaption b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
     .chart-caption {
       font-family: "IBM Plex Mono", monospace;
       font-size: 11px;
@@ -793,7 +852,7 @@
     </header>
 
     <div class="intro-box">
-      <h3>Vì sao 4 chương này, và chúng liên hệ với nhau thế nào?</h3>
+      <h3>Tư duy cốt lõi: không hỏi "output đúng không" — hỏi "module có chịu được khi input vượt phạm vi không"</h3>
       <p class="explain">Cùng một module C (quản lý giảng viên → lớp học phần → tính lương) được soi bằng 4 lăng kính
         khác nhau, theo đúng thứ tự "trừu tượng → cụ thể" của kiểm chứng phần mềm: <b>Chương 1</b> mô hình hoá hành vi
         hệ thống thành đồ thị trạng thái rồi <b>chứng minh toán học</b> (không chạy code) xem có vi phạm quy tắc nghiệp
@@ -802,18 +861,118 @@
           trị</b> (không phải test vài mẫu); <b>Chương 4</b> thực sự <b>chạy chương trình đã biên dịch</b> với hàng trăm
         input để xem lỗi có biểu hiện ra ngoài hay không. Bốn góc nhìn này bổ sung cho nhau: cái Chương 2 bỏ sót thì
         Chương 1 vẫn có thể phát hiện qua mô hình, và ngược lại.</p>
+
+      <div class="chart-caption" style="margin-top:20px;">Vùng input hợp lệ (đặc tả) → vượt phạm vi → CWE phát sinh
+      </div>
+      <div class="chart-wrap" style="align-items:stretch;">
+        <div
+          style="flex:1 1 260px; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px;">
+          <div style="font-size:12px; font-weight:600; color:var(--status-good); margin-bottom:8px;">✓ VÙNG HỢP LỆ —
+            module PHẢI chịu được</div>
+          <dl style="margin:0; font-family:'IBM Plex Mono',monospace; font-size:12px;">
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);">
+              <span>soTiet</span><b style="color:var(--ink);">1 – 500</b></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);">
+              <span>bangCap</span><b style="color:var(--ink);">GS/PGS/TS/ThS/CN</b></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);">
+              <span>hoTen</span><b style="color:var(--ink);">≤ 80 ký tự</b></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);">
+              <span>soLuongSinhVien</span><b style="color:var(--ink);">0 – 127</b></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);">
+              <span>gv_ptr</span><b style="color:var(--ink);">luôn hợp lệ</b></div>
+          </dl>
+        </div>
+        <div
+          style="flex:1 1 260px; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px;">
+          <div style="font-size:12px; font-weight:600; color:var(--status-critical); margin-bottom:8px;">✗ VƯỢT PHẠM VI
+            — defect phát sinh</div>
+          <dl style="margin:0; font-family:'IBM Plex Mono',monospace; font-size:12px;">
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);"><span>soTiet =
+                50000</span><b style="color:var(--status-critical);">CWE-190</b></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);"><span>bangCap =
+                "HACKER"</span><b style="color:var(--status-critical);">CWE-1288</b></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);"><span>hoTen =
+                173 ký tự</span><b style="color:var(--status-critical);">CWE-120</b></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);">
+              <span>soLuongSinhVien = 256</span><b style="color:var(--status-critical);">CWE-197</b></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-2);"><span>gv_ptr
+                sau free() / NULL</span><b style="color:var(--status-critical);">CWE-416 / 476</b></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="chart-caption" style="margin-top:24px;">Testing thông thường vs. Kiểm chứng hình thức (Formal — Ch1
+        &amp; Ch3)</div>
+      <table class="props">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Testing (Ch4 + test truyền thống)</th>
+            <th>Formal (Ch1, Ch3)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prop-name">Cách tiếp cận</td>
+            <td>Thử N trường hợp cụ thể</td>
+            <td>Xét toàn bộ không gian giá trị/trạng thái</td>
+          </tr>
+          <tr>
+            <td class="prop-name">Khi không thấy lỗi</td>
+            <td>"Chưa thấy lỗi" — confidence tăng dần theo N</td>
+            <td>"Chứng minh không có lỗi" — UNSAT tuyệt đối, không phụ thuộc N</td>
+          </tr>
+          <tr>
+            <td class="prop-name">Phụ thuộc</td>
+            <td>Phụ thuộc bộ input đã chọn để thử</td>
+            <td>Độc lập với input cụ thể — quantify trên biến ký hiệu</td>
+          </tr>
+          <tr>
+            <td class="prop-name">Kết luận</td>
+            <td>Xác suất / thống kê</td>
+            <td>Tuyệt đối trong phạm vi ràng buộc đã khai báo</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:11.5px; color:var(--ink-muted); margin-top:10px; margin-bottom:0;">Ví dụ ngay trong đề tài:
+        <span class="mono">fuzzer_blackbox.py</span> chạy 200 lần trên bản vá cho <b>0/200 crash</b> — đó là "chưa
+        thấy lỗi sau 200 lần thử". Còn <b>Check 2</b> (<span class="mono">smt_verify.py</span>) chứng minh
+        <b>UNSAT</b> cho tràn số 64-bit trên toàn miền ràng buộc — đó là "chứng minh không có lỗi", không phụ thuộc đã
+        thử bao nhiêu lần. Hai loại bằng chứng này bổ sung, không thay thế nhau.
+      </p>
     </div>
 
     <div class="summary">
-      <a href="#ch1"><span class="num">CH.1</span><span class="label">Kripke &amp; BMC</span><span class="result">4
+      <a href="#ch1"><span class="num">CH.1</span><span class="label">Kripke &amp; BMC</span><span class="result">5
           thuộc tính LTL, k=5</span></a>
-      <a href="#ch2"><span class="num">CH.2</span><span class="label">Pattern Scanner</span><span class="result">8 cảnh
+      <a href="#ch2"><span class="num">CH.2</span><span class="label">Pattern Scanner</span><span class="result">9 cảnh
           báo / 3 file</span></a>
-      <a href="#ch3"><span class="num">CH.3</span><span class="label">Z3 SMT Solver</span><span class="result">int32 vs
-          int64</span></a>
-      <a href="#ch4"><span class="num">CH.4</span><span class="label">Fuzzing</span><span class="result">~38× nhanh
-          hơn</span></a>
+      <a href="#ch3"><span class="num">CH.3</span><span class="label">Z3 SMT Solver</span><span class="result">5
+          checks E2E</span></a>
+      <a href="#ch4"><span class="num">CH.4</span><span class="label">Fuzzing</span><span class="result">7/7 target
+          Z3</span></a>
     </div>
+
+    <section style="margin-bottom:48px;">
+      <div class="chapter-head">
+        <span class="idx">ERD</span>
+        <h2 style="font-size:19px;">Kiến trúc dữ liệu 3 mô-đun</h2>
+      </div>
+      <div class="tool lede">giang_vien.h &middot; lop_hoc_phan.h &middot; tinh_tien_day.h</div>
+      <p class="explain" style="margin:10px 0 16px;">3 struct C liên kết qua con trỏ thô — nền tảng mà cả 4 chương phía
+        dưới cùng kiểm chứng. Ô tô màu là trường dữ liệu liên quan trực tiếp tới 1 CWE đã tìm thấy.</p>
+      <figure class="diagram" style="margin:0;">
+        <div class="pdf-figure">
+          <img src="diagrams/diagram2_entity_relationship.png"
+            alt="Sơ đồ quan hệ 3 struct GiangVien, LopHocPhan, Config: hoTen/bangCap/maLop tô đỏ CWE-120, gv_ptr tô đỏ CWE-416/476, dinhMucTienChuan dùng long long int64">
+        </div>
+        <figcaption>Nguồn: <code>diagrams/diagram2_entity_relationship.pdf</code>. 4 trường tô đỏ
+          (<b>hoTen, bangCap, maLop, gv_ptr</b>) là đúng 4 trường dữ liệu gây CWE-120/416/476 đã quét thấy ở Chương 2;
+          <b>dinhMucTienChuan</b> dùng <code>long long</code> (int64) là bản vá cho CWE-190 đã chứng minh UNSAT ở
+          Chương 3.
+        </figcaption>
+      </figure>
+    </section>
 
     <section class="chapter" id="ch1">
       <div class="chapter-head">
@@ -822,12 +981,25 @@
       </div>
       <div class="tool lede">ch1_models/kripke_bmc.py</div>
 
+      <div class="concept-box">
+        <h4>Khái niệm chính</h4>
+        <div class="concept-item"><b>Kripke structure</b> — mô hình toán học liệt kê hết mọi trạng thái và mọi đường
+          đi có thể của hệ thống, thay vì chỉ vài kịch bản test.</div>
+        <div class="concept-item"><b>State (trạng thái)</b> — một "lát cắt" tình huống hệ thống tại 1 thời điểm, ví
+          dụ "đã phân công giảng viên", "đã tính tiền".</div>
+        <div class="concept-item"><b>BMC (Bounded Model Checking)</b> — duyệt thử đúng k bước, nhờ Z3 tìm xem có
+          đường đi nào trong k bước đó vi phạm luật an toàn hay không.</div>
+        <div class="concept-item"><b>SAT / UNSAT</b> — SAT = tìm thấy phản ví dụ cụ thể (lỗi có thật); UNSAT = không
+          tìm thấy vi phạm nào trong phạm vi đã duyệt (an toàn có điều kiện).</div>
+      </div>
+
       <div class="explain-block">
         <p class="explain"><b>Kripke structure</b> là gì? Một bộ 4 thành phần M = (S, S₀, R, L): tập trạng thái
           <code>S</code>, trạng thái khởi tạo <code>S₀</code>, quan hệ chuyển tiếp <code>R</code> (trạng thái nào được
           phép đi tới trạng thái nào), và hàm gán nhãn <code>L</code> (mỗi trạng thái mang những thuộc tính gì, ví dụ
           "đã phân công", "đã tính tiền"). Đây là cách toán học biểu diễn "mọi luồng thực thi có thể xảy ra" của hệ
-          thống, thay vì chỉ một vài kịch bản test cụ thể.</p>
+          thống, thay vì chỉ một vài kịch bản test cụ thể.
+        </p>
       </div>
       <div class="explain-block">
         <p class="explain"><b>Bounded Model Checking (BMC)</b>: thay vì duyệt mô hình vô hạn bước, ta "duỗi" (unroll)
@@ -837,38 +1009,24 @@
           bước đó (chứng minh có điều kiện, không phải "an toàn tuyệt đối mãi mãi").</p>
       </div>
 
-      <div class="state-row">
-        <span class="row-label">Luồng chính</span>
-        <div class="state-track">
-          <span class="state-chip">S0_INIT</span><span class="state-arrow">→</span>
-          <span class="state-chip">S1_GV_ASSIGNED</span><span class="state-arrow">→</span>
-          <span class="state-chip">S2_SALARY_CALC</span><span class="state-arrow">→</span>
-          <span class="state-chip">S3_EXPORTED</span>
+      <figure class="diagram" style="margin:4px 0 6px;">
+        <div class="pdf-figure">
+          <img src="diagrams/diagram1_state_transition.png"
+            alt="Đồ thị chuyển trạng thái Kripke S0 INIT đến S4 ERROR, S5 INVALID_CALC chỉ tồn tại ở bản BUGGY, kèm bảng kết quả BMC P1-P4">
         </div>
-      </div>
-      <div class="state-row">
-        <span class="row-label">Nhánh lỗi</span>
-        <div class="state-track">
-          <span class="state-chip">S4_ERROR</span>
-          <span style="font-size:11.5px; color:var(--ink-muted); margin-left:10px;">rẽ nhánh từ S1 hoặc S2 — có ở cả 2
-            bản</span>
-        </div>
-      </div>
-      <div class="state-row">
-        <span class="row-label">Vết BMC</span>
-        <div class="state-track">
-          <span class="state-chip">S0_INIT</span><span class="state-arrow">→</span>
-          <span class="state-chip bad">S5_INVALID_CALC</span><span class="state-arrow">→</span>
-          <span class="state-chip">S4_ERROR</span>
-        </div>
-      </div>
-      <span class="state-note">S5_INVALID_CALC chỉ tồn tại ở bản BUGGY (6 trạng thái, so với 5 ở bản FIXED) — đây là vết
-        phản ví dụ thật do Z3 tìm ra cho Property 1: nhảy thẳng từ "chưa phân công" sang "đã tính tiền", bỏ qua bước
-        phân công giảng viên (S1)</span>
+        <figcaption>Nguồn: <code>diagrams/diagram1_state_transition.pdf</code>, dựng từ
+          <code>build_duong_university_kripke()</code> — viền nét đứt đỏ = chỉ tồn tại/vi phạm ở bản BUGGY.
+          <b>S5_INVALID_CALC</b> là đường tắt Z3 tìm ra cho phản ví dụ P1 (nhảy từ S0 sang tính tiền, bỏ qua bước phân
+          công). Bảng P1-P4 trong ảnh khớp với log thật ở mục dưới; thuộc tính <b>P5</b> (CWE-197, nhãn
+          <code>byte_truncated</code> trên S3 ở bản BUGGY) được thêm sau nên chưa có trong ảnh gốc — xem bảng đầy đủ
+          5 thuộc tính ngay bên dưới.
+        </figcaption>
+      </figure>
 
       <div class="chart-caption">Kết quả BMC theo từng thuộc tính (k=5)</div>
       <div class="heat-axis"><span
-          class="heat-label-spacer"></span><span>P1</span><span>P2</span><span>P3</span><span>P4</span></div>
+          class="heat-label-spacer"></span><span>P1</span><span>P2</span><span>P3</span><span>P4</span><span>P5</span>
+      </div>
       <div class="heat-grid">
         <div class="heat-row">
           <span class="heat-label">BUGGY</span>
@@ -876,12 +1034,14 @@
           <span class="heat-cell good">UNSAT</span>
           <span class="heat-cell bad">SAT</span>
           <span class="heat-cell good">UNSAT</span>
+          <span class="heat-cell bad">SAT</span>
         </div>
         <div class="heat-row">
           <span class="heat-label">FIXED</span>
           <span class="heat-cell good">UNSAT</span>
           <span class="heat-cell good">UNSAT</span>
           <span class="heat-cell bad">SAT</span>
+          <span class="heat-cell good">UNSAT</span>
           <span class="heat-cell good">UNSAT</span>
         </div>
       </div>
@@ -920,6 +1080,12 @@
             <td><span class="pill good">UNSAT — an toàn</span></td>
             <td><span class="pill good">UNSAT — an toàn</span></td>
           </tr>
+          <tr>
+            <td class="prop-name">P5 · Safety</td>
+            <td>G(exported → ¬byte_truncated) — CWE-197</td>
+            <td><span class="pill critical">SAT — vi phạm</span></td>
+            <td><span class="pill good">UNSAT — an toàn</span></td>
+          </tr>
         </tbody>
       </table>
 
@@ -932,10 +1098,14 @@
           <li><b>P3 ra SAT ở cả 2 bản</b> — không phải lỗi mã nguồn, mà là <b>giới hạn kỹ thuật của BMC</b>: với
             liveness ("cuối cùng phải xảy ra"), BMC hữu hạn k bước luôn có thể tìm ra một vết dừng sớm ở nhánh lỗi trước
             khi kịp thoả mãn — cần k-induction hoặc Büchi automata mới chứng minh liveness vô hạn triệt để.</li>
+          <li><b>P5 khác biệt rõ giữa 2 bản</b>, giống P1 — bản BUGGY luôn ép kiểu (char) không kiểm tra ở
+            <code>pack_class_size_byte_VULN()</code> nên S3_EXPORTED mang nhãn byte_truncated (SAT, vi phạm CWE-197);
+            bản FIXED dùng guard trong <code>pack_class_size_byte_SAFE()</code> nên không bao giờ vi phạm (UNSAT).
+          </li>
           <li><b>Đối chiếu tự động với Chương 2:</b> script còn tự gọi lại <span class="mono">pattern_scanner.py</span>
-            để xác nhận trạng thái lỗi S4_ERROR khớp với đúng lỗ hổng thật (CWE-416 tại <span
-              class="mono">giang_vien.c:32</span>) — tránh việc mô hình Kripke chỉ tồn tại trên giấy, tách rời code
-            thật.</li>
+            để xác nhận trạng thái lỗi S4_ERROR và S3_EXPORTED_TRUNCATED khớp với đúng lỗ hổng thật (CWE-416 tại <span
+              class="mono">giang_vien.c:32</span>, CWE-197 tại <span class="mono">tinh_tien_day.c:63</span>) — tránh
+            việc mô hình Kripke chỉ tồn tại trên giấy, tách rời code thật.</li>
         </ul>
       </div>
     </section>
@@ -947,11 +1117,25 @@
       </div>
       <div class="tool lede">ch2_memsafe/pattern_scanner.py</div>
 
+      <div class="concept-box">
+        <h4>Khái niệm chính</h4>
+        <div class="concept-item"><b>Static analysis (phân tích tĩnh)</b> — đọc và đối chiếu mã nguồn để tìm lỗi mà
+          không cần biên dịch hay chạy chương trình.</div>
+        <div class="concept-item"><b>Pattern/regex scanning</b> — so khớp mã nguồn với các "khuôn mẫu" đã biết là
+          nguy hiểm, ví dụ gọi <code>strcpy</code> hoặc <code>free()</code> theo cách thiếu kiểm tra.</div>
+        <div class="concept-item"><b>CWE (Common Weakness Enumeration)</b> — danh mục chuẩn quốc tế đặt tên và mã số
+          cho từng loại lỗ hổng phần mềm, giúp gọi tên lỗi thống nhất.</div>
+        <div class="concept-item"><b>False positive / false negative</b> — báo nhầm chỗ không có lỗi thành có lỗi, so
+          với bỏ sót một lỗi thật sự tồn tại.</div>
+      </div>
+
       <div class="explain-block">
         <p class="explain">Công cụ này quét <b>trực tiếp mã nguồn C dạng văn bản</b> — không biên dịch, không chạy
-          chương trình — tìm 4 mẫu lỗi: gọi <code>strcpy</code> không giới hạn độ dài (CWE-120), <code>free()</code> mà
+          chương trình — tìm 5 mẫu lỗi: gọi <code>strcpy</code> không giới hạn độ dài (CWE-120), <code>free()</code> mà
           không huỷ liên kết con trỏ ở module khác (CWE-416), truy cập con trỏ lồng <code>gv_ptr-&gt;</code> chưa kiểm
-          tra NULL (CWE-476), và ép kiểu <code>(int)</code> trong phép nhân có nguy cơ tràn số (CWE-190).</p>
+          tra NULL (CWE-476), ép kiểu <code>(int)</code> trong phép nhân có nguy cơ tràn số (CWE-190), và ép kiểu
+          <code>(char)</code> không có guard phạm vi đứng trước trong cùng hàm (CWE-197).
+        </p>
       </div>
       <div class="explain-block">
         <p class="explain"><b>Một lỗi thật đã được tìm và vá trong chính công cụ này:</b> heuristic "đã được bảo vệ" ban
@@ -960,7 +1144,6 @@
           toàn và <b>bỏ sót hoàn toàn</b> 2 lỗi CWE-416/476 bên dưới. Đã sửa bằng hàm <code>_code_part()</code> cắt bỏ
           phần sau <code>//</code> trước khi so khớp.</p>
       </div>
-
       <div class="chart-caption">Số cảnh báo bảo mật theo file (thang 0–4)</div>
       <div style="margin-bottom: 22px;">
         <div class="bar-row"><span class="bname" style="width:140px;">giang_vien.c</span>
@@ -975,7 +1158,7 @@
         </div>
         <div class="bar-row"><span class="bname" style="width:140px;">tinh_tien_day.c</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width:75%; background:var(--status-critical);"><span>3</span></div>
+            <div class="bar-fill" style="width:100%; background:var(--status-critical);"><span>4</span></div>
           </div>
         </div>
         <div class="bar-row"><span class="bname" style="width:140px;">main_fixed.c</span>
@@ -1012,6 +1195,8 @@
         <div class="finding"><span
             class="line">13</span><code>lhp-&gt;gv_ptr-&gt;heSoBangCap (chưa kiểm tra NULL)</code><span
             class="cwe">CWE-476</span></div>
+        <div class="finding"><span class="line">63</span><code>return (char)soLuongSinhVien;</code><span
+            class="cwe">CWE-197</span></div>
       </div>
       <div class="finding-group">
         <div class="fname">main_fixed.c</div>
@@ -1021,13 +1206,67 @@
       <div class="verdict-box">
         <h3>Đọc kết quả này thế nào?</h3>
         <ul>
-          <li><b>8/8 cảnh báo</b> nằm đúng trên 3 file module chứa hàm <code>*_VULN</code>; file
+          <li><b>9/9 cảnh báo</b> nằm đúng trên 3 file module chứa hàm <code>*_VULN</code>; file
             <code>main_fixed.c</code> (chỉ gọi hàm <code>*_SAFE</code>) sạch tuyệt đối — chứng minh scanner phân biệt
-            đúng code lỗi và code đã vá, không phải false positive tràn lan.</li>
+            đúng code lỗi và code đã vá, không phải false positive tràn lan.
+          </li>
+          <li><b>CWE-197 là phép thử phân biệt trong cùng 1 file:</b> <code>pack_class_size_byte_VULN()</code> và
+            <code>pack_class_size_byte_SAFE()</code> cùng nằm trong <code>tinh_tien_day.c</code> — scanner chỉ báo
+            động đúng hàm VULN (không có guard) mà không báo nhầm hàm SAFE (có guard <code>if (soLuongSinhVien &lt; 0
+            || &gt; 127)</code> đứng trước), xác nhận cơ chế xét theo phạm vi hàm hoạt động đúng, không chỉ dựa vào
+            tên file như 2 rule cũ (<code>is_fixed_file</code>).
+          </li>
           <li>Scanner vẫn là công cụ so khớp chuỗi/regex, không phải phân tích AST/data-flow đầy đủ — nên phù hợp bổ trợ
             cho <code>cppcheck</code> thật (Lab 4), không thay thế.</li>
         </ul>
       </div>
+
+      <div class="concept-box">
+        <h4>Khái niệm bổ sung — Phân tích động</h4>
+        <div class="concept-item"><b>Dynamic analysis (phân tích động)</b> — biên dịch và <b>chạy thật</b> chương
+          trình để quan sát hành vi bộ nhớ thực tế, khác với phần quét tĩnh ở trên (chỉ đọc code, không chạy).</div>
+        <div class="concept-item"><b>AddressSanitizer (ASan)</b> — công cụ runtime độc lập, chèn vào chương trình lúc
+          biên dịch để tự động phát hiện và chặn đứng lỗi bộ nhớ thật (như use-after-free) ngay khi nó xảy ra.</div>
+      </div>
+
+      <div class="explain-block">
+        <p class="explain"><b>Bổ sung: bằng chứng động (không chỉ đọc code suy luận).</b> Toàn bộ phần trên là tĩnh —
+          để trả lời "giả định chương trình chạy được thì bộ nhớ dùng ra sao qua từng bước", đã biên dịch cùng 1 luồng
+          E2E 7 bước (nhập → tạo GV → tạo lớp → tính lương → ép byte → xoá GV → xuất báo cáo) thành 2 bản nhị phân
+          khác nhau và <b>thực sự chạy</b> chúng.</p>
+      </div>
+
+      <div class="proof-grid" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="proof-card">
+          <div class="ptitle">Bản Plain GCC — im lặng, nguy hiểm nhất</div>
+          <span class="pill good">Exit code 0 — không crash</span>
+          <dl>
+            <div><span>Bước 2/6/7 — địa chỉ gv</span><b class="mono">...E160</b></div>
+            <div><span>Bước 7 đọc lại</span><b class="mono">...E160 (trùng!)</b></div>
+          </dl>
+          <p class="verdict">Chương trình đọc thành công một vùng nhớ <b>đã bị <code>free()</code> ở bước ngay
+              trước đó</b> mà không có bất kỳ tín hiệu bất thường nào — đây chính là lý do CWE-416 nguy hiểm trong thực
+            tế: không crash không có nghĩa là an toàn.</p>
+        </div>
+        <div class="proof-card">
+          <div class="ptitle">Bản Clang64 + AddressSanitizer — công cụ độc lập</div>
+          <span class="pill critical">heap-use-after-free — ABORTING</span>
+          <dl>
+            <div><span>Vùng cấp phát</span><b>132 byte</b></div>
+            <div><span>Offset vi phạm</span><b>+24 byte (hoTen)</b></div>
+          </dl>
+          <p class="verdict">Không phải chương trình tự báo cáo — ASan (công cụ tách biệt hoàn toàn khỏi logic
+            chương trình) tự phát hiện và <b>chặn đứng</b> tiến trình, chỉ đúng ra vùng nhớ 132 byte của
+            <code>GiangVien</code>, offset 24 byte trùng khớp field <code>hoTen</code>.
+          </p>
+        </div>
+      </div>
+      <p style="font-size:11.5px; color:var(--ink-muted); margin-top:10px;">Bản FIXED (<span
+          class="mono">main_fixed.c</span>,
+        huỷ liên kết <span class="mono">gv_ptr = NULL</span> trước khi free) chạy sạch trên cả 2 bản — ASan xác nhận
+        <b>0 vi phạm</b>. Log đầy đủ (kèm toàn bộ call stack + shadow-byte map thật): <span
+          class="mono">logs/memory_trace.log</span>.
+      </p>
     </section>
 
     <section class="chapter" id="ch3">
@@ -1037,11 +1276,24 @@
       </div>
       <div class="tool lede">ch3_staticsat/smt_verify.py</div>
 
+      <div class="concept-box">
+        <h4>Khái niệm chính</h4>
+        <div class="concept-item"><b>SMT solver (Z3)</b> — công cụ giải tự động, trả lời một tập ràng buộc toán học
+          có nghiệm (thoả mãn được) hay không.</div>
+        <div class="concept-item"><b>Formal verification (kiểm chứng hình thức)</b> — chứng minh đúng/sai bằng toán
+          học trên <b>toàn miền giá trị</b>, khác với test chỉ thử một vài input mẫu.</div>
+        <div class="concept-item"><b>SAT (ở đây)</b> — Z3 tìm được ít nhất 1 bộ giá trị cụ thể làm lỗi xảy ra thật.
+        </div>
+        <div class="concept-item"><b>UNSAT (ở đây)</b> — Z3 chứng minh không tồn tại bộ giá trị nào gây lỗi, tức an
+          toàn tuyệt đối trong phạm vi ràng buộc đã đặt ra.</div>
+      </div>
+
       <div class="explain-block">
         <p class="explain">Khác với test thông thường (thử một vài bộ input), <b>SMT solver</b> chứng minh một mệnh đề
           đúng hoặc sai <b>trên toàn miền giá trị hợp lệ</b> cùng lúc. Ở đây: liệu công thức
           <code>tổng lương = Σ (số tiết × hệ số) × hệ số bằng cấp × đơn giá</code> có thể tràn số nguyên 32-bit không,
-          xét trên mọi tổ hợp giá trị doanh nghiệp hợp lý (1-20 lớp, 15-120 tiết, đơn giá 85.000-500.000đ...).</p>
+          xét trên mọi tổ hợp giá trị doanh nghiệp hợp lý (1-20 lớp, 15-120 tiết, đơn giá 85.000-500.000đ...).
+        </p>
       </div>
 
       <div class="proof-grid">
@@ -1076,6 +1328,38 @@
           <p class="verdict">Mô hình hoá bằng đúng công thức thật trong <code>calculate_e2e_salary_SAFE()</code> (không
             phải mệnh đề Boolean trừu tượng tách rời code), rồi chứng minh guard-check không thể bị vượt qua.</p>
         </div>
+        <div class="proof-card">
+          <div class="ptitle">Check 4 — Ép kiểu (char) chưa vá</div>
+          <span class="pill critical">SAT — sai lệch có thể xảy ra</span>
+          <dl>
+            <div><span>soLuongSinhVien</span><b>128</b></div>
+            <div><span>Byte sau ép kiểu</span><b>-128</b></div>
+          </dl>
+          <p class="verdict">Ép kiểu (char) mô phỏng bằng số học modulo 256 wrap dấu — Z3 tìm ra ngay ranh giới
+            two's-complement nơi 128 (hợp lệ, &lt;=300) bị wrap thành -128, khác hoàn toàn giá trị gốc.</p>
+        </div>
+        <div class="proof-card">
+          <div class="ptitle">Check 5 — Ép kiểu (char) đã vá</div>
+          <span class="pill good">UNSAT — chứng minh an toàn</span>
+          <dl>
+            <div><span>Guard</span><b>0 ≤ n ≤ 127</b></div>
+            <div><span>Kết quả</span><b>byte = n luôn đúng</b></div>
+          </dl>
+          <p class="verdict">Với đúng guard trong <code>pack_class_size_byte_SAFE()</code>, Z3 không tìm được phản ví
+            dụ nào — chứng minh hình thức rằng bản vá loại trừ hoàn toàn CWE-197, không chỉ vá theo từng test mẫu.</p>
+        </div>
+        <div class="proof-card">
+          <div class="ptitle">Check 6 — Trùng lặp byte (lớp nguy hiểm nhất)</div>
+          <span class="pill critical">SAT — 2 lớp khác nhau, cùng 1 byte</span>
+          <dl>
+            <div><span>Lớp A</span><b>0 SV (rỗng thật)</b></div>
+            <div><span>Lớp B</span><b>256 SV (có thật)</b></div>
+            <div><span>Byte chung</span><b>0</b></div>
+          </dl>
+          <p class="verdict">Không chỉ hỏi "có sai không" mà hỏi "có 2 tình huống khác nhau nào bị nhầm thành một
+            không" — Z3 tìm ngay ra cặp 0↔256, đúng lớp lỗi nguy hiểm nhất vì không hề biểu hiện bằng số âm hay
+            crash.</p>
+        </div>
       </div>
 
       <div class="verdict-box">
@@ -1087,6 +1371,12 @@
           <li>Check 3 từng dùng biến Boolean trừu tượng không liên quan code thật (một lỗi đã tìm và sửa) — nay dùng
             đúng công thức và biến số của Module 3, nên kết quả UNSAT phản ánh đúng hành vi mã nguồn thật, không phải
             một tautology tự dựng.</li>
+          <li>Check 4 + Check 5 là cặp chứng minh hình thức hiếm gặp theo <b>cả 2 chiều</b> cho cùng 1 lỗ hổng: SAT
+            trên mô hình VULN (phản ví dụ cụ thể) và UNSAT trên mô hình SAFE với guard — mạnh hơn hẳn so với chỉ chạy
+            fuzzing/test mẫu, vì chứng minh loại trừ lỗi trên <b>toàn miền giá trị</b>, không chỉ vài input đã thử.</li>
+          <li><b>Check 6 đi xa hơn "có sai không":</b> nó hỏi "có 2 tình huống nghiệp vụ khác nhau nào bị hệ thống
+            nhầm thành một không" — dạng câu hỏi mà chỉ SMT mới trả lời thuận tiện bằng cách quantify trên toàn miền
+            $[0,300]^2$; test mẫu hay fuzzing ngẫu nhiên khó tự tìm ra đúng cặp giá trị gây nhầm lẫn.</li>
         </ul>
       </div>
     </section>
@@ -1098,12 +1388,27 @@
       </div>
       <div class="tool lede">ch4_dynafuzz/fuzzer_blackbox.py &amp; fuzzer_whitebox.py</div>
 
+      <div class="concept-box">
+        <h4>Khái niệm chính</h4>
+        <div class="concept-item"><b>Dynamic analysis (phân tích động)</b> — chạy thật chương trình đã biên dịch để
+          quan sát hành vi thật, đối lập với phân tích tĩnh ở Chương 2 (chỉ đọc code, không chạy).</div>
+        <div class="concept-item"><b>Fuzzing</b> — một kỹ thuật phân tích động cụ thể: tự động sinh nhiều input rồi
+          chạy thật chương trình để xem có làm nó lỗi/crash không.</div>
+        <div class="concept-item"><b>Black-box fuzzing</b> — sinh input ngẫu nhiên, không biết trước cấu trúc lỗi bên
+          trong chương trình.</div>
+        <div class="concept-item"><b>White-box fuzzing</b> — dùng thông tin đã biết (ràng buộc Z3 giải ra) để nhắm
+          thẳng vào đúng điều kiện gây lỗi, không cần thử ngẫu nhiên.</div>
+        <div class="concept-item"><b>Crash rate / exit code</b> — tỉ lệ % số lần thử làm chương trình sập, và mã số
+          hệ điều hành trả về để phân biệt loại lỗi.</div>
+      </div>
+
       <div class="explain-block">
         <p class="explain"><b>Black-box fuzzing</b>: sinh input hoàn toàn ngẫu nhiên (tên dài ngẫu nhiên, bằng cấp ngẫu
-          nhiên...) rồi chạy thật <code>salary_calc.exe</code>, đếm số lần crash. <b>White-box fuzzing</b> ở đây là giải
-          trực tiếp 5 ràng buộc Z3 tương ứng 5 lỗ hổng đã biết trước (không phải symbolic execution duyệt toàn bộ luồng
-          thực thi) — nên nhanh hơn nhiều lần nhưng đổi lại chỉ tìm đúng cái đã biết trước, không tự khám phá lỗ hổng
-          mới.</p>
+          nhiên, số lượng sinh viên ngẫu nhiên...) rồi chạy thật <code>salary_calc.exe</code>, đếm số lần crash hoặc
+          sai lệch dữ liệu. <b>White-box fuzzing</b> ở đây là giải trực tiếp 7 ràng buộc Z3 tương ứng 6 lỗ hổng đã biết
+          trước (Target 6 và 7 cùng minh hoạ CWE-197 ở 2 khía cạnh khác nhau — không phải symbolic execution duyệt
+          toàn bộ luồng thực thi) — nên nhanh hơn nhiều lần nhưng đổi lại chỉ tìm đúng cái đã biết trước, không tự
+          khám phá lỗ hổng mới.</p>
       </div>
       <div class="explain-block">
         <p class="explain"><b>Một con số đã từng sai và được sửa:</b> bản gốc in cứng "~982× speedup" — một số cố định
@@ -1118,33 +1423,34 @@
             <span class="swatch" style="background:var(--cat-1)"></span>
             <span class="bname">Black-box</span>
             <div class="bar-track">
-              <div class="bar-fill" style="width:100%; background:var(--cat-1);"><span>13.08s</span></div>
+              <div class="bar-fill" style="width:100%; background:var(--cat-1);"><span>11.90s</span></div>
             </div>
           </div>
           <div class="bar-row">
             <span class="swatch" style="background:var(--cat-2)"></span>
             <span class="bname">White-box</span>
             <div class="bar-track">
-              <div class="bar-fill" style="width:2.6%; background:var(--cat-2);"></div>
+              <div class="bar-fill" style="width:3%; background:var(--cat-2);"></div>
               <span class="mono tabular"
-                style="position:absolute; left:calc(2.6% + 8px); top:50%; transform:translateY(-50%); font-size:11.5px; font-weight:600; color:var(--ink);">0.34s</span>
+                style="position:absolute; left:calc(3% + 8px); top:50%; transform:translateY(-50%); font-size:11.5px; font-weight:600; color:var(--ink);">0.39s</span>
             </div>
           </div>
           <p style="font-size:11.5px; color:var(--ink-muted); margin-top:2px;">Thời gian để phủ hết mục tiêu lỗ hổng đã
-            biết (200 lần thử ngẫu nhiên so với 5 lần giải Z3 trực tiếp)</p>
+            biết (200 lần thử ngẫu nhiên so với 7 lần giải Z3 trực tiếp)</p>
         </div>
         <div class="speedup-callout">
-          <div class="big tabular">~38.3×</div>
-          <div class="cap">nhanh hơn — White-box giải đúng 5/5 mục tiêu trong 5 lần thử, Black-box cần tới 200 lần thử
-            ngẫu nhiên trên bản có lỗi</div>
+          <div class="big tabular">~30.5×</div>
+          <div class="cap">nhanh hơn — White-box giải đúng 7/7 mục tiêu trong 7 lần thử, Black-box cần tới 200 lần thử
+            ngẫu nhiên trên bản có lỗi. Tỉ lệ này dao động mạnh giữa các lần chạy (quan sát ~30×–280×) do độ trễ
+            subprocess của Windows, nhưng white-box luôn nhanh hơn hàng chục đến hàng trăm lần.</div>
         </div>
       </div>
 
-      <div class="chart-caption">Số lần crash trên 200 lần thử Black-box</div>
+      <div class="chart-caption">Số lần crash trên 200 lần thử Black-box (qua stdin: tên / bằng cấp / mã lớp)</div>
       <div style="margin-bottom: 4px;">
         <div class="bar-row"><span class="bname" style="width:160px;">salary_calc.exe</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width:100%; background:var(--status-critical);"><span>93 / 200</span></div>
+            <div class="bar-fill" style="width:100%; background:var(--status-critical);"><span>72 / 200</span></div>
           </div>
         </div>
         <div class="bar-row"><span class="bname" style="width:160px;">salary_calc_fixed.exe</span>
@@ -1158,29 +1464,106 @@
 
       <div class="stat-pair">
         <div class="tile">
-          <div class="k tabular">5 / 5</div>
+          <div class="k tabular">7 / 7</div>
           <div class="d">mục tiêu CWE xác nhận đúng bằng Z3 (White-box)</div>
         </div>
         <div class="tile">
-          <div class="k tabular">53 / 200</div>
+          <div class="k tabular">75 / 200</div>
           <div class="d">lần thử rơi vào lỗi logic bằng cấp không hợp lệ (bản lỗi)</div>
         </div>
         <div class="tile">
-          <div class="k tabular">124 / 200</div>
+          <div class="k tabular">104 / 200</div>
           <div class="d">lần thử rơi vào lỗi logic bằng cấp không hợp lệ (bản vá — không còn crash nên tỉ lệ lỗi logic
             tăng)</div>
         </div>
       </div>
 
+      <div class="chart-caption">CWE-197: sai lệch dữ liệu trên 200 lần thử subcommand e2e_byte_truncate</div>
+      <div style="margin-bottom: 22px;">
+        <div class="bar-row"><span class="bname" style="width:160px;">salary_calc.exe</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:var(--status-critical);"><span>120 / 200 sai
+                lệch</span></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="bname" style="width:160px;">salary_calc_fixed.exe</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:2%; background:var(--status-good);"></div><span class="mono tabular"
+              style="position:absolute; left:calc(2% + 8px); top:50%; transform:translateY(-50%); font-size:11.5px; font-weight:600; color:var(--ink);">0
+              / 200 sai lệch (150 bị chặn an toàn)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="explain-block">
+        <p class="explain"><b>Vì sao dùng 17 giá trị biên cố định thay vì để random tự chọn?</b> Fuzzing ngẫu nhiên
+          (2 biểu đồ trên) có xác suất rất thấp trúng đúng các mốc "chết người" như bội số 256 — nên
+          <code>run_bva_truncation_test()</code> chạy đúng 17 giá trị thiết kế sẵn theo phân tích lớp tương đương
+          (quanh mép <code>char</code>: -129/-128/-127/126/127/128/129; quanh mép chu kỳ 256: -256/-255/255/256/257;
+          và vài giá trị lớp đại cương thực tế: 300, 384), rồi <b>gom nhóm theo byte kết quả thật</b> để tự lộ ra
+          những bộ giá trị hoàn toàn khác nhau nhưng bị hệ thống hiểu nhầm là một.
+        </p>
+      </div>
+
+      <div class="chart-caption">Boundary Value Analysis — trùng lặp byte phát hiện trên salary_calc.exe (BUGGY)</div>
+      <table class="props" style="margin-bottom:18px;">
+        <thead>
+          <tr>
+            <th>Byte xuất ra</th>
+            <th>Các soLuongSinhVien khác nhau cho cùng byte này</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prop-name mono">0</td>
+            <td class="mono tabular">-256, 0, 256</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">1</td>
+            <td class="mono tabular">-255, 1, 257</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">-128</td>
+            <td class="mono tabular">-128, 128, 384</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">-127</td>
+            <td class="mono tabular">-127, 129</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">127</td>
+            <td class="mono tabular">-129, 127</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">-1</td>
+            <td class="mono tabular">-1, 255</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:11.5px; color:var(--ink-muted); margin-top:-8px; margin-bottom:18px;">Trên
+        <span class="mono">salary_calc_fixed.exe</span>: 0 nhóm trùng lặp — cả 17 giá trị biên đều bị chặn an toàn
+        hoặc chấp nhận đúng, không giá trị nào bị ép kiểu sai.
+      </p>
+
       <div class="verdict-box">
         <h3>Đọc kết quả này thế nào?</h3>
         <ul>
-          <li>Bản lỗi crash gần một nửa số lần thử ngẫu nhiên (93/200); bản đã vá <b>0 crash</b> trong đúng 200 lần thử
+          <li>Bản lỗi crash hơn một phần ba số lần thử ngẫu nhiên (72/200); bản đã vá <b>0 crash</b> trong đúng 200 lần thử
             với cùng bộ sinh input — bằng chứng thực nghiệm bổ sung, độc lập với 3 chương chứng minh hình thức ở trên.
           </li>
-          <li>Tốc độ ~38× không phải "white-box luôn thắng tuyệt đối": nó nhanh vì đã biết trước 5 mục tiêu cần tìm; nếu
-            có lỗ hổng chưa từng nghĩ tới, black-box vẫn có cơ hội tình cờ phát hiện còn white-box thì không. Đây chính
-            là trade-off cần cân nhắc khi chọn công cụ cho CI/CD.</li>
+          <li><b>CWE-197 không biểu hiện bằng crash mà bằng sai lệch dữ liệu âm thầm:</b> bản lỗi cho ra dữ liệu sai
+            <b>120/200 lần</b> (60%) mà chương trình vẫn thoát bình thường (exit code 0) — nguy hiểm hơn crash vì
+            không ai nhận ra nếu chỉ theo dõi log lỗi/crash. Bản vá <b>0/200 sai lệch</b>, thay vào đó chủ động từ chối
+            150/200 lần thử nằm ngoài phạm vi <code>[0,127]</code> của <code>char</code>.
+          </li>
+          <li><b>Bảng trùng lặp byte mới là bằng chứng đáng lo nhất:</b> fuzzing ngẫu nhiên chỉ đếm được "có bao nhiêu
+            lần sai", còn bộ BVA cố định lộ ra rằng <b>3 lớp học hoàn toàn khác nhau</b> (-256, 0, 256 sinh viên) đều
+            xuất ra cùng 1 byte — nếu bất kỳ logic nào sau này dựa vào byte đó để ra quyết định (vd "byte=0 → lớp
+            chưa mở, không duyệt lương"), một lớp <b>256 sinh viên có thật</b> sẽ bị đối xử y hệt một lớp thật sự rỗng.
+          </li>
+          <li>Tốc độ ~30.5× không phải "white-box luôn thắng tuyệt đối": nó nhanh vì đã biết trước 7 mục tiêu cần tìm;
+            nếu có lỗ hổng chưa từng nghĩ tới, black-box vẫn có cơ hội tình cờ phát hiện còn white-box thì không. Đây
+            chính là trade-off cần cân nhắc khi chọn công cụ cho CI/CD.</li>
         </ul>
       </div>
     </section>

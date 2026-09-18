@@ -1,0 +1,7 @@
+\babel@toc {english}{}\relax 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Kiến trúc tổng quan DuongUniversity Management System -- tầng tính toán C (viền đỏ nét đứt) biên dịch độc lập với .NET, không được GC/bounds-checking của .NET bảo vệ}}{11}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Sơ đồ quan hệ 3 struct \texttt {GiangVien}, \texttt {LopHocPhan}, \texttt {Config} và các trường liên quan tới CWE-120/416/476/190}}{13}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Sơ đồ luồng dữ liệu qua 3 hàm chính, đánh dấu vị trí phát sinh CWE và kết quả đối chứng Z3/fuzzing}}{14}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Sơ đồ chuyển trạng thái Kripke và kết quả BMC $k=5$ (thuộc tính $P_1$--$P_4$)}}{16}{figure.caption.12}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Black-box vs. White-box: (a) thời gian thực thi và (b) số lần thử cần để phát hiện đủ lỗ hổng đã biết (số liệu khớp \Cref {tab:fuzz})}}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces So sánh điểm CVSS-lite giữa 6 CWE của đề tài (số liệu khớp \Cref {tab:cwe-cvss})}}{24}{figure.caption.18}%

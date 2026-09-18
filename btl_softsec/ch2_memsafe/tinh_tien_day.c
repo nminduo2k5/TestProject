@@ -52,3 +52,26 @@ void export_report_SAFE(GiangVien *gv, LopHocPhan *lhp, long long tienDay) {
            lhp ? lhp->soTiet : 0,
            tienDay);
 }
+
+// MODULE 3 (MO RONG): DONG GOI BAN GHI AUDIT LOG GON NHE - PHIEN BAN CO LO HONG (VULN)
+// LOI CWE-197 (Numeric Truncation Error): soLuongSinhVien la int, thuc te lop dai cuong o
+// DuongUniversity co the len toi vai tram sinh vien (vd 200), nhung khi dong goi vao ban ghi
+// audit log gon nhe (1 byte/truong) lai ep thang xuong signed char (pham vi -128..127) MA
+// KHONG kiem tra pham vi truoc -> gia tri > 127 bi "wrap around" thanh so am (vd 200 -> -56),
+// lam sai lech du lieu audit/thong ke duyet chi ve sau.
+char pack_class_size_byte_VULN(int soLuongSinhVien) {
+    return (char)soLuongSinhVien;
+}
+
+// MODULE 3 (MO RONG): DONG GOI BAN GHI AUDIT LOG - PHIEN BAN AN TOAN (SAFE)
+// FIX CWE-197: Kiem tra pham vi hop le cua signed char (0..127) TRUOC khi ep kieu; neu vuot
+// pham vi thi TU CHOI dong goi (tra ve 0 bao that bai) thay vi de gia tri wrap-around am
+// tham lang di vao du lieu audit/thanh toan.
+int pack_class_size_byte_SAFE(int soLuongSinhVien, char *out_byte) {
+    if (soLuongSinhVien < 0 || soLuongSinhVien > 127) {
+        fprintf(stderr, "[SAFE ERROR] soLuongSinhVien=%d vuot pham vi char (0..127) - TU CHOI ep kieu de tranh Numeric Truncation!\n", soLuongSinhVien);
+        return 0;
+    }
+    *out_byte = (char)soLuongSinhVien;
+    return 1;
+}

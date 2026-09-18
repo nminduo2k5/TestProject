@@ -83,10 +83,14 @@ class KripkeStructure:
 #                        delete_lecturer_VULN() khong huy lien ket (CWE-416, giang_vien.c:32)
 #   S5_INVALID_CALC  <-> chi co trong ban BUGGY: goi calculate_e2e_salary_VULN() ma KHONG
 #                        qua buoc gan giang vien hop le - dung de mo phong nhanh loi CWE-476/416
+#   nhan "byte_truncated" tren S3_EXPORTED (chi ban BUGGY) <-> pack_class_size_byte_VULN()
+#                        (tinh_tien_day.c) ep (int)soLuongSinhVien xuong char khong kiem tra
+#                        pham vi truoc khi xuat bao cao - CWE-197 Numeric Truncation Error
 # Xem THAM_CHIEU_TRANG_THAI o cuoi file va ham cross_validate_with_pattern_scanner() de doi
 # chieu tu dong voi ket qua quet tinh o Chuong 2 (ch2_memsafe/pattern_scanner.py).
 THAM_CHIEU_TRANG_THAI = {
     "S4_ERROR": [("ch2_memsafe/giang_vien.c", "dangling_free"), ("ch2_memsafe/tinh_tien_day.c", "unchecked_nested_deref")],
+    "S3_EXPORTED_TRUNCATED": [("ch2_memsafe/tinh_tien_day.c", "unchecked_numeric_truncation")],
 }
 
 
@@ -98,7 +102,11 @@ def build_duong_university_kripke(is_buggy=False) -> KripkeStructure:
     k.add_state("S0_INIT", labels=["init"], initial=True)
     k.add_state("S1_GV_ASSIGNED", labels=["assigned"])
     k.add_state("S2_SALARY_CALC", labels=["assigned", "calculated"])
-    k.add_state("S3_EXPORTED", labels=["assigned", "calculated", "exported"])
+    # S3_EXPORTED trong ban BUGGY mang them nhan "byte_truncated": pack_class_size_byte_VULN()
+    # (tinh_tien_day.c) luon ep (char) khong kiem tra pham vi truoc khi xuat -> CWE-197.
+    # Ban FIXED dung pack_class_size_byte_SAFE() co guard nen KHONG bao gio mang nhan nay.
+    s3_labels = ["assigned", "calculated", "exported"] + (["byte_truncated"] if is_buggy else [])
+    k.add_state("S3_EXPORTED", labels=s3_labels)
     k.add_state("S4_ERROR", labels=["error"])
 
     # Chuyển trạng thái hợp lệ
@@ -136,20 +144,22 @@ def cross_validate_with_pattern_scanner():
     print("=======================================================")
 
     all_ok = True
-    for src_relpath, expected_rule in THAM_CHIEU_TRANG_THAI["S4_ERROR"]:
-        src_path = os.path.join(base_dir, *src_relpath.split("/"))
-        findings = pattern_scanner.scan_source(src_path)
-        matched = [f for f in findings if f.rule == expected_rule]
-        if matched:
-            f = matched[0]
-            print(f"  [OK] S4_ERROR <-> {src_relpath}:{f.line_no} [{expected_rule}] (xac nhan boi pattern_scanner.py)")
-        else:
-            all_ok = False
-            print(f"  [CANH BAO] Khong tim thay [{expected_rule}] trong {src_relpath} - mo hinh Kripke co the KHONG con khop voi code that!")
+    for state_name, rule_list in THAM_CHIEU_TRANG_THAI.items():
+        for src_relpath, expected_rule in rule_list:
+            src_path = os.path.join(base_dir, *src_relpath.split("/"))
+            findings = pattern_scanner.scan_source(src_path)
+            matched = [f for f in findings if f.rule == expected_rule]
+            if matched:
+                f = matched[0]
+                print(f"  [OK] {state_name} <-> {src_relpath}:{f.line_no} [{expected_rule}] (xac nhan boi pattern_scanner.py)")
+            else:
+                all_ok = False
+                print(f"  [CANH BAO] Khong tim thay [{expected_rule}] trong {src_relpath} - mo hinh Kripke co the KHONG con khop voi code that!")
 
     if all_ok:
-        print("  --> KET LUAN: Trang thai loi (S4_ERROR) trong mo hinh Kripke duoc xac nhan boi\n"
-              "      it nhat 1 lo hong THAT (CWE-416/CWE-476) do Chuong 2 quet duoc tren code C hien tai.")
+        print("  --> KET LUAN: Cac trang thai loi (S4_ERROR, S3_EXPORTED_TRUNCATED) trong mo hinh\n"
+              "      Kripke deu duoc xac nhan boi it nhat 1 lo hong THAT (CWE-416/CWE-476/CWE-197)\n"
+              "      do Chuong 2 quet duoc tren code C hien tai.")
     return all_ok
 
 
@@ -260,6 +270,34 @@ def run_bmc_check_5state(kripke: KripkeStructure, bound_k: int = 5):
     print(f"\n[Property 4] Safety: G(error -> NOT exported) [Hệ thống Lỗi -> Không xuất báo cáo]")
     if res4 == sat:
         print(f"  --> RESULT: SAT (Counterexample Found!)")
+    else:
+        print(f"  --> RESULT: UNSAT (Property Holds up to k={bound_k})")
+    solver.pop()
+
+    # P5 (Safety): G(exported -> NOT byte_truncated) - Báo cáo xuất ra không được mang dữ liệu
+    # bị ép kiểu (char) sai lệch (CWE-197 Numeric Truncation Error, tinh_tien_day.c)
+    violation_conds_p5 = []
+    for i in range(bound_k + 1):
+        step_violations = []
+        for s_idx, s_name in inv_state_map.items():
+            lbls = kripke.labels[s_name]
+            if "exported" in lbls and "byte_truncated" in lbls:
+                step_violations.append(state_vars[i] == s_idx)
+        if step_violations:
+            violation_conds_p5.append(Or(step_violations))
+
+    solver.push()
+    solver.add(Or(violation_conds_p5) if violation_conds_p5 else False)
+    res5 = solver.check()
+    print(f"\n[Property 5] Safety: G(exported -> NOT byte_truncated) [Báo cáo xuất ra không được sai lệch do ép kiểu (char)]")
+    if res5 == sat:
+        model = solver.model()
+        print(f"  --> RESULT: SAT (Counterexample Trace Found! CWE-197 co the ro ri ra bao cao xuat)")
+        for i in range(bound_k + 1):
+            s_val = model[state_vars[i]].as_long()
+            s_name = inv_state_map[s_val]
+            lbls = sorted(list(kripke.labels[s_name]))
+            print(f"    Step {i}: {s_name} [Labels: {lbls}]")
     else:
         print(f"  --> RESULT: UNSAT (Property Holds up to k={bound_k})")
     solver.pop()

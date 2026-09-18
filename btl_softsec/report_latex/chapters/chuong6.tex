@@ -1,0 +1,26 @@
+\section{Thảo luận và Hạn chế}
+\label{sec:thaoluan}
+
+\subsection{Giới hạn phương pháp}
+
+\begin{itemize}
+  \item \textbf{BMC $k=5$ chưa đạt completeness threshold}: kết quả \textbf{UNSAT} của BMC chỉ chứng minh ``không có vi phạm trong $k=5$ bước'', \emph{không} loại trừ khả năng tồn tại vi phạm ở bước sâu hơn -- đây chính là lý do $P_3$ (Liveness) ra SAT ở cả 2 bản (\Cref{sec:ketqua}): BMC hữu hạn không thể chứng minh một thuộc tính ``cuối cùng phải xảy ra'' một cách tuyệt đối, chỉ có thể chứng minh trong phạm vi $k$ bước đã duyệt.
+  \item \textbf{Pattern scanner dùng regex/so khớp chuỗi, không phải phân tích AST/data-flow liên hàm (interprocedural) đầy đủ}: công cụ chỉ xét được guard-check trong phạm vi \emph{một hàm}, nên sẽ bỏ sót lớp lỗi mà điều kiện bảo vệ nằm ở một hàm gọi \emph{khác} với hàm chứa điểm truy cập nguy hiểm (ví dụ: một hàm kiểm tra \texttt{gv\_ptr != NULL} rồi truyền tiếp con trỏ đã kiểm tra sang một hàm thứ hai đọc nó -- scanner hiện tại sẽ không ``nhớ'' guard đó qua ranh giới lời gọi hàm). Đây là giới hạn cấu trúc cố hữu của một scanner một-pass; công cụ phù hợp để bổ trợ chứ không thay thế một static analyzer thật (Clang Static Analyzer, cppcheck với chế độ \texttt{--enable=all}).
+  \item \textbf{Fuzzing trên Windows dùng exit code thay vì tín hiệu SIGSEGV kiểu POSIX}: Windows không có SIGSEGV theo nghĩa POSIX cho crash native; toàn bộ 72 mẫu crash CWE-120 quan sát được ở Chương 4 đều trả về \textbf{cùng một exit code 3221226356} (\texttt{0xC0000374} -- \texttt{STATUS\_HEAP\_CORRUPTION}), không phải \texttt{0xC0000005} (\texttt{STATUS\_ACCESS\_VIOLATION}) như trực giác thường nghĩ về ``buffer overflow gây segfault''. Điều này phản ánh đúng cơ chế Windows CRT heap: ghi tràn qua \texttt{hoTen[80]} làm hỏng heap metadata liền kề, và lỗi chỉ bị phát hiện \emph{muộn hơn} -- tại lần gọi \texttt{free()} kế tiếp khi CRT heap manager kiểm tra tính toàn vẹn metadata -- chứ không crash ngay tại dòng \texttt{strcpy}. Đây cũng là lý do một phần các lần thử ``overflow'' không crash ngay (75/200 rơi vào nhánh ``logic error'' thay vì crash): tuỳ lượng dữ liệu ghi tràn có chạm đúng vùng metadata bị kiểm tra hay không.
+\end{itemize}
+
+\subsection{So sánh với lý thuyết đã học}
+
+\begin{itemize}
+  \item Kết quả $P_3$ SAT ở cả 2 bản đúng với lý thuyết \emph{Soundness/Completeness} của BMC đã học ở Chương 1: BMC là \emph{sound nhưng không complete} đối với Liveness ở độ sâu hữu hạn -- một kết quả SAT ở $P_3$ không tự động suy ra lỗi mã nguồn, phải phân biệt rõ với SAT của các thuộc tính Safety ($P_1,P_2,P_4,P_5$) vốn luôn tương ứng phản ví dụ thật.
+  \item Tốc độ tăng tốc $\approx 30.5\times$ của white-box so với black-box phù hợp đúng dự đoán lý thuyết Chương 4: constraint solving trực tiếp (giải 7 ràng buộc đã biết) về bản chất là $O(1)$ theo số lần gọi solver, trong khi random fuzzing là $O(n)$ theo số lần thử cần để ngẫu nhiên trúng đúng điều kiện biên -- tỉ lệ tăng tốc dao động khá lớn giữa các lần chạy thực tế (quan sát được từ $\approx 30\times$ đến $\approx 280\times$ tuỳ độ trễ khởi tạo tiến trình con của Windows ở từng lần đo) nhưng bản chất định tính không đổi.
+\end{itemize}
+
+\subsection{Hướng cải thiện}
+
+\begin{itemize}
+  \item Áp dụng \textbf{$k$-Induction} (hoặc chuyển đổi sang Büchi automata) để chứng minh $P_3$ (Liveness) một cách tuyệt đối thay vì chỉ trong phạm vi $k=5$ bước.
+  \item Chạy lại bộ fuzzing trên \textbf{Linux} (qua WSL hoặc máy ảo) để thu được tín hiệu \texttt{SIGSEGV}/\texttt{SIGABRT} chuẩn POSIX, đối chiếu trực tiếp với hành vi \texttt{STATUS\_HEAP\_CORRUPTION} đã quan sát trên Windows -- làm rõ liệu sự khác biệt về cơ chế phát hiện lỗi giữa 2 hệ điều hành có ảnh hưởng tới tỉ lệ crash đo được hay không.
+  \item Thay thế/bổ trợ \texttt{pattern\_scanner.py} bằng một static analyzer thật hỗ trợ phân tích interprocedural (cppcheck~\cite{cppcheck} \texttt{--enable=all} hoặc Clang Static Analyzer) để mở rộng phạm vi phát hiện ra ngoài giới hạn ``một hàm'' đã nêu ở mục 6.1.
+  \item Mở rộng bảng CVSS-lite (\Cref{tab:cwe-cvss}) bằng việc thực sự khai thác (exploit) thử một lỗ hổng CWE-120 thành RCE có kiểm soát trong môi trường cô lập, để có cơ sở thực nghiệm nâng điểm Impact (C/I) thay vì chỉ dựa trên crash/DoS đã quan sát.
+\end{itemize}

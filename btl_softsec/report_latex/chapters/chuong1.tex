@@ -1,0 +1,25 @@
+\section{Giới thiệu và Mục tiêu}
+\label{sec:gioithieu}
+
+\subsection{Bối cảnh}
+
+Các hệ thống quản lý đào tạo đại học quy mô lớn -- như \textbf{DuongUniversity Management System} -- xử lý đồng thời dữ liệu nhân sự (giảng viên), dữ liệu học vụ (lớp học phần) và dữ liệu tài chính (thù lao giảng dạy). Khi ba loại dữ liệu này liên thông với nhau qua các mô-đun C tốc độ cao (thường dùng ở tầng tính toán/tích hợp phía sau một backend .NET/PostgreSQL), một lỗi thao tác bộ nhớ ở mô-đun đầu (ví dụ giải phóng bộ nhớ giảng viên không đúng cách) có thể lan truyền thành lỗi tài chính nghiêm trọng ở mô-đun cuối (tính sai hoặc tính nhầm thù lao). Đây chính là rủi ro an toàn đặc trưng của hệ thống quản lý tài chính giáo dục: hậu quả của một lỗi an toàn bộ nhớ không dừng lại ở việc chương trình crash, mà có thể trở thành một quyết định tài chính sai (trả nhầm lương, từ chối duyệt lương cho giảng viên đã dạy thật).
+
+Đề tài chọn đúng \textbf{mô-đun tính thù lao giảng viên} (\texttt{tinh\_tien\_day.c}, liên kết với \texttt{giang\_vien.c} và \texttt{lop\_hoc\_phan.c}) làm đối tượng phân tích vì đây là nơi hội tụ đầy đủ các đặc điểm cần thiết để một bài tập lớn an toàn phần mềm có ý nghĩa thực chất: (1) \textbf{xử lý input người dùng trực tiếp} (họ tên, bằng cấp, mã lớp qua \texttt{stdin}); (2) \textbf{thao tác con trỏ xuyên mô-đun} (\texttt{LopHocPhan.gv\_ptr} trỏ chéo sang \texttt{GiangVien}); và (3) \textbf{phép toán tài chính có thể tràn số} (nhân dồn số tiết, hệ số, đơn giá). Ba đặc điểm này tạo thành một \emph{attack surface} rõ ràng, đủ nhỏ để phân tích triệt để bằng 4 kỹ thuật kiểm chứng khác nhau, nhưng đủ thật để không chỉ là bài tập minh họa.
+
+\subsection{Mục tiêu cụ thể}
+
+Bài tập lớn đặt ra 4 mục tiêu cụ thể, mỗi mục tiêu ứng với một chương kỹ thuật, áp dụng trọn vẹn khung 4 chương công cụ của học phần~\cite{softsectoolkit2026} lên đúng một hệ thống E2E thay vì các bài tập minh hoạ độc lập:
+
+\begin{enumerate}
+  \item \textbf{Phát hiện lỗ hổng bộ nhớ và dữ liệu bằng phân tích tĩnh}: quét trực tiếp mã nguồn C, phát hiện tối thiểu 6 lớp lỗ hổng -- \textbf{CWE-120} (Buffer Copy without Checking Size), \textbf{CWE-416} (Use-After-Free), \textbf{CWE-476} (NULL Pointer Dereference), \textbf{CWE-190} (Integer Overflow), \textbf{CWE-1288} (Improper Validation of Specified Quantity/Enum), và \textbf{CWE-197} (Numeric Truncation Error) -- không cần biên dịch hay chạy chương trình.
+  \item \textbf{Kiểm chứng luồng nghiệp vụ bằng mô hình hóa hình thức}: dựng mô hình Kripke $M=(S,S_0,R,L)$ cho luồng E2E 3 mô-đun và kiểm chứng bằng Bounded Model Checking (BMC, $k=5$) trên 5 thuộc tính LTL/CTL.
+  \item \textbf{Chứng minh (hoặc bác bỏ) an toàn số học trên toàn miền giá trị bằng SMT}: dùng Z3 solver chứng minh phép tính thù lao có/không thể tràn số 32-bit, và chứng minh hình thức (không chỉ test mẫu) rằng bản vá loại trừ hoàn toàn lỗi.
+  \item \textbf{Xác nhận lỗ hổng biểu hiện thật trên binary đã biên dịch bằng fuzzing động}: black-box (input ngẫu nhiên, đo crash rate thật trên \texttt{salary\_calc.exe}) và white-box (Z3-guided, giải trực tiếp điều kiện gây lỗi).
+\end{enumerate}
+
+\subsection{Phạm vi}
+
+\textbf{Sẽ thực hiện:} phân tích, mô hình hóa và kiểm chứng 3 file module C -- \texttt{giang\_vien.c} (Module 1 -- Quản lý Giảng viên), \texttt{lop\_hoc\_phan.c} (Module 2 -- Quản lý Lớp học phần), \texttt{tinh\_tien\_day.c} (Module 3 -- Tính tiền dạy \& Thanh toán) -- cùng 2 driver \texttt{main.c} (bản có lỗ hổng cố ý, VULN) và \texttt{main\_fixed.c} (bản đã khắc phục, SAFE, dùng chung 3 module với bản VULN). Toàn bộ 4 chương công cụ (\texttt{ch1\_models}, \texttt{ch2\_memsafe}, \texttt{ch3\_staticsat}, \texttt{ch4\_dynafuzz}) đều áp dụng trên đúng 3 module này, đảm bảo tính nhất quán E2E thay vì 4 ví dụ minh họa rời rạc không liên quan tới nhau.
+
+\textbf{Sẽ không thực hiện:} triển khai/kiểm chứng backend .NET 9 Web API, frontend React, hay kết nối cơ sở dữ liệu PostgreSQL thực của hệ thống DuongUniversity Management System -- các thành phần này chỉ được mô tả ở mức kiến trúc tổng quan (\Cref{sec:motahethong}) để xác định đúng vị trí của 3 module C trong hệ thống thật, không nằm trong phạm vi kiểm chứng của đề tài.

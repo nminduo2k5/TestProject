@@ -41,13 +41,17 @@ def main():
         os.path.join(ch2_dir, "main_fixed.c")
     ])
 
-    python_exe = sys.executable
+    # Uu tien python co san z3-solver (vd Anaconda) thay vi sys.executable, vi PATH tren may
+    # nay co the tro toi MSYS2 python (khong co z3-solver) neu MSYS2 dung truoc trong PATH.
+    anaconda_python = os.path.join(os.path.expanduser("~"), "anaconda3", "python.exe")
+    python_exe = anaconda_python if os.path.exists(anaconda_python) else sys.executable
 
     # 2. Run Chapter 1: Kripke BMC
     run_cmd([python_exe, os.path.join(base_dir, "ch1_models", "kripke_bmc.py")])
 
-    # 3. Run Chapter 2: Pattern Scanner
+    # 3. Run Chapter 2: Pattern Scanner (static) + Memory Trace Demo (dynamic, bo sung)
     run_cmd([python_exe, os.path.join(base_dir, "ch2_memsafe", "pattern_scanner.py")])
+    run_cmd([python_exe, os.path.join(base_dir, "ch2_memsafe", "memory_trace_demo.py")])
 
     # 4. Run Chapter 3: SMT Verify (ch3_staticsat)
     run_cmd([python_exe, os.path.join(base_dir, "ch3_staticsat", "smt_verify.py")])

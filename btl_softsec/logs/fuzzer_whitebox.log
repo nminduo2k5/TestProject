@@ -13,10 +13,16 @@
 [Target 5] Module 3 Integer Overflow (CWE-190): SAT in 5 attempt
   Condition: soTiet = 16694179, dmt = 2147583020 VND -> product > 2,147,483,647
 
+[Target 6] Module 3 Numeric Truncation int->char (CWE-197): SAT in 6 attempt
+  Condition: soLuongSinhVien = 200 -> byte ep kieu (char) = -56 (sai lech du lieu audit/thanh toan!)
+
+[Target 7] Module 3 Numeric Truncation Collision (CWE-197): SAT in 7 attempt
+  Condition: lop A rong (soLuongSinhVien=0) va lop B co that 256 sinh vien deu xuat ra byte = 0 -> khong the phan biet sau khi xuat bao cao!
+
 --> BẢNG KẾT QUẢ WHITE-BOX FUZZING E2E 3-MODULE:
-    - Tổng số lần thử (Attempts):     5 lần (Giải ràng buộc Z3)
-    - Số target phát hiện crash/vulnerability: 5 / 5 target
-    - Thời gian thực thi:             0.3418 giây
-    - Độ chính xác:                    100% (Constraint-based exact SAT trên 5 target đã xác định trước, không phải coverage-guided tự động)
-    - Tốc độ tăng tốc so với Blackbox: ~38.3x speedup (dựa trên logs/fuzzer_blackbox.log: 13.08s)
+    - Tổng số lần thử (Attempts):     7 lần (Giải ràng buộc Z3)
+    - Số target phát hiện crash/vulnerability: 7 / 7 target
+    - Thời gian thực thi:             0.3904 giây
+    - Độ chính xác:                    100% (Constraint-based exact SAT trên 7 target đã xác định trước, không phải coverage-guided tự động)
+    - Tốc độ tăng tốc so với Blackbox: ~30.5x speedup (dựa trên logs/fuzzer_blackbox.log: 11.90s)
 

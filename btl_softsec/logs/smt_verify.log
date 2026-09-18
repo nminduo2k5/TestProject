@@ -22,3 +22,21 @@
   --> RESULT: UNSAT (Safe code strictly enforces: NO/DELETED LECTURER -> SALARY = 0 VND,
       da kiem chung tren chinh cong thuc tinh luong that dung trong Module 3).
 
+[Check 4] E2E Numeric Truncation Error int -> char tren So Luong Sinh Vien (CWE-197):
+  --> RESULT: SAT (Numeric truncation CO THE xay ra - ep (char) khong kiem tra pham vi!)
+    - soLuongSinhVien (int)      = 128
+    - Byte da ep kieu (char)     = -128  <- SAI LECH so voi gia tri that
+  --> DE XUAT: Kiem tra pham vi (0..127) TRUOC khi ep kieu (char), giong pack_class_size_byte_SAFE().
+
+[Check 5] E2E Numeric Truncation SAU KHI FIX (guard 0..127 truoc khi ep kieu, CWE-197):
+  --> RESULT: UNSAT (Da chung minh: voi guard 0..127 dung TRUOC khi ep kieu, gia tri
+      sau ep kieu LUON BANG gia tri int goc - khong bao gio xay ra Numeric Truncation).
+
+[Check 6] E2E Numeric Truncation COLLISION - 2 gia tri KHAC NHAU cung cho 1 byte (CWE-197):
+  --> RESULT: SAT (Ton tai 2 lop hoc phan HOAN TOAN KHAC NHAU nhung xuat ra CUNG 1 byte!)
+    - Lop A: soLuongSinhVien = 0  (lop that su rong)
+    - Lop B: soLuongSinhVien = 256  (lop CO THAT 256 sinh vien)
+    - Ca 2 deu xuat ra byte = 0  <- KHONG THE PHAN BIET duoc sau khi ep kieu!
+  --> DE XUAT: Day chinh la ly do phai chan TRUOC khi ep kieu (pack_class_size_byte_SAFE), khong
+      the chi dua vao gia tri byte da xuat de suy nguoc lai so sinh vien that.
+

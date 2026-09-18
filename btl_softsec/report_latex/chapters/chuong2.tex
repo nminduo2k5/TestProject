@@ -1,0 +1,104 @@
+\section{Đặc tả Yêu cầu (Specification)}
+\label{sec:dacta}
+
+Trước khi phân tích lỗ hổng, đề tài đặc tả tường minh \emph{vùng input hợp lệ} và các quy tắc an toàn mà 3 module bắt buộc phải tuân thủ. Đây là cơ sở để mọi kỹ thuật kiểm chứng ở \Cref{sec:phuongphap} trả lời cùng một câu hỏi cốt lõi: \emph{``Mô-đun có chịu được khi input vượt ra ngoài vùng an toàn (đặc tả) hay không?''} -- thay vì chỉ hỏi ``output có đúng không'' trên một vài trường hợp thử.
+
+\subsection{Bảng yêu cầu chức năng và phi chức năng}
+
+\begin{table}[H]
+  \centering
+  \caption{Yêu cầu chức năng (functional) và an toàn (safety/memory) của hệ thống}
+  \label{tab:req}
+  \footnotesize
+  \begin{tabularx}{\linewidth}{@{}l l l X@{}}
+    \toprule
+    \textbf{Mã YC} & \textbf{Loại} & \textbf{Ưu tiên} & \textbf{Nội dung đặc tả} \\
+    \midrule
+    REQ-1 & Safety & HIGH & Không được tính tiền khi chưa phân công giảng viên cho lớp học phần \\
+    REQ-2 & Safety & HIGH & Không được xuất báo cáo khi chưa tính tiền \\
+    REQ-3 & Memory & HIGH & \texttt{hoTen[80]}, \texttt{bangCap[20]}, \texttt{maLop[20]} không tràn bộ đệm khi input vượt kích thước (CWE-120) \\
+    REQ-4 & Memory & HIGH & Con trỏ \texttt{gv\_ptr} (Module 2 $\to$ 1) không được truy cập sau khi vùng nhớ đã \texttt{free()} (CWE-416) \\
+    REQ-5 & Memory & HIGH & \texttt{gv\_ptr} phải được kiểm tra \texttt{NULL} trước khi dùng để tính tiền (CWE-476) \\
+    REQ-6 & Memory & HIGH & Phép nhân dồn số tiết $\times$ hệ số $\times$ đơn giá không tràn số nguyên 32-bit (CWE-190) \\
+    REQ-7 & Functional & MEDIUM & Công thức tính tiền 2 bước phải cho kết quả đúng với mọi tổ hợp đầu vào hợp lệ \\
+    REQ-8 & Integrity & HIGH & \texttt{soLuongSinhVien} (\texttt{int}) không sai lệch khi đóng gói vào audit log (\texttt{char}) (CWE-197) \\
+    REQ-9 & Functional & MEDIUM & \texttt{bangCap} phải thuộc danh mục hợp lệ, không âm thầm rơi vào hệ số mặc định (CWE-1288) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\Cref{tab:req} là yêu cầu \emph{chức năng} (hệ thống làm \emph{gì}) và các ràng buộc an toàn dữ liệu trực tiếp gắn với một CWE cụ thể. Đây chưa phải yêu cầu \emph{phi chức năng} (hệ thống vận hành \emph{tốt đến mức nào}) -- được đặc tả riêng ở \Cref{tab:nfr} ngay dưới đây, vì hai loại yêu cầu này cần hai cách kiểm chứng khác nhau (correctness hình thức/tĩnh cho REQ, đo lường/quan sát thực nghiệm cho NFR).
+
+\subsection{Yêu cầu phi chức năng (NFR)}
+\label{sec:nfr}
+
+\begin{table}[H]
+  \centering
+  \caption{Yêu cầu phi chức năng (Non-Functional Requirements)}
+  \label{tab:nfr}
+  \footnotesize
+  \begin{tabularx}{\linewidth}{@{}l p{2.2cm} X X@{}}
+    \toprule
+    \textbf{Mã NFR} & \textbf{Thuộc tính} & \textbf{Nội dung đặc tả} & \textbf{Đối chiếu kiểm chứng} \\
+    \midrule
+    NFR-1 & Hiệu năng & Thời gian tính lương cho 1 lớp $< 10\,$ms (không tính I/O) trên phần cứng phổ thông. & Hàm gồm 2 phép tính số học $O(1)$, không vòng lặp -- thoả mãn lý thuyết; chưa đo microbenchmark riêng. \\
+    NFR-2 & Độ ổn định bộ nhớ & Không phát sinh lỗi bộ nhớ (\texttt{heap-use-after-free}, buffer overflow) khi lặp luồng E2E $\ge 10.000$ lần. & 0 vi phạm qua ASan (\Cref{sec:ch2}) và 0/200 crash qua black-box fuzzing bản FIXED (\Cref{sec:ch4}). Quy mô $10^4$ chưa đo trực tiếp. \\
+    NFR-3 & Tính di động & Biên dịch sạch (0 warning với \texttt{-Wall}) trên $\ge 2$ toolchain khác nhau. & Đã xác nhận biên dịch và chạy thành công trên GCC/MSYS2 UCRT64 và Clang64 (\Cref{sec:ch2}) -- \textbf{PASS}. \\
+    NFR-4 & Chịu lỗi (Robustness) & Khi input vượt đặc tả (\Cref{tab:range}), bản vá phải từ chối có kiểm soát (trả mã lỗi), không crash. & 0/200 crash trên fuzzing bản FIXED; 150/200 lần chặn an toàn đúng thiết kế trên kịch bản CWE-197 (\Cref{sec:ketqua}) -- \textbf{PASS}. \\
+    NFR-5 & Toàn vẹn (Audit) & Hai giá trị \texttt{soLuongSinhVien} khác nhau không bị map trùng 1 byte trong audit log (non-collision). & Check 6 (\Cref{sec:ch3}) và Target 7 (\Cref{sec:ch4}) tái hiện vi phạm trên VULN; bản FIXED chặn trước ép kiểu -- \textbf{PASS trên FIXED}. \\
+    NFR-6 & Tính tất định & Cùng bộ input, kết quả BMC/SMT và tính lương phải nhất quán ở mọi lần chạy độc lập. & Cố định \texttt{random\_seed} trong \texttt{kripke\_bmc.py}, các lần chạy độc lập cho ra cùng 1 kết quả -- \textbf{PASS}. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Miền giá trị hợp lệ theo đặc tả nghiệp vụ}
+
+\Cref{tab:range} liệt kê chính xác miền giá trị hợp lệ theo đặc tả \emph{nghiệp vụ} (không phải giới hạn kỹ thuật của kiểu dữ liệu C -- xem phân biệt tại \Cref{sec:constraints}) của DuongUniversity cho từng trường dữ liệu chịu trách nhiệm bởi REQ-3, REQ-6, REQ-8, REQ-9. Đây là các con số được dùng trực tiếp làm ràng buộc khi mô hình hóa Z3 SMT (\Cref{sec:ch3}) và khi thiết kế bộ input biên (Boundary Value Analysis) cho fuzzing (\Cref{sec:ch4}).
+
+\begin{table}[H]
+  \centering
+  \caption{Miền giá trị hợp lệ theo đặc tả nghiệp vụ}
+  \label{tab:range}
+  \footnotesize
+  \begin{tabularx}{\linewidth}{@{}l X l@{}}
+    \toprule
+    \textbf{Trường dữ liệu} & \textbf{Miền hợp lệ (nghiệp vụ)} & \textbf{YC liên quan} \\
+    \midrule
+    \texttt{hoTen}            & Chuỗi họ tên giảng viên hợp lệ                & REQ-3 \\
+    \texttt{maLop}             & Chuỗi mã lớp học phần hợp lệ                   & REQ-3 \\
+    \texttt{bangCap}          & $\in \{$GS, PGS, TIEN\_SI, THAC\_SI, CU\_NHAN$\}$ & REQ-9 \\
+    \texttt{soTiet}            & $[1, 500]$                                  & REQ-6, REQ-7 \\
+    \texttt{dinhMucTienChuan} & $[50\,000, 200\,000]$ VNĐ                   & REQ-6, REQ-7 \\
+    \texttt{soLuongSinhVien}  & $[0, 300]$ (lớp đại cương có thể tới vài trăm SV, đại diện cho BVA) & REQ-8 \\
+    \texttt{gv\_ptr}           & Khác \texttt{NULL} và trỏ tới vùng nhớ còn hợp lệ trước khi đọc & REQ-4, REQ-5 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Mọi giá trị nằm ngoài các miền trên đều là input hợp lệ về mặt \emph{cú pháp} (compiler chấp nhận) nhưng vi phạm đặc tả nghiệp vụ -- và chính xác đây là những trường hợp mà 4 chương kiểm chứng ở \Cref{sec:phuongphap} tập trung khai thác để trả lời câu hỏi ``module có chịu được không''. Lưu ý quan trọng: \emph{miền nghiệp vụ} của \texttt{soLuongSinhVien} ($[0,300]$, không có giới hạn kỹ thuật cứng) \textbf{khác hẳn} \emph{giới hạn kỹ thuật} khi đóng gói giá trị đó xuống kiểu \texttt{char} ($[0,127]$) -- chính khoảng cách giữa hai miền này là nguồn gốc của CWE-197, được đặc tả tường minh ở CON-5 dưới đây.
+
+\subsection{Ràng buộc thiết kế/công nghệ (CON-x)}
+\label{sec:constraints}
+
+Khác với \Cref{tab:range} (miền giá trị \emph{nghiệp vụ} -- do người phân tích đặc tả đặt ra), \Cref{tab:con} liệt kê các \textbf{ràng buộc thiết kế/công nghệ} -- giới hạn áp lên hệ thống bởi chính \emph{cách hiện thực} (kích thước buffer khai báo trong struct C, phạm vi kiểu dữ liệu) chứ không phải bởi quy tắc nghiệp vụ. Việc tách hai loại ràng buộc này (trước đây bị trộn chung vào \Cref{tab:range}) là quan trọng vì phần lớn CWE trong đề tài phát sinh đúng tại \emph{khoảng cách} giữa hai miền: nghiệp vụ cho phép một giá trị, nhưng công nghệ (kiểu dữ liệu/kích thước buffer) không đủ chỗ chứa giá trị đó.
+
+\begin{table}[H]
+  \centering
+  \caption{Ràng buộc thiết kế/công nghệ (CON-x) và vị trí tương ứng trong mã nguồn}
+  \label{tab:con}
+  \footnotesize
+  \begin{tabularx}{\linewidth}{@{}l X X p{2.2cm}@{}}
+    \toprule
+    \textbf{Mã CON} & \textbf{Ràng buộc kỹ thuật} & \textbf{Vị trí trong code} & \textbf{YC/CWE} \\
+    \midrule
+    CON-1 & Buffer \texttt{hoTen} tối đa \textbf{80} byte (79 ký tự thật $+$ \texttt{'\textbackslash0'}) & \texttt{\#define MAX\_NAME 80} (\texttt{giang\_vien.h:4}) & REQ-3 / CWE-120 \\
+    CON-2 & Buffer \texttt{maGiangVien} tối đa \textbf{20} byte & \texttt{char maGiangVien[20]} (\texttt{giang\_vien.h:9}) & REQ-3 / CWE-120 \\
+    CON-3 & Buffer \texttt{bangCap} tối đa \textbf{20} byte & \texttt{char bangCap[20]} (\texttt{giang\_vien.h:11}) & REQ-3, 9 / CWE-120 \\
+    CON-4 & Buffer \texttt{maLop} tối đa \textbf{20} byte & \texttt{\#define MAX\_MALOP 20} (\texttt{lop\_hoc\_phan.h:6}) & REQ-3 / CWE-120 \\
+    CON-5 & Kiểu \texttt{char} (signed 8-bit) giới hạn an toàn $[0,127]$ -- vượt quá sẽ wrap-around & \texttt{pack\_class\_size\_byte\_*()} (\texttt{tinh\_tien\_day.h}) & REQ-8 / CWE-197 \\
+    CON-6 & Kiểu \texttt{int} 32-bit giới hạn kết quả phép nhân dồn về $[\text{INT\_MIN}, \text{INT\_MAX}]$ & phép nhân trung gian \texttt{(int)} trong \texttt{tinh\_tien\_day.c} & REQ-6 / CWE-190 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Đúng như quan sát ở \Cref{sec:ketqua}: kích thước buffer $\{80, 20, 20\}$ (CON-1, CON-3, CON-4 -- ba trường được nêu trực tiếp trong REQ-3) khớp \emph{tường minh, từng con số} với đúng 3 định nghĩa struct thật trong \Cref{lst:gvstruct,lst:lhpstruct} (\Cref{sec:motahethong}), không phải số minh họa; CON-2 (\texttt{maGiangVien[20]}) là buffer thứ 4 cũng bị \texttt{strcpy} tràn (\texttt{giang\_vien.c:12} trong \Cref{tab:findings}) nhưng chưa được liệt trong văn bản REQ-3 gốc -- một khoảng hở đặc tả nhỏ được phát hiện chính nhờ việc tách bảng CON riêng và đối chiếu lại với kết quả quét Chương 2. CON-2/CON-3 dùng hằng số nguyên $20$ trực tiếp trong khai báo struct, không qua một macro riêng như \texttt{MAX\_NAME}/\texttt{MAX\_MALOP} (CON-1/CON-4) -- một điểm chưa nhất quán về style code, dù không gây ra lỗi chức năng.

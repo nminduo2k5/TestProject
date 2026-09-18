@@ -9,14 +9,14 @@
 
 --> KẾT QUẢ BLACK-BOX FUZZING TREN salary_calc.exe:
     - Tổng số lần thử (Attempts):   200
-    - Số lần Crash (Buffer Overflow): 93
-    - Số lần Logic Error (Bằng cấp):  53
-    - Thời gian thực thi:            13.08 giây
-    - Tốc độ fuzzing:                 15.3 execs/sec
+    - Số lần Crash (Buffer Overflow): 72
+    - Số lần Logic Error (Bằng cấp):  75
+    - Thời gian thực thi:            11.90 giây
+    - Tốc độ fuzzing:                 16.8 execs/sec
 --> MẪU TESTCASE GÂY CRASH PHÁT HIỆN:
-    Sample #1: Attempt #1 | TenLen=155 | LopLen=49 | BangCap='' | Reason: ExitCode=3221226356
-    Sample #2: Attempt #3 | TenLen=179 | LopLen=16 | BangCap='INVALID_DEGREE' | Reason: ExitCode=3221226356
-    Sample #3: Attempt #5 | TenLen=122 | LopLen=45 | BangCap='PGS' | Reason: ExitCode=3221226356
+    Sample #1: Attempt #1 | TenLen=144 | LopLen=5 | BangCap='INVALID_DEGREE' | Reason: ExitCode=3221226356
+    Sample #2: Attempt #3 | TenLen=178 | LopLen=36 | BangCap='THAC_SI' | Reason: ExitCode=3221226356
+    Sample #3: Attempt #4 | TenLen=132 | LopLen=33 | BangCap='CU_NHAN' | Reason: ExitCode=3221226356
 
 
 =================================================================
@@ -27,7 +27,91 @@
 --> KẾT QUẢ BLACK-BOX FUZZING TREN salary_calc_fixed.exe:
     - Tổng số lần thử (Attempts):   200
     - Số lần Crash (Buffer Overflow): 0
-    - Số lần Logic Error (Bằng cấp):  124
-    - Thời gian thực thi:            5.71 giây
-    - Tốc độ fuzzing:                 35.0 execs/sec
+    - Số lần Logic Error (Bằng cấp):  104
+    - Thời gian thực thi:            4.24 giây
+    - Tốc độ fuzzing:                 47.2 execs/sec
+
+
+=================================================================
+  BLACK-BOX FUZZING (CWE-197 Numeric Truncation) TREN salary_calc.exe (200 runs)
+=================================================================
+--> Target Binary Executable: K:\TestProject\btl_softsec\ch2_memsafe\salary_calc.exe e2e_byte_truncate <soLuongSinhVien>
+
+--> KẾT QUẢ BLACK-BOX FUZZING (CWE-197) TREN salary_calc.exe:
+    - Tổng số lần thử (Attempts):        200
+    - Số lần SAI LỆCH DỮ LIỆU (Truncation): 120
+    - Số lần bị CHẶN AN TOÀN (Safe Blocked): 0
+    - Số lần dữ liệu hợp lệ (Normal):     80
+    - Số lần Crash:                       0
+    - Thời gian thực thi:                 6.30 giây
+    - Mẫu soLuongSinhVien gây sai lệch: [152, 375, 219]
+
+
+=================================================================
+  BLACK-BOX FUZZING (CWE-197 Numeric Truncation) TREN salary_calc_fixed.exe (200 runs)
+=================================================================
+--> Target Binary Executable: K:\TestProject\btl_softsec\ch2_memsafe\salary_calc_fixed.exe e2e_byte_truncate <soLuongSinhVien>
+
+--> KẾT QUẢ BLACK-BOX FUZZING (CWE-197) TREN salary_calc_fixed.exe:
+    - Tổng số lần thử (Attempts):        200
+    - Số lần SAI LỆCH DỮ LIỆU (Truncation): 0
+    - Số lần bị CHẶN AN TOÀN (Safe Blocked): 150
+    - Số lần dữ liệu hợp lệ (Normal):     50
+    - Số lần Crash:                       0
+    - Thời gian thực thi:                 4.99 giây
+
+
+=================================================================
+  BOUNDARY VALUE ANALYSIS (CWE-197) TREN salary_calc.exe (17 gia tri bien co dinh)
+=================================================================
+    n= -256  ->  status=TRUNCATED    byte_that=    0  byte_du_kien=    0  [OK]
+    n= -255  ->  status=TRUNCATED    byte_that=    1  byte_du_kien=    1  [OK]
+    n= -129  ->  status=TRUNCATED    byte_that=  127  byte_du_kien=  127  [OK]
+    n= -128  ->  status=OK           byte_that= -128  byte_du_kien= -128  [OK]
+    n= -127  ->  status=OK           byte_that= -127  byte_du_kien= -127  [OK]
+    n=   -1  ->  status=OK           byte_that=   -1  byte_du_kien=   -1  [OK]
+    n=    0  ->  status=OK           byte_that=    0  byte_du_kien=    0  [OK]
+    n=    1  ->  status=OK           byte_that=    1  byte_du_kien=    1  [OK]
+    n=  126  ->  status=OK           byte_that=  126  byte_du_kien=  126  [OK]
+    n=  127  ->  status=OK           byte_that=  127  byte_du_kien=  127  [OK]
+    n=  128  ->  status=TRUNCATED    byte_that= -128  byte_du_kien= -128  [OK]
+    n=  129  ->  status=TRUNCATED    byte_that= -127  byte_du_kien= -127  [OK]
+    n=  255  ->  status=TRUNCATED    byte_that=   -1  byte_du_kien=   -1  [OK]
+    n=  256  ->  status=TRUNCATED    byte_that=    0  byte_du_kien=    0  [OK]
+    n=  257  ->  status=TRUNCATED    byte_that=    1  byte_du_kien=    1  [OK]
+    n=  300  ->  status=TRUNCATED    byte_that=   44  byte_du_kien=   44  [OK]
+    n=  384  ->  status=TRUNCATED    byte_that= -128  byte_du_kien= -128  [OK]
+
+--> PHAT HIEN TRUNG LAP BYTE (nhieu soLuongSinhVien HOP LE KHAC NHAU cho CUNG 1 byte):
+    byte=-128  <-  cac gia tri soLuongSinhVien: [-128, 128, 384]  (KHONG THE PHAN BIET duoc sau khi xuat bao cao!)
+    byte=-127  <-  cac gia tri soLuongSinhVien: [-127, 129]  (KHONG THE PHAN BIET duoc sau khi xuat bao cao!)
+    byte=-1  <-  cac gia tri soLuongSinhVien: [-1, 255]  (KHONG THE PHAN BIET duoc sau khi xuat bao cao!)
+    byte=0  <-  cac gia tri soLuongSinhVien: [-256, 0, 256]  (KHONG THE PHAN BIET duoc sau khi xuat bao cao!)
+    byte=1  <-  cac gia tri soLuongSinhVien: [-255, 1, 257]  (KHONG THE PHAN BIET duoc sau khi xuat bao cao!)
+    byte=127  <-  cac gia tri soLuongSinhVien: [-129, 127]  (KHONG THE PHAN BIET duoc sau khi xuat bao cao!)
+
+
+=================================================================
+  BOUNDARY VALUE ANALYSIS (CWE-197) TREN salary_calc_fixed.exe (17 gia tri bien co dinh)
+=================================================================
+    n= -256  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien=    0  [OK]
+    n= -255  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien=    1  [OK]
+    n= -129  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien=  127  [OK]
+    n= -128  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien= -128  [OK]
+    n= -127  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien= -127  [OK]
+    n=   -1  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien=   -1  [OK]
+    n=    0  ->  status=OK           byte_that=    0  byte_du_kien=    0  [OK]
+    n=    1  ->  status=OK           byte_that=    1  byte_du_kien=    1  [OK]
+    n=  126  ->  status=OK           byte_that=  126  byte_du_kien=  126  [OK]
+    n=  127  ->  status=OK           byte_that=  127  byte_du_kien=  127  [OK]
+    n=  128  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien= -128  [OK]
+    n=  129  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien= -127  [OK]
+    n=  255  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien=   -1  [OK]
+    n=  256  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien=    0  [OK]
+    n=  257  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien=    1  [OK]
+    n=  300  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien=   44  [OK]
+    n=  384  ->  status=SAFE_BLOCKED byte_that= None  byte_du_kien= -128  [OK]
+
+--> PHAT HIEN TRUNG LAP BYTE (nhieu soLuongSinhVien HOP LE KHAC NHAU cho CUNG 1 byte):
+    Khong co trung lap nao (binary nay chan/tu choi truoc khi ep kieu sai lech).
 

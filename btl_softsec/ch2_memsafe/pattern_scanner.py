@@ -132,6 +132,13 @@ def scan_source(path: str) -> List[Finding]:
             if not is_protected:
                 findings.append(Finding(path, line_no, line.rstrip("\n"), "unchecked_nested_deref"))
 
+        if re.search(r"\(char\)\s*\w", code_line):
+            scope_start = func_starts[i]
+            prev_block = "".join(_code_part(l) for l in lines[scope_start:i])
+            has_range_guard = re.search(r"if\s*\([^)]*(<|>|<=|>=)[^)]*\)", prev_block) is not None
+            if not has_range_guard:
+                findings.append(Finding(path, line_no, line.rstrip("\n"), "unchecked_numeric_truncation"))
+
     return findings
 
 
@@ -148,6 +155,8 @@ def report(findings: List[Finding]) -> None:
             rule_desc = "Giải phóng free() bộ nhớ mà không gán NULL hoặc hủy liên kết con trỏ treo (CWE-416 UAF)"
         elif f.rule == "unchecked_nested_deref":
             rule_desc = "Truy cập con trỏ lồng (gv_ptr->) mà không kiểm tra NULL trước (CWE-476 Null Pointer Dereference)"
+        elif f.rule == "unchecked_numeric_truncation":
+            rule_desc = "Ép kiểu (char) không kiểm tra phạm vi trước - giá trị int ngoài [-128,127] sẽ bị wrap-around sai lệch (CWE-197 Numeric Truncation Error)"
         else:
             rule_desc = "Cảnh báo vi phạm an toàn bộ nhớ"
             

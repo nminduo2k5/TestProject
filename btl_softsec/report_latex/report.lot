@@ -1,0 +1,11 @@
+\babel@toc {english}{}\relax 
+\contentsline {table}{\numberline {2.1}{\ignorespaces Yêu cầu chức năng (functional) và an toàn (safety/memory) của hệ thống}}{7}{table.caption.5}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Yêu cầu phi chức năng (Non-Functional Requirements)}}{8}{table.caption.6}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Miền giá trị hợp lệ theo đặc tả nghiệp vụ}}{9}{table.caption.7}%
+\contentsline {table}{\numberline {2.4}{\ignorespaces Ràng buộc thiết kế/công nghệ (CON-x) và vị trí tương ứng trong mã nguồn}}{10}{table.caption.8}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Kết quả BMC $k=5$ trên 5 thuộc tính $P_1$--$P_5$}}{19}{table.caption.13}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Toàn bộ 9 cảnh báo phát hiện bởi \texttt {pattern\_scanner.py} trên code VULN; \texttt {main\_fixed.c} sạch tuyệt đối (0 finding)}}{20}{table.caption.14}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces So sánh Black-box vs. White-box (lần chạy đại diện, \texttt {logs/fuzzer\_black/whitebox.log})}}{22}{table.caption.15}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Tổng hợp CWE, vị trí trong đề tài và điểm CVSS-lite tự tính}}{24}{table.caption.17}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Ví dụ thực tế minh họa cho mỗi lớp CWE}}{25}{table.caption.19}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Ma trận truy vết Test Case $\to $ Yêu cầu (mọi kết quả thực tế trích từ \texttt {logs/*.log} thật)}}{26}{table.5.6}%

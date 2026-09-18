@@ -1,0 +1,1040 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(report.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(phenikaa-report.cls
+
+LaTeX Warning: You have requested document class `phenikaa-report',
+               but the document class provides `hcmut-report'.
+
+Document Class: hcmut-report 
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\vntex.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5enc.def
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5enc.dfu))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmr.fd))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\vncaps.tex))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/anyfontsize\anyfontsize.st
+y) (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrextend.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrkbase.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile-hook.
+sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.sty)))
+ (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty))))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def)))
+ (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tools\indentfirst.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty)
+ (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekey
+s.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.st
+y)) (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmacro.st
+y) (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitles
+tring.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty)))
+ (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.st
+y)) (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty)
+) (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilech
+eck.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecoun
+ter.sty)))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.ldf)
+)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\babel-en
+glish.tex))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\tgtermes.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjustbox.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex)))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjcalc.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\trimclip.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/collectbox\collectbox.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\tc-pdftex.def))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/varwidth\varwidth.sty))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-co
+mmon.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-la
+tex.def)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.cod
+e.tex
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty
+
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty
+
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.c
+ode.tex
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.co
+de.tex
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeyslib
+raryfiltered.code.tex))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg)
+
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-p
+dftex.def
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-c
+ommon-pdf.def)))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsysso
+ftpath.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsyspr
+otocol.code.tex))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.c
+ode.tex
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.te
+x
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.cod
+e.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.c
+ode.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.basic.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.trigonometric.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.random.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.comparison.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.base.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.round.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.misc.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunction
+s.integerarithmetics.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.cod
+e.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.co
+de.tex))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex
+)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepo
+ints.code.tex
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\t5qtm.fd))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepa
+thconstruct.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepa
+thusage.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoresc
+opes.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregr
+aphicstate.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretr
+ansformations.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequ
+ick.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreob
+jects.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepa
+thprocessing.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorear
+rows.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoresh
+ade.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreim
+age.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreex
+ternal.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorela
+yers.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretr
+ansparency.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepa
+tterns.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerd
+f.code.tex)))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulesha
+pes.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleplo
+t.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-
+version-0-65.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-
+version-1-18.sty))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.co
+de.tex))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.te
+x))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.cod
+e.tex))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\t
+ikz.code.tex
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibrary
+plothandlers.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulemat
+rix.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/l
+ibraries\tikzlibrarytopaths.code.tex)))
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibrary
+arrows.meta.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/l
+ibraries\tikzlibrarypositioning.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/l
+ibraries\tikzlibrarycalc.code.tex)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/cleveref\cleveref.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex
+.def) (report.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base
+.sty (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg)
+) (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty)
+(report.out) (report.out)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd) [1{C:/Us
+ers/HP/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/HP/AppData/Lo
+cal/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-t5.enc} <./graphics/Logo ÄH Phe
+nikaa V Wh.png>] (report.toc
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmtt.fd)
+
+LaTeX Font Warning: Font shape `T5/cmtt/b/n' undefined
+(Font)              using `T5/cmtt/m/n' instead on input line 26.
+
+[2]) (report.lof) (report.lot [3]
+Underfull \hbox (badness 10000) in paragraph at lines 8--8
+ [][] [][][]\T5/qtm/m/n/13 So s¡nh Black-box vs. White-box (l¦n ch¤y ^^_¤i di»n
+, 
+) (report.lol) [4] (chapters/chuong1.tex [5]) (chapters/chuong2.tex
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+[]|\T5/cmtt/m/n/11.86258 bangCap \T5/qtm/m/n/11.86258 ph£i thuëc ^^_óng danh mö
+c hñp l»
+[6]
+Underfull \hbox (badness 2229) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 håc ph¦n (tø khi câ ^^_õ in-put
+
+Underfull \hbox (badness 1997) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 k¸t qu£ VN^^^, khæng t½nh I/O
+
+Underfull \hbox (badness 6157) in paragraph at lines 51--51
+[]|\T5/qtm/m/n/11.86258 Khæng ph¡t sinh léi bë nhî
+
+Underfull \hbox (badness 2626) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 (\T5/cmtt/m/n/11.86258 heap-use-after-free\T5/qtm/m/n/11.8
+6258 , buffer
+
+Underfull \hbox (badness 4403) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 v  0/200 crash qua black-box
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+[]|\T5/qtm/m/n/11.86258 Kh£ n«ng
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 di ^^_ëng
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 (Porta-bil-
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+[]|\T5/qtm/m/n/11.86258 Kh£ n«ng
+
+Underfull \hbox (badness 1308) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 chàu léi câ
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 kiºm so¡t
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 (Ro-bust-
+
+Underfull \hbox (badness 1354) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 ([][]B£ng 2.3[][]), b£n ^^_¢ v¡ ph£i tø
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+[]|\T5/qtm/m/n/11.86258 0/200 crash tr¶n black-box
+
+Underfull \hbox (badness 1199) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 kàch b£n CWE-197 ([][]Möc 5[][]) --
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 (Au-ditabil-
+
+Underfull \hbox (badness 4582) in paragraph at lines 51--51
+[]|\T5/qtm/m/n/11.86258 Hai gi¡ trà \T5/cmtt/m/n/11.86258 soLuongSinhVien
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+[]|\T5/qtm/m/n/11.86258 T½nh t§t
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 ^^_ành (De-
+
+Underfull \hbox (badness 1424) in paragraph at lines 51--51
+[]|\T5/qtm/m/n/11.86258 Sau khi cè ^^_ành \T5/cmtt/m/n/11.86258 random_seed
+
+Underfull \hbox (badness 3838) in paragraph at lines 51--51
+\T5/qtm/m/n/11.86258 trong \T5/cmtt/m/n/11.86258 kripke_bmc.py\T5/qtm/m/n/11.86
+258 , ^^_¢ x¡c
+[7] [8]
+Overfull \vbox (124.37866pt too high) has occurred while \output is active
+[9]
+Overfull \hbox (353.83563pt too wide) in paragraph at lines 63--76
+ [][] 
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/cmtt/m/n/11.86258 #define MAX_NAME 80 \T5/qtm/m/n/11.86258 --
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+\T5/cmtt/m/n/11.86258 giang_vien.h:4\T5/qtm/m/n/11.86258 , dòng t¤i
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/qtm/m/n/11.86258 REQ-3 /
+
+Underfull \hbox (badness 1210) in paragraph at lines 101--101
+[]|\T5/qtm/m/n/11.86258 Buffer \T5/cmtt/m/n/11.86258 maGiangVien \T5/qtm/m/n/11
+.86258 tèi ^^_a \T5/qtm/b/n/11.86258 20
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/cmtt/m/n/11.86258 char maGiangVien[20] \T5/qtm/m/n/11.86258 --
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/qtm/m/n/11.86258 REQ-3 /
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/cmtt/m/n/11.86258 char bangCap[20] \T5/qtm/m/n/11.86258 --
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+\T5/cmtt/m/n/11.86258 giang_vien.h:11 \T5/qtm/m/n/11.86258 (h¬ng sè
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/qtm/m/n/11.86258 REQ-3,
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+\T5/qtm/m/n/11.86258 REQ-9 /
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/cmtt/m/n/11.86258 #define MAX_MALOP 20 \T5/qtm/m/n/11.86258 --
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+\T5/cmtt/m/n/11.86258 lop_hoc_phan.h:6\T5/qtm/m/n/11.86258 , dòng t¤i
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/qtm/m/n/11.86258 REQ-3 /
+
+Overfull \hbox (35.87651pt too wide) in paragraph at lines 101--101
+[]|\T5/cmtt/m/n/11.86258 pack_class_size_byte_VULN/SAFE()
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/qtm/m/n/11.86258 REQ-8 /
+
+Overfull \hbox (5.3626pt too wide) in paragraph at lines 101--101
+\T5/cmtt/m/n/11.86258 calculate_e2e_salary_VULN()
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T5/qtm/m/n/11.86258 REQ-6 /
+) (chapters/chuong3.tex [11]
+Overfull \hbox (155.64436pt too wide) in paragraph at lines 32--33
+ [][] 
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\ts1qtm.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+[]\T5/qtm/b/n/13 Module 1 -- Qu£n lþ Gi£ng vi¶n \T5/qtm/m/n/13 (\T5/cmtt/b/n/13
+ giang_vien.c\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 .h\T5/qtm/m/n/13 ): ^^_ành ngh¾a
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+\T5/qtm/m/n/13 struct \T5/cmtt/b/n/13 GiangVien \T5/qtm/m/n/13 (\T5/cmtt/b/n/13
+ id\T5/qtm/m/n/13 , \T5/cmtt/b/n/13 maGiangVien\T5/qtm/m/n/13 , \T5/cmtt/b/n/13
+ hoTen\T5/qtm/m/n/13 , \T5/cmtt/b/n/13 bangCap\T5/qtm/m/n/13 , \T5/cmtt/b/n/13 
+heSoBangCap\T5/qtm/m/n/13 ,
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+\T5/cmtt/b/n/13 is_deleted\T5/qtm/m/n/13 ) v  c°p h m \T5/cmtt/b/n/13 add_lectu
+rer_VULN()\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 add_lecturer_SAFE()\T5/qtm/m/n/13 ,
+[12]
+Underfull \hbox (badness 2884) in paragraph at lines 44--45
+[]\T5/qtm/b/n/13 Module 3 -- T½nh ti·n d¤y & Thanh to¡n \T5/qtm/m/n/13 (\T5/cmt
+t/b/n/13 tinh_tien_day.c\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 .h\T5/qtm/m/n/13 ): ^^_
+ành
+
+Underfull \hbox (badness 1902) in paragraph at lines 44--45
+\T5/cmtt/b/n/13 calculate_e2e_salary_VULN()\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 _SAF
+E()\T5/qtm/m/n/13 , \T5/cmtt/b/n/13 export_report_VULN()\T5/qtm/m/n/13 /\T5/cmt
+t/b/n/13 _SAFE()\T5/qtm/m/n/13 ,
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
+\T5/cmtt/b/n/13 pack_class_size_byte_VULN()\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 _SAF
+E() \T5/qtm/m/n/13 -- h m cuèi ^^_âng gâi
+(code/giang_vien.h) (code/lop_hoc_phan.h [13{C:/Users/HP/AppData/Local/Programs
+/MiKTeX/fonts/enc/dvips/tex-gyre/q-ts1.enc}]) [14 <./diagrams/diagram2_entity_r
+elationship.png (PNG copy)>] [15 <./diagrams/diagram3_data_flow.png (PNG copy)>
+]) (chapters/chuong4.tex [16]
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+[]\T5/qtm/m/n/13 H m \T5/cmtt/b/n/13 cross_validate_with_pattern_scanner() \T5/
+qtm/m/n/13 gåi l¤i ch½nh
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\T5/cmtt/b/n/13 pattern_scanner.py \T5/qtm/m/n/13 cõa Ch÷ìng 2 ^^_º tü ^^_ëng x
+¡c nhªn tr¤ng th¡i léi
+
+Underfull \hbox (badness 4378) in paragraph at lines 27--28
+\OML/cmm/m/it/12 S[]$\T5/qtm/m/n/13 /$\OML/cmm/m/it/12 S[]$\T5/qtm/m/n/13 _EXPO
+RTED_TRUNCATED trong mæ h¼nh Kripke trøu t÷ñng khîp vîi
+[17 <./diagrams/diagram1_state_transition.png (PNG copy)>]
+Underfull \hbox (badness 2913) in paragraph at lines 34--35
+\T5/cmtt/b/n/13 tinh_tien_day.c \T5/qtm/m/n/13 v  driver \T5/cmtt/b/n/13 main_f
+ixed.c\T5/qtm/m/n/13 , vîi 5 quy t­c ph¡t hi»n: \T5/cmtt/b/n/13 strcpy
+
+Underfull \hbox (badness 1062) in paragraph at lines 34--35
+\T5/qtm/m/n/13 (CWE-120), \T5/cmtt/b/n/13 dangling_free \T5/qtm/m/n/13 (CWE-416
+), \T5/cmtt/b/n/13 unchecked_nested_deref \T5/qtm/m/n/13 (CWE-476),
+
+Underfull \hbox (badness 3078) in paragraph at lines 34--35
+\T5/cmtt/b/n/13 int_overflow_cast \T5/qtm/m/n/13 (CWE-190), \T5/cmtt/b/n/13 unc
+hecked_numeric_truncation \T5/qtm/m/n/13 (CWE-197).
+[18]) (chapters/chuong5.tex
+Underfull \hbox (badness 1286) in paragraph at lines 63--1
+[]\T5/qtm/b/n/13 White-box (Z3-guided)\T5/qtm/m/n/13 : gi£i trüc ti¸p 7 r ng bu
+ëc Z3 t÷ìng ùng 6 lé hêng
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
+[]\T5/cmtt/b/n/10.83347 Step 0: S0_INIT [init] $\OMS/cmsy/m/n/10.95 !$ \T5/cmtt
+/b/n/10.83347 Step 1: S5_INVALID_CALC [calculated,error] $\OMS/cmsy/m/n/10.95 !
+$
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
+\T5/cmtt/b/n/10.83347 Step 2: S4_ERROR [error] $\OMS/cmsy/m/n/10.95 !$ \T5/cmtt
+/b/n/10.83347 Step 3: S0_INIT $\OMS/cmsy/m/n/10.95 !$ \T5/cmtt/b/n/10.83347 Ste
+p 4: S5_INVALID_CALC
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+[]\T5/qtm/m/n/13 ^^^iºm ^^_¡ng chó þ: \T5/cmtt/b/n/13 pack_class_size_byte_SAFE
+() \T5/qtm/m/n/13 n¬m \T5/qtm/m/it/13 trong còng file
+(code/giang_vien.c) (code/giang_vien.c [21]) (code/tinh_tien_day.c)
+(code/tinh_tien_day.c)
+Underfull \hbox (badness 7777) in paragraph at lines 74--75
+[]\T5/qtm/b/n/13 Check 1 SAT\T5/qtm/m/n/13 : coun-terex-am-ple $[] \OT1/cmr/m/n
+/12 = 20$\T5/qtm/m/n/13 , $[] \OT1/cmr/m/n/12 = 120$\T5/qtm/m/n/13 ,
+[22] [23]
+Underfull \hbox (badness 10000) in paragraph at lines 169--169
+[]|\T5/qtm/m/n/11.86258 Ch2 \T5/cmtt/m/n/11.86258 dangling_free\T5/qtm/m/n/11.8
+6258 ; Ch2.1 ASan
+[24] [25]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 238.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\to' on input line 238.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 238.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]|\T5/qtm/m/n/10.83347 TC-K1-
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]|\T5/qtm/m/n/10.83347 BMC $\OML/cmm/m/it/10.95 P[]$\T5/qtm/m/n/10.83347 , b£n
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+\T5/qtm/m/n/10.83347 BUGGY (b÷îc
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+\T5/qtm/m/n/10.83347 nh£y th¯ng sang
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+\T5/qtm/m/n/10.83347 t½nh ti·n, bä qua
+
+Underfull \hbox (badness 6510) in paragraph at lines 261--261
+[]|\T5/qtm/m/n/10.83347 UNSAT (khæng
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]|\T5/qtm/b/n/10.83347 SAT \T5/qtm/m/n/10.83347 -- ph£n v½
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+\T5/qtm/m/n/10.83347 dö $\OML/cmm/m/it/10.95 S[][]S[][]S[]$
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
+[]|\T5/qtm/m/n/10.83347 TC-K1-
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
+[]|\T5/qtm/m/n/10.83347 BMC $\OML/cmm/m/it/10.95 P[]$\T5/qtm/m/n/10.83347 , b£n
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
+[]|\T5/qtm/m/n/10.83347 UNSAT
+
+Underfull \hbox (badness 10000) in paragraph at lines 263--263
+[]|\T5/qtm/m/n/10.83347 TC-K1-
+
+Underfull \hbox (badness 10000) in paragraph at lines 263--263
+[]|\T5/qtm/m/n/10.83347 UNSAT c£ 2 b£n
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/qtm/m/n/10.83347 Scanner
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+\T5/qtm/m/n/10.83347 qu²t \T5/cmtt/b/n/10.83347 strcpy
+
+Overfull \hbox (95.28273pt too wide) in paragraph at lines 264--264
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 hoTen/maLop/bangCap/maGiangVien\T5/
+qtm/m/n/10.83347 )
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n ^^_õ
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]|\T5/qtm/m/n/10.83347 5 c£nh b¡o CWE-
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+\T5/qtm/m/n/10.83347 120 ^^_óng và tr½
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 264--264
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 265--265
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+
+Underfull \hbox (badness 10000) in paragraph at lines 265--265
+[]|\T5/qtm/m/n/10.83347 Scanner qu²t
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 265--265
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--266
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--266
+[]|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--266
+[]|\T5/qtm/m/n/10.83347 SAT ð l¦n thû 1
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 266--266
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--267
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--267
+[]|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--267
+[]|\T5/qtm/m/n/10.83347 SAT ð l¦n thû 2
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 267--267
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 4266) in paragraph at lines 268--268
+[]|\T5/qtm/m/n/10.83347 Black-box 200 l¦n
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
+\T5/qtm/m/n/10.83347 ng¨u nhi¶n tr¶n
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
+[]|\T5/qtm/m/n/10.83347 72/200 crash,
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
+\T5/qtm/m/n/10.83347 exit \T5/cmtt/b/n/10.83347 0xC0000374
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 268--268
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--269
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 4266) in paragraph at lines 269--269
+[]|\T5/qtm/m/n/10.83347 Black-box 200 l¦n
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--269
+[]|\T5/qtm/m/n/10.83347 0/200 crash
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 269--269
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+[]|\T5/qtm/m/n/10.83347 Scanner qu²t
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+\T5/cmtt/b/n/10.83347 dangling_free
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+\T5/qtm/m/n/10.83347 CWE-416 t¤i
+
+Overfull \hbox (11.31526pt too wide) in paragraph at lines 270--270
+\T5/cmtt/b/n/10.83347 giang_vien.c:32| 
+
+Underfull \hbox (badness 1629) in paragraph at lines 270--270
+[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n ^^_óng và tr½
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 270--270
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--271
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 4859) in paragraph at lines 271--271
+\T5/cmtt/b/n/10.83347 free(gv) \T5/qtm/m/n/10.83347 rçi v¨n
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--271
+[]|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--271
+[]|\T5/qtm/m/n/10.83347 SAT ð l¦n thû 3
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 271--271
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 272--272
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+
+Overfull \hbox (28.53143pt too wide) in paragraph at lines 272--272
+[]|\T5/cmtt/b/n/10.83347 memory_trace_demo.py\T5/qtm/m/n/10.83347 :
+
+Overfull \hbox (8.31555pt too wide) in paragraph at lines 272--272
+[]|\T5/cmtt/b/n/10.83347 heap-use-after-free\T5/qtm/m/n/10.83347 ,
+
+Underfull \hbox (badness 10000) in paragraph at lines 272--272
+\T5/qtm/m/n/10.83347 ABORT-ING, off-set
+
+Underfull \hbox (badness 10000) in paragraph at lines 272--272
+\OT1/cmr/m/n/10.95 +24$ \T5/qtm/m/n/10.83347 byte $\OT1/cmr/m/n/10.95 =$ \T5/cm
+tt/b/n/10.83347 hoTen
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+
+Overfull \hbox (28.2281pt too wide) in paragraph at lines 273--273
+[]|\T5/cmtt/b/n/10.83347 memory_trace_demo.py\T5/qtm/m/n/10.83347 ,
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T5/qtm/m/n/10.83347 b£n ASan-FIXED
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 gv_ptr=NULL
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T5/qtm/m/n/10.83347 0 vi ph¤m
+
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
+[]|\T5/qtm/m/n/10.83347 Scanner qu²t
+
+Overfull \hbox (36.89209pt too wide) in paragraph at lines 274--274
+\T5/cmtt/b/n/10.83347 unchecked_nested_deref
+
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
+[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n
+
+Underfull \hbox (badness 10000) in paragraph at lines 274--274
+\T5/qtm/m/n/10.83347 CWE-476 t¤i
+
+Overfull \hbox (28.37378pt too wide) in paragraph at lines 274--274
+\T5/cmtt/b/n/10.83347 tinh_tien_day.c:13| 
+
+Underfull \hbox (badness 1629) in paragraph at lines 274--274
+[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n ^^_óng và tr½
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 274--274
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--275
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--275
+\T5/cmtt/b/n/10.83347 gv_ptr=NULL
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--275
+\T5/qtm/m/n/10.83347 rçi gåi
+
+Overfull \hbox (25.51974pt too wide) in paragraph at lines 275--275
+\T5/cmtt/b/n/10.83347 calculate_e2e_salary| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--275
+[]|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--275
+[]|\T5/qtm/m/n/10.83347 SAT ð l¦n thû 4
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 275--275
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--276
+[]|\T5/qtm/m/n/10.83347 TC-K3-
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--276
+[]|\T5/qtm/m/n/10.83347 SAT dü ki¸n
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--276
+[]|\T5/qtm/m/n/10.83347 SAT -- num-
+
+Underfull \hbox (badness 10000) in paragraph at lines 277--277
+[]|\T5/qtm/m/n/10.83347 TC-K3-
+
+Underfull \hbox (badness 2245) in paragraph at lines 277--277
+\T5/qtm/m/n/10.83347 c¥u häi tr¶n \T5/cmtt/b/n/10.83347 long
+
+Underfull \hbox (badness 10000) in paragraph at lines 277--277
+[]|\T5/qtm/m/n/10.83347 UNSAT
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--278
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--278
+\T5/qtm/m/n/10.83347 soTiet=16694179,
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--278
+[]|\T5/qtm/m/n/10.83347 SAT ð l¦n thû 5
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 278--278
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--279
+[]|\T5/qtm/m/n/10.83347 TC-K1-
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--279
+[]|\T5/qtm/m/n/10.83347 BMC $\OML/cmm/m/it/10.95 P[]$\T5/qtm/m/n/10.83347 , b£n
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--279
+\T5/cmtt/b/n/10.83347 byte_truncated
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--280
+[]|\T5/qtm/m/n/10.83347 TC-K1-
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--280
+[]|\T5/qtm/m/n/10.83347 BMC $\OML/cmm/m/it/10.95 P[]$\T5/qtm/m/n/10.83347 , b£n
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--280
+[]|\T5/qtm/m/n/10.83347 UNSAT
+
+Underfull \hbox (badness 10000) in paragraph at lines 281--281
+[]|\T5/qtm/m/n/10.83347 TC-K3-
+
+Underfull \hbox (badness 10000) in paragraph at lines 281--281
+[]|\T5/qtm/m/n/10.83347 Check 4 (Z3):
+
+Underfull \hbox (badness 10000) in paragraph at lines 281--281
+\T5/qtm/m/n/10.83347 byte $\OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr
+/m/n/10.95 128$
+
+Underfull \hbox (badness 10000) in paragraph at lines 282--282
+[]|\T5/qtm/m/n/10.83347 TC-K3-
+
+Underfull \hbox (badness 3312) in paragraph at lines 282--282
+\T5/qtm/m/n/10.83347 c¥u häi vîi guard
+
+Underfull \hbox (badness 10000) in paragraph at lines 282--282
+[]|\T5/qtm/m/n/10.83347 UNSAT
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--283
+[]|\T5/qtm/m/n/10.83347 TC-K3-
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--283
+[]|\T5/qtm/m/n/10.83347 REQ-
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--283
+\T5/qtm/m/n/10.83347 8,
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--283
+[]|\T5/qtm/m/n/10.83347 UNSAT mong
+
+Underfull \hbox (badness 7433) in paragraph at lines 283--283
+\T5/qtm/m/n/10.83347 muèn (an to n
+
+Underfull \hbox (badness 1038) in paragraph at lines 283--283
+[]|\T5/qtm/m/n/10.83347 SAT -- $\OML/cmm/m/it/10.95 a \OT1/cmr/m/n/10.95 = 0\OM
+L/cmm/m/it/10.95 ; b \OT1/cmr/m/n/10.95 =
+
+Underfull \hbox (badness 2932) in paragraph at lines 283--283
+\OT1/cmr/m/n/10.95 256$ \T5/qtm/m/n/10.83347 còng byte $\OT1/cmr/m/n/10.95 = 0$
+
+
+Overfull \hbox (0.57286pt too wide) in paragraph at lines 283--284
+[]|\T5/qtm/m/n/10.83347 FAIL$[]$| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 284--284
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 284--284
+[]|\T5/qtm/m/n/10.83347 Black-box CWE-
+
+Underfull \hbox (badness 4805) in paragraph at lines 284--284
+\T5/qtm/m/n/10.83347 197, 200 l¦n tr¶n
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 284--284
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 285--285
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 285--285
+[]|\T5/qtm/m/n/10.83347 Black-box CWE-
+
+Underfull \hbox (badness 4805) in paragraph at lines 285--285
+\T5/qtm/m/n/10.83347 197, 200 l¦n tr¶n
+
+Underfull \hbox (badness 10000) in paragraph at lines 285--285
+[]|\T5/qtm/m/n/10.83347 0/200 sai l»ch,
+
+Underfull \hbox (badness 1325) in paragraph at lines 285--285
+\T5/qtm/m/n/10.83347 150/200 ch°n an to n
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 285--285
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
+[]|\T5/qtm/m/n/10.83347 REQ-
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
+\T5/qtm/m/n/10.83347 8,
+
+Underfull \hbox (badness 5302) in paragraph at lines 286--286
+[]|\T5/qtm/m/n/10.83347 Byte thªt khîp
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
+\T5/qtm/m/n/10.83347 byte t½nh tay
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
+\T5/qtm/m/n/10.83347 17/17; khæng
+
+Underfull \hbox (badness 1668) in paragraph at lines 286--286
+[]|\T5/qtm/m/n/10.83347 17/17 khîp lþ thuy¸t,
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
+\T5/qtm/m/n/10.83347 nh÷ng lë 6 nhâm
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
+\T5/qtm/m/n/10.83347 tròng l°p byte thªt
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 286--286
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Overfull \hbox (28.50148pt too wide) in paragraph at lines 286--287
+[]|\T5/qtm/m/n/10.83347 PASS/FAIL$[]$| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--287
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--287
+[]|\T5/qtm/m/n/10.83347 REQ-
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--287
+\T5/qtm/m/n/10.83347 8,
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--287
+[]|\T5/qtm/m/n/10.83347 0 nhâm tròng l°p
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 287--287
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
+[]|\T5/qtm/m/n/10.83347 Black-box:
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
+\T5/cmtt/b/n/10.83347 bangCap \T5/qtm/m/n/10.83347 ng¨u
+
+Underfull \hbox (badness 3792) in paragraph at lines 288--288
+\T5/qtm/m/n/10.83347 nhi¶n gçm gi¡ trà
+
+Underfull \hbox (badness 1221) in paragraph at lines 288--288
+\T5/qtm/m/n/10.83347 khæng hñp l», tr¶n
+
+Underfull \hbox (badness 4608) in paragraph at lines 288--288
+[]|\T5/qtm/m/n/10.83347 C¦n or-a-cle x¡c
+
+Overfull \hbox (12.82228pt too wide) in paragraph at lines 288--288
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+
+Underfull \hbox (badness 10000) in paragraph at lines 289--289
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+
+Underfull \hbox (badness 2753) in paragraph at lines 289--289
+[]|\T5/qtm/m/n/10.83347 (ch÷a câ test case
+
+Underfull \hbox (badness 4217) in paragraph at lines 289--289
+[]|\T5/qtm/m/n/10.83347 Cæng thùc t½nh
+
+Underfull \hbox (badness 3199) in paragraph at lines 289--289
+\T5/qtm/m/n/10.83347 l÷ìng ^^_óng vîi
+
+Underfull \hbox (badness 3635) in paragraph at lines 289--289
+[]|\T5/qtm/m/n/10.83347 Check 1/2 ch¿ chùng
+
+Underfull \hbox (badness 1292) in paragraph at lines 289--289
+\T5/qtm/m/n/10.83347 minh KHÆNG TR€N
+
+Underfull \hbox (badness 1728) in paragraph at lines 289--289
+\T5/qtm/m/n/10.83347 thùc nghi»p vö mong
+[26] [27] [28]) (chapters/chuong6.tex
+Underfull \hbox (badness 1215) in paragraph at lines 9--10
+\T5/qtm/m/n/13 Win-dows khæng câ SIGSEGV theo ngh¾a POSIX cho crash na-tive; to
+ n bë
+
+Underfull \hbox (badness 3919) in paragraph at lines 9--10
+\T5/qtm/b/n/13 code 3221226356 \T5/qtm/m/n/13 (\T5/cmtt/b/n/13 0xC0000374 \T5/q
+tm/m/n/13 -- \T5/cmtt/b/n/13 STATUS_HEAP_CORRUPTION\T5/qtm/m/n/13 ), khæng ph£i
+
+[29]
+Underfull \hbox (badness 1642) in paragraph at lines 23--24
+[]\T5/qtm/m/n/13 Ch¤y l¤i bë fuzzing tr¶n \T5/qtm/b/n/13 Linux \T5/qtm/m/n/13 (
+qua WSL ho°c m¡y £o) ^^_º thu ^^_÷ñc t½n
+
+Underfull \hbox (badness 7851) in paragraph at lines 23--24
+\T5/qtm/m/n/13 hi»u \T5/cmtt/b/n/13 SIGSEGV\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 SIGA
+BRT \T5/qtm/m/n/13 chu©n POSIX, ^^_èi chi¸u trüc ti¸p vîi h nh vi
+[30]) (chapters/chuong7.tex) (report.bbl [31]
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\ot1qtm.fd)
+[32{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-rm.enc
+}]) [33] (report.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)<C:/Users/HP/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/HP/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/HP/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/
+HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/U
+sers/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+<C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.
+pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
+mr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmr9.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmsy6.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmsy8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/symbols/msam10.pfb><C:/Users/HP/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/tex-gyre/qtmb.pfb><C:/Users/HP/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Users/HP/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Users/HP/AppData/Local/Programs/
+MiKTeX/fonts/type1/vntex/vnr/vnitt10.pfb><C:/Users/HP/AppData/Local/Programs/Mi
+KTeX/fonts/type1/vntex/vnr/vntt10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTe
+X/fonts/type1/vntex/vnr/vntt12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/f
+onts/type1/vntex/vnr/vntt8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts
+/type1/vntex/vnr/vntt9.pfb>
+Output written on report.pdf (33 pages, 1435163 bytes).
+Transcript written on report.log.

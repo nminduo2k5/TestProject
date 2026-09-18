@@ -1,0 +1,83 @@
+\begin{thebibliography}{10}
+
+\bibitem{cppcheck}
+{Cppcheck Team}.
+\newblock Cppcheck: A tool for static c/c++ code analysis, 2024.
+
+\bibitem{demoura2008z3}
+Leonardo de~Moura and Nikolaj Bj{\o}rner.
+\newblock {Z3}: An efficient {SMT} solver.
+\newblock In {\em Tools and Algorithms for the Construction and Analysis of
+  Systems (TACAS 2008)}, volume 4963 of {\em Lecture Notes in Computer
+  Science}, pages 337--340. Springer, 2008.
+
+\bibitem{cvss31}
+{FIRST.Org, Inc.}
+\newblock Common vulnerability scoring system version 3.1: Specification
+  document.
+\newblock Technical report, Forum of Incident Response and Security Teams
+  (FIRST), 2019.
+
+\bibitem{ieee829}
+{IEEE Computer Society}.
+\newblock {IEEE} standard for software and system test documentation ({IEEE}
+  std 829-2008).
+\newblock Technical report, Institute of Electrical and Electronics Engineers,
+  2008.
+
+\bibitem{ariane5report}
+{Inquiry Board (ESA/CNES)}.
+\newblock {Ariane 5} flight 501 failure -- report by the inquiry board, 1996.
+
+\bibitem{clangasan}
+{LLVM Project}.
+\newblock {AddressSanitizer}, 2024.
+
+\bibitem{cve2003-0352}
+{MITRE Corporation}.
+\newblock {CVE-2003-0352}: Buffer overflow in {Microsoft RPC} interface
+  (``{MSBlaster}''), 2003.
+
+\bibitem{cve2019-0708}
+{MITRE Corporation}.
+\newblock {CVE-2019-0708}: Remote desktop services remote code execution
+  vulnerability (``{BlueKeep}''), 2019.
+
+\bibitem{cwe120}
+{MITRE Corporation}.
+\newblock {CWE-120}: Buffer copy without checking size of input ({Classic
+  Buffer Overflow}), 2024.
+\newblock Accessed: 2026-09.
+
+\bibitem{cwe1288}
+{MITRE Corporation}.
+\newblock {CWE-1288}: Improper validation of consistency within input, 2024.
+\newblock Accessed: 2026-09.
+
+\bibitem{cwe190}
+{MITRE Corporation}.
+\newblock {CWE-190}: Integer overflow or wraparound, 2024.
+\newblock Accessed: 2026-09.
+
+\bibitem{cwe197}
+{MITRE Corporation}.
+\newblock {CWE-197}: Numeric truncation error, 2024.
+\newblock Accessed: 2026-09.
+
+\bibitem{cwe416}
+{MITRE Corporation}.
+\newblock {CWE-416}: Use after free, 2024.
+\newblock Accessed: 2026-09.
+
+\bibitem{cwe476}
+{MITRE Corporation}.
+\newblock {CWE-476}: {NULL} pointer dereference, 2024.
+\newblock Accessed: 2026-09.
+
+\bibitem{softsectoolkit2026}
+{Vũ Quang Dũng}.
+\newblock Softsec toolkit -- giáo trình học phần {CSE703093} an toàn
+  phần mềm, 2026.
+\newblock Khoa Hệ thống thông tin, Trường Đại học Phenikaa.
+
+\end{thebibliography}

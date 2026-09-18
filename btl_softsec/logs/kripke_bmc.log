@@ -26,6 +26,15 @@
 [Property 4] Safety: G(error -> NOT exported) [Hệ thống Lỗi -> Không xuất báo cáo]
   --> RESULT: UNSAT (Property Holds up to k=5)
 
+[Property 5] Safety: G(exported -> NOT byte_truncated) [Báo cáo xuất ra không được sai lệch do ép kiểu (char)]
+  --> RESULT: SAT (Counterexample Trace Found! CWE-197 co the ro ri ra bao cao xuat)
+    Step 0: S0_INIT [Labels: ['init']]
+    Step 1: S1_GV_ASSIGNED [Labels: ['assigned']]
+    Step 2: S2_SALARY_CALC [Labels: ['assigned', 'calculated']]
+    Step 3: S3_EXPORTED [Labels: ['assigned', 'byte_truncated', 'calculated', 'exported']]
+    Step 4: S0_INIT [Labels: ['init']]
+    Step 5: S5_INVALID_CALC [Labels: ['calculated', 'error']]
+
 =======================================================
   RUNNING BMC CHECK ON: DuongUniversity_Kripke_FIXED (5 trang thai, k=5)
 =======================================================
@@ -42,10 +51,15 @@
 [Property 4] Safety: G(error -> NOT exported) [Hệ thống Lỗi -> Không xuất báo cáo]
   --> RESULT: UNSAT (Property Holds up to k=5)
 
+[Property 5] Safety: G(exported -> NOT byte_truncated) [Báo cáo xuất ra không được sai lệch do ép kiểu (char)]
+  --> RESULT: UNSAT (Property Holds up to k=5)
+
 =======================================================
   DOI CHIEU MO HINH KRIPKE VOI KET QUA QUET TINH CHUONG 2 (Traceability Check)
 =======================================================
   [OK] S4_ERROR <-> ch2_memsafe/giang_vien.c:32 [dangling_free] (xac nhan boi pattern_scanner.py)
   [OK] S4_ERROR <-> ch2_memsafe/tinh_tien_day.c:13 [unchecked_nested_deref] (xac nhan boi pattern_scanner.py)
-  --> KET LUAN: Trang thai loi (S4_ERROR) trong mo hinh Kripke duoc xac nhan boi
-      it nhat 1 lo hong THAT (CWE-416/CWE-476) do Chuong 2 quet duoc tren code C hien tai.
+  [OK] S3_EXPORTED_TRUNCATED <-> ch2_memsafe/tinh_tien_day.c:63 [unchecked_numeric_truncation] (xac nhan boi pattern_scanner.py)
+  --> KET LUAN: Cac trang thai loi (S4_ERROR, S3_EXPORTED_TRUNCATED) trong mo hinh
+      Kripke deu duoc xac nhan boi it nhat 1 lo hong THAT (CWE-416/CWE-476/CWE-197)
+      do Chuong 2 quet duoc tren code C hien tai.

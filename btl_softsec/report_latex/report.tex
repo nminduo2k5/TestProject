@@ -1,0 +1,99 @@
+% BAO CAO BTL - CSE703093 An toan phan mem
+% DuongUniversity Management System - Module tinh tien giang vien
+\documentclass[twoside,final]{phenikaa-report}
+
+\usepackage{tgtermes}  % Times New Roman-like font with Vietnamese support
+
+% Better tables
+\usepackage{array,longtable,multicol,multirow,tabularx}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Graphics
+\usepackage{caption,float}
+\usepackage[export]{adjustbox}
+
+% References
+\usepackage[nameinlink]{cleveref}
+
+\graphicspath{{diagrams/}{graphics/}}
+
+% Cho phep LaTeX gian dong nhe hon truoc khi bao Overfull \hbox, tranh tran le
+% do cac ten ham \texttt{} dai (vd create_class_section_VULN()) khong the ngat dong.
+\emergencystretch=3em
+\tolerance=1000
+
+% ===== Lightweight C listing style (no shell-escape / minted dependency) =====
+\definecolor{codebg}{RGB}{245,244,240}
+\definecolor{codekw}{RGB}{130,50,160}
+\definecolor{codecm}{RGB}{0,120,0}
+\definecolor{codestr}{RGB}{160,60,60}
+\lstdefinestyle{cstyle}{
+  language=C,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecm}\itshape,
+  stringstyle=\color{codestr},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=6pt,
+  frame=single,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b
+}
+\lstset{style=cstyle}
+
+% ===== Cover page configuration =====
+\uniname{BỘ GIÁO DỤC VÀ ĐÀO TẠO}
+\deptname{ĐẠI HỌC PHENIKAA}
+\coursename{Học phần: CSE703093 -- An toàn phần mềm}
+\reporttype{BÁO CÁO BÀI TẬP LỚN}
+\title{End-to-end testing cho hệ thống tính tiền giảng dạy}
+\advisor{ThS. Vũ Quang Dũng}
+\stuname{%
+  Nguyễn Minh Dương -- MSSV: 23010441 \\
+  Đỗ Hữu Ngọc -- MSSV: 23010822
+}
+\reportplace{Hà Nội}
+\reporttime{tháng 9 năm 2026}
+
+\AtBeginDocument{\renewcommand{\contentsname}{Mục lục}}
+\AtBeginDocument{\renewcommand{\listfigurename}{Danh mục hình ảnh}}
+\AtBeginDocument{\renewcommand{\listtablename}{Danh mục bảng}}
+\AtBeginDocument{\renewcommand{\tablename}{Bảng}}
+\AtBeginDocument{\renewcommand{\figurename}{Hình}}
+\AtBeginDocument{\renewcommand{\refname}{Tài liệu tham khảo}}
+\AtBeginDocument{\renewcommand{\lstlistlistingname}{Danh mục mã nguồn}}
+\AtBeginDocument{%
+  \crefname{section}{mục}{mục}\Crefname{section}{Mục}{Mục}%
+  \crefname{subsection}{mục}{mục}\Crefname{subsection}{Mục}{Mục}%
+  \crefname{table}{bảng}{bảng}\Crefname{table}{Bảng}{Bảng}%
+  \crefname{figure}{hình}{hình}\Crefname{figure}{Hình}{Hình}%
+  \crefname{equation}{công thức}{công thức}\Crefname{equation}{Công thức}{Công thức}%
+}
+
+\begin{document}
+\coverpage%
+
+\tableofcontents
+\listoffigures
+\listoftables
+\lstlistoflistings
+
+\clearpage
+\input{chapters/chuong1.tex}
+\input{chapters/chuong2.tex}
+\input{chapters/chuong3.tex}
+\input{chapters/chuong4.tex}
+\input{chapters/chuong5.tex}
+\input{chapters/chuong6.tex}
+\input{chapters/chuong7.tex}
+
+\bibliographystyle{plain}
+\bibliography{refs/references}
+\nocite{*}
+
+\end{document}

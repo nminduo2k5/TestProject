@@ -23,6 +23,8 @@ K:\TestProject\btl_softsec\ch2_memsafe\tinh_tien_day.c:13: cảnh báo [int_over
     int tienDay32 = (int)soTietQuyDoi * (int)lhp->gv_ptr->heSoBangCap * (int)cfg->dinhMucTienChuan;
 K:\TestProject\btl_softsec\ch2_memsafe\tinh_tien_day.c:13: cảnh báo [unchecked_nested_deref] Truy cập con trỏ lồng (gv_ptr->) mà không kiểm tra NULL trước (CWE-476 Null Pointer Dereference)
     int tienDay32 = (int)soTietQuyDoi * (int)lhp->gv_ptr->heSoBangCap * (int)cfg->dinhMucTienChuan;
+K:\TestProject\btl_softsec\ch2_memsafe\tinh_tien_day.c:63: cảnh báo [unchecked_numeric_truncation] Ép kiểu (char) không kiểm tra phạm vi trước - giá trị int ngoài [-128,127] sẽ bị wrap-around sai lệch (CWE-197 Numeric Truncation Error)
+    return (char)soLuongSinhVien;
 
 == Quét tệp: main_fixed.c ==
   --> [CLEAN] Không phát hiện vi phạm quy tắc an toàn bộ nhớ nào.

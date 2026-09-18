@@ -1,0 +1,55 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage[utf8]{vntex,inputenc}
+\usepackage[T5]{fontenc}
+\usepackage{tgtermes}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{xcolor}
+
+%% ===== COLOR PALETTE (khop dashboard.html: --status-critical/-warm/-status-good) =====
+\definecolor{sevhigh}{HTML}{D03B3B}
+\definecolor{sevmed}{HTML}{EB6834}
+\definecolor{sevlow}{HTML}{0CA30C}
+
+\begin{document}
+%% ===========================================================
+%% DIAGRAM 4: SO SANH DIEM CVSS-LITE GIUA 6 CWE (Bang 5.4)
+%% ===========================================================
+\begin{tikzpicture}[x=1.55cm,y=0.42cm]
+  % Truc
+  \draw[gray!70,-{Triangle[length=2mm]}] (-0.35,0) -- (-0.35,11.2);
+  \node[rotate=90,font=\scriptsize,align=center,gray!40!black] at (-0.95,5.3) {Điểm CVSS-lite\\(thang 0--10)};
+  \draw[gray!70,-{Triangle[length=2mm]}] (0,-0.35) -- (7,-0.35);
+  \foreach \y in {2,4,6,8,10} {
+    \draw[gray!25,dashed] (0,\y) -- (6.7,\y);
+    \node[left,font=\tiny,gray!50!black] at (-0.15,\y) {\y};
+  }
+  % 6 cot, dung dung thu tu va gia tri trong Bang 5.4 (tab:cwe-cvss)
+  \draw[fill=sevhigh] (0.65,0) rectangle (1.35,7.2);
+  \draw[fill=sevhigh] (1.65,0) rectangle (2.35,8.0);
+  \draw[fill=sevmed]  (2.65,0) rectangle (3.35,6.7);
+  \draw[fill=sevmed]  (3.65,0) rectangle (4.35,6.1);
+  \draw[fill=sevmed]  (4.65,0) rectangle (5.35,6.1);
+  \draw[fill=sevlow]  (5.65,0) rectangle (6.35,3.9);
+  \node[above,font=\scriptsize\bfseries] at (1,7.2)  {7.2};
+  \node[above,font=\scriptsize\bfseries] at (2,8.0)  {8.0};
+  \node[above,font=\scriptsize\bfseries] at (3,6.7)  {6.7};
+  \node[above,font=\scriptsize\bfseries] at (4,6.1)  {6.1};
+  \node[above,font=\scriptsize\bfseries] at (5,6.1)  {6.1};
+  \node[above,font=\scriptsize\bfseries] at (6,3.9)  {3.9};
+  % nhan truc x
+  \node[below,font=\scriptsize] at (1,-0.5) {CWE-120};
+  \node[below,font=\scriptsize] at (2,-0.5) {CWE-416};
+  \node[below,font=\scriptsize] at (3,-0.5) {CWE-476};
+  \node[below,font=\scriptsize] at (4,-0.5) {CWE-190};
+  \node[below,font=\scriptsize] at (5,-0.5) {CWE-197};
+  \node[below,font=\scriptsize] at (6,-0.5) {CWE-1288};
+  % chu giai
+  \node[draw,fill=sevhigh,minimum width=7pt,minimum height=7pt,inner sep=0] at (0.9,10.3) {};
+  \node[right,font=\tiny] at (1.05,10.3) {HIGH ($\geq 7.0$)};
+  \node[draw,fill=sevmed,minimum width=7pt,minimum height=7pt,inner sep=0] at (3.1,10.3) {};
+  \node[right,font=\tiny] at (3.25,10.3) {MEDIUM ($4.0$--$6.9$)};
+  \node[draw,fill=sevlow,minimum width=7pt,minimum height=7pt,inner sep=0] at (5.6,10.3) {};
+  \node[right,font=\tiny] at (5.75,10.3) {LOW ($<4.0$)};
+\end{tikzpicture}
+\end{document}
