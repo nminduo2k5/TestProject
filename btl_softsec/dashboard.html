@@ -377,6 +377,15 @@
       background: var(--status-critical);
     }
 
+    .pill.warn {
+      background: var(--warm-soft);
+      color: var(--warm);
+    }
+
+    .pill.warn::before {
+      background: var(--warm);
+    }
+
     .state-row {
       display: flex;
       align-items: center;
@@ -955,6 +964,30 @@
 
     <section style="margin-bottom:48px;">
       <div class="chapter-head">
+        <span class="idx">ARCH</span>
+        <h2 style="font-size:19px;">Kiến trúc tổng quan hệ thống</h2>
+      </div>
+      <div class="tool lede">DuongUniversity Management System — bối cảnh triển khai thực tế</div>
+      <p class="explain" style="margin:10px 0 16px;">Hệ thống đầy đủ gồm Frontend React 19 + Vite 6 + Ant Design v5,
+        Backend .NET 9 Web API + EF Core 9, và PostgreSQL. 3 module C mục tiêu của đề tài đóng vai trò tầng tính toán
+        thù lao tốc độ cao, biên dịch <b>độc lập</b> với backend .NET — đây chính là điểm mà một lỗi an toàn bộ nhớ có
+        thể xảy ra mà <b>không được GC/bounds-checking tự động của .NET bảo vệ</b>. Đề tài chỉ kiểm chứng 3 module C
+        (viền đỏ nét đứt); phần Frontend/Backend/DB chỉ để xác định đúng bối cảnh, không nằm trong phạm vi kiểm chứng.
+      </p>
+      <figure class="diagram" style="margin:0;">
+        <div class="pdf-figure">
+          <img src="diagrams/diagram6_e2e_architecture.png"
+            alt="Kiến trúc tổng quan: React 19 Frontend -> .NET 9 Backend -> rẽ 2 nhánh PostgreSQL và tầng tính toán C viền đỏ gồm 3 module giang_vien.c, lop_hoc_phan.c, tinh_tien_day.c">
+        </div>
+        <figcaption>Nguồn: <code>diagrams/diagram6_e2e_architecture.tex</code> (TikZ), khớp §3.1 báo cáo .tex. Đường rẽ
+          thứ hai từ Backend (gọi trực tiếp, biên dịch độc lập) là ranh giới an toàn bị mất tác dụng của .NET — lý do 3
+          module C là đối tượng kiểm chứng duy nhất của đề tài.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section style="margin-bottom:48px;">
+      <div class="chapter-head">
         <span class="idx">ERD</span>
         <h2 style="font-size:19px;">Kiến trúc dữ liệu 3 mô-đun</h2>
       </div>
@@ -1018,8 +1051,10 @@
           <code>build_duong_university_kripke()</code> — viền nét đứt đỏ = chỉ tồn tại/vi phạm ở bản BUGGY.
           <b>S5_INVALID_CALC</b> là đường tắt Z3 tìm ra cho phản ví dụ P1 (nhảy từ S0 sang tính tiền, bỏ qua bước phân
           công). Bảng P1-P4 trong ảnh khớp với log thật ở mục dưới; thuộc tính <b>P5</b> (CWE-197, nhãn
-          <code>byte_truncated</code> trên S3 ở bản BUGGY) được thêm sau nên chưa có trong ảnh gốc — xem bảng đầy đủ
-          5 thuộc tính ngay bên dưới.
+          <code>byte_truncated</code> trên S3 ở bản BUGGY) được thêm sau nên chưa có trong ảnh gốc, và trạng thái
+          <b>S2_SALARY_CALC</b> trong ảnh nay đã tách thành <b>S2A_CALC_THUONG</b>/<b>S2B_CALC_DONG</b> (theo ngưỡng
+          <code>soLuongSinhVien &gt; 50</code> thật trong <code>tinh_tien_day.c</code>) — model hiện có 6/7 trạng thái
+          (FIXED/BUGGY) thay vì 5/6, không đổi kết quả SAT/UNSAT nào — xem bảng đầy đủ 5 thuộc tính ngay bên dưới.
         </figcaption>
       </figure>
 
@@ -1303,10 +1338,13 @@
           <dl>
             <div><span>numClasses</span><b>20</b></div>
             <div><span>soTiet</span><b>120</b></div>
-            <div><span>dinhMucTienChuan</span><b>127.827đ</b></div>
+            <div><span>soLuongSinhVien</span><b>0 (→heSoQuyMo=0.0)</b></div>
+            <div><span>dinhMucTienChuan</span><b>149.131đ</b></div>
           </dl>
           <p class="verdict">Z3 tự tìm ra bộ giá trị cụ thể này khiến tổng lương vượt INT32_MAX — không phải giả định,
-            mà là một bộ số thật thoả mãn mọi ràng buộc nghiệp vụ.</p>
+            mà là một bộ số thật thoả mãn mọi ràng buộc nghiệp vụ. Đã sửa mô hình dùng đúng
+            <code>soLuongSinhVien</code> thật thay cho biến tự do <code>heSoQuyMoLop</code> (field chết, không được
+            <code>tinh_tien_day.c</code> đọc) — kết luận SAT không đổi.</p>
         </div>
         <div class="proof-card">
           <div class="ptitle">Check 2 — Tổng lương int64</div>
@@ -1360,6 +1398,19 @@
             không" — Z3 tìm ngay ra cặp 0↔256, đúng lớp lỗi nguy hiểm nhất vì không hề biểu hiện bằng số âm hay
             crash.</p>
         </div>
+        <div class="proof-card">
+          <div class="ptitle">Check 7 — Trùng lặp bằng cấp (CWE-1288, mới)</div>
+          <span class="pill critical">SAT — 2 danh mục khác nhau, cùng 1 hệ số</span>
+          <dl>
+            <div><span>Giảng viên A</span><b>bangCap="CU_NHAN" (thật)</b></div>
+            <div><span>Giảng viên B</span><b>bangCap không hợp lệ</b></div>
+            <div><span>heSoBangCap chung</span><b>1.0</b></div>
+          </dl>
+          <p class="verdict">Cùng lớp lỗi "va chạm trạng thái" như Check 6, nhưng ở Module 1: if-chain thật trong
+            <code>add_lecturer_*()</code> gộp giảng viên CU_NHAN thật và mọi chuỗi bangCap không hợp lệ vào cùng
+            heSoBangCap=1.0. Khác CWE-197, lỗi này <b>không thể loại trừ bằng cách từ chối</b> (nghiệp vụ cần 1 giá
+            trị fallback thật) — bản SAFE chỉ thêm được cảnh báo stderr khi fallback xảy ra, không xoá được va chạm.</p>
+        </div>
       </div>
 
       <div class="verdict-box">
@@ -1377,6 +1428,10 @@
           <li><b>Check 6 đi xa hơn "có sai không":</b> nó hỏi "có 2 tình huống nghiệp vụ khác nhau nào bị hệ thống
             nhầm thành một không" — dạng câu hỏi mà chỉ SMT mới trả lời thuận tiện bằng cách quantify trên toàn miền
             $[0,300]^2$; test mẫu hay fuzzing ngẫu nhiên khó tự tìm ra đúng cặp giá trị gây nhầm lẫn.</li>
+          <li><b>Check 7 (CWE-1288) là cùng lớp câu hỏi với Check 6 nhưng ở Module 1</b> — và lộ ra một sự khác biệt
+            quan trọng: CWE-197 loại trừ được va chạm hoàn toàn bằng cách <i>từ chối</i> giá trị ngoài phạm vi, nhưng
+            CWE-1288 thì không thể — nghiệp vụ đòi hỏi một giá trị bằng cấp mặc định thật, nên bản vá chỉ thêm được
+            <i>cảnh báo phát hiện</i> chứ không xoá được va chạm giá trị.</li>
         </ul>
       </div>
     </section>
@@ -1564,6 +1619,91 @@
           <li>Tốc độ ~30.5× không phải "white-box luôn thắng tuyệt đối": nó nhanh vì đã biết trước 7 mục tiêu cần tìm;
             nếu có lỗ hổng chưa từng nghĩ tới, black-box vẫn có cơ hội tình cờ phát hiện còn white-box thì không. Đây
             chính là trade-off cần cân nhắc khi chọn công cụ cho CI/CD.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-bottom:48px;">
+      <div class="chapter-head">
+        <span class="idx">CVSS</span>
+        <h2 style="font-size:19px;">Tổng hợp CWE &amp; mức độ rủi ro (CVSS-lite)</h2>
+      </div>
+      <div class="tool lede">Tự tính theo mô hình CVSS-lite — không sao chép điểm CVSS công khai</div>
+      <p class="explain" style="margin:10px 0 16px;">Điểm CVSS-lite tính theo
+        <span class="mono">Score = min(Exploitability + Impact, 10)</span>, áp dụng
+        <span class="mono">AV=Local, AC=Low, PR=None, UI=None</span> cho toàn bộ 6 CWE (chương trình CLI cục bộ,
+        không phải dịch vụ mạng), mức Impact (C/I/A) lấy theo đúng hậu quả <b>đã chứng minh được bằng thực nghiệm</b>
+        ở 4 chương trên — không giả định RCE chưa kiểm chứng.</p>
+
+      <figure class="diagram" style="margin:0 0 18px;">
+        <div class="pdf-figure">
+          <img src="diagrams/diagram4_cvss_bar.png"
+            alt="Biểu đồ cột so sánh điểm CVSS-lite 6 CWE: CWE-416=8.0 và CWE-120=7.2 mức HIGH; CWE-476/190/197=6.7/6.1/6.1 mức MEDIUM; CWE-1288=3.9 mức LOW">
+        </div>
+        <figcaption>Nguồn: <code>diagrams/diagram4_cvss_bar.png</code> (TikZ), số liệu khớp bảng dưới đây.</figcaption>
+      </figure>
+
+      <table class="props">
+        <thead>
+          <tr>
+            <th>CWE</th>
+            <th>Vị trí trong đề tài</th>
+            <th>CVSS-lite</th>
+            <th>Mức</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prop-name mono">CWE-416</td>
+            <td>Ch2 <code>dangling_free</code>; Ch2.1 ASan <code>heap-use-after-free</code> thật</td>
+            <td class="mono tabular">8.0</td>
+            <td><span class="pill critical">HIGH</span></td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CWE-120</td>
+            <td>Ch2 <code>strcpy</code>; Ch4 crash 72/200</td>
+            <td class="mono tabular">7.2</td>
+            <td><span class="pill critical">HIGH</span></td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CWE-476</td>
+            <td>Ch2 <code>unchecked_nested_deref</code>; Ch4 Target 4</td>
+            <td class="mono tabular">6.7</td>
+            <td><span class="pill warn">MEDIUM</span></td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CWE-190</td>
+            <td>Ch1 S₅; Ch3 Check 1 SAT / Check 2 UNSAT</td>
+            <td class="mono tabular">6.1</td>
+            <td><span class="pill warn">MEDIUM</span></td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CWE-197</td>
+            <td>Ch1 P₅; Ch3 Check 4/6; Ch4 BVA 17/17</td>
+            <td class="mono tabular">6.1</td>
+            <td><span class="pill warn">MEDIUM</span></td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CWE-1288</td>
+            <td>Ch2 fallback <code>heSoBangCap=1.0f</code>; Ch3 Check 7 SAT</td>
+            <td class="mono tabular">3.9</td>
+            <td><span class="pill good">LOW</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:11.5px; color:var(--ink-muted); margin-top:10px;">CWE-476/197/1288 <b>cố ý không</b> gán mã
+        CVE cụ thể vì không xác minh được một CVE thực sự khớp chính xác với bối cảnh đề tài — thà để trống còn hơn
+        trích dẫn một mã CVE không chắc chắn đúng (xem đầy đủ ví dụ CVE tại <code>BAO_CAO_BTL_SOFTSEC.md</code>).</p>
+
+      <div class="verdict-box" style="margin-top:18px;">
+        <h3>Đọc kết quả này thế nào?</h3>
+        <ul>
+          <li><b>CWE-416 (UAF) và CWE-120 (buffer overflow) là 2 lớp lỗi nghiêm trọng nhất</b> (HIGH, ≥ 7.0) — đúng
+            với trực giác vì cả 2 đều có thể dẫn tới hỏng bộ nhớ ngay lập tức, đã xác nhận bằng ASan/crash thật ở
+            trên.</li>
+          <li><b>CWE-197 và CWE-190 tuy nguy hiểm nhưng ở mức MEDIUM</b> vì hậu quả quan sát được (sai lệch dữ
+            liệu/DoS) chưa được chứng minh leo thang tới RCE trong phạm vi đề tài — không phải vì chúng ít quan trọng
+            hơn, mà vì điểm Impact chỉ được tính trên bằng chứng đã thực nghiệm, không suy diễn.</li>
         </ul>
       </div>
     </section>

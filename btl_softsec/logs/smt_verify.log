@@ -7,10 +7,10 @@
   Counterexample values:
     - numClasses        = 20
     - soTiet            = 120
-    - heSoHocPhan       = 1572863/524288
-    - heSoQuyMoLop      = 524287/1048576
-    - heSoBangCap       = 262143/131072
-    - dinhMucTienChuan  = 127827 VND
+    - soLuongSinhVien   = 0 (--> heSoQuyMo = 0.0, dung cong thuc that)
+    - heSoHocPhan       = 786431/262144
+    - heSoBangCap       = 134217727/67108864
+    - dinhMucTienChuan  = 149131 VND
   --> DE XUAT: Dung long long (int64) va double trong C de dam bao an toan tuyet doi.
 
 [Check 2] E2E 64-bit Integer Overflow Verification (long long / int64):
@@ -39,4 +39,14 @@
     - Ca 2 deu xuat ra byte = 0  <- KHONG THE PHAN BIET duoc sau khi ep kieu!
   --> DE XUAT: Day chinh la ly do phai chan TRUOC khi ep kieu (pack_class_size_byte_SAFE), khong
       the chi dua vao gia tri byte da xuat de suy nguoc lai so sinh vien that.
+
+[Check 7] E2E Improper Degree Validation Collision (CWE-1288):
+  --> RESULT: SAT (Giang vien CU_NHAN THAT va 1 bangCap KHONG HOP LE cho CUNG 1 heSoBangCap!)
+    - Giang vien A: bangCap = 'CU_NHAN'          (hop le)      -> heSoBangCap = 1.0
+    - Giang vien B: bangCap = '<chuoi khong hop le>' (typo/rac) -> heSoBangCap = 1.0 (fallback)
+  --> DE XUAT: main_fixed.c (add_lecturer_SAFE) da them canh bao stderr khi fallback, nhung
+      KHONG loai tru duoc va cham gia tri nhu CWE-197 - o day nghiep vu can 1 gia tri fallback
+      thuc su (khong the 'tu choi hoan toan' nhu ep kieu char). Neu can phan biet duoc, phai
+      luu them 1 co is_validated rieng, khong the chi dua vao heSoBangCap da luu de suy nguoc
+      lai bangCap goc co hop le hay khong.
 

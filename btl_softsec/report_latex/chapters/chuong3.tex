@@ -22,6 +22,8 @@ Hệ thống \textbf{DuongUniversity Management System} là một hệ thống q
   \item \textbf{Module 3 -- Tính tiền dạy \& Thanh toán} (\texttt{tinh\_tien\_day.c}/\texttt{.h}): định nghĩa struct \texttt{Config} (\texttt{heSoQuyMoLop}, \texttt{dinhMucTienChuan}, \texttt{nam}) và 3 cặp hàm \texttt{calculate\_e2e\_salary\_VULN()}/\texttt{\_SAFE()}, \texttt{export\_report\_VULN()}/\texttt{\_SAFE()}, \texttt{pack\_class\_size\_byte\_VULN()}/\texttt{\_SAFE()} -- hàm cuối đóng gói \texttt{soLuongSinhVien} vào bản ghi audit log dạng \texttt{char}.
 \end{itemize}
 
+\noindent\textit{Lưu ý:} field \texttt{Config.heSoQuyMoLop} được \textbf{khai báo nhưng không hề được đọc} bởi \texttt{tinh\_tien\_day.c} -- hệ số quy mô lớp thật sự dùng trong công thức dưới đây được tính lại từ \texttt{soLuongSinhVien} (xem statement tường minh tại \Cref{sec:params}), không lấy từ field này. Đây là một field ``chết'' (dead field) phát hiện được khi đối chiếu lại công thức thật với mô hình Z3 ở Chương 3.
+
 \Cref{lst:gvstruct,lst:lhpstruct} trích \emph{nguyên văn} định nghĩa 2 struct cốt lõi từ chính mã nguồn thật của đề tài -- trường \texttt{gv\_ptr} (con trỏ thô, không đếm tham chiếu) chính là điểm liên kết xuyên module tạo ra CWE-416/476 đã nêu.
 
 \lstinputlisting[language=C,firstline=7,lastline=14,caption={Struct \texttt{GiangVien} -- trích nguyên văn \texttt{giang\_vien.h} (dòng 7--14)},label={lst:gvstruct}]{code/giang_vien.h}
@@ -30,7 +32,8 @@ Hệ thống \textbf{DuongUniversity Management System} là một hệ thống q
 
 Công thức tính tiền dạy gồm 2 bước, giữ nguyên 100\% giữa bản VULN và bản SAFE (chỉ khác kiểu dữ liệu):
 \begin{align*}
-  \text{soTietQuyDoi} &= \text{soTiet} \times (\text{heSoHocPhan} + \text{heSoQuyMoLop}) \\
+  \text{heSoQuyMo} &= (\text{soLuongSinhVien} > 50)\ ?\ 0.2 : 0.0 \\
+  \text{soTietQuyDoi} &= \text{soTiet} \times (\text{heSoHocPhan} + \text{heSoQuyMo}) \\
   \text{tienDay} &= \text{soTietQuyDoi} \times \text{gv\_ptr}.\text{heSoBangCap} \times \text{dinhMucTienChuan}
 \end{align*}
 

@@ -9,14 +9,14 @@
 
 --> KẾT QUẢ BLACK-BOX FUZZING TREN salary_calc.exe:
     - Tổng số lần thử (Attempts):   200
-    - Số lần Crash (Buffer Overflow): 72
-    - Số lần Logic Error (Bằng cấp):  75
-    - Thời gian thực thi:            11.90 giây
-    - Tốc độ fuzzing:                 16.8 execs/sec
+    - Số lần Crash (Buffer Overflow): 61
+    - Số lần Logic Error (Bằng cấp):  85
+    - Thời gian thực thi:            63.25 giây
+    - Tốc độ fuzzing:                 3.2 execs/sec
 --> MẪU TESTCASE GÂY CRASH PHÁT HIỆN:
-    Sample #1: Attempt #1 | TenLen=144 | LopLen=5 | BangCap='INVALID_DEGREE' | Reason: ExitCode=3221226356
-    Sample #2: Attempt #3 | TenLen=178 | LopLen=36 | BangCap='THAC_SI' | Reason: ExitCode=3221226356
-    Sample #3: Attempt #4 | TenLen=132 | LopLen=33 | BangCap='CU_NHAN' | Reason: ExitCode=3221226356
+    Sample #1: Attempt #4 | TenLen=149 | LopLen=6 | BangCap='GS' | Reason: TimeoutExpired
+    Sample #2: Attempt #6 | TenLen=148 | LopLen=37 | BangCap='' | Reason: ExitCode=3221226356
+    Sample #3: Attempt #9 | TenLen=175 | LopLen=12 | BangCap='INVALID_DEGREE' | Reason: ExitCode=3221226356
 
 
 =================================================================
@@ -27,9 +27,9 @@
 --> KẾT QUẢ BLACK-BOX FUZZING TREN salary_calc_fixed.exe:
     - Tổng số lần thử (Attempts):   200
     - Số lần Crash (Buffer Overflow): 0
-    - Số lần Logic Error (Bằng cấp):  104
-    - Thời gian thực thi:            4.24 giây
-    - Tốc độ fuzzing:                 47.2 execs/sec
+    - Số lần Logic Error (Bằng cấp):  107
+    - Thời gian thực thi:            3.81 giây
+    - Tốc độ fuzzing:                 52.5 execs/sec
 
 
 =================================================================
@@ -43,8 +43,8 @@
     - Số lần bị CHẶN AN TOÀN (Safe Blocked): 0
     - Số lần dữ liệu hợp lệ (Normal):     80
     - Số lần Crash:                       0
-    - Thời gian thực thi:                 6.30 giây
-    - Mẫu soLuongSinhVien gây sai lệch: [152, 375, 219]
+    - Thời gian thực thi:                 5.96 giây
+    - Mẫu soLuongSinhVien gây sai lệch: [212, 303, 293]
 
 
 =================================================================
@@ -55,10 +55,10 @@
 --> KẾT QUẢ BLACK-BOX FUZZING (CWE-197) TREN salary_calc_fixed.exe:
     - Tổng số lần thử (Attempts):        200
     - Số lần SAI LỆCH DỮ LIỆU (Truncation): 0
-    - Số lần bị CHẶN AN TOÀN (Safe Blocked): 150
-    - Số lần dữ liệu hợp lệ (Normal):     50
+    - Số lần bị CHẶN AN TOÀN (Safe Blocked): 153
+    - Số lần dữ liệu hợp lệ (Normal):     47
     - Số lần Crash:                       0
-    - Thời gian thực thi:                 4.99 giây
+    - Thời gian thực thi:                 3.99 giây
 
 
 =================================================================

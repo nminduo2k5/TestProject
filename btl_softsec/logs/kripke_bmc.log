@@ -1,10 +1,10 @@
 =========================================================
   CHUONG 1: MO HINH HOA KRIPKE & BMC (k=5)
-  Ban FIXED: 5 trang thai (S0-S4) | Ban BUGGY: 6 trang thai (S0-S5)
+  Ban FIXED: 6 trang thai (S0,S1,S2A,S2B,S3,S4) | Ban BUGGY: 7 trang thai (them S5)
 =========================================================
 
 =======================================================
-  RUNNING BMC CHECK ON: DuongUniversity_Kripke_BUGGY (6 trang thai, k=5)
+  RUNNING BMC CHECK ON: DuongUniversity_Kripke_BUGGY (7 trang thai, k=5)
 =======================================================
 
 [Property 1] Safety: G(calculated -> assigned) [Chưa phân công -> Không tính tiền]
@@ -14,8 +14,8 @@
     Step 1: S5_INVALID_CALC [Labels: ['calculated', 'error']]
     Step 2: S4_ERROR [Labels: ['error']]
     Step 3: S0_INIT [Labels: ['init']]
-    Step 4: S5_INVALID_CALC [Labels: ['calculated', 'error']]
-    Step 5: S4_ERROR [Labels: ['error']]
+    Step 4: S1_GV_ASSIGNED [Labels: ['assigned']]
+    Step 5: S2A_CALC_THUONG [Labels: ['assigned', 'calculated', 'lop_thuong']]
 
 [Property 2] Safety: G(exported -> calculated) [Chưa tính tiền -> Không xuất báo cáo]
   --> RESULT: UNSAT (Property Holds up to k=5)
@@ -30,13 +30,13 @@
   --> RESULT: SAT (Counterexample Trace Found! CWE-197 co the ro ri ra bao cao xuat)
     Step 0: S0_INIT [Labels: ['init']]
     Step 1: S1_GV_ASSIGNED [Labels: ['assigned']]
-    Step 2: S2_SALARY_CALC [Labels: ['assigned', 'calculated']]
+    Step 2: S2B_CALC_DONG [Labels: ['assigned', 'calculated', 'lop_dong']]
     Step 3: S3_EXPORTED [Labels: ['assigned', 'byte_truncated', 'calculated', 'exported']]
     Step 4: S0_INIT [Labels: ['init']]
-    Step 5: S5_INVALID_CALC [Labels: ['calculated', 'error']]
+    Step 5: S1_GV_ASSIGNED [Labels: ['assigned']]
 
 =======================================================
-  RUNNING BMC CHECK ON: DuongUniversity_Kripke_FIXED (5 trang thai, k=5)
+  RUNNING BMC CHECK ON: DuongUniversity_Kripke_FIXED (6 trang thai, k=5)
 =======================================================
 
 [Property 1] Safety: G(calculated -> assigned) [Chưa phân công -> Không tính tiền]

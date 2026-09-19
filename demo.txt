@@ -1,0 +1,3 @@
+xác định được các phần module chức năng (bao nhiêu tham số, a1,a2,a3...an)(tham số nào bắt buộc, tự chọn -> tổ hợp (bắt buộc + optional)-> Cơ số trạng thái (s1,s2...,sm)->Xét ràng buộc của nó ->Statement
+vd : A1,A2,A3 thay đổi thứ tự -> Qhe trạng thái thay đổi-> S0->S1, S0->S1..., dựa vào quá trình tổ hợp -> Requirments-> Làm với Requirments-> Check phân tích...tổ hợp A của B
+input là đầu vào chức năng, phân tách thành các mô hình toán học

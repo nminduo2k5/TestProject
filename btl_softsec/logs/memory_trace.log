@@ -18,16 +18,16 @@
 =================================================================
   BUOC 3/4: Chay PLAIN build - VULN (khong ASan, chi doi chieu dia chi)
 =================================================================
-[BUOC 1] Nhap input vao buffer STACK   : dia chi=0000003D809FF8A0  noi dung="Pham Van Duong"
-[BUOC 2] malloc() GiangVien tren HEAP   : dia chi=000001FEF258D490  (gv->hoTen tai 000001FEF258D4A8)
-[BUOC 3] malloc() LopHocPhan tren HEAP  : dia chi=000001FEF2584C30  (lhp->gv_ptr = 000001FEF258D490  <-- TRUNG voi Buoc 2!)
-[BUOC 4] Tinh luong (doc lai gv_ptr)    : ket qua=4590000 (doc qua con tro tai dia chi 000001FEF258D490)
-[BUOC 5] Ep kieu (char) so luong SV     : int=60 -> byte=60 (dia chi bien cuc bo=0000003D809FF96F)
-[BUOC 6] free(gv) - TRA vung nho ve allocator: dia chi vua free=000001FEF258D490 (lhp->gv_ptr VAN CON tro toi day!)
-[BUOC 7] export_report doc lai gv_ptr->hoTen SAU KHI FREE - dia chi doc=000001FEF258D490 (== dia chi da free o Buoc 6!)
+[BUOC 1] Nhap input vao buffer STACK   : dia chi=00000031907FF860  noi dung="Pham Van Duong"
+[BUOC 2] malloc() GiangVien tren HEAP   : dia chi=0000017C89ECE1B0  (gv->hoTen tai 0000017C89ECE1C8)
+[BUOC 3] malloc() LopHocPhan tren HEAP  : dia chi=0000017C89EC4C10  (lhp->gv_ptr = 0000017C89ECE1B0  <-- TRUNG voi Buoc 2!)
+[BUOC 4] Tinh luong (doc lai gv_ptr)    : ket qua=4590000 (doc qua con tro tai dia chi 0000017C89ECE1B0)
+[BUOC 5] Ep kieu (char) so luong SV     : int=60 -> byte=60 (dia chi bien cuc bo=00000031907FF92F)
+[BUOC 6] free(gv) - TRA vung nho ve allocator: dia chi vua free=0000017C89ECE1B0 (lhp->gv_ptr VAN CON tro toi day!)
+[BUOC 7] export_report doc lai gv_ptr->hoTen SAU KHI FREE - dia chi doc=0000017C89ECE1B0 (== dia chi da free o Buoc 6!)
 [MOD-E2E REPORT] GV: Pham Van Duong (TIEN_SI) | Lop: CNTT2024_TRACE | Tiet: 45 | Tien: 4590000 VND
 [KET LUAN] Buoc 7 vua doc THANH CONG mot vung nho DA BI FREE o Buoc 6 - day chinh la CWE-416
-           Use-After-Free, chung minh bang DIA CHI THAT (000001FEF258D490 == 000001FEF258D490), khong phai suy luan.
+           Use-After-Free, chung minh bang DIA CHI THAT (0000017C89ECE1B0 == 0000017C89ECE1B0), khong phai suy luan.
 
 
 --> Exit code: 0 (0 = chay het, KHONG crash, du da doc vung nho da free!)
@@ -35,12 +35,12 @@
 =================================================================
   BUOC 3b/4: Chay PLAIN build - FIXED (khong ASan, doi chung)
 =================================================================
-[BUOC 1] Nhap input vao buffer STACK   : dia chi=0000003A6A9FF8A0  noi dung="Pham Van Duong"
-[BUOC 2] malloc() GiangVien tren HEAP   : dia chi=000001EAF529E250  (gv->hoTen tai 000001EAF529E268)
-[BUOC 3] malloc() LopHocPhan tren HEAP  : dia chi=000001EAF5294C40  (lhp->gv_ptr = 000001EAF529E250  <-- TRUNG voi Buoc 2!)
-[BUOC 4] Tinh luong (doc lai gv_ptr)    : ket qua=6885000 (doc qua con tro tai dia chi 000001EAF529E250)
-[BUOC 5] Ep kieu (char) so luong SV     : int=60 -> byte=60 (dia chi bien cuc bo=0000003A6A9FF977)
-[BUOC 6-SAFE] Huy lien ket lhp->gv_ptr=NULL TRUOC khi free(gv=000001EAF529E250) - khac VULN o day!
+[BUOC 1] Nhap input vao buffer STACK   : dia chi=000000015B3FF550  noi dung="Pham Van Duong"
+[BUOC 2] malloc() GiangVien tren HEAP   : dia chi=000001FB00FFE1C0  (gv->hoTen tai 000001FB00FFE1D8)
+[BUOC 3] malloc() LopHocPhan tren HEAP  : dia chi=000001FB00FF4C20  (lhp->gv_ptr = 000001FB00FFE1C0  <-- TRUNG voi Buoc 2!)
+[BUOC 4] Tinh luong (doc lai gv_ptr)    : ket qua=6885000 (doc qua con tro tai dia chi 000001FB00FFE1C0)
+[BUOC 5] Ep kieu (char) so luong SV     : int=60 -> byte=60 (dia chi bien cuc bo=000000015B3FF627)
+[BUOC 6-SAFE] Huy lien ket lhp->gv_ptr=NULL TRUOC khi free(gv=000001FB00FFE1C0) - khac VULN o day!
 [BUOC 7-SAFE] export_report kiem tra lhp->gv_ptr=0000000000000000 (NULL) TRUOC khi doc - khong doc vung nho da free
 [MOD-E2E SAFE REPORT] GV: UNASSIGNED (N/A) | Lop: CNTT2024_TRACE | Tiet: 45 | Tien: 6885000 VND
 [KET LUAN] Buoc 7 KHONG doc vung nho da free (lhp->gv_ptr da la NULL tu Buoc 6) - CWE-416 da bi CHAN.
@@ -51,61 +51,61 @@
 =================================================================
   BUOC 4/4: Chay ASAN build - VULN (phat hien that bang cong cu doc lap)
 =================================================================
-[BUOC 1] Nhap input vao buffer STACK   : dia chi=0000005AC2EFF360  noi dung="Pham Van Duong"
-[BUOC 2] malloc() GiangVien tren HEAP   : dia chi=000011AD1F9A0040  (gv->hoTen tai 000011AD1F9A0058)
-[BUOC 3] malloc() LopHocPhan tren HEAP  : dia chi=0000119B1F9A0010  (lhp->gv_ptr = 000011AD1F9A0040  <-- TRUNG voi Buoc 2!)
-[BUOC 4] Tinh luong (doc lai gv_ptr)    : ket qua=4590000 (doc qua con tro tai dia chi 000011AD1F9A0040)
-[BUOC 5] Ep kieu (char) so luong SV     : int=60 -> byte=60 (dia chi bien cuc bo=0000005AC2EFF470)
-[BUOC 6] free(gv) - TRA vung nho ve allocator: dia chi vua free=000011AD1F9A0040 (lhp->gv_ptr VAN CON tro toi day!)
-[BUOC 7] export_report doc lai gv_ptr->hoTen SAU KHI FREE - dia chi doc=000011AD1F9A0040 (== dia chi da free o Buoc 6!)
+[BUOC 1] Nhap input vao buffer STACK   : dia chi=0000001C3AAFF7A0  noi dung="Pham Van Duong"
+[BUOC 2] malloc() GiangVien tren HEAP   : dia chi=00001159D3EA0040  (gv->hoTen tai 00001159D3EA0058)
+[BUOC 3] malloc() LopHocPhan tren HEAP  : dia chi=00001147D3EA0010  (lhp->gv_ptr = 00001159D3EA0040  <-- TRUNG voi Buoc 2!)
+[BUOC 4] Tinh luong (doc lai gv_ptr)    : ket qua=4590000 (doc qua con tro tai dia chi 00001159D3EA0040)
+[BUOC 5] Ep kieu (char) so luong SV     : int=60 -> byte=60 (dia chi bien cuc bo=0000001C3AAFF8B0)
+[BUOC 6] free(gv) - TRA vung nho ve allocator: dia chi vua free=00001159D3EA0040 (lhp->gv_ptr VAN CON tro toi day!)
+[BUOC 7] export_report doc lai gv_ptr->hoTen SAU KHI FREE - dia chi doc=00001159D3EA0040 (== dia chi da free o Buoc 6!)
 
 =================================================================
-==5060==ERROR: AddressSanitizer: heap-use-after-free on address 0x11ad1f9a0058 at pc 0x7ffa942125df bp 0x005ac2efe250 sp 0x005ac2efe298
-READ of size 15 at 0x11ad1f9a0058 thread T0
-    #0 0x7ffa942125de in _asan_wrap_strnlen+0x24e (K:\TestProject\btl_softsec\ch2_memsafe\libclang_rt.asan_dynamic-x86_64.dll+0x1800425de)
+==3828==ERROR: AddressSanitizer: heap-use-after-free on address 0x1159d3ea0058 at pc 0x7ffaab9825df bp 0x001c3aafe690 sp 0x001c3aafe6d8
+READ of size 15 at 0x1159d3ea0058 thread T0
+    #0 0x7ffaab9825de in _asan_wrap_strnlen+0x24e (K:\TestProject\btl_softsec\ch2_memsafe\libclang_rt.asan_dynamic-x86_64.dll+0x1800425de)
     #1 0x7ffb03c841fe in isleadbyte_l+0x1ce (C:\WINDOWS\System32\ucrtbase.dll+0x1800241fe)
     #2 0x7ffb03c7be6c in _stdio_common_vfwprintf+0x30c (C:\WINDOWS\System32\ucrtbase.dll+0x18001be6c)
     #3 0x7ffb03c7a614 in iswxdigit_l+0x994 (C:\WINDOWS\System32\ucrtbase.dll+0x18001a614)
     #4 0x7ffb03c7b215 in fseeki64+0x155 (C:\WINDOWS\System32\ucrtbase.dll+0x18001b215)
     #5 0x7ffb03c7b346 in fseeki64+0x286 (C:\WINDOWS\System32\ucrtbase.dll+0x18001b346)
     #6 0x7ffb03c7b3e3 in _stdio_common_vfprintf+0x73 (C:\WINDOWS\System32\ucrtbase.dll+0x18001b3e3)
-    #7 0x7ff6f64c5cce  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140005cce)
-    #8 0x7ff6f64c2986  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140002986)
-    #9 0x7ff6f64c3e7a  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140003e7a)
-    #10 0x7ff6f64c10fa  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400010fa)
+    #7 0x7ff72f845cce  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140005cce)
+    #8 0x7ff72f842986  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140002986)
+    #9 0x7ff72f843e7a  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140003e7a)
+    #10 0x7ff72f8410fa  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400010fa)
     #11 0x7ffb05e97373 in BaseThreadInitThunk+0x13 (C:\WINDOWS\System32\KERNEL32.DLL+0x180017373)
     #12 0x7ffb05fdcc90 in RtlUserThreadStart+0x20 (C:\WINDOWS\SYSTEM32\ntdll.dll+0x18004cc90)
 
-0x11ad1f9a0058 is located 24 bytes inside of 132-byte region [0x11ad1f9a0040,0x11ad1f9a00c4)
+0x1159d3ea0058 is located 24 bytes inside of 132-byte region [0x1159d3ea0040,0x1159d3ea00c4)
 freed by thread T0 here:
-    #0 0x7ffa9421d931 in _asan_wrap_memcpy+0x6e1 (K:\TestProject\btl_softsec\ch2_memsafe\libclang_rt.asan_dynamic-x86_64.dll+0x18004d931)
-    #1 0x7ff6f64c18d9  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400018d9)
-    #2 0x7ff6f64c3dbc  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140003dbc)
-    #3 0x7ff6f64c10fa  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400010fa)
+    #0 0x7ffaab98d931 in _asan_wrap_memcpy+0x6e1 (K:\TestProject\btl_softsec\ch2_memsafe\libclang_rt.asan_dynamic-x86_64.dll+0x18004d931)
+    #1 0x7ff72f8418d9  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400018d9)
+    #2 0x7ff72f843dbc  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140003dbc)
+    #3 0x7ff72f8410fa  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400010fa)
     #4 0x7ffb05e97373 in BaseThreadInitThunk+0x13 (C:\WINDOWS\System32\KERNEL32.DLL+0x180017373)
     #5 0x7ffb05fdcc90 in RtlUserThreadStart+0x20 (C:\WINDOWS\SYSTEM32\ntdll.dll+0x18004cc90)
 
 previously allocated by thread T0 here:
-    #0 0x7ffa9421da41 in _asan_wrap_memcpy+0x7f1 (K:\TestProject\btl_softsec\ch2_memsafe\libclang_rt.asan_dynamic-x86_64.dll+0x18004da41)
-    #1 0x7ff6f64c14a1  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400014a1)
-    #2 0x7ff6f64c3abc  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140003abc)
-    #3 0x7ff6f64c10fa  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400010fa)
+    #0 0x7ffaab98da41 in _asan_wrap_memcpy+0x7f1 (K:\TestProject\btl_softsec\ch2_memsafe\libclang_rt.asan_dynamic-x86_64.dll+0x18004da41)
+    #1 0x7ff72f8414a1  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400014a1)
+    #2 0x7ff72f843abc  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x140003abc)
+    #3 0x7ff72f8410fa  (K:\TestProject\btl_softsec\ch2_memsafe\trace_asan_vuln.exe+0x1400010fa)
     #4 0x7ffb05e97373 in BaseThreadInitThunk+0x13 (C:\WINDOWS\System32\KERNEL32.DLL+0x180017373)
     #5 0x7ffb05fdcc90 in RtlUserThreadStart+0x20 (C:\WINDOWS\SYSTEM32\ntdll.dll+0x18004cc90)
 
 SUMMARY: AddressSanitizer: heap-use-after-free (C:\WINDOWS\System32\ucrtbase.dll+0x1800241fe) in isleadbyte_l+0x1ce
 Shadow bytes around the buggy address:
-  0x11ad1f99fd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x11ad1f99fe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x11ad1f99fe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x11ad1f99ff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x11ad1f99ff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=>0x11ad1f9a0000: fa fa fa fa fa fa fa fa fd fd fd[fd]fd fd fd fd
-  0x11ad1f9a0080: fd fd fd fd fd fd fd fd fd fa fa fa fa fa fa fa
-  0x11ad1f9a0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x11ad1f9a0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x11ad1f9a0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x11ad1f9a0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1159d3e9fd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1159d3e9fe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1159d3e9fe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1159d3e9ff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1159d3e9ff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x1159d3ea0000: fa fa fa fa fa fa fa fa fd fd fd[fd]fd fd fd fd
+  0x1159d3ea0080: fd fd fd fd fd fd fd fd fd fa fa fa fa fa fa fa
+  0x1159d3ea0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1159d3ea0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1159d3ea0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1159d3ea0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
 Shadow byte legend (one shadow byte represents 8 application bytes):
   Addressable:           00
   Partially addressable: 01 02 03 04 05 06 07 
@@ -125,19 +125,19 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   ASan internal:           fe
   Left alloca redzone:     ca
   Right alloca redzone:    cb
-==5060==ABORTING
+==3828==ABORTING
 
 --> Exit code: 1 (khac 0 = ASan da CHAN chuong trinh vi phat hien heap-use-after-free THAT)
 
 =================================================================
   BUOC 4b/4: Chay ASAN build - FIXED (phai chay sach, khong loi)
 =================================================================
-[BUOC 1] Nhap input vao buffer STACK   : dia chi=000000CD93BCF2F0  noi dung="Pham Van Duong"
-[BUOC 2] malloc() GiangVien tren HEAP   : dia chi=000012AFB1EA0040  (gv->hoTen tai 000012AFB1EA0058)
-[BUOC 3] malloc() LopHocPhan tren HEAP  : dia chi=0000129DB1EA0010  (lhp->gv_ptr = 000012AFB1EA0040  <-- TRUNG voi Buoc 2!)
-[BUOC 4] Tinh luong (doc lai gv_ptr)    : ket qua=6885000 (doc qua con tro tai dia chi 000012AFB1EA0040)
-[BUOC 5] Ep kieu (char) so luong SV     : int=60 -> byte=60 (dia chi bien cuc bo=000000CD93BCF420)
-[BUOC 6-SAFE] Huy lien ket lhp->gv_ptr=NULL TRUOC khi free(gv=000012AFB1EA0040) - khac VULN o day!
+[BUOC 1] Nhap input vao buffer STACK   : dia chi=000000C41B5CF610  noi dung="Pham Van Duong"
+[BUOC 2] malloc() GiangVien tren HEAP   : dia chi=000011E60CFA0040  (gv->hoTen tai 000011E60CFA0058)
+[BUOC 3] malloc() LopHocPhan tren HEAP  : dia chi=000011D40CFA0010  (lhp->gv_ptr = 000011E60CFA0040  <-- TRUNG voi Buoc 2!)
+[BUOC 4] Tinh luong (doc lai gv_ptr)    : ket qua=6885000 (doc qua con tro tai dia chi 000011E60CFA0040)
+[BUOC 5] Ep kieu (char) so luong SV     : int=60 -> byte=60 (dia chi bien cuc bo=000000C41B5CF740)
+[BUOC 6-SAFE] Huy lien ket lhp->gv_ptr=NULL TRUOC khi free(gv=000011E60CFA0040) - khac VULN o day!
 [BUOC 7-SAFE] export_report kiem tra lhp->gv_ptr=0000000000000000 (NULL) TRUOC khi doc - khong doc vung nho da free
 [MOD-E2E SAFE REPORT] GV: UNASSIGNED (N/A) | Lop: CNTT2024_TRACE | Tiet: 45 | Tien: 6885000 VND
 [KET LUAN] Buoc 7 KHONG doc vung nho da free (lhp->gv_ptr da la NULL tu Buoc 6) - CWE-416 da bi CHAN.

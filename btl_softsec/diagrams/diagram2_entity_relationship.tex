@@ -112,9 +112,10 @@
    \hspace{2pt}\textcolor{CRed600}{\tiny CWE-120}};
 \node[erd field vuln,   below=0pt of gv3] (gv4)
   {bangCap[\textbf{20}] \hfill \texttt{char}
-   \hspace{2pt}\textcolor{CRed600}{\tiny CWE-120}};
-\node[erd field normal, below=0pt of gv4] (gv5)
-  {heSoBangCap \hfill \texttt{float}};
+   \hspace{2pt}\textcolor{CRed600}{\tiny CWE-120+1288}};
+\node[erd field vuln, below=0pt of gv4] (gv5)
+  {heSoBangCap \hfill \texttt{float}
+   \hspace{2pt}\textcolor{CRed600}{\tiny fallback=1.0}};
 \node[erd field safe,   below=0pt of gv5] (gv6)
   {is\_deleted \hfill \texttt{int}
    \hspace{2pt}\textcolor{CTeal600}{\tiny UAF flag}};
@@ -136,8 +137,9 @@
   {soTiet \hfill \texttt{int}};
 \node[erd field normal, below=0pt of lhp3] (lhp4)
   {heSoHocPhan \hfill \texttt{float}};
-\node[erd field normal, below=0pt of lhp4] (lhp5)
-  {soLuongSinhVien \hfill \texttt{int}};
+\node[erd field vuln, below=0pt of lhp4] (lhp5)
+  {soLuongSinhVien \hfill \texttt{int}
+   \hspace{2pt}\textcolor{CRed600}{\tiny CWE-197}};
 \node[erd field vuln,   below=0pt of lhp5] (lhp6)
   {gv\_ptr * \hfill \texttt{GiangVien*}
    \hspace{2pt}\textcolor{CRed600}{\tiny CWE-416+476}};
@@ -151,8 +153,9 @@
   right=2.8cm of LHPH] (CFGH)
   {Config\\\small\normalfont\textit{Module 3 --- tinh\_tien\_day.h}};
 
-\node[erd field normal, below=0pt of CFGH] (cfg1)
-  {heSoQuyMoLop \hfill \texttt{float}};
+\node[erd field gray, below=0pt of CFGH] (cfg1)
+  {heSoQuyMoLop \hfill \texttt{float}\\
+   \hfill\textcolor{CGray500}{\tiny (dead field)}};
 \node[erd field safe,   below=0pt of cfg1] (cfg2)
   {dinhMucTienChuan \hfill \texttt{long long}
    \hspace{2pt}\textcolor{CTeal600}{\tiny int64}};
@@ -161,7 +164,7 @@
 \node[erd field gray, below=0pt of cfg3] (cfg4)
   {\textit{dmt = 85.000 VND/tiet}};
 \node[erd field gray, below=0pt of cfg4] (cfg5)
-  {\textit{heSoQuyMoLop = 0.2f}};
+  {\textit{\scriptsize cfg->heSoQuyMoLop khong duoc doc o dau ca!}};
 
 \node[draw=CAmber400, line width=0.8pt, rounded corners=4pt,
   fit=(CFGH)(cfg1)(cfg2)(cfg3)(cfg4)(cfg5),
@@ -190,18 +193,23 @@
   (LHPH.south);
 
 %% ===== FORMULA BOX =====
+%% DA SUA: cong thuc THAT dung heSoQuyMo suy tu lhp.soLuongSinhVien (statement
+%% ro rang), KHONG PHAI cfg.heSoQuyMoLop (dead field, xem ghi chu CFG o tren) --
+%% day la loi mo hinh-code that da tim thay va sua o Check 1/2 (Chuong 3).
 \node[draw=CGray200, fill=CGray50, rounded corners=5pt,
-  text width=13.5cm, align=center, inner sep=10pt,
-  below=1.5cm of lhp6, xshift=-2.8cm] (formula)
+  text width=14.5cm, align=center, inner sep=10pt,
+  below=1.5cm of lhp6, xshift=-2.3cm] (formula)
 {
-  \textbf{Cong thuc tinh tien 2 buoc (DuongUniversity):}\\[6pt]
+  \textbf{Cong thuc tinh tien 2 buoc (DuongUniversity) -- DA DOI CHIEU VOI CODE THAT:}\\[6pt]
+  $\text{heSoQuyMo} = (\text{lhp.soLuongSinhVien} > 50)\ ?\ 0.2 : 0.0$\\[2pt]
+  \textcolor{CRed600}{\scriptsize\textit{statement thuc trong tinh\_tien\_day.c -- KHONG phai cfg.heSoQuyMoLop (dead field)!}}\\[6pt]
   $\text{soTietQuyDoi} = \text{lhp.soTiet}
-    \times (\text{lhp.heSoHocPhan} + \text{cfg.heSoQuyMoLop})$\\[4pt]
+    \times (\text{lhp.heSoHocPhan} + \text{heSoQuyMo})$\\[4pt]
   $\text{tienDay} = \text{soTietQuyDoi}
     \times \underbrace{\text{gv\_ptr.heSoBangCap}}_{\text{CWE-416/476 if freed/NULL}}
     \times \text{cfg.dinhMucTienChuan}$\\[4pt]
   \textit{\scriptsize VULN: dung kieu \texttt{int} (CWE-190 tran so)
-    \quad SAFE: dung kieu \texttt{double}/\texttt{long long} (Z3 chung minh UNSAT)}
+    \quad SAFE: dung kieu \texttt{double}/\texttt{long long} (Z3 Check 1/2 chung minh UNSAT)}
 };
 
 \draw[arr] (lhp6.south) |- (formula.north);

@@ -10,22 +10,33 @@ Toàn bộ số liệu trong mục này trích xuất verbatim từ log thực t
   \caption{Kết quả BMC $k=5$ trên 5 thuộc tính $P_1$--$P_5$}
   \label{tab:bmc}
   \small
-  \begin{tabularx}{\linewidth}{@{}l X c c@{}}
+  \begin{tabularx}{\linewidth}{@{}l X >{\centering\arraybackslash}p{2.6cm} >{\centering\arraybackslash}p{1.7cm}@{}}
     \toprule
     \textbf{Thuộc tính} & \textbf{Công thức} & \textbf{BUGGY} & \textbf{FIXED} \\
     \midrule
-    $P_1$ Safety   & $G(\text{calculated}\to\text{assigned})$          & \textbf{SAT} -- counterexample $S_0{\to}S_5{\to}S_4$ & \textbf{UNSAT} \checkmark \\
+    $P_1$ Safety   & $G(\text{calculated}\to\text{assigned})$          & \textbf{SAT} -- counterexample qua $S_5$ (chi tiết dưới bảng) & \textbf{UNSAT} \checkmark \\
     $P_2$ Safety   & $G(\text{exported}\to\text{calculated})$          & \textbf{UNSAT} \checkmark & \textbf{UNSAT} \checkmark \\
     $P_3$ Liveness & $G(\text{assigned}\to F\,\text{calculated})$      & \textbf{SAT} ($k{=}5$ limit) & \textbf{SAT} ($k{=}5$ limit) \\
     $P_4$ Safety   & $G(\text{error}\to\lnot\,\text{exported})$        & \textbf{UNSAT} \checkmark & \textbf{UNSAT} \checkmark \\
-    $P_5$ Safety   & $G(\text{exported}\to\lnot\,\text{byte\_truncated})$ & \textbf{SAT} -- $S_3$ mang nhãn \texttt{byte\_truncated} & \textbf{UNSAT} \checkmark \\
+    $P_5$ Safety   & $G(\text{exported}\to\lnot\,\text{byte\_truncated})$ & \textbf{SAT} -- qua $S_{2B}$ (chi tiết dưới bảng) & \textbf{UNSAT} \checkmark \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
+Mô hình FIXED hiện có \textbf{6 trạng thái} ($S_0,S_1,S_{2A},S_{2B},S_3,S_4$) và bản BUGGY có \textbf{7 trạng thái} (thêm $S_5$) -- xem \Cref{sec:ch1} để biết vì sao $S_2$ SALARY\_CALC gốc được tách thành $S_{2A}$/$S_{2B}$. Việc tách này không làm đổi bất kỳ kết quả SAT/UNSAT nào ở trên so với mô hình gốc (đã xác nhận bằng cách chạy lại BMC sau khi sửa).
+
 \textbf{Counterexample trace thật} cho $P_1$ trên bản BUGGY (\texttt{logs/kripke\_bmc.log}):
 \begin{quote}\ttfamily\footnotesize
-Step 0: S0\_INIT [init] $\to$ Step 1: S5\_INVALID\_CALC [calculated,error] $\to$ Step 2: S4\_ERROR [error] $\to$ Step 3: S0\_INIT $\to$ Step 4: S5\_INVALID\_CALC $\to$ Step 5: S4\_ERROR
+Step 0: S0\_INIT [init] $\to$ Step 1: S5\_INVALID\_CALC [calculated,error] $\to$ Step 2: S4\_ERROR [error] \\
+$\to$ Step 3: S0\_INIT [init] $\to$ Step 4: S1\_GV\_ASSIGNED [assigned] \\
+$\to$ Step 5: S2A\_CALC\_THUONG [assigned,calculated,lop\_thuong]
+\end{quote}
+
+\textbf{Counterexample trace thật} cho $P_5$ trên bản BUGGY (\texttt{logs/kripke\_bmc.log}) -- nay đi qua đúng nhánh $S_{2B}$ CALC\_DONG (lớp đông, statement \Cref{sec:params}):
+\begin{quote}\ttfamily\footnotesize
+Step 0: S0\_INIT [init] $\to$ Step 1: S1\_GV\_ASSIGNED [assigned] $\to$ Step 2: S2B\_CALC\_DONG [assigned,calculated,lop\_dong] \\
+$\to$ Step 3: S3\_EXPORTED [assigned,byte\_truncated,calculated,exported] \\
+$\to$ Step 4: S0\_INIT [init] $\to$ Step 5: S1\_GV\_ASSIGNED [assigned]
 \end{quote}
 
 $P_3$ ra \textbf{SAT} ở cả 2 bản -- đây \emph{không phải lỗi mã nguồn}, mà là giới hạn kỹ thuật tự nhiên của BMC hữu hạn $k=5$ đối với thuộc tính Liveness (cần $k$-induction hoặc Büchi automata để chứng minh liveness vô hạn triệt để).
@@ -71,12 +82,13 @@ $P_3$ ra \textbf{SAT} ở cả 2 bản -- đây \emph{không phải lỗi mã ng
 \subsection{Kết quả Chương 3 -- SMT}
 
 \begin{itemize}
-  \item \textbf{Check 1 SAT}: counterexample $\text{numClasses}=20$, $\text{soTiet}=120$, $\text{dinhMucTienChuan}=127\,827$ VNĐ $\Rightarrow$ tổng thù lao vượt \texttt{INT32\_MAX}.
+  \item \textbf{Check 1 SAT}: counterexample $\text{numClasses}=20$, $\text{soTiet}=120$, $\text{soLuongSinhVien}=0$ (nên $\text{heSoQuyMo}=0.0$, đúng statement \Cref{sec:params}), $\text{heSoHocPhan}\approx 3.0$, $\text{heSoBangCap}\approx 2.0$, $\text{dinhMucTienChuan}=149\,131$ VNĐ $\Rightarrow$ tổng thù lao vượt \texttt{INT32\_MAX}. (Đã sửa mô hình để dùng đúng \texttt{soLuongSinhVien} thật thay cho biến tự do \texttt{heSoQuyMoLop} không tồn tại trong code -- xem \Cref{sec:params}; kết luận SAT không đổi.)
   \item \textbf{Check 2 UNSAT}: chứng minh \texttt{long long} an toàn tuyệt đối trong toàn bộ ràng buộc doanh nghiệp ($\text{numClasses}\in[1,100]$, $\text{dinhMucTienChuan}$ tới 2 triệu VNĐ).
   \item \textbf{Check 3 UNSAT}: guard-check (\texttt{gv\_ptr} NULL/đã xóa $\to$ lương $=0$) hoạt động đúng trên chính công thức thật.
   \item \textbf{Check 4 SAT}: phản ví dụ $\text{soLuongSinhVien}=128 \to \text{byte}=-128$.
   \item \textbf{Check 5 UNSAT}: với guard $[0,127]$ đúng trước, ép kiểu không bao giờ sai lệch.
   \item \textbf{Check 6 SAT}: $a=0$ (lớp rỗng thật) và $b=256$ (lớp có thật 256 sinh viên) đều cho byte $=0$ -- 2 tình huống nghiệp vụ hoàn toàn khác nhau không thể phân biệt sau khi xuất báo cáo.
+  \item \textbf{Check 7 SAT} (mới, CWE-1288): giảng viên \texttt{CU\_NHAN} thật và 1 chuỗi \texttt{bangCap} không hợp lệ đều cho $\text{heSoBangCap}=1.0$ -- cùng lớp lỗi ``va chạm trạng thái'' như Check 6, nhưng ở Module 1 (xem \Cref{sec:quytrinh}); khác CWE-197, lỗi này không thể loại trừ hoàn toàn bằng cách từ chối (nghiệp vụ cần 1 giá trị fallback thật), bản SAFE chỉ thêm được cảnh báo phát hiện.
 \end{itemize}
 
 \subsection{Kết quả Chương 4 -- Fuzzing}
@@ -128,7 +140,7 @@ Riêng CWE-197 (không biểu hiện bằng crash mà bằng sai lệch dữ li�
     CWE-476~\cite{cwe476}   & Ch2 \texttt{unchecked\_nested\_deref}; Ch4 Target 4 & 6.7 & MEDIUM \\
     CWE-190~\cite{cwe190}   & Ch1 $S_5$; Ch3 Check 1 SAT / Check 2 UNSAT       & 6.1 & MEDIUM \\
     CWE-197~\cite{cwe197}   & Ch1 $P_5$; Ch3 Check 4/6; Ch4 BVA 17/17          & 6.1 & MEDIUM \\
-    CWE-1288~\cite{cwe1288} & Ch2 fallback \texttt{heSoBangCap=1.0f}           & 3.9 & LOW \\
+    CWE-1288~\cite{cwe1288} & Ch2 fallback \texttt{heSoBangCap=1.0f}; Ch3 Check 7 SAT & 3.9 & LOW \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -169,7 +181,7 @@ Nhìn theo biểu đồ: CWE-416 (UAF) và CWE-120 (buffer overflow) là 2 lớp
 Các mục 5.1--5.4 trên trình bày kết quả \emph{theo từng chương/kỹ thuật}. Bảng dưới đây tổ chức lại đúng cùng số liệu đó theo hướng ngược lại -- \emph{theo từng yêu cầu (REQ/NFR)} -- theo tinh thần đặc tả \emph{Test Case Specification} của chuẩn IEEE~829-2008~\cite{ieee829} (mã test case, điều kiện đầu vào, kết quả mong đợi, kết quả thực tế đối chiếu ngược lại nguồn log thật). Đây là góc nhìn truy vết hai chiều REQ $\leftrightarrow$ Test Case còn thiếu ở \Cref{sec:dacta}, nơi mới chỉ đặc tả yêu cầu mà chưa chỉ rõ từng yêu cầu được kiểm chứng bởi test case cụ thể nào.
 
 {\footnotesize
-\begin{longtable}{@{}p{1.3cm} p{1.1cm} p{3.1cm} p{2.6cm} p{3.6cm} p{1.1cm}@{}}
+\begin{longtable}{@{}p{1.4cm} p{1.1cm} p{2.9cm} p{2.4cm} p{3.8cm} >{\centering\arraybackslash}p{1.4cm}@{}}
   \caption{Ma trận truy vết Test Case $\to$ Yêu cầu (mọi kết quả thực tế trích từ \texttt{logs/*.log} thật)}
   \label{tab:trace} \\
   \toprule
@@ -213,7 +225,8 @@ Các mục 5.1--5.4 trên trình bày kết quả \emph{theo từng chương/k�
   TC-K4-09 & REQ-8 & Black-box CWE-197, 200 lần trên FIXED & 0/200 sai lệch & 0/200 sai lệch, 150/200 chặn an toàn (\texttt{fuzzer\_blackbox.log}) & PASS \\
   TC-K4-10 & REQ-8, NFR-5 & BVA 17 giá trị biên cố định trên VULN & Byte thật khớp byte tính tay 17/17; không nên trùng lặp & 17/17 khớp lý thuyết, nhưng lộ 6 nhóm trùng lặp byte thật (\texttt{fuzzer\_blackbox.log}) & PASS/FAIL$^{**}$ \\
   TC-K4-11 & REQ-8, NFR-5 & BVA 17 giá trị biên trên FIXED & 0 nhóm trùng lặp & 0 nhóm trùng lặp (\texttt{fuzzer\_blackbox.log}) & PASS \\
-  TC-K4-12 & REQ-9 & Black-box: \texttt{bangCap} ngẫu nhiên gồm giá trị không hợp lệ, trên VULN & Cần oracle xác nhận hệ thống xử lý đúng & Script chỉ đếm 75/200 lần input không hợp lệ được sinh ra, KHÔNG assert hành vi đúng/sai (\texttt{fuzzer\_blackbox.log}) & QS$^\dagger$ \\
+  TC-K3-06 & REQ-9 & Check 7 (Z3): $\exists$ 2 danh mục \texttt{bangCap} khác nhau (\texttt{CU\_NHAN} thật, chuỗi không hợp lệ) cùng cho 1 \texttt{heSoBangCap} & UNSAT mong muốn (phân biệt được) & SAT -- cả 2 cùng rơi vào fallback $1.0$ (\texttt{smt\_verify.log}) & FAIL$^{**}$ \\
+  TC-K4-12 & REQ-9 & Black-box: \texttt{bangCap} ngẫu nhiên gồm giá trị không hợp lệ, trên VULN & Cần oracle xác nhận hệ thống xử lý đúng & Script chỉ đếm 75/200 lần input không hợp lệ được sinh ra, KHÔNG assert hành vi đúng/sai (\texttt{fuzzer\_blackbox.log}) & QS$^\dagger$ (Check 7 đã chứng minh hình thức va chạm giá trị, nhưng vẫn thiếu oracle runtime) \\
   TC-K2-07 & REQ-7 & (chưa có test case riêng) & Công thức tính lương đúng với mọi input hợp lệ & Check 1/2 chỉ chứng minh KHÔNG TRÀN SỐ, không chứng minh giá trị tính ra khớp công thức nghiệp vụ mong đợi & QS$^\dagger$ \\
 \end{longtable}
 }

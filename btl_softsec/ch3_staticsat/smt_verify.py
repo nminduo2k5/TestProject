@@ -34,26 +34,38 @@ def run_smt_verification_e2e():
     print("  CHUONG 3: KIEM CHUNG FORMAL E2E 3-MODULE VOI Z3 SMT SOLVER")
     print("=================================================================\n")
 
-    soTiet       = Int('soTiet')
-    heSoHocPhan  = Real('heSoHocPhan')
-    heSoQuyMoLop = Real('heSoQuyMoLop')
-    heSoBangCap  = Real('heSoBangCap')
-    dmt          = Int('dmt')
-    numClasses   = Int('numClasses')
+    soTiet          = Int('soTiet')
+    soLuongSinhVien = Int('soLuongSinhVien')
+    heSoHocPhan     = Real('heSoHocPhan')
+    heSoBangCap     = Real('heSoBangCap')
+    dmt             = Int('dmt')
+    numClasses      = Int('numClasses')
 
     INT32_MAX = 2**31 - 1
     INT64_MAX = 2**63 - 1
+
+    # heSoQuyMo la 1 "statement" (khong phai bien tu do): tinh_tien_day.c dung dung cong thuc
+    #   float heSoQuyMo = (lhp->soLuongSinhVien > 50) ? 0.2f : 0.0f;
+    # -- tuc la RAT NHIEU gia tri soLuongSinhVien khac nhau (51, 52, ..., 300, ...) deu cung
+    # anh xa vao 1 "trang thai" he so duy nhat (0.2), va moi gia tri <=50 deu anh xa vao trang
+    # thai con lai (0.0). Truoc day Check 1/2 mo hinh sai bang 1 bien Real tu do heSoQuyMoLop
+    # (doc theo ten field Config.heSoQuyMoLop) trong khoang [0.1,0.5]/[0.1,2.0] -- nhung field
+    # do KHONG bao gio duoc code C thuc su doc (xem tinh_tien_day.c, khong co cfg->heSoQuyMoLop
+    # o dau ca!), nen phan chung minh truoc day khong phan anh dung cong thuc chay thuc te.
+    # Da sua: mo hinh dung If(...) dung y nhu code, voi soLuongSinhVien la tham so dau vao
+    # THAT (ket hop voi soTiet thanh soTietQuyDoi tang dan theo ca 2 tham so).
+    heSoQuyMo = If(soLuongSinhVien > 50, RealVal(0.2), RealVal(0.0))
 
     print("[Check 1] E2E 32-bit Integer Overflow Test across Multi-Class Salary Aggregation:")
     s_unbound = Solver()
     s_unbound.add(numClasses >= 1, numClasses <= 20)
     s_unbound.add(soTiet >= 15, soTiet <= 120)
+    s_unbound.add(soLuongSinhVien >= 0, soLuongSinhVien <= 300)
     s_unbound.add(heSoHocPhan >= 0.5, heSoHocPhan <= 3.0)
-    s_unbound.add(heSoQuyMoLop >= 0.1, heSoQuyMoLop <= 0.5)
     s_unbound.add(heSoBangCap >= 1.0, heSoBangCap <= 2.0)
     s_unbound.add(dmt >= 85000, dmt <= 500000)
 
-    soTietQuyDoi = soTiet * (heSoHocPhan + heSoQuyMoLop)
+    soTietQuyDoi = soTiet * (heSoHocPhan + heSoQuyMo)
     tienDayPerClass = soTietQuyDoi * heSoBangCap * dmt
     totalTienDay = numClasses * tienDayPerClass
 
@@ -63,11 +75,12 @@ def run_smt_verification_e2e():
     if res_a == sat:
         print("  --> RESULT: SAT (32-bit Integer Overflow IS POSSIBLE when aggregating multi-class salary!)")
         m = s_unbound.model()
+        sv_val = m[soLuongSinhVien].as_long()
         print("  Counterexample values:")
         print(f"    - numClasses        = {m[numClasses]}")
         print(f"    - soTiet            = {m[soTiet]}")
+        print(f"    - soLuongSinhVien   = {sv_val} (--> heSoQuyMo = {'0.2' if sv_val > 50 else '0.0'}, dung cong thuc that)")
         print(f"    - heSoHocPhan       = {m[heSoHocPhan]}")
-        print(f"    - heSoQuyMoLop      = {m[heSoQuyMoLop]}")
         print(f"    - heSoBangCap       = {m[heSoBangCap]}")
         print(f"    - dinhMucTienChuan  = {m[dmt]} VND")
         print("  --> DE XUAT: Dung long long (int64) va double trong C de dam bao an toan tuyet doi.\n")
@@ -78,12 +91,12 @@ def run_smt_verification_e2e():
     s_64 = Solver()
     s_64.add(numClasses >= 1, numClasses <= 100)
     s_64.add(soTiet >= 1, soTiet <= 500)
+    s_64.add(soLuongSinhVien >= 0, soLuongSinhVien <= 300)
     s_64.add(heSoHocPhan >= 0.5, heSoHocPhan <= 5.0)
-    s_64.add(heSoQuyMoLop >= 0.1, heSoQuyMoLop <= 2.0)
     s_64.add(heSoBangCap >= 1.0, heSoBangCap <= 3.0)
     s_64.add(dmt >= 50000, dmt <= 2000000)
 
-    soTietQuyDoi_64 = soTiet * (heSoHocPhan + heSoQuyMoLop)
+    soTietQuyDoi_64 = soTiet * (heSoHocPhan + heSoQuyMo)
     tienDay_64 = numClasses * (soTietQuyDoi_64 * heSoBangCap * dmt)
 
     s_64.add(tienDay_64 > INT64_MAX)
@@ -205,6 +218,38 @@ def run_smt_verification_e2e():
         print(f"    - Ca 2 deu xuat ra byte = {m.eval(byte_a6)}  <- KHONG THE PHAN BIET duoc sau khi ep kieu!")
         print("  --> DE XUAT: Day chinh la ly do phai chan TRUOC khi ep kieu (pack_class_size_byte_SAFE), khong")
         print("      the chi dua vao gia tri byte da xuat de suy nguoc lai so sinh vien that.\n")
+    else:
+        print("  --> RESULT: UNSAT\n")
+
+    print("[Check 7] E2E Improper Degree Validation Collision (CWE-1288):")
+    # Mo hinh hoa DUNG if-chain that trong add_lecturer_VULN()/add_lecturer_SAFE() (giang_vien.c):
+    #   GS=2.0, PGS=1.8, TIEN_SI=1.5, THAC_SI=1.2, CU_NHAN=1.0, con lai (khong hop le) -> fallback 1.0
+    # danhMucBangCap: 0=GS, 1=PGS, 2=TIEN_SI, 3=THAC_SI, 4=CU_NHAN (hop le), 5=KHONG_HOP_LE (typo/rac)
+    # -- day chinh la "statement" tuong ung voi nhanh if-chain that, khong phai bien tu do.
+    catA7 = Int('danhMucBangCap_A')
+    catB7 = Int('danhMucBangCap_B')
+
+    def heSoBangCap_tu_danhmuc(cat):
+        return If(cat == 0, RealVal(2.0),
+               If(cat == 1, RealVal(1.8),
+               If(cat == 2, RealVal(1.5),
+               If(cat == 3, RealVal(1.2),
+                  RealVal(1.0)))))  # cat==4 (CU_NHAN THAT) va cat==5 (KHONG HOP LE) CUNG roi vao day!
+
+    s_degree = Solver()
+    s_degree.add(catA7 == 4, catB7 == 5)  # A = giang vien CU_NHAN THAT, B = 1 chuoi bangCap KHONG HOP LE
+    s_degree.add(heSoBangCap_tu_danhmuc(catA7) == heSoBangCap_tu_danhmuc(catB7))
+    res_degree = s_degree.check()
+
+    if res_degree == sat:
+        print("  --> RESULT: SAT (Giang vien CU_NHAN THAT va 1 bangCap KHONG HOP LE cho CUNG 1 heSoBangCap!)")
+        print("    - Giang vien A: bangCap = 'CU_NHAN'          (hop le)      -> heSoBangCap = 1.0")
+        print("    - Giang vien B: bangCap = '<chuoi khong hop le>' (typo/rac) -> heSoBangCap = 1.0 (fallback)")
+        print("  --> DE XUAT: main_fixed.c (add_lecturer_SAFE) da them canh bao stderr khi fallback, nhung")
+        print("      KHONG loai tru duoc va cham gia tri nhu CWE-197 - o day nghiep vu can 1 gia tri fallback")
+        print("      thuc su (khong the 'tu choi hoan toan' nhu ep kieu char). Neu can phan biet duoc, phai")
+        print("      luu them 1 co is_validated rieng, khong the chi dua vao heSoBangCap da luu de suy nguoc")
+        print("      lai bangCap goc co hop le hay khong.\n")
     else:
         print("  --> RESULT: UNSAT\n")
 

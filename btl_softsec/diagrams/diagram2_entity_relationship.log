@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  14 SEP 2026 19:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  19 SEP 2026 08:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -579,8 +579,7 @@ s\pgflibrarydecorations.markings.code.tex))
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count299
 \l__pdf_internal_box=\box88
-)
-No file diagram2_entity_relationship.aux.
+) (diagram2_entity_relationship.aux)
 \openout1 = `diagram2_entity_relationship.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
@@ -597,6 +596,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
 LaTeX Font Info:    ... okay on input line 91.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
 LaTeX Font Info:    ... okay on input line 91.
+
 (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count300
@@ -620,12 +620,12 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 198
+LaTeX Font Info:    Trying to load font information for U+msa on input line 204
 .
  (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 198
+LaTeX Font Info:    Trying to load font information for U+msb on input line 204
 .
 
 (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -640,10 +640,10 @@ L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 16125 strings out of 474485
- 350078 string characters out of 5745150
- 1953542 words of memory out of 5000000
- 38113 multiletter control sequences out of 15000+600000
+ 16129 strings out of 474485
+ 350293 string characters out of 5745150
+ 1954542 words of memory out of 5000000
+ 38115 multiletter control sequences out of 15000+600000
  562974 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,17n,121p,432b,762s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -654,17 +654,19 @@ fonts/cm/cmbx7.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmbx9.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmex10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/
 type1/public/amsfonts/cm/cmitt10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/HP/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/HP/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/HP/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/HP/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/HP/AppDat
-a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/HP/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Users
-/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on diagram2_entity_relationship.pdf (1 page, 178077 bytes).
+/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/HP/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/HP/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/HP/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/HP/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/HP/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/HP/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/User
+s/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:
+/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pf
+b>
+Output written on diagram2_entity_relationship.pdf (1 page, 193580 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
+ 108 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  109 words of extra memory for PDF output out of 10000 (max. 10000000)
 

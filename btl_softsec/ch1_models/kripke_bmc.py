@@ -1,11 +1,25 @@
 """
 ch1_models/kripke_bmc.py - Mô hình hóa Kripke & BMC cho DuongUniversity (giang_vien.c/lop_hoc_phan.c/tinh_tien_day.c)
 Luồng trạng thái: S0_INIT (Chưa phân công) -> S1_GV_ASSIGNED (Đã phân công)
-                 -> S2_SALARY_CALC (Tính tiền) -> S3_EXPORTED (Xuất báo cáo) -> S4_ERROR (Lỗi)
-Bản FIXED: 5 trạng thái (S0-S4). Bản BUGGY: 6 trạng thái (thêm S5_INVALID_CALC mô phỏng
-nhánh nhảy cóc bỏ qua bước phân công — xem THAM_CHIEU_TRANG_THAI bên dưới để đối chiếu
-từng trạng thái với vị trí thật trong code C, và cross_validate_with_pattern_scanner()
+                 -> {S2A_CALC_THUONG | S2B_CALC_DONG} (Tính tiền, rẽ theo quy mô lớp)
+                 -> S3_EXPORTED (Xuất báo cáo) -> S4_ERROR (Lỗi)
+Bản FIXED: 6 trạng thái (S0,S1,S2A,S2B,S3,S4). Bản BUGGY: 7 trạng thái (thêm S5_INVALID_CALC
+mô phỏng nhánh nhảy cóc bỏ qua bước phân công — xem THAM_CHIEU_TRANG_THAI bên dưới để đối
+chiếu từng trạng thái với vị trí thật trong code C, và cross_validate_with_pattern_scanner()
 để tự động xác nhận bằng kết quả quét tĩnh Chương 2).
+
+S2A_CALC_THUONG / S2B_CALC_DONG (thêm theo góp ý: "2 tham số soTiet + soLuongSinhVien tổng
+hợp thành 1 tham số tăng dần, và nhiều tổ hợp giá trị cùng rơi vào 1 trạng thái phải viết rõ
+statement") mô hình hóa ĐÚNG nhánh rẽ thật trong tinh_tien_day.c:
+    float heSoQuyMo = (lhp->soLuongSinhVien > 50) ? 0.2f : 0.0f;
+-- tức là RẤT NHIỀU giá trị soLuongSinhVien khác nhau (0..50 hoặc 51..300) đều rơi vào cùng
+1 trong 2 "trạng thái" hệ số này. Statement (predicate) tương ứng mỗi trạng thái:
+    S2A_CALC_THUONG  ≡ (0 <= soLuongSinhVien <= 50)   -> heSoQuyMo = 0.0
+    S2B_CALC_DONG    ≡ (soLuongSinhVien > 50)          -> heSoQuyMo = 0.2
+Cả 2 nhánh đều mang nhãn "assigned"+"calculated" giống nhau (P1-P5 không đổi kết quả, xem
+thảo luận ở chương 6) -- việc tách trạng thái ở đây phục vụ tính TRUY VẾT tường minh giữa mô
+hình điều khiển (Kripke, định tính) và ràng buộc số học đã sửa ở Check 1/2 (Z3, định lượng,
+xem ch3_staticsat/smt_verify.py), không phải để tạo thêm 1 lỗi mới.
 Tự động lưu nhật ký thực thi vào ../logs/kripke_bmc.log
 """
 
@@ -98,10 +112,15 @@ def build_duong_university_kripke(is_buggy=False) -> KripkeStructure:
     name = "DuongUniversity_Kripke_BUGGY" if is_buggy else "DuongUniversity_Kripke_FIXED"
     k = KripkeStructure(name)
 
-    # 5 Trạng thái chuẩn (bản FIXED): chưa phân công -> đã phân công -> tính tiền -> xuất báo cáo -> lỗi
+    # 6 Trạng thái chuẩn (bản FIXED): chưa phân công -> đã phân công -> {lớp thường | lớp đông}
+    # -> xuất báo cáo -> lỗi
     k.add_state("S0_INIT", labels=["init"], initial=True)
     k.add_state("S1_GV_ASSIGNED", labels=["assigned"])
-    k.add_state("S2_SALARY_CALC", labels=["assigned", "calculated"])
+    # S2A/S2B: statement rẽ nhánh THẬT theo soLuongSinhVien (xem docstring đầu file) -- 2 trạng
+    # thái này thay cho 1 S2_SALARY_CALC duy nhất trước đây, để tường minh hóa "nhiều tổ hợp giá
+    # trị cùng rơi vào 1 trạng thái" thay vì gộp chung không phân biệt.
+    k.add_state("S2A_CALC_THUONG", labels=["assigned", "calculated", "lop_thuong"])
+    k.add_state("S2B_CALC_DONG", labels=["assigned", "calculated", "lop_dong"])
     # S3_EXPORTED trong ban BUGGY mang them nhan "byte_truncated": pack_class_size_byte_VULN()
     # (tinh_tien_day.c) luon ep (char) khong kiem tra pham vi truoc khi xuat -> CWE-197.
     # Ban FIXED dung pack_class_size_byte_SAFE() co guard nen KHONG bao gio mang nhan nay.
@@ -111,10 +130,13 @@ def build_duong_university_kripke(is_buggy=False) -> KripkeStructure:
 
     # Chuyển trạng thái hợp lệ
     k.add_transition("S0_INIT", "S1_GV_ASSIGNED")
-    k.add_transition("S1_GV_ASSIGNED", "S2_SALARY_CALC")
+    k.add_transition("S1_GV_ASSIGNED", "S2A_CALC_THUONG")
+    k.add_transition("S1_GV_ASSIGNED", "S2B_CALC_DONG")
     k.add_transition("S1_GV_ASSIGNED", "S4_ERROR")
-    k.add_transition("S2_SALARY_CALC", "S3_EXPORTED")
-    k.add_transition("S2_SALARY_CALC", "S4_ERROR")
+    k.add_transition("S2A_CALC_THUONG", "S3_EXPORTED")
+    k.add_transition("S2B_CALC_DONG", "S3_EXPORTED")
+    k.add_transition("S2A_CALC_THUONG", "S4_ERROR")
+    k.add_transition("S2B_CALC_DONG", "S4_ERROR")
     k.add_transition("S3_EXPORTED", "S0_INIT")
     k.add_transition("S4_ERROR", "S0_INIT")
 
@@ -310,7 +332,7 @@ if __name__ == "__main__":
 
     print("=========================================================")
     print("  CHUONG 1: MO HINH HOA KRIPKE & BMC (k=5)")
-    print("  Ban FIXED: 5 trang thai (S0-S4) | Ban BUGGY: 6 trang thai (S0-S5)")
+    print("  Ban FIXED: 6 trang thai (S0,S1,S2A,S2B,S3,S4) | Ban BUGGY: 7 trang thai (them S5)")
     print("=========================================================")
 
     buggy_kripke = build_duong_university_kripke(is_buggy=True)

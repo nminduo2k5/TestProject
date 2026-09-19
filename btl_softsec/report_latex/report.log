@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  18 SEP 2026 22:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  19 SEP 2026 09:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -977,7 +977,7 @@ Package hyperref Info: Link coloring ON on input line 78.
 \openout3 = `report.out'.
 
 \c@lstlisting=\count333
-<graphics/Logo ÄH Phenikaa V Wh.png, id=135, 1204.5pt x 826.08624pt>
+<graphics/Logo ÄH Phenikaa V Wh.png, id=147, 1204.5pt x 826.08624pt>
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
@@ -1002,20 +1002,20 @@ LaTeX Font Info:    Calculating math sizes for size <13> on input line 79.
 {C:/Users/HP/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/HP/AppD
 ata/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-t5.enc} <./graphics/Logo Ä
 H Phenikaa V Wh.png>] (report.toc
-LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 2
-6.
+LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 1
+3.
 
 (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmtt.fd
 File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 
 LaTeX Font Warning: Font shape `T5/cmtt/b/n' undefined
-(Font)              using `T5/cmtt/m/n' instead on input line 26.
+(Font)              using `T5/cmtt/m/n' instead on input line 27.
 
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 26.
+e 27.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
 [2
 
@@ -1032,10 +1032,10 @@ e 26.
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 4.
+e 3.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
  [3]
-Underfull \hbox (badness 10000) in paragraph at lines 8--8
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
  [][] [][][]\T5/qtm/m/n/13 So s¡nh Black-box vs. White-box (l¦n ch¤y ^^_¤i di»n
 , 
  []
@@ -1044,7 +1044,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--8
 \tf@lot=\write6
 \openout6 = `report.lot'.
 
- (report.lol)
+ (report.lol
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 5.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [4])
 \tf@lol=\write7
 \openout7 = `report.lol'.
 
@@ -1053,169 +1059,353 @@ File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
 e 86.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [4] (chapters/chuong1.tex
+ [5] (chapters/chuong1.tex
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
 e 17.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [5
+ [6
 
 ]) (chapters/chuong2.tex
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 29.
+e 9.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [6]
-Underfull \hbox (badness 1215) in paragraph at lines 51--51
-\OT1/cmr/m/n/10.95 10 $\T5/qtm/m/n/10.83347 ms (khæng t½nh I/O) tr¶n ph¦n
+
+[7]
+Overfull \hbox (3.4766pt too wide) in alignment at lines 13--19
+ [] [] [] [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--51
+Overfull \hbox (3.4766pt too wide) in alignment at lines 19--24
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (3.4766pt too wide) in alignment at lines 24--26
+ [] [] [] [] 
+ []
+
+LaTeX Font Info:    Trying to load font information for T5+cmss on input line 2
+9.
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmss.fd
+File: t5cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Calculating math sizes for size <10.83347> on input line 32
+.
+
+Overfull \hbox (3.4766pt too wide) in alignment at lines 26--117
+ [] [] [] [] 
+ []
+
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 117.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+[8]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 117.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [9]
+Underfull \hbox (badness 2401) in paragraph at lines 141--141
+\T5/qtm/m/n/10.83347 khæng váng l°p -- tho£ m¢n lş
+ []
+
+
+Underfull \hbox (badness 1424) in paragraph at lines 141--141
+\T5/qtm/m/n/10.83347 thuy¸t; ch÷a ^^_o []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
 []|\T5/qtm/m/n/10.83347 Khæng ph¡t sinh léi bë nhî
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--51
-\T5/qtm/m/n/10.83347 (\T5/cmtt/m/n/10.83347 heap-use-after-free\T5/qtm/m/n/10.8
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 heap-use-after-free\T5/qtm/m/n/10.8
 3347 , buffer
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--51
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
 \T5/qtm/m/n/10.83347 over-flow) khi l°p luçng E2E
  []
 
 
-Underfull \hbox (badness 7344) in paragraph at lines 51--51
+Underfull \hbox (badness 3758) in paragraph at lines 141--141
 []|\T5/qtm/m/n/10.83347 Bi¶n dàch s¤ch (0 warn-ing vîi
  []
 
 
-Underfull \hbox (badness 1484) in paragraph at lines 51--51
-\T5/cmtt/m/n/10.83347 -Wall\T5/qtm/m/n/10.83347 ) tr¶n $\OMS/cmsy/m/n/10.95 ^^U
- \OT1/cmr/m/n/10.95 2$ \T5/qtm/m/n/10.83347 toolchain kh¡c
+Underfull \hbox (badness 1552) in paragraph at lines 141--141
+[]|\T5/qtm/m/n/10.83347 ^^^¢ x¡c nhªn bi¶n dàch v  ch¤y
  []
 
 
-Underfull \hbox (badness 3179) in paragraph at lines 51--51
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+\T5/qtm/m/n/10.83347 th nh cæng tr¶n GC-C/M-SYS2
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+[]|\T5/qtm/m/n/10.83347 0/200 crash tr¶n fuzzing b£n
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+\T5/qtm/m/n/10.83347 FIXED; 150/200 l¦n ch°n an
+ []
+
+
+Underfull \hbox (badness 1502) in paragraph at lines 141--141
 []|\T5/qtm/m/n/10.83347 Check 6 ([][]Möc 4.3[][]) v  Tar-get 7
  []
 
 
-Underfull \hbox (badness 2035) in paragraph at lines 51--51
-\T5/qtm/m/n/10.83347 ([][]Möc 4.4[][]) t¡i hi»n vi ph¤m tr¶n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 51--51
-[]|\T5/qtm/m/n/10.83347 Cè ^^_ành \T5/cmtt/m/n/10.83347 random_seed \T5/qtm/m/n
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+[]|\T5/qtm/m/n/10.83347 Cè ^^_ành \T5/cmtt/b/n/10.83347 random_seed \T5/qtm/m/n
 /10.83347 trong
  []
 
-File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
-<use graphics/Logo ÄH Phenikaa V Wh.png>
-Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 53.
-(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[7]
-File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
-<use graphics/Logo ÄH Phenikaa V Wh.png>
-Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 77.
-(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [8]
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
-[]|\T5/cmtt/m/n/10.83347 #define MAX_NAME 80
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+[]|\T5/cmtt/b/n/10.83347 cfg->heSoQuyMoLop
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 tinh_tien_day.h:8\T5/qtm/m/n/10.833
+47 )
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+\T5/qtm/m/n/10.83347 khæng ^^_÷ñc
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--141
+\T5/cmtt/b/n/10.83347 calculate_e2e_salary_*()
+ []
+
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 144.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+[10]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 148.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [11]
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\T5/cmtt/b/n/10.83347 #define MAX_NAME 80
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
 []|\T5/qtm/m/n/10.83347 REQ-3 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
-[]|\T5/cmtt/m/n/10.83347 char maGiangVien[20]
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\T5/cmtt/b/n/10.83347 char maGiangVien[20]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
 []|\T5/qtm/m/n/10.83347 REQ-3 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
-[]|\T5/cmtt/m/n/10.83347 char bangCap[20]
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\T5/cmtt/b/n/10.83347 char bangCap[20]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
 []|\T5/qtm/m/n/10.83347 REQ-3, 9 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
-[]|\T5/cmtt/m/n/10.83347 #define MAX_MALOP 20
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\T5/cmtt/b/n/10.83347 #define MAX_MALOP 20
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
 []|\T5/qtm/m/n/10.83347 REQ-3 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
-[]|\T5/cmtt/m/n/10.83347 pack_class_size_byte_*()
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\T5/cmtt/b/n/10.83347 pack_class_size_byte_*()
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
 []|\T5/qtm/m/n/10.83347 REQ-8 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
-[]|\T5/qtm/m/n/10.83347 Kiºu \T5/cmtt/m/n/10.83347 int \T5/qtm/m/n/10.83347 32-
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\T5/qtm/m/n/10.83347 Kiºu \T5/cmtt/b/n/10.83347 int \T5/qtm/m/n/10.83347 32-
 bit giîi h¤n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
 \T5/qtm/m/n/10.83347 k¸t qu£ ph²p nh¥n dçn v·
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
 []|\T5/qtm/m/n/10.83347 REQ-6 /
  []
 
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 103.
+e 194.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[9]) (chapters/chuong3.tex
+[12]
+Underfull \hbox (badness 1226) in paragraph at lines 219--219
+[]|\T5/qtm/m/n/11.86258 Quy¸t ^^_ành h» sè quy mæ lîp qua
+ []
+
+
+Underfull \hbox (badness 2443) in paragraph at lines 219--219
+[]|\T5/qtm/m/n/11.86258 Khæng câ tr÷íng t÷ìng ùng trong
+ []
+
+
+Underfull \hbox (badness 2443) in paragraph at lines 219--219
+[]|\T5/qtm/m/n/11.86258 Khæng câ tr÷íng t÷ìng ùng trong
+ []
+
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 221.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+[13]
+Underfull \hbox (badness 2111) in paragraph at lines 222--223
+[]\T5/qtm/b/n/13 Tham sè têng hñp t«ng d¦n tø 2 tham sè \T5/cmtt/b/n/13 soTiet 
+\T5/qtm/b/n/13 + \T5/cmtt/b/n/13 soLuongSinhVien\T5/qtm/b/n/13 :
+ []
+
+
+Overfull \hbox (15.55962pt too wide) detected at line 233
+[]
+ []
+
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 235.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+[14]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 251.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [15]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 272.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [16]
+Underfull \hbox (badness 10000) in paragraph at lines 295--295
+[]|\T5/qtm/m/n/10.83347 Ch¿ ^^_åc khi $\OML/cmm/m/it/10.95 A[]$\T5/qtm/m/n/10.8
+3347 =valid; mi·n nghi»p vö
+ []
+
+
+Underfull \hbox (badness 1122) in paragraph at lines 295--295
+[]|\T5/qtm/b/n/10.83347 Dead field\T5/qtm/m/n/10.83347 : khai b¡o ğ \T5/cmtt/b/
+n/10.83347 tinh_tien_day.h:8
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 295--295
+\T5/qtm/m/n/10.83347 nh÷ng \T5/cmtt/b/n/10.83347 calculate_e2e_salary_VULN/SAFE
+
+ []
+
+
+Underfull \hbox (badness 3849) in paragraph at lines 298--299
+[]\T5/qtm/b/n/13 Sai l»ch mæ h¼nh-code ph¡t hi»n ngay ğ b÷îc ph¥n lo¤i: \T5/qtm
+/m/n/13 n¸u ch¿ ^^_åc
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
+\T5/cmtt/b/n/13 tinh_tien_day.h \T5/qtm/m/n/13 (khai b¡o \T5/cmtt/b/n/13 Config
+.heSoQuyMoLop\T5/qtm/m/n/13 ) m  khæng ^^_èi chi¸u
+ []
+
+
+Underfull \hbox (badness 1303) in paragraph at lines 298--299
+\T5/cmtt/b/n/13 tinh_tien_day.c \T5/qtm/m/n/13 (^^_ành ngh¾a h m), r§t d¹ ph¥n 
+lo¤i $\OML/cmm/m/it/12 A[]$ \T5/qtm/m/n/13 l  ``tòy chån, câ £nh
+ []
+
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 299.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+[17]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 330.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [18]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 387.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [19]
+LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 3
+92.
+
+(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\ts1qtm.fd
+File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
+)
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 394.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+
+[20{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-ts1.en
+c}]) (chapters/chuong3.tex
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
 e 7.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [10]
-<diagrams/diagram6_e2e_architecture.png, id=331, 630.9171pt x 198.0198pt>
+ [21]
+<diagrams/diagram6_e2e_architecture.png, id=453, 630.9171pt x 198.0198pt>
 File: diagrams/diagram6_e2e_architecture.png Graphic file (type png)
 <use diagrams/diagram6_e2e_architecture.png>
 Package pdftex.def Info: diagrams/diagram6_e2e_architecture.png  used on input 
 line 10.
 (pdftex.def)             Requested size: 455.24411pt x 142.88234pt.
-LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 2
-0.
 
-(C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\ts1qtm.fd
-File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
-)
 Underfull \hbox (badness 10000) in paragraph at lines 20--21
 []\T5/qtm/b/n/13 Module 1 -- Qu£n lş Gi£ng vi¶n \T5/qtm/m/n/13 (\T5/cmtt/b/n/13
  giang_vien.c\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 .h\T5/qtm/m/n/13 ): ^^_ành ngh¾a
@@ -1235,7 +1425,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 20--21
 rer_VULN()\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 add_lecturer_SAFE()\T5/qtm/m/n/13 ,
  []
 
-
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 21.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+[22 <./diagrams/diagram6_e2e_architecture.png (PNG copy)>]
 Underfull \hbox (badness 2884) in paragraph at lines 22--23
 []\T5/qtm/b/n/13 Module 3 -- T½nh ti·n d¤y & Thanh to¡n \T5/qtm/m/n/13 (\T5/cmt
 t/b/n/13 tinh_tien_day.c\T5/qtm/m/n/13 /\T5/cmtt/b/n/13 .h\T5/qtm/m/n/13 ): ^^_
@@ -1255,96 +1450,119 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--23
 E() \T5/qtm/m/n/13 -- h m cuèi ^^_âng gâi
  []
 
-File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
-<use graphics/Logo ÄH Phenikaa V Wh.png>
-Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 23.
-(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[11{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-ts1.en
-c} <./diagrams/diagram6_e2e_architecture.png (PNG copy)>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 27.
- (code/giang_vien.h)
-(code/lop_hoc_phan.h)
+nput line 29.
+(code/giang_vien.h) (code/lop_hoc_phan.h
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 40.
+e 10.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [12]
-<diagrams/diagram2_entity_relationship.png, id=363, 575.9919pt x 349.305pt>
+ [23])
+<diagrams/diagram2_entity_relationship.png, id=477, 575.9919pt x 393.51015pt>
 File: diagrams/diagram2_entity_relationship.png Graphic file (type png)
 <use diagrams/diagram2_entity_relationship.png>
 Package pdftex.def Info: diagrams/diagram2_entity_relationship.png  used on inp
-ut line 43.
-(pdftex.def)             Requested size: 432.48051pt x 262.2819pt.
-<diagrams/diagram3_data_flow.png, id=365, 565.1514pt x 581.0508pt>
+ut line 46.
+(pdftex.def)             Requested size: 432.48051pt x 295.47414pt.
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 50.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [24]
+<diagrams/diagram3_data_flow.png, id=491, 565.1514pt x 581.0508pt>
 File: diagrams/diagram3_data_flow.png Graphic file (type png)
 <use diagrams/diagram3_data_flow.png>
-Package pdftex.def Info: diagrams/diagram3_data_flow.png  used on input line 54
+Package pdftex.def Info: diagrams/diagram3_data_flow.png  used on input line 57
 .
 (pdftex.def)             Requested size: 455.24411pt x 468.06853pt.
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 58.
+e 61.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [13 <./diagrams/diagram2_entity_relationship.png (PNG copy)>]
+ [25 <./diagrams/diagram2_entity_relationship.png (PNG copy)>]
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 65.
+e 68.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [14 <./diagrams/diagram3_data_flow.png (PNG copy)>])
-(chapters/chuong4.tex
-<diagrams/diagram1_state_transition.png, id=379, 607.068pt x 418.2024pt>
-File: diagrams/diagram1_state_transition.png Graphic file (type png)
-<use diagrams/diagram1_state_transition.png>
-Package pdftex.def Info: diagrams/diagram1_state_transition.png  used on input 
-line 13.
-(pdftex.def)             Requested size: 455.24411pt x 313.61273pt.
+ [26 <./diagrams/diagram3_data_flow.png (PNG copy)>]) (chapters/chuong4.tex
+Underfull \hbox (badness 2057) in paragraph at lines 11--12
+[]\T5/qtm/m/n/13 Hai tr¤ng th¡i $\OML/cmm/m/it/12 S[]$ \T5/qtm/m/n/13 CALC_THUO
+NG v  $\OML/cmm/m/it/12 S[]$ \T5/qtm/m/n/13 CALC_DONG (thay cho 1 $\OML/cmm/m/i
+t/12 S[]$
+ []
+
+
+Underfull \hbox (badness 2744) in paragraph at lines 11--12
+\T5/qtm/m/n/13 SALARY_CALC duy nh§t tr÷îc ^^_¥y) mæ h¼nh hâa ^^_óng nh¡nh r³ \T
+5/qtm/m/it/13 thªt \T5/qtm/m/n/13 trong
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\T5/cmtt/b/n/13 tinh_tien_day.c\T5/qtm/m/n/13 : \T5/cmtt/b/n/13 heSoQuyMo = (so
+LuongSinhVien > 50) ? 0.2 : 0.0 \T5/qtm/m/n/13 --
+ []
+
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 17.
+e 12.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [15]
-Underfull \hbox (badness 10000) in paragraph at lines 27--28
+[27]
+<diagrams/diagram1_state_transition_fixed.png, id=512, 851.0997pt x 1086.9408pt
+>
+File: diagrams/diagram1_state_transition_fixed.png Graphic file (type png)
+<use diagrams/diagram1_state_transition_fixed.png>
+Package pdftex.def Info: diagrams/diagram1_state_transition_fixed.png  used on 
+input line 20.
+(pdftex.def)             Requested size: 455.24411pt x 581.3832pt.
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 24.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [28]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 29.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [29 <./diagrams/diagram1_state_transition_fixed.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
 []\T5/qtm/m/n/13 H m \T5/cmtt/b/n/13 cross_validate_with_pattern_scanner() \T5/
 qtm/m/n/13 gåi l¤i ch½nh
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 27--28
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
 \T5/cmtt/b/n/13 pattern_scanner.py \T5/qtm/m/n/13 cõa Ch÷ìng 2 ^^_º tü ^^_ëng x
 ¡c nhªn tr¤ng th¡i léi
  []
 
 
-Underfull \hbox (badness 4378) in paragraph at lines 27--28
+Underfull \hbox (badness 4378) in paragraph at lines 34--35
 \OML/cmm/m/it/12 S[]$\T5/qtm/m/n/13 /$\OML/cmm/m/it/12 S[]$\T5/qtm/m/n/13 _EXPO
 RTED_TRUNCATED trong mæ h¼nh Kripke trøu t÷ñng khîp vîi
  []
 
-File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
-<use graphics/Logo ÄH Phenikaa V Wh.png>
-Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 34.
-(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[16 <./diagrams/diagram1_state_transition.png (PNG copy)>]
-Underfull \hbox (badness 2913) in paragraph at lines 34--35
+
+Underfull \hbox (badness 2913) in paragraph at lines 41--42
 \T5/cmtt/b/n/13 tinh_tien_day.c \T5/qtm/m/n/13 v  driver \T5/cmtt/b/n/13 main_f
 ixed.c\T5/qtm/m/n/13 , vîi 5 quy t­c ph¡t hi»n: \T5/cmtt/b/n/13 strcpy
  []
 
 
-Underfull \hbox (badness 1062) in paragraph at lines 34--35
+Underfull \hbox (badness 1062) in paragraph at lines 41--42
 \T5/qtm/m/n/13 (CWE-120), \T5/cmtt/b/n/13 dangling_free \T5/qtm/m/n/13 (CWE-416
 ), \T5/cmtt/b/n/13 unchecked_nested_deref \T5/qtm/m/n/13 (CWE-476),
  []
 
 
-Underfull \hbox (badness 3078) in paragraph at lines 34--35
+Underfull \hbox (badness 3078) in paragraph at lines 41--42
 \T5/cmtt/b/n/13 int_overflow_cast \T5/qtm/m/n/13 (CWE-190), \T5/cmtt/b/n/13 unc
 hecked_numeric_truncation \T5/qtm/m/n/13 (CWE-197).
  []
@@ -1352,37 +1570,25 @@ hecked_numeric_truncation \T5/qtm/m/n/13 (CWE-197).
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 51.
+e 50.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[17]) (chapters/chuong5.tex
-Underfull \hbox (badness 1286) in paragraph at lines 63--1
+[30]
+Underfull \hbox (badness 3861) in paragraph at lines 53--54
+[]\T5/qtm/b/n/13 Check 1\T5/qtm/m/n/13 : $\OMS/cmsy/m/n/12 9$ \T5/qtm/m/n/13 in
+-put hñp l» ($[] \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 [1\OML/cmm/m/it/12 ; \OT1/c
+mr/m/n/12 20]$\T5/qtm/m/n/13 , $[] \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 [15\OML/c
+mm/m/it/12 ; \OT1/cmr/m/n/12 120]$\T5/qtm/m/n/13 ,
+ []
+
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 65.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+[31]) (chapters/chuong5.tex
+Underfull \hbox (badness 1286) in paragraph at lines 73--1
 []\T5/qtm/b/n/13 White-box (Z3-guided)\T5/qtm/m/n/13 : gi£i trüc ti¸p 7 r ng bu
 ëc Z3 t÷ìng ùng 6 lé hêng
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]|$\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 ([] \OMS/cmsy/m/n/12 !
  []
 
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
@@ -1390,40 +1596,40 @@ File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
 e 25.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
+[32]
+Underfull \hbox (badness 10000) in paragraph at lines 30--33
 []\T5/cmtt/b/n/10.83347 Step 0: S0_INIT [init] $\OMS/cmsy/m/n/10.95 !$ \T5/cmtt
 /b/n/10.83347 Step 1: S5_INVALID_CALC [calculated,error] $\OMS/cmsy/m/n/10.95 !
 $
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
-\T5/cmtt/b/n/10.83347 Step 2: S4_ERROR [error] $\OMS/cmsy/m/n/10.95 !$ \T5/cmtt
-/b/n/10.83347 Step 3: S0_INIT $\OMS/cmsy/m/n/10.95 !$ \T5/cmtt/b/n/10.83347 Ste
-p 4: S5_INVALID_CALC
+Underfull \hbox (badness 10000) in paragraph at lines 37--40
+[]\T5/cmtt/b/n/10.83347 Step 0: S0_INIT [init] $\OMS/cmsy/m/n/10.95 !$ \T5/cmtt
+/b/n/10.83347 Step 1: S1_GV_ASSIGNED [assigned] $\OMS/cmsy/m/n/10.95 !$ \T5/cmt
+t/b/n/10.83347 Step 2:
  []
 
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 56.
+e 40.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 57--58
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 68--69
 []\T5/qtm/m/n/13 ^^^iºm ^^_¡ng chó ş: \T5/cmtt/b/n/13 pack_class_size_byte_SAFE
 () \T5/qtm/m/n/13 n¬m \T5/qtm/m/it/13 trong còng file
  []
 
-(code/giang_vien.c) (code/giang_vien.c
+(code/giang_vien.c
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 69.
+e 33.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [20]) (code/tinh_tien_day.c)
+ [34]) (code/giang_vien.c) (code/tinh_tien_day.c)
 (code/tinh_tien_day.c)
-Underfull \hbox (badness 7777) in paragraph at lines 74--75
+Underfull \hbox (badness 7777) in paragraph at lines 85--86
 []\T5/qtm/b/n/13 Check 1 SAT\T5/qtm/m/n/13 : coun-terex-am-ple $[] \OT1/cmr/m/n
 /12 = 20$\T5/qtm/m/n/13 , $[] \OT1/cmr/m/n/12 = 120$\T5/qtm/m/n/13 ,
  []
@@ -1431,858 +1637,963 @@ Underfull \hbox (badness 7777) in paragraph at lines 74--75
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 77.
+e 86.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[21]
-<diagrams/diagram5_fuzz_compare.png, id=446, 328.5876pt x 189.8292pt>
+[35]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 113.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [36]
+<diagrams/diagram5_fuzz_compare.png, id=598, 328.5876pt x 189.8292pt>
 File: diagrams/diagram5_fuzz_compare.png Graphic file (type png)
 <use diagrams/diagram5_fuzz_compare.png>
 Package pdftex.def Info: diagrams/diagram5_fuzz_compare.png  used on input line
- 104.
+ 116.
 (pdftex.def)             Requested size: 455.24411pt x 263.0189pt.
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 108.
+e 124.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [22]
-Underfull \hbox (badness 10000) in paragraph at lines 133--133
+ [37 <./diagrams/diagram5_fuzz_compare.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 145--145
 []|\T5/qtm/m/n/11.86258 Ch2 \T5/cmtt/m/n/11.86258 dangling_free\T5/qtm/m/n/11.8
 6258 ; Ch2.1 ASan
  []
 
-File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
-<use graphics/Logo ÄH Phenikaa V Wh.png>
-Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 134.
-(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[23 <./diagrams/diagram5_fuzz_compare.png (PNG copy)>]
-<diagrams/diagram4_cvss_bar.png, id=478, 381.8265pt x 171.5208pt>
+<diagrams/diagram4_cvss_bar.png, id=626, 381.8265pt x 171.5208pt>
 File: diagrams/diagram4_cvss_bar.png Graphic file (type png)
 <use diagrams/diagram4_cvss_bar.png>
-Package pdftex.def Info: diagrams/diagram4_cvss_bar.png  used on input line 138
+Package pdftex.def Info: diagrams/diagram4_cvss_bar.png  used on input line 150
 .
 (pdftex.def)             Requested size: 386.96027pt x 173.83134pt.
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 163.
+e 156.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [24 <./diagrams/diagram4_cvss_bar.png (PNG copy)>]
-LaTeX Font Info:    Calculating math sizes for size <15.59996> on input line 16
-6.
+[38 <./diagrams/diagram4_cvss_bar.png (PNG copy)>]
+LaTeX Font Info:    Calculating math sizes for size <15.59996> on input line 17
+8.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 166.
+(hyperref)                removing `math shift' on input line 178.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\to' on input line 166.
+(hyperref)                removing `\to' on input line 178.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 166.
+(hyperref)                removing `math shift' on input line 178.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
 []|\T5/qtm/m/n/10.83347 TC-K1-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
 []|\T5/qtm/m/n/10.83347 BMC $\OML/cmm/m/it/10.95 P[]$\T5/qtm/m/n/10.83347 , b£n
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
 \T5/qtm/m/n/10.83347 BUGGY (b÷îc
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
 \T5/qtm/m/n/10.83347 nh£y th¯ng sang
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 2707) in paragraph at lines 201--201
 \T5/qtm/m/n/10.83347 t½nh ti·n, bä qua
  []
 
 
-Underfull \hbox (badness 6510) in paragraph at lines 189--189
-[]|\T5/qtm/m/n/10.83347 UNSAT (khæng
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
 []|\T5/qtm/b/n/10.83347 SAT \T5/qtm/m/n/10.83347 -- ph£n v½
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
 \T5/qtm/m/n/10.83347 dö $\OML/cmm/m/it/10.95 S[][]S[][]S[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 190--190
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
 []|\T5/qtm/m/n/10.83347 TC-K1-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 190--190
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
 []|\T5/qtm/m/n/10.83347 BMC $\OML/cmm/m/it/10.95 P[]$\T5/qtm/m/n/10.83347 , b£n
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 190--190
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
 []|\T5/qtm/m/n/10.83347 UNSAT
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--191
+Underfull \hbox (badness 10000) in paragraph at lines 203--203
 []|\T5/qtm/m/n/10.83347 TC-K1-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--191
+Underfull \hbox (badness 10000) in paragraph at lines 203--203
 []|\T5/qtm/m/n/10.83347 UNSAT c£ 2 b£n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--192
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
 []|\T5/qtm/m/n/10.83347 TC-K2-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--192
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
 []|\T5/qtm/m/n/10.83347 Scanner
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--192
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
 \T5/qtm/m/n/10.83347 qu²t \T5/cmtt/b/n/10.83347 strcpy
  []
 
 
-Overfull \hbox (95.28273pt too wide) in paragraph at lines 192--192
+Overfull \hbox (100.97362pt too wide) in paragraph at lines 204--204
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 hoTen/maLop/bangCap/maGiangVien\T5/
 qtm/m/n/10.83347 )
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--192
-[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n ^^_õ
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--192
-[]|\T5/qtm/m/n/10.83347 5 c£nh b¡o CWE-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--192
-\T5/qtm/m/n/10.83347 120 ^^_óng và tr½
- []
-
-
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 192--192
-\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
-3347 )| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--193
-[]|\T5/qtm/m/n/10.83347 TC-K2-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--193
-[]|\T5/qtm/m/n/10.83347 Scanner qu²t
- []
-
-
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 193--193
-\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
-3347 )| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 194--194
-[]|\T5/qtm/m/n/10.83347 TC-K4-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 194--194
-[]|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 194--194
-[]|\T5/qtm/m/n/10.83347 SAT ğ l¦n thû 1
- []
-
-
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 194--194
-\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
-3347 )| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 195--195
-[]|\T5/qtm/m/n/10.83347 TC-K4-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 195--195
-[]|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 195--195
-[]|\T5/qtm/m/n/10.83347 SAT ğ l¦n thû 2
- []
-
-
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 195--195
-\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
-3347 )| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
-[]|\T5/qtm/m/n/10.83347 TC-K4-
- []
-
-
-Underfull \hbox (badness 4266) in paragraph at lines 196--196
-[]|\T5/qtm/m/n/10.83347 Black-box 200 l¦n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
-\T5/qtm/m/n/10.83347 ng¨u nhi¶n tr¶n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
-[]|\T5/qtm/m/n/10.83347 72/200 crash,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
-\T5/qtm/m/n/10.83347 exit \T5/cmtt/b/n/10.83347 0xC0000374
- []
-
-
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 196--196
-\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
-3347 )| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 197--197
-[]|\T5/qtm/m/n/10.83347 TC-K4-
- []
-
-
-Underfull \hbox (badness 4266) in paragraph at lines 197--197
-[]|\T5/qtm/m/n/10.83347 Black-box 200 l¦n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 197--197
-[]|\T5/qtm/m/n/10.83347 0/200 crash
- []
-
-
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 197--197
-\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
-3347 )| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--198
-[]|\T5/qtm/m/n/10.83347 TC-K2-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--198
-[]|\T5/qtm/m/n/10.83347 Scanner qu²t
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--198
-\T5/cmtt/b/n/10.83347 dangling_free
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--198
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
 []|\T5/qtm/m/n/10.83347 Ph¡t hi»n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 198--198
-\T5/qtm/m/n/10.83347 CWE-416 t¤i
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+\T5/qtm/m/n/10.83347 ^^_õ c£nh b¡o
  []
 
 
-Overfull \hbox (11.31526pt too wide) in paragraph at lines 198--198
-\T5/cmtt/b/n/10.83347 giang_vien.c:32| 
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+[]|\T5/qtm/m/n/10.83347 5 c£nh b¡o CWE-
  []
 
 
-Underfull \hbox (badness 1629) in paragraph at lines 198--198
-[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n ^^_óng và tr½
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+\T5/qtm/m/n/10.83347 120 ^^_óng và tr½
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 198--198
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 204--204
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--199
+Underfull \hbox (badness 10000) in paragraph at lines 205--205
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--205
+[]|\T5/qtm/m/n/10.83347 Scanner qu²t
+ []
+
+
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 205--205
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
+3347 )| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 206--206
 []|\T5/qtm/m/n/10.83347 TC-K4-
  []
 
 
-Underfull \hbox (badness 4859) in paragraph at lines 199--199
-\T5/cmtt/b/n/10.83347 free(gv) \T5/qtm/m/n/10.83347 rçi v¨n
+Underfull \hbox (badness 10000) in paragraph at lines 206--206
+[]|\T5/qtm/m/n/10.83347 White-box Tar-get
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--199
+Underfull \hbox (badness 2213) in paragraph at lines 206--206
 []|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--199
-[]|\T5/qtm/m/n/10.83347 SAT ğ l¦n thû 3
+Underfull \hbox (badness 10000) in paragraph at lines 206--206
+[]|\T5/qtm/m/n/10.83347 SAT ğ l¦n thû 1
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 199--199
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 206--206
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 207--207
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 207--207
+[]|\T5/qtm/m/n/10.83347 White-box Tar-get
+ []
+
+
+Underfull \hbox (badness 2213) in paragraph at lines 207--207
+[]|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 207--207
+[]|\T5/qtm/m/n/10.83347 SAT ğ l¦n thû 2
+ []
+
+
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 207--207
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
+3347 )| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--208
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--208
+\T5/qtm/m/n/10.83347 ng¨u nhi¶n tr¶n
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--208
+[]|\T5/qtm/m/n/10.83347 72/200 crash,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--208
+\T5/qtm/m/n/10.83347 exit \T5/cmtt/b/n/10.83347 0xC0000374
+ []
+
+
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 208--208
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 209--209
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 209--209
+[]|\T5/qtm/m/n/10.83347 0/200 crash
+ []
+
+
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 209--209
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
+3347 )| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
 []|\T5/qtm/m/n/10.83347 TC-K2-
  []
 
 
-Overfull \hbox (28.53143pt too wide) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+[]|\T5/qtm/m/n/10.83347 Scanner qu²t
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+\T5/cmtt/b/n/10.83347 dangling_free
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+\T5/qtm/m/n/10.83347 CWE-416 t¤i
+ []
+
+
+Overfull \hbox (17.00615pt too wide) in paragraph at lines 210--210
+\T5/cmtt/b/n/10.83347 giang_vien.c:32| 
+ []
+
+
+Underfull \hbox (badness 4608) in paragraph at lines 210--210
+[]|\T5/qtm/m/n/10.83347 Ph¡t hi»n ^^_óng và tr½
+ []
+
+
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 210--210
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
+3347 )| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--211
+[]|\T5/qtm/m/n/10.83347 TC-K4-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--211
+[]|\T5/qtm/m/n/10.83347 White-box Tar-
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 211--211
+\T5/qtm/m/n/10.83347 get 3: \T5/cmtt/b/n/10.83347 free(gv)
+ []
+
+
+Underfull \hbox (badness 5878) in paragraph at lines 211--211
+\T5/qtm/m/n/10.83347 rçi v¨n ^^_åc qua
+ []
+
+
+Underfull \hbox (badness 2213) in paragraph at lines 211--211
+[]|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--211
+[]|\T5/qtm/m/n/10.83347 SAT ğ l¦n thû 3
+ []
+
+
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 211--211
+\T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
+3347 )| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 212--212
+[]|\T5/qtm/m/n/10.83347 TC-K2-
+ []
+
+
+Overfull \hbox (34.22232pt too wide) in paragraph at lines 212--212
 []|\T5/cmtt/b/n/10.83347 memory_trace_demo.py\T5/qtm/m/n/10.83347 :
  []
 
 
-Overfull \hbox (8.31555pt too wide) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 212--212
+\T5/qtm/m/n/10.83347 ^^_åc \T5/cmtt/b/n/10.83347 gv->hoTen
+ []
+
+
+Underfull \hbox (badness 5189) in paragraph at lines 212--212
+\T5/qtm/m/n/10.83347 sau \T5/cmtt/b/n/10.83347 free()\T5/qtm/m/n/10.83347 , b£n
+
+ []
+
+
+Underfull \hbox (badness 1655) in paragraph at lines 212--212
+[]|\T5/qtm/m/n/10.83347 ASan ph£i b­t
+ []
+
+
+Overfull \hbox (2.62509pt too wide) in paragraph at lines 212--212
 []|\T5/cmtt/b/n/10.83347 heap-use-after-free\T5/qtm/m/n/10.83347 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 212--212
 \T5/qtm/m/n/10.83347 ABORT-ING, off-set
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 212--212
 \OT1/cmr/m/n/10.95 +24$ \T5/qtm/m/n/10.83347 byte $\OT1/cmr/m/n/10.95 =$ \T5/cm
 tt/b/n/10.83347 hoTen
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--201
+Underfull \hbox (badness 10000) in paragraph at lines 213--213
 []|\T5/qtm/m/n/10.83347 TC-K2-
  []
 
 
-Overfull \hbox (28.2281pt too wide) in paragraph at lines 201--201
+Overfull \hbox (33.91899pt too wide) in paragraph at lines 213--213
 []|\T5/cmtt/b/n/10.83347 memory_trace_demo.py\T5/qtm/m/n/10.83347 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--201
+Underfull \hbox (badness 3884) in paragraph at lines 213--213
 \T5/qtm/m/n/10.83347 b£n ASan-FIXED
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--201
+Underfull \hbox (badness 10000) in paragraph at lines 213--213
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 gv_ptr=NULL
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--201
+Underfull \hbox (badness 10000) in paragraph at lines 213--213
 []|\T5/qtm/m/n/10.83347 0 vi ph¤m
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--202
+Underfull \hbox (badness 10000) in paragraph at lines 214--214
 []|\T5/qtm/m/n/10.83347 TC-K2-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--202
+Underfull \hbox (badness 10000) in paragraph at lines 214--214
 []|\T5/qtm/m/n/10.83347 Scanner qu²t
  []
 
 
-Overfull \hbox (36.89209pt too wide) in paragraph at lines 202--202
+Overfull \hbox (42.58298pt too wide) in paragraph at lines 214--214
 \T5/cmtt/b/n/10.83347 unchecked_nested_deref
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--202
+Underfull \hbox (badness 10000) in paragraph at lines 214--214
 []|\T5/qtm/m/n/10.83347 Ph¡t hi»n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--202
+Underfull \hbox (badness 10000) in paragraph at lines 214--214
 \T5/qtm/m/n/10.83347 CWE-476 t¤i
  []
 
 
-Overfull \hbox (28.37378pt too wide) in paragraph at lines 202--202
+Overfull \hbox (34.06467pt too wide) in paragraph at lines 214--214
 \T5/cmtt/b/n/10.83347 tinh_tien_day.c:13| 
  []
 
 
-Underfull \hbox (badness 1629) in paragraph at lines 202--202
+Underfull \hbox (badness 4608) in paragraph at lines 214--214
 []|\T5/qtm/m/n/10.83347 Ph¡t hi»n ^^_óng và tr½
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 202--202
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 214--214
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 pattern_scanner.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--203
+Underfull \hbox (badness 10000) in paragraph at lines 215--215
 []|\T5/qtm/m/n/10.83347 TC-K4-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--203
-\T5/cmtt/b/n/10.83347 gv_ptr=NULL
+Underfull \hbox (badness 10000) in paragraph at lines 215--215
+[]|\T5/qtm/m/n/10.83347 White-box Tar-get
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--203
+Underfull \hbox (badness 10000) in paragraph at lines 215--215
+\T5/qtm/m/n/10.83347 4: \T5/cmtt/b/n/10.83347 gv_ptr=NULL
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 215--215
 \T5/qtm/m/n/10.83347 rçi gåi
  []
 
 
-Overfull \hbox (25.51974pt too wide) in paragraph at lines 203--203
+Overfull \hbox (31.21063pt too wide) in paragraph at lines 215--215
 \T5/cmtt/b/n/10.83347 calculate_e2e_salary| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--203
+Underfull \hbox (badness 2213) in paragraph at lines 215--215
 []|\T5/qtm/m/n/10.83347 T¼m ^^_i·u ki»n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--203
+Underfull \hbox (badness 10000) in paragraph at lines 215--215
 []|\T5/qtm/m/n/10.83347 SAT ğ l¦n thû 4
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 203--203
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 215--215
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
+Underfull \hbox (badness 10000) in paragraph at lines 216--216
 []|\T5/qtm/m/n/10.83347 TC-K3-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
+Underfull \hbox (badness 10000) in paragraph at lines 216--216
 []|\T5/qtm/m/n/10.83347 SAT dü ki¸n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
+Underfull \hbox (badness 10000) in paragraph at lines 216--216
+\T5/qtm/m/n/10.83347 (^^_ang kiºm
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--216
+\T5/qtm/m/n/10.83347 ^^_ành code
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--216
 []|\T5/qtm/m/n/10.83347 SAT -- num-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--205
+Underfull \hbox (badness 5050) in paragraph at lines 216--216
+\T5/qtm/m/n/10.83347 Classes=20, soTiet=120
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 217--217
 []|\T5/qtm/m/n/10.83347 TC-K3-
  []
 
 
-Underfull \hbox (badness 2245) in paragraph at lines 205--205
-\T5/qtm/m/n/10.83347 c¥u häi tr¶n \T5/cmtt/b/n/10.83347 long
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 205--205
+Underfull \hbox (badness 10000) in paragraph at lines 217--217
 []|\T5/qtm/m/n/10.83347 UNSAT
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--206
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
 []|\T5/qtm/m/n/10.83347 TC-K4-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--206
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]|\T5/qtm/m/n/10.83347 White-box
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\T5/qtm/m/n/10.83347 Tar-get 5:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
 \T5/qtm/m/n/10.83347 soTiet=16694179,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--206
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
 []|\T5/qtm/m/n/10.83347 SAT ğ l¦n thû 5
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 206--206
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 218--218
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_whitebox.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--207
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
 []|\T5/qtm/m/n/10.83347 TC-K1-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--207
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
 []|\T5/qtm/m/n/10.83347 BMC $\OML/cmm/m/it/10.95 P[]$\T5/qtm/m/n/10.83347 , b£n
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--207
+Underfull \hbox (badness 2608) in paragraph at lines 219--219
+[]|\T5/qtm/m/n/10.83347 SAT -- $\OML/cmm/m/it/10.95 S[]$ \T5/qtm/m/n/10.83347 m
+ang nh¢n
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
 \T5/cmtt/b/n/10.83347 byte_truncated
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--208
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
 []|\T5/qtm/m/n/10.83347 TC-K1-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--208
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
 []|\T5/qtm/m/n/10.83347 BMC $\OML/cmm/m/it/10.95 P[]$\T5/qtm/m/n/10.83347 , b£n
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--208
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
 []|\T5/qtm/m/n/10.83347 UNSAT
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
 []|\T5/qtm/m/n/10.83347 TC-K3-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
 []|\T5/qtm/m/n/10.83347 Check 4 (Z3):
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 1184) in paragraph at lines 221--221
+[]|\T5/qtm/m/n/10.83347 SAT -- $\OML/cmm/m/it/10.95 n \OT1/cmr/m/n/10.95 = 128 
+\OMS/cmsy/m/n/10.95 !$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
 \T5/qtm/m/n/10.83347 byte $\OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr
 /m/n/10.95 128$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 210--210
+Underfull \hbox (badness 10000) in paragraph at lines 222--222
 []|\T5/qtm/m/n/10.83347 TC-K3-
  []
 
 
-Underfull \hbox (badness 3312) in paragraph at lines 210--210
-\T5/qtm/m/n/10.83347 c¥u häi vîi guard
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 210--210
+Underfull \hbox (badness 10000) in paragraph at lines 222--222
 []|\T5/qtm/m/n/10.83347 UNSAT
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 211--211
+Underfull \hbox (badness 10000) in paragraph at lines 223--223
 []|\T5/qtm/m/n/10.83347 TC-K3-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 211--211
+Underfull \hbox (badness 10000) in paragraph at lines 223--223
 []|\T5/qtm/m/n/10.83347 REQ-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 211--211
+Underfull \hbox (badness 10000) in paragraph at lines 223--223
 \T5/qtm/m/n/10.83347 8,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 211--211
+Underfull \hbox (badness 10000) in paragraph at lines 223--223
+[]|\T5/qtm/m/n/10.83347 Check 6 (Z3):
+ []
+
+
+Underfull \hbox (badness 7740) in paragraph at lines 223--223
 []|\T5/qtm/m/n/10.83347 UNSAT mong
  []
 
 
-Underfull \hbox (badness 7433) in paragraph at lines 211--211
-\T5/qtm/m/n/10.83347 muèn (an to n
- []
-
-
-Underfull \hbox (badness 1038) in paragraph at lines 211--211
+Underfull \hbox (badness 1895) in paragraph at lines 223--223
 []|\T5/qtm/m/n/10.83347 SAT -- $\OML/cmm/m/it/10.95 a \OT1/cmr/m/n/10.95 = 0\OM
 L/cmm/m/it/10.95 ; b \OT1/cmr/m/n/10.95 =
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 211--211
+Underfull \hbox (badness 5878) in paragraph at lines 223--223
 \OT1/cmr/m/n/10.95 256$ \T5/qtm/m/n/10.83347 còng byte $\OT1/cmr/m/n/10.95 = 0$
 
  []
 
 
-Overfull \hbox (0.57286pt too wide) in paragraph at lines 211--212
-[]|\T5/qtm/m/n/10.83347 FAIL$[]$| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 212--212
+Underfull \hbox (badness 10000) in paragraph at lines 224--224
 []|\T5/qtm/m/n/10.83347 TC-K4-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 212--212
+Underfull \hbox (badness 10000) in paragraph at lines 224--224
 []|\T5/qtm/m/n/10.83347 Black-box CWE-
  []
 
 
-Underfull \hbox (badness 4805) in paragraph at lines 212--212
+Underfull \hbox (badness 1117) in paragraph at lines 224--224
 \T5/qtm/m/n/10.83347 197, 200 l¦n tr¶n
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 212--212
+Underfull \hbox (badness 2564) in paragraph at lines 224--224
+[]|\T5/qtm/m/n/10.83347 120/200 sai l»ch, 60%
+ []
+
+
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 224--224
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--213
+Underfull \hbox (badness 10000) in paragraph at lines 225--225
 []|\T5/qtm/m/n/10.83347 TC-K4-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--213
+Underfull \hbox (badness 10000) in paragraph at lines 225--225
 []|\T5/qtm/m/n/10.83347 Black-box CWE-
  []
 
 
-Underfull \hbox (badness 4805) in paragraph at lines 213--213
+Underfull \hbox (badness 1117) in paragraph at lines 225--225
 \T5/qtm/m/n/10.83347 197, 200 l¦n tr¶n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--213
+Underfull \hbox (badness 10000) in paragraph at lines 225--225
 []|\T5/qtm/m/n/10.83347 0/200 sai l»ch,
  []
 
 
-Underfull \hbox (badness 1325) in paragraph at lines 213--213
+Underfull \hbox (badness 5345) in paragraph at lines 225--225
 \T5/qtm/m/n/10.83347 150/200 ch°n an to n
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 213--213
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 225--225
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--214
+Underfull \hbox (badness 10000) in paragraph at lines 226--226
 []|\T5/qtm/m/n/10.83347 TC-K4-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--214
+Underfull \hbox (badness 10000) in paragraph at lines 226--226
 []|\T5/qtm/m/n/10.83347 REQ-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--214
+Underfull \hbox (badness 10000) in paragraph at lines 226--226
 \T5/qtm/m/n/10.83347 8,
  []
 
 
-Underfull \hbox (badness 5302) in paragraph at lines 214--214
-[]|\T5/qtm/m/n/10.83347 Byte thªt khîp
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 214--214
+Underfull \hbox (badness 10000) in paragraph at lines 226--226
 \T5/qtm/m/n/10.83347 byte t½nh tay
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--214
+Underfull \hbox (badness 10000) in paragraph at lines 226--226
 \T5/qtm/m/n/10.83347 17/17; khæng
  []
 
 
-Underfull \hbox (badness 1668) in paragraph at lines 214--214
+Underfull \hbox (badness 6188) in paragraph at lines 226--226
 []|\T5/qtm/m/n/10.83347 17/17 khîp lş thuy¸t,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--214
+Underfull \hbox (badness 10000) in paragraph at lines 226--226
 \T5/qtm/m/n/10.83347 nh÷ng lë 6 nhâm
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--214
+Underfull \hbox (badness 10000) in paragraph at lines 226--226
 \T5/qtm/m/n/10.83347 tròng l°p byte thªt
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 214--214
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 226--226
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Overfull \hbox (28.50148pt too wide) in paragraph at lines 214--215
-[]|\T5/qtm/m/n/10.83347 PASS/FAIL$[]$| 
+Overfull \hbox (19.966pt too wide) in paragraph at lines 226--227
+ []|\T5/qtm/m/n/10.83347 PASS/FAIL$[]$| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
 []|\T5/qtm/m/n/10.83347 TC-K4-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
 []|\T5/qtm/m/n/10.83347 REQ-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
 \T5/qtm/m/n/10.83347 8,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
+Underfull \hbox (badness 4569) in paragraph at lines 227--227
+[]|\T5/qtm/m/n/10.83347 0 nhâm tròng
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
 []|\T5/qtm/m/n/10.83347 0 nhâm tròng l°p
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 215--215
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 227--227
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--216
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+[]|\T5/qtm/m/n/10.83347 TC-K3-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+[]|\T5/qtm/m/n/10.83347 Check 7 (Z3):
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+\OMS/cmsy/m/n/10.95 9$ \T5/qtm/m/n/10.83347 2 danh möc
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+\T5/cmtt/b/n/10.83347 bangCap \T5/qtm/m/n/10.83347 kh¡c
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+\T5/qtm/m/n/10.83347 nhau (\T5/cmtt/b/n/10.83347 CU_NHAN
+ []
+
+
+Underfull \hbox (badness 1831) in paragraph at lines 228--228
+\T5/qtm/m/n/10.83347 thªt, chuéi khæng
+ []
+
+
+Underfull \hbox (badness 7740) in paragraph at lines 228--228
+[]|\T5/qtm/m/n/10.83347 UNSAT mong
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+\T5/qtm/m/n/10.83347 muèn (ph¥n
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+[]|\T5/qtm/m/n/10.83347 SAT -- c£ 2 còng
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+\T5/qtm/m/n/10.83347 rìi v o fall-back $\OT1/cmr/m/n/10.95 1\OML/cmm/m/it/10.95
+ :\OT1/cmr/m/n/10.95 0$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--229
 []|\T5/qtm/m/n/10.83347 TC-K4-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--216
+Underfull \hbox (badness 10000) in paragraph at lines 229--229
 []|\T5/qtm/m/n/10.83347 Black-box:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--216
+Underfull \hbox (badness 10000) in paragraph at lines 229--229
 \T5/cmtt/b/n/10.83347 bangCap \T5/qtm/m/n/10.83347 ng¨u
  []
 
 
-Underfull \hbox (badness 3792) in paragraph at lines 216--216
-\T5/qtm/m/n/10.83347 nhi¶n gçm gi¡ trà
+Underfull \hbox (badness 1655) in paragraph at lines 229--229
+\T5/qtm/m/n/10.83347 nhªn h» thèng
  []
 
 
-Underfull \hbox (badness 1221) in paragraph at lines 216--216
-\T5/qtm/m/n/10.83347 khæng hñp l», tr¶n
+Underfull \hbox (badness 2617) in paragraph at lines 229--229
+[]|\T5/qtm/m/n/10.83347 Script ch¿ ^^_¸m 75/200
  []
 
 
-Underfull \hbox (badness 4608) in paragraph at lines 216--216
-[]|\T5/qtm/m/n/10.83347 C¦n or-a-cle x¡c
+Underfull \hbox (badness 1831) in paragraph at lines 229--229
+\T5/qtm/m/n/10.83347 ^^_÷ñc sinh ra, KHÆNG
  []
 
 
-Overfull \hbox (12.82228pt too wide) in paragraph at lines 216--216
+Underfull \hbox (badness 1033) in paragraph at lines 229--229
+\T5/qtm/m/n/10.83347 as-sert h nh vi ^^_óng/-sai
+ []
+
+
+Overfull \hbox (7.13182pt too wide) in paragraph at lines 229--229
 \T5/qtm/m/n/10.83347 (\T5/cmtt/b/n/10.83347 fuzzer_blackbox.log\T5/qtm/m/n/10.8
 3347 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--217
+Underfull \hbox (badness 10000) in paragraph at lines 230--230
 []|\T5/qtm/m/n/10.83347 TC-K2-
  []
 
 
-Underfull \hbox (badness 2753) in paragraph at lines 217--217
-[]|\T5/qtm/m/n/10.83347 (ch÷a câ test case
+Underfull \hbox (badness 2253) in paragraph at lines 230--230
+\T5/qtm/m/n/10.83347 måi in-put hñp
  []
 
 
-Underfull \hbox (badness 4217) in paragraph at lines 217--217
-[]|\T5/qtm/m/n/10.83347 Cæng thùc t½nh
- []
-
-
-Underfull \hbox (badness 3199) in paragraph at lines 217--217
-\T5/qtm/m/n/10.83347 l÷ìng ^^_óng vîi
- []
-
-
-Underfull \hbox (badness 3635) in paragraph at lines 217--217
+Underfull \hbox (badness 10000) in paragraph at lines 230--230
 []|\T5/qtm/m/n/10.83347 Check 1/2 ch¿ chùng
  []
 
 
-Underfull \hbox (badness 1292) in paragraph at lines 217--217
+Underfull \hbox (badness 10000) in paragraph at lines 230--230
 \T5/qtm/m/n/10.83347 minh KHÆNG TR€N
  []
 
-
-Underfull \hbox (badness 1728) in paragraph at lines 217--217
-\T5/qtm/m/n/10.83347 thùc nghi»p vö mong
- []
-
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 218.
+e 231.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[25]
+[39]
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 218.
+e 231.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [26]
+ [40]
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 218.
+e 231.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [27]) (chapters/chuong6.tex
+ [41]
+File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
+<use graphics/Logo ÄH Phenikaa V Wh.png>
+Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
+e 231.
+(pdftex.def)             Requested size: 20.0pt x 13.71428pt.
+ [42]) (chapters/chuong6.tex
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
 e 8.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [28]
+ [43]
 Underfull \hbox (badness 1215) in paragraph at lines 9--10
 \T5/qtm/m/n/13 Win-dows khæng câ SIGSEGV theo ngh¾a POSIX cho crash na-tive; to
  n bë
@@ -2298,9 +2609,9 @@ tm/m/n/13 -- \T5/cmtt/b/n/13 STATUS_HEAP_CORRUPTION\T5/qtm/m/n/13 ), khæng ph£i
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 16.
+e 17.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
-[29]
+[44]
 Underfull \hbox (badness 1642) in paragraph at lines 23--24
 []\T5/qtm/m/n/13 Ch¤y l¤i bë fuzzing tr¶n \T5/qtm/b/n/13 Linux \T5/qtm/m/n/13 (
 qua WSL ho°c m¡y £o) ^^_º thu ^^_÷ñc t½n
@@ -2316,9 +2627,9 @@ BRT \T5/qtm/m/n/13 chu©n POSIX, ^^_èi chi¸u trüc ti¸p vîi h nh vi
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 7.
+e 8.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [30]) (report.bbl
+ [45]) (report.bbl
 LaTeX Font Info:    Trying to load font information for OT1+qtm on input line 8
 .
 
@@ -2328,17 +2639,17 @@ File: ot1qtm.fd 2009/09/25 v1.2 font definition file for OT1/qtm
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
-e 41.
+e 56.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
 
-[31{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-rm.enc
+[46{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-rm.enc
 }])
 File: graphics/Logo ÄH Phenikaa V Wh.png Graphic file (type png)
 <use graphics/Logo ÄH Phenikaa V Wh.png>
 Package pdftex.def Info: graphics/Logo ÄH Phenikaa V Wh.png  used on input lin
 e 99.
 (pdftex.def)             Requested size: 20.0pt x 13.71428pt.
- [32] (report.aux)
+ [47] (report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -2348,35 +2659,40 @@ L3 programming layer <2024-01-04>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: DE8993D8E5BCCD54E5D89370237E902D;7236.
+(rerunfilecheck)             Checksum: 050689D53CB261ECE5B38BB710CCB6C7;8602.
  ) 
 Here is how much of TeX's memory you used:
- 21187 strings out of 474485
- 353131 string characters out of 5745150
- 2055542 words of memory out of 5000000
- 42935 multiletter control sequences out of 15000+600000
- 634009 words of font info for 157 fonts, out of 8000000 for 9000
+ 21305 strings out of 474485
+ 355002 string characters out of 5745150
+ 2090542 words of memory out of 5000000
+ 43005 multiletter control sequences out of 15000+600000
+ 645582 words of font info for 176 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 123i,25n,121p,1154b,2378s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmm
-i10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmmi12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmr9.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/HP/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/HP/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/tex-gyre/qtmb.pfb><C:/Users/HP/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Users/HP/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Users/HP/AppData/
-Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnitt10.pfb><C:/Users/HP/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt10.pfb><C:/Users/HP/AppData/Local
-/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt12.pfb>
-Output written on report.pdf (32 pages, 1573501 bytes).
+ 123i,25n,121p,1396b,2382s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
+x12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmex10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmmi12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/HP/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/HP/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/HP/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/HP/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/HP/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/HP/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:
+/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qtmb.pfb><C
+:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qtmr.pfb><
+C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qtmri.pfb
+><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnitt10.pfb><
+C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnss10.pfb><C:/
+Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt10.pfb><C:/Use
+rs/HP/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vntt12.pfb>
+Output written on report.pdf (47 pages, 3900790 bytes).
 PDF statistics:
- 665 PDF objects out of 1000 (max. 8388607)
- 152 named destinations out of 1000 (max. 500000)
- 300 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 846 PDF objects out of 1000 (max. 8388607)
+ 189 named destinations out of 1000 (max. 500000)
+ 324 words of extra memory for PDF output out of 10000 (max. 10000000)
 
