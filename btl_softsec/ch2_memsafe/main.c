@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#ifdef _WIN32
+#include <windows.h>
+#include <psapi.h>
+#endif
 #include "giang_vien.h"
 #include "lop_hoc_phan.h"
 #include "tinh_tien_day.h"
@@ -100,6 +105,65 @@ int main(int argc, char *argv[]) {
             fflush(stdout);
 
             free(lhp);
+            return 0;
+        } else if (strcmp(argv[1], "e2e_nfr_bench") == 0) {
+            // Doi chung VULN cho NFR-1/NFR-2 (xem main_fixed.c) - dung ham *_VULN de xac nhan
+            // ca 2 NFR khong phu thuoc vao viec ham co guard an toan hay khong (hieu nang/
+            // rieng biet voi memory-safety), va de bang chung minh (khong chi lap luan) rang
+            // delete_lecturer_VULN() van goi free() nen KHONG gay leak (CWE-416 la dangling
+            // pointer, khac voi memory leak).
+            int N = (argc > 2) ? atoi(argv[2]) : 10000;
+            printf("--- E2E NFR BENCH VULN: N=%d lan lap ---\n", N);
+
+            GiangVien *gv0 = add_lecturer_VULN(1, "DU_GV01", "Nguyen Van A", "TIEN_SI");
+            LopHocPhan *lhp0 = create_class_section_VULN(1, "CNTT2024_NFR", 45, 1.0f, 60, gv0);
+
+            // NFR-1: cung ly do dung QueryPerformanceCounter thay vi clock() nhu main_fixed.c
+            // (clock() tren Windows do phan giai ~15ms, qua tho cho 1 phep tinh O(1)).
+            volatile long acc = 0;
+#ifdef _WIN32
+            LARGE_INTEGER freq, t0, t1;
+            QueryPerformanceFrequency(&freq);
+            QueryPerformanceCounter(&t0);
+            for (int i = 0; i < N; i++) {
+                acc += calculate_e2e_salary_VULN(lhp0, &cfg);
+            }
+            QueryPerformanceCounter(&t1);
+            double totalMs = 1000.0 * (double)(t1.QuadPart - t0.QuadPart) / (double)freq.QuadPart;
+#else
+            clock_t t0 = clock();
+            for (int i = 0; i < N; i++) {
+                acc += calculate_e2e_salary_VULN(lhp0, &cfg);
+            }
+            clock_t t1 = clock();
+            double totalMs = 1000.0 * (double)(t1 - t0) / CLOCKS_PER_SEC;
+#endif
+            double avgMs = totalMs / N;
+            printf("[NFR-1 PERF] %d lan calculate_e2e_salary_VULN: tong=%.3f ms, trung binh=%.6f ms/lan (nguong <10ms/lan) -> %s (acc=%ld)\n",
+                   N, totalMs, avgMs, (avgMs < 10.0) ? "PASS" : "FAIL", acc);
+
+            free(lhp0);
+            free(gv0);
+
+#ifdef _WIN32
+            PROCESS_MEMORY_COUNTERS pmcBefore, pmcAfter;
+            GetProcessMemoryInfo(GetCurrentProcess(), &pmcBefore, sizeof(pmcBefore));
+#endif
+            for (int i = 0; i < N; i++) {
+                GiangVien *gv = add_lecturer_VULN(1, "DU_GV01", "Nguyen Van A", "TIEN_SI");
+                LopHocPhan *lhp = create_class_section_VULN(1, "CNTT2024_NFR", 45, 1.0f, 60, gv);
+                delete_lecturer_VULN(gv);
+                free(lhp);
+            }
+#ifdef _WIN32
+            GetProcessMemoryInfo(GetCurrentProcess(), &pmcAfter, sizeof(pmcAfter));
+            long long driftKB = ((long long)pmcAfter.WorkingSetSize - (long long)pmcBefore.WorkingSetSize) / 1024;
+            printf("[NFR-2 MEMORY] %d lan tao/xoa GiangVien+LopHocPhan: WorkingSet truoc=%llu KB, sau=%llu KB, drift=%lld KB (nguong |drift|<1024 KB) -> %s\n",
+                   N, (unsigned long long)(pmcBefore.WorkingSetSize / 1024), (unsigned long long)(pmcAfter.WorkingSetSize / 1024),
+                   driftKB, (driftKB < 1024 && driftKB > -1024) ? "PASS" : "FAIL");
+#else
+            printf("[NFR-2 MEMORY] Bo qua do khong bien dich tren Windows (can psapi.h GetProcessMemoryInfo)\n");
+#endif
             return 0;
         }
     }

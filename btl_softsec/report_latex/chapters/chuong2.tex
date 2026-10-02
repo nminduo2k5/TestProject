@@ -95,7 +95,7 @@ Trước khi phân tích lỗ hổng, đề tài đặc tả tường minh \emph
   \midrule
   REQ-8.1 & $\texttt{soLuongSinhVien}\in[0,127]$ $\to$ byte chính xác & ST-11 & Ch3 Check 5 (UNSAT); Ch4 BVA 17/17 \\
   REQ-8.2 & $\texttt{soLuongSinhVien}=128$ $\to$ SAFE bị chặn & ST-12 & Ch3 Check 4/5; Ch4 BVA \\
-  REQ-8.3 & $\texttt{soLuongSinhVien}>127$ $\to$ ghi sentinel, không wrap-around & ST-12 & Ch4 BVA (150/200 chặn an toàn) \\
+  REQ-8.3 & $\texttt{soLuongSinhVien}>127$ $\to$ ghi sentinel, không wrap-around & ST-12 & Ch4 BVA (146/200 chặn an toàn) \\
   REQ-8.4 & Không tồn tại 2 \texttt{soLuongSinhVien} khác nhau cùng 1 byte & ST-13 & Ch3 Check 6 (SAT trên VULN) \\
   REQ-8.5 & $\texttt{soLuongSinhVien}=0$ và $=256$ phải cho byte khác nhau & ST-13 & Ch3 Check 6; Ch4 Target 7 \\
 
@@ -120,27 +120,31 @@ Trước khi phân tích lỗ hổng, đề tài đặc tả tường minh \emph
 \subsection{Yêu cầu phi chức năng (NFR)}
 \label{sec:nfr}
 
-\begin{table}[H]
-  \centering
+{\scriptsize
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{@{}l >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{5.3cm} >{\raggedright\arraybackslash}p{5.3cm}@{}}
   \caption{Yêu cầu phi chức năng (Non-Functional Requirements)}
-  \label{tab:nfr}
-  \footnotesize
-  \renewcommand{\arraystretch}{1.18}
-  \begin{tabularx}{\linewidth}{@{}l >{\raggedright\arraybackslash}p{2.6cm} X X@{}}
-    \toprule
-    \textbf{Mã NFR} & \textbf{Thuộc tính} & \textbf{Nội dung đặc tả} & \textbf{Đối chiếu kiểm chứng} \\
-    \midrule
-    NFR-1 & Hiệu năng & Thời gian tính lương cho 1 lớp $< 10\,$ms (không tính I/O) trên phần cứng phổ thông. & Hàm gồm 2 phép tính số học $O(1)$, không vòng lặp -- thoả mãn lý thuyết; chưa đo \mbox{microbenchmark} riêng. \\
-    NFR-2 & Độ ổn định bộ nhớ & Không phát sinh lỗi bộ nhớ (\texttt{heap-use-after-free}, buffer overflow) khi lặp luồng E2E $\ge 10.000$ lần. & 0 vi phạm qua ASan (\Cref{sec:ch2}) và 0/200 crash qua black-box fuzzing bản FIXED (\Cref{sec:ch4}). Quy mô $10^4$ chưa đo trực tiếp. \\
+  \label{tab:nfr} \\
+  \toprule
+  \textbf{Mã NFR} & \textbf{Thuộc tính} & \textbf{Nội dung đặc tả} & \textbf{Đối chiếu kiểm chứng} \\
+  \midrule
+  \endfirsthead
+  \multicolumn{4}{l}{\textit{\small(tiếp theo Bảng~\ref{tab:nfr})}} \\[3pt]
+  \toprule
+  \textbf{Mã NFR} & \textbf{Thuộc tính} & \textbf{Nội dung đặc tả} & \textbf{Đối chiếu kiểm chứng} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endlastfoot
+    NFR-1 & Hiệu năng & Thời gian tính lương cho 1 lớp $< 10\,$ms (không tính I/O) trên phần cứng phổ thông. & \textbf{Đã đo thực nghiệm} (subcommand \texttt{e2e\_nfr\_bench}, \texttt{main\_fixed.c}/\texttt{main.c}, dùng \texttt{QueryPerformanceCounter} vì \texttt{clock()} trên Windows chỉ có độ phân giải $\approx$15\,ms -- quá thô để đo 1 phép tính $O(1)$): $10\,000$ lần gọi \texttt{calculate\_e2e\_salary\_SAFE()} mất tổng $0{,}141\,$ms $\Rightarrow$ trung bình $0{,}000014\,$ms/lần (bản VULN: $0{,}000011\,$ms/lần) -- thấp hơn ngưỡng gần $6$ bậc độ lớn -- \textbf{PASS} (\texttt{logs/nfr\_check.log}). \\
+    NFR-2 & Độ ổn định bộ nhớ & Không phát sinh lỗi bộ nhớ (\texttt{heap-use-after-free}, buffer overflow) khi lặp luồng E2E $\ge 10.000$ lần. & \textbf{Đã đo thực nghiệm ở đúng quy mô $10^4$} (cùng subcommand \texttt{e2e\_nfr\_bench}, đo \texttt{WorkingSetSize} qua \texttt{GetProcessMemoryInfo} trước/sau $10\,000$ lần tạo/xoá \texttt{GiangVien}+\texttt{LopHocPhan}): drift $=4$\,KB trên bản SAFE, $4$\,KB trên bản VULN (ngưỡng $<1024$\,KB) -- \textbf{PASS cả 2 bản} (\texttt{logs/nfr\_check.log}), bổ trợ cho 0 vi phạm ASan (\Cref{sec:ch2}) và 0/200 crash fuzzing bản FIXED (\Cref{sec:ch4}) đã có trước đó. \\
     NFR-3 & Tính di động & Biên dịch sạch (0 warning với \texttt{-Wall}) trên $\ge 2$ toolchain khác nhau. & Đã xác nhận biên dịch và chạy thành công trên GCC/MSYS2 UCRT64 và Clang64 (\Cref{sec:ch2}) -- \textbf{PASS}. \\
-    NFR-4 & Chịu lỗi \mbox{(Robustness)} & Khi input vượt đặc tả (\Cref{tab:range}), bản vá phải từ chối có kiểm soát (trả mã lỗi), không crash. & 0/200 crash trên fuzzing bản FIXED; 150/200 lần chặn an toàn đúng thiết kế trên kịch bản CWE-197 (\Cref{sec:ketqua}) -- \textbf{PASS}. \\
+    NFR-4 & Chịu lỗi \mbox{(Robustness)} & Khi input vượt đặc tả (\Cref{tab:range}), bản vá phải từ chối có kiểm soát (trả mã lỗi), không crash. & 0/200 crash trên fuzzing bản FIXED; 146/200 lần chặn an toàn đúng thiết kế trên kịch bản CWE-197 (\Cref{sec:ketqua}) -- \textbf{PASS}. \\
     NFR-5 & Toàn vẹn \mbox{(Audit)} & Hai giá trị \texttt{soLuongSinhVien} khác nhau không bị map trùng 1 byte trong audit log (non-collision). & Check 6 (\Cref{sec:ch3}) và Target 7 (\Cref{sec:ch4}) tái hiện vi phạm trên VULN; bản FIXED chặn trước ép kiểu -- \textbf{PASS trên FIXED}. \\
-    NFR-6 & Tính tất định & Cùng bộ input, kết quả BMC/SMT và tính lương phải nhất quán ở mọi lần chạy độc lập. & Cố định \texttt{random\_seed} trong \texttt{kripke\_bmc.py}, các lần chạy độc lập cho ra cùng 1 kết quả -- \textbf{PASS}. \\
-    NFR-7 & Không có \mbox{dead field} & Mọi field khai báo trong struct cấu hình (\texttt{Config}, ...) phải được ít nhất 1 hàm thực sự đọc -- không giữ lại field không dùng, dễ gây hiểu sai khi mô hình hóa. & \texttt{cfg->heSoQuyMoLop} (\texttt{tinh\_tien\_day.h:8}) không được \texttt{calculate\_e2e\_salary\_*()} đọc ở đâu cả -- \textbf{FAIL}, xem \Cref{sec:vidufull}. \\
-    \bottomrule
-  \end{tabularx}
-  \renewcommand{\arraystretch}{1}
-\end{table}
+    NFR-6 & Tính tất định & Cùng bộ input, kết quả BMC/SMT và số liệu fuzzing phải nhất quán ở mọi lần chạy độc lập. & Ch1/Ch3: \texttt{random\_seed} cố định trong \texttt{kripke\_bmc.py}/Z3 -- SAT/UNSAT và phản ví dụ giống nhau mọi lần chạy -- \textbf{PASS}. Ch4 black-box: đã thêm \texttt{random.seed(42)} cho \texttt{fuzzer\_blackbox.py} để đầu vào sinh ra tất định, nhưng \textbf{số crash vẫn dao động} ($60$--$72$/200 đo được qua nhiều lần chạy lại cùng seed) vì ASLR/heap-layout của Windows CRT nằm ngoài kiểm soát của seed Python (xem cơ chế tại \Cref{sec:thaoluan}) -- kết luận định tính (VULN có crash, FIXED 0 crash) tất định, nhưng số đếm chính xác thì \textbf{không} -- \textbf{PASS một phần}, số liệu trích trong báo cáo là 1 lần chạy đại diện đã lưu log. \\
+    NFR-7 & Không có \mbox{dead field} & Mọi field khai báo trong struct cấu hình (\texttt{Config}, ...) phải được ít nhất 1 hàm thực sự đọc -- không giữ lại field không dùng, dễ gây hiểu sai khi mô hình hóa. & Rà soát toàn bộ \texttt{Config} (không chỉ theo lead của Check 1/2): \textbf{2/3 field không hề được đọc} -- \texttt{heSoQuyMoLop} (\texttt{tinh\_tien\_day.h:8}) \emph{và} \texttt{nam} (\texttt{tinh\_tien\_day.h:13}, chỉ gán lúc khởi tạo tại \texttt{main.c:15}/\texttt{main\_fixed.c:16}, không hàm nào đọc lại) -- \textbf{FAIL}, xem \Cref{sec:vidufull}. Ghi chú phụ: \texttt{id} trong \texttt{GiangVien}/\texttt{LopHocPhan} cũng write-only, nhưng thuộc lớp khác (định danh dự phòng, không phải tham số nghiệp vụ) nên không tính là FAIL của NFR này. \\
+\end{longtable}
+}
 
 \subsection{Miền giá trị hợp lệ theo đặc tả nghiệp vụ}
 
@@ -173,26 +177,43 @@ Mọi giá trị nằm ngoài các miền trên đều là input hợp lệ về
 
 Khác với \Cref{tab:range} (miền giá trị \emph{nghiệp vụ} -- do người phân tích đặc tả đặt ra), \Cref{tab:con} liệt kê các \textbf{ràng buộc thiết kế/công nghệ} -- giới hạn áp lên hệ thống bởi chính \emph{cách hiện thực} (kích thước buffer khai báo trong struct C, phạm vi kiểu dữ liệu) chứ không phải bởi quy tắc nghiệp vụ. Việc tách hai loại ràng buộc này (trước đây bị trộn chung vào \Cref{tab:range}) là quan trọng vì phần lớn CWE trong đề tài phát sinh đúng tại \emph{khoảng cách} giữa hai miền: nghiệp vụ cho phép một giá trị, nhưng công nghệ (kiểu dữ liệu/kích thước buffer) không đủ chỗ chứa giá trị đó.
 
-\begin{table}[H]
-  \centering
-  \caption{Ràng buộc thiết kế/công nghệ (CON-x) và vị trí tương ứng trong mã nguồn}
-  \label{tab:con}
-  \footnotesize
-  \begin{tabularx}{\linewidth}{@{}l X X p{2.2cm}@{}}
-    \toprule
-    \textbf{Mã CON} & \textbf{Ràng buộc kỹ thuật} & \textbf{Vị trí trong code} & \textbf{YC/CWE} \\
-    \midrule
-    CON-1 & Buffer \texttt{hoTen} tối đa \textbf{80} byte (79 ký tự thật $+$ \texttt{'\textbackslash0'}) & \texttt{\#define MAX\_NAME 80} (\texttt{giang\_vien.h:4}) & REQ-3 / CWE-120 \\
-    CON-2 & Buffer \texttt{maGiangVien} tối đa \textbf{20} byte & \texttt{char maGiangVien[20]} (\texttt{giang\_vien.h:9}) & REQ-3 / CWE-120 \\
-    CON-3 & Buffer \texttt{bangCap} tối đa \textbf{20} byte & \texttt{char bangCap[20]} (\texttt{giang\_vien.h:11}) & REQ-3, 9 / CWE-120 \\
-    CON-4 & Buffer \texttt{maLop} tối đa \textbf{20} byte & \texttt{\#define MAX\_MALOP 20} (\texttt{lop\_hoc\_phan.h:6}) & REQ-3 / CWE-120 \\
-    CON-5 & Kiểu \texttt{char} (signed 8-bit) giới hạn an toàn $[0,127]$ -- vượt quá sẽ wrap-around & \texttt{pack\_class\_size\_byte\_*()} (\texttt{tinh\_tien\_day.h}) & REQ-8 / CWE-197 \\
-    CON-6 & Kiểu \texttt{int} 32-bit giới hạn kết quả phép nhân dồn về $[\text{INT\_MIN}, \text{INT\_MAX}]$ & phép nhân trung gian \texttt{(int)} trong \texttt{tinh\_tien\_day.c} & REQ-6 / CWE-190 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+\Cref{tab:con} nay liệt kê \textbf{13 ràng buộc CON-1--13}, đủ để \textbf{mọi REQ-1 đến REQ-10} đều truy vết được về ít nhất 1 ràng buộc kỹ thuật/thiết kế cụ thể (bảng cũ chỉ phủ REQ-3, 6, 8, 9 -- bỏ trống hoàn toàn REQ-1, 2, 4, 5, 7, 10). 7 ràng buộc mới (CON-7--13) không phải kích thước buffer mà là \textbf{ràng buộc kiểu dữ liệu và luồng điều khiển}: con trỏ \texttt{NULL}-able (CON-7, 8), quản lý bộ nhớ thủ công (CON-9), thiếu cờ trạng thái tường minh (CON-10), literal cứng thay cho hằng số có tên (CON-11), guard một chiều (CON-12), và chuỗi tự do thay cho \texttt{enum} (CON-13) -- tất cả đều đối chiếu trực tiếp với dòng code thật.
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{@{} >{\raggedright\arraybackslash}p{1.1cm} >{\raggedright\arraybackslash}p{6.0cm} >{\raggedright\arraybackslash}p{4.6cm} >{\raggedright\arraybackslash}p{2.6cm} @{}}
+  \caption{Ràng buộc thiết kế/công nghệ (CON-x) và vị trí tương ứng trong mã nguồn, khớp toàn bộ REQ-1--10}
+  \label{tab:con} \\
+  \toprule
+  \textbf{Mã CON} & \textbf{Ràng buộc kỹ thuật} & \textbf{Vị trí trong code} & \textbf{REQ liên quan} \\
+  \midrule
+  \endfirsthead
+  \multicolumn{4}{l}{\textit{\small(tiếp theo Bảng~\ref{tab:con})}} \\[3pt]
+  \toprule
+  \textbf{Mã CON} & \textbf{Ràng buộc kỹ thuật} & \textbf{Vị trí trong code} & \textbf{REQ liên quan} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endlastfoot
+  CON-1 & Buffer \texttt{hoTen} tối đa \textbf{80} byte (79 ký tự thật $+$ \texttt{'\textbackslash0'}) & \texttt{\#define MAX\_NAME 80} (\texttt{giang\_vien.h:4}) & REQ-3.1 / CWE-120 \\
+  CON-2 & Buffer \texttt{maGiangVien} tối đa \textbf{20} byte (hằng số $20$ trực tiếp, không qua macro riêng) & \texttt{char maGiangVien[20]} (\texttt{giang\_vien.h:9}) & REQ-3.3 / CWE-120 \\
+  CON-3 & Buffer \texttt{bangCap} tối đa \textbf{20} byte (cùng kiểu hằng số trực tiếp như CON-2) & \texttt{char bangCap[20]} (\texttt{giang\_vien.h:11}) & REQ-3.3 / CWE-120 \\
+  CON-4 & Buffer \texttt{maLop} tối đa \textbf{20} byte & \texttt{\#define MAX\_MALOP 20} (\texttt{lop\_hoc\_phan.h:6}) & REQ-3.2 / CWE-120 \\
+  CON-5 & Kiểu \texttt{char} (signed 8-bit) giới hạn an toàn $[0,127]$ -- vượt quá sẽ wrap-around & \texttt{pack\_class\_size\_byte\_*()} (\texttt{tinh\_tien\_day.c:67,75}) & REQ-8.1--8.5 / CWE-197 \\
+  CON-6 & Kiểu \texttt{int} 32-bit giới hạn kết quả phép nhân dồn về $[\text{INT\_MIN},\text{INT\_MAX}]$ (bản VULN); bản SAFE đổi sang \texttt{double}/\texttt{long long} & ép kiểu \texttt{(int)} trong \texttt{calculate\_e2e\_salary\_VULN} (\texttt{tinh\_tien\_day.c:12--13}) & REQ-6.1--6.4 / CWE-190 \\
+  CON-7 & \texttt{gv\_ptr} là con trỏ \texttt{GiangVien*} cho phép \texttt{NULL} (C không có kiểu non-null/\texttt{Option}) -- trạng thái ``đã phân công'' chỉ được \emph{suy ra ngầm} từ \texttt{gv\_ptr != NULL}, không có cờ boolean riêng & \texttt{LopHocPhan.gv\_ptr} (\texttt{lop\_hoc\_phan.h:15}) & REQ-1.0, REQ-5.1, REQ-5.2 / CWE-476 \\
+  CON-8 & \texttt{cfg} là con trỏ \texttt{Config*} cho phép \texttt{NULL}, cùng nguyên nhân kỹ thuật như CON-7 & tham số \texttt{Config *cfg} trong \texttt{calculate\_e2e\_salary\_*()} (\texttt{tinh\_tien\_day.h:17,20}) & REQ-10.1, REQ-10.2 / CWE-476 \\
+  CON-9 & \texttt{GiangVien} cấp phát bằng \texttt{malloc()}/giải phóng bằng \texttt{free()} thủ công -- C không có RAII/GC/reference counting theo dõi vòng đời con trỏ dùng chung giữa 2 module & \texttt{add\_lecturer\_*()} (\texttt{malloc}); \texttt{delete\_lecturer\_VULN()} (\texttt{free}, \texttt{giang\_vien.c:35}) & REQ-4.1--4.4 / CWE-416 \\
+  CON-10 & Không có cờ trạng thái ``đã tính lương'' -- \texttt{tienDay} truyền vào \texttt{export\_report\_*()} như 1 tham số độc lập; thứ tự \texttt{create}$\to$\texttt{calculate}$\to$\texttt{export} chỉ được đảm bảo bởi trình tự gọi hàm viết tay trong \texttt{main()}, không có kiểm tra bất biến runtime & tham số \texttt{tienDay} của \texttt{export\_report\_SAFE()} (\texttt{tinh\_tien\_day.h:23}); trình tự gọi tại \texttt{main\_fixed.c:39--43} & REQ-2.0 \\
+  CON-11 & Ngưỡng quy mô lớp ($50$ sinh viên) là \textbf{literal cứng} ngay trong công thức, không phải \texttt{\#define} hay field \texttt{Config} có tên & \texttt{(lhp->soLuongSinhVien > 50)} (\texttt{tinh\_tien\_day.c:9} VULN, \texttt{:41} SAFE) & REQ-7.6, REQ-7.7 \\
+  CON-12 & \texttt{soTiet} chỉ có guard \emph{một chiều} (kẹp về $0$ nếu $\le 0$); không có guard trên tương ứng miền nghiệp vụ $\texttt{soTiet}\le 500$ (\Cref{tab:range}) & \texttt{lhp->soTiet = (soTiet>0)?soTiet:0} (\texttt{lop\_hoc\_phan.c:31}) -- không có nhánh nào chặn \texttt{soTiet>500} & REQ-7.3, REQ-7.4, REQ-7.5 \\
+  CON-13 & \texttt{bangCap} là \texttt{char[20]} tự do (chuỗi), không phải kiểu \texttt{enum} -- tập giá trị hợp lệ $\{$GS, PGS, TIEN\_SI, THAC\_SI, CU\_NHAN$\}$ chỉ được ép bằng chuỗi \texttt{if}/\texttt{strcmp}, không có ràng buộc ở tầng kiểu dữ liệu (compile-time) & chuỗi \texttt{if(strcmp(bangCap,...))} trong \texttt{add\_lecturer\_VULN/SAFE} (\texttt{giang\_vien.c:19--23}) & REQ-9.1, REQ-9.2 / CWE-1288 \\
+\end{longtable}
+}
 
 Đúng như quan sát ở \Cref{sec:ketqua}: kích thước buffer $\{80, 20, 20\}$ (CON-1, CON-3, CON-4 -- ba trường được nêu trực tiếp trong REQ-3) khớp \emph{tường minh, từng con số} với đúng 3 định nghĩa struct thật trong \Cref{lst:gvstruct,lst:lhpstruct} (\Cref{sec:motahethong}), không phải số minh họa; CON-2 (\texttt{maGiangVien[20]}) là buffer thứ 4 cũng bị \texttt{strcpy} tràn (\texttt{giang\_vien.c:12} trong \Cref{tab:findings}) nhưng chưa được liệt trong văn bản REQ-3 gốc -- một khoảng hở đặc tả nhỏ được phát hiện chính nhờ việc tách bảng CON riêng và đối chiếu lại với kết quả quét Chương 2. CON-2/CON-3 dùng hằng số nguyên $20$ trực tiếp trong khai báo struct, không qua một macro riêng như \texttt{MAX\_NAME}/\texttt{MAX\_MALOP} (CON-1/CON-4) -- một điểm chưa nhất quán về style code, dù không gây ra lỗi chức năng.
+
+Nhóm CON-7--13 (mới) cho thấy một lớp ràng buộc \emph{khác hẳn} nhóm buffer/kiểu số ở trên: đây không phải giới hạn \emph{kích thước}, mà là giới hạn \emph{biểu diễn trạng thái} -- C không có kiểu non-null, không có enum ràng buộc tại compile-time, không có RAII, nên mọi bất biến (invariant) như ``đã phân công'', ``đã tính lương'', ``bangCap hợp lệ'' đều phải được lập trình viên tự đảm bảo bằng kỷ luật viết code (guard \texttt{if}, đúng thứ tự gọi hàm) chứ không được ngôn ngữ hỗ trợ. Đây chính là nguyên nhân gốc rễ về \emph{ngôn ngữ/thiết kế} phía sau toàn bộ REQ-1, 2, 4, 5, 7, 9, 10 -- không chỉ REQ-3/6/8 (lỗi bộ nhớ/số học) như bảng CON bản cũ ngụ ý.
 
 \subsection{Tham số đầu vào: bắt buộc, tùy chọn, và tham số tổng hợp}
 \label{sec:params}
@@ -297,6 +318,8 @@ Hai ví dụ trên áp dụng từng phần quy trình 8 bước. Mục này áp
 
 \textbf{Sai lệch mô hình-code phát hiện ngay ở bước phân loại:} nếu chỉ đọc \texttt{tinh\_tien\_day.h} (khai báo \texttt{Config.heSoQuyMoLop}) mà không đối chiếu \texttt{tinh\_tien\_day.c} (định nghĩa hàm), rất dễ phân loại $A_8$ là ``tùy chọn, có ảnh hưởng cộng vào công thức'' và $A_9$ là ``tùy chọn, chỉ dùng khi xuất audit log'' -- \textbf{cả hai đều sai}. Đây đúng là lỗi đã tìm thấy ở Check 1/2 (\Cref{sec:ch3}): $A_8$ không tham gia tính toán gì cả; $A_9$ mới là tham số \textbf{bắt buộc} thực sự tạo ra hệ số \texttt{heSoQuyMo}. Bài học phương pháp luận: \textbf{bước phân loại (2) phải đối chiếu với định nghĩa hàm (\texttt{.c}), không chỉ khai báo struct (\texttt{.h})}.
 
+\textbf{Bài học thứ hai, tự sửa lại chính bước 1 ở trên:} $A_8$ (\texttt{heSoQuyMoLop}) bị bắt vì nó trùng đúng \emph{tên field} với biến tự do sai trong mô hình Z3 cũ (một \emph{lead} có sẵn từ Check 1/2) -- không phải vì đã rà soát \emph{toàn bộ} struct \texttt{Config} một cách hệ thống. Rà lại toàn bộ 3 field của \texttt{Config} (không đi theo lead nào) lộ ra field \textbf{thứ hai cũng chết}: \texttt{nam} (\texttt{tinh\_tien\_day.h:13}) được gán duy nhất 1 lần lúc khởi tạo (\texttt{main.c:15}, \texttt{main\_fixed.c:16}: \texttt{.nam = 2025}) nhưng \textbf{không một hàm nào đọc lại} -- kể cả \texttt{export\_report\_*()} (nơi hợp lý nhất để in năm học). Vậy \texttt{Config} có \textbf{2/3 field chết} (\texttt{heSoQuyMoLop}, \texttt{nam}), chỉ \texttt{dinhMucTienChuan} ($A_7$) thực sự được dùng. Đây được cập nhật vào NFR-7 (\Cref{tab:nfr}). Rà soát mở rộng sang 2 struct còn lại cũng thấy \texttt{id} (\texttt{GiangVien.id}, \texttt{LopHocPhan.id}) write-only tương tự, nhưng đây là field định danh dự phòng (không phải tham số nghiệp vụ/cấu hình) nên không được tính là vi phạm NFR-7 -- phân biệt 2 loại field không dùng này (\emph{cấu hình bị bỏ quên} vs.\ \emph{định danh dự phòng}) là điều bước rà soát \emph{có chủ đích, không theo lead} mới lộ ra được.
+
 \subsubsection*{Bước 3: Tổ hợp bắt buộc + tùy chọn}
 
 Vì $A_8$ không hiệu lực, 2 tổ hợp $T_2=T_1\cup\{A_8\}$ và $T_4=T_3\cup\{A_8\}$ trong đề xuất ban đầu \textbf{sụp về cùng 1 hành vi} với $T_1$/$T_3$ tương ứng bất kể giá trị $A_8$ -- một tín hiệu tổ hợp học (nhiều tổ hợp khác nhau cho cùng 1 statement) tự nó cho thấy $A_8$ không phải một chiều tổ hợp thật. Tổ hợp còn lại có ý nghĩa: $T = \{A_1,\dots,A_7,A_9\}$ (8 tham số bắt buộc thật, không có tham số tùy chọn nào theo đúng nghĩa ``có thể vắng mặt'' đối với riêng hàm này).
@@ -342,7 +365,7 @@ Tổng tổ hợp thô: $3\times2\times5\times5\times5\times2\times5\times2 = \m
     $R_1$ & $A_1{=}$S\_null $\to$ $A_2$ không xét (SAFE trả 0 trước khi đọc \texttt{is\_deleted}, dòng 34) \\
     $R_2$ & $A_1{=}$S\_null $\to$ $A_3$ không xét (cùng lý do) \\
     $R_3$ & $A_1{=}$S\_freed $\to$ $A_2$ có thể vẫn đọc được S\_alive (UAF -- giá trị đọc từ vùng nhớ đã free là \emph{undefined}, không phải lỗi logic mà lỗi bộ nhớ, đúng CWE-416) \\
-    $R_4$ & $A_2{=}$S\_dead $\to$ $A_3$ vẫn tồn tại trong bộ nhớ nhưng SAFE không bao giờ đọc tới (guard chặn tại dòng 34, trước khi tới dòng 42) \\
+    $R_4$ & $A_2{=}$S\_dead $\to$ $A_3$ vẫn tồn tại trong bộ nhớ nhưng SAFE không bao giờ đọc tới (guard chặn tại dòng 34, trước khi tới dòng 44) \\
     $R_5$ & $A_6{=}$S\_null $\to$ $A_7$ không xét (SAFE trả -1 trước khi đọc \texttt{dinhMucTienChuan}, dòng 30) \\
     $R_6'$ & $A_8$ (mọi giá trị) không ảnh hưởng output $\to$ không cần rẽ nhánh theo $A_8$ -- đây là ràng buộc \textbf{tự phát hiện được} nhờ chính bước 4/5, không phải giả định đặt trước \\
     $R_7$ & $A_4{=}$S\_under ($\texttt{soTiet}\le 0$) $\to$ \texttt{create\_class\_section\_SAFE} (\texttt{lop\_hoc\_phan.c:31}) \textbf{kẹp âm thầm về 0} (không có thông báo lỗi) $\to$ kết quả tính lương $=0$ \\
@@ -401,3 +424,11 @@ Mọi statement xác định ở Bước 6 được ánh xạ trực tiếp thà
 Toàn bộ ma trận kiểm chứng chi tiết giữa các mã REQ này và các kịch bản kiểm thử (Ch1 BMC, Ch2 Pattern Scanner/ASan, Ch3 SMT/Z3, Ch4 Fuzzing) đã được đối chiếu toàn diện trong \Cref{tab:req} và ma trận truy vết IEEE 829 (\Cref{sec:traceability}).
 
 \textbf{Tóm tắt:} 9 tham số ban đầu $\to$ đối chiếu code phát hiện 1 dead field ($A_8$) và 1 phân loại sai ($A_9$) $\to$ 8 tham số bắt buộc thật $\to$ 15\,000 tổ hợp thô $\to$ 9 ràng buộc (phát hiện thêm 1 điểm chưa nhất quán về xử lý lỗi ở $R_7$) $\to$ 15 statement $\to$ \textbf{26 Requirements con REQ-$X$.$Y$} (gộp với 10 REQ tổng quan $=$ \textbf{36 REQ toàn chương}, cộng 2 statement được gán thẳng vào NFR-6/NFR-7 có sẵn thay vì tạo REQ trùng) $\to$ ánh xạ tới cả 4 chương kiểm chứng. Đây là minh chứng đầy đủ nhất trong đề tài cho luận điểm cốt lõi: \emph{nghĩ theo tổ hợp tham số trước, tìm lỗi sau} -- 2/9 tham số ban đầu đã sai ngay từ bước phân loại, và chỉ lộ ra khi đối chiếu nghiêm túc với code thật ở từng bước, không phải khi ``đi tìm lỗi'' trực tiếp.
+
+\subsubsection*{Mở rộng: cùng 1 statement được kiểm tra lại ở nhiều thời điểm khác nhau}
+
+Tham số $A_1$ (\texttt{gv\_ptr}) trong bảng trên không phải tham số ``đầu vào thô'' -- nó là \emph{kết quả} của một statement khác đã áp dụng \textbf{sớm hơn}, ngay tại \texttt{create\_class\_section\_SAFE()} (\texttt{lop\_hoc\_phan.c:34}):
+\[
+\text{lhp->gv\_ptr} = (\text{gv} \ne \text{NULL} \land \lnot\,\text{gv->is\_deleted})\ ?\ \text{gv} : \text{NULL}
+\]
+Statement này ($S_{\text{tao\_lop}} \equiv$ ``giảng viên hợp lệ tại \emph{thời điểm tạo lớp}'') và statement $A_1/A_2$ trong \texttt{calculate\_e2e\_salary\_SAFE()} (``giảng viên hợp lệ tại \emph{thời điểm tính lương}'') \textbf{kiểm tra cùng 1 điều kiện logic nhưng ở 2 thời điểm khác nhau} trong vòng đời đối tượng -- đây \textbf{không phải trùng lặp thừa}: nếu chỉ kiểm tra 1 lần lúc tạo lớp, kịch bản ``giảng viên bị xóa \emph{sau khi} lớp đã được tạo, \emph{trước khi} tính lương'' (chính là nhánh $S_1 \to S_2A/S_2B \to S_4$ đã mô hình ở \Cref{sec:ch1}) sẽ không bị chặn. Bài học phương pháp luận thứ ba từ ví dụ này: \textbf{khi 1 tham số đi qua nhiều hàm theo thời gian, phải hỏi statement đó có cần kiểm tra lại ở mỗi ``thời điểm quan sát'' hay chỉ 1 lần là đủ} -- ở đây cần cả 2, và code thật (\texttt{main\_fixed.c}) đã làm đúng cả 2.

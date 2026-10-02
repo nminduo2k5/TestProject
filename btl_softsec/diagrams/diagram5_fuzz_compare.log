@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  18 SEP 2026 21:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  19 SEP 2026 18:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -613,8 +613,7 @@ File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count285
 \l__pdf_internal_box=\box63
-)
-No file diagram5_fuzz_compare.aux.
+) (diagram5_fuzz_compare.aux)
 \openout1 = `diagram5_fuzz_compare.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -633,6 +632,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
+
 (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count286
@@ -666,17 +666,17 @@ L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 14009 strings out of 474485
- 289813 string characters out of 5745150
+ 14012 strings out of 474485
+ 289937 string characters out of 5745150
  1936542 words of memory out of 5000000
- 36049 multiletter control sequences out of 15000+600000
+ 36050 multiletter control sequences out of 15000+600000
  571130 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,7n,121p,441b,716s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qtmb.p
 fb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qtmr.
 pfb>
-Output written on diagram5_fuzz_compare.pdf (1 page, 55505 bytes).
+Output written on diagram5_fuzz_compare.pdf (1 page, 55908 bytes).
 PDF statistics:
  20 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

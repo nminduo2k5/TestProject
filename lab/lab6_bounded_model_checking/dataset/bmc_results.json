@@ -1,0 +1,72 @@
+[
+  {
+    "id": "BMC-01-SAFE-FULL-SCAN",
+    "label": "SAFE",
+    "violated_at_step": null,
+    "witness": null,
+    "explanation": "Khong tim thay vi pham trong 10 buoc unwind dau tien (SAFE-UP-TO-BOUND, khong phai chung minh an toan vo han).",
+    "expected_label": "SAFE",
+    "matches_expectation": true,
+    "description": "Tong hop thu lao ca hoc ky: for (i = 0; i < MAX_LOP; i++) doc danhSachLop[i]. Vong lap dung chinh xac bang kich thuoc mang (safe_full_scan)."
+  },
+  {
+    "id": "BMC-02-UNSAFE-OFFBYONE",
+    "label": "UNSAFE",
+    "violated_at_step": 10,
+    "witness": {
+      "unwind_step_i": 10,
+      "index_accessed": 10
+    },
+    "explanation": "Tai buoc unwind i=10, ton tai gia tri lam truy cap danhSachLop[index] voi index nam ngoai [0, 10).",
+    "expected_label": "UNSAFE",
+    "matches_expectation": true,
+    "description": "Loi off-by-one kinh dien: for (i = 0; i <= MAX_LOP; i++) doc danhSachLop[i] - dieu kien dung '<=' thay vi '<', doc danhSachLop[10] la vuot bien (offbyone_scan)."
+  },
+  {
+    "id": "BMC-03-UNSAFE-SYMBOLIC-OFFSET",
+    "label": "UNSAFE",
+    "violated_at_step": 1,
+    "witness": {
+      "base_index": 9,
+      "unwind_step_i": 1,
+      "index_accessed": 10
+    },
+    "explanation": "Tai buoc unwind i=1, ton tai gia tri lam truy cap danhSachLop[index] voi index nam ngoai [0, 10).",
+    "expected_label": "UNSAFE",
+    "matches_expectation": true,
+    "description": "Xuat bang ke theo trang: doc danhSachLop[base_index + i], i = 0..4, voi base_index la offset trang nguoi dung nhap, KHONG duoc kiem tra truoc vong lap (symbolic_unsafe) - CWE-125 Out-of-bounds Read, soTiet rac di vao cong thuc tien day."
+  },
+  {
+    "id": "BMC-04-SAFE-SYMBOLIC-OFFSET-BOUNDED",
+    "label": "SAFE",
+    "violated_at_step": null,
+    "witness": null,
+    "explanation": "Khong tim thay vi pham trong 5 buoc unwind dau tien (SAFE-UP-TO-BOUND, khong phai chung minh an toan vo han).",
+    "expected_label": "SAFE",
+    "matches_expectation": true,
+    "description": "Giong BMC-03 nhung da them tien dieu kien base_index <= MAX_LOP - PAGE_SIZE (= 5) kiem tra truoc vong lap (symbolic_safe) -> an toan trong pham vi unwind da cho."
+  },
+  {
+    "id": "BMC-05-UNSAFE-REVERSE-COUNTDOWN",
+    "label": "UNSAFE",
+    "violated_at_step": 0,
+    "witness": {
+      "unwind_step_i": 0,
+      "index_accessed": 10
+    },
+    "explanation": "Tai buoc unwind i=0, ton tai gia tri lam truy cap danhSachLop[index] voi index nam ngoai [0, 10).",
+    "expected_label": "UNSAFE",
+    "matches_expectation": true,
+    "description": "Tu them (Buoc 5): in bang ke theo thu tu NGUOC (lop moi nhat truoc) doc danhSachLop[MAX_LOP - i], i = 0..4 (symbolic_reverse). Vi pham NGAY buoc i = 0 vi MAX_LOP - 0 = 10 = array_size nam ngoai bien."
+  },
+  {
+    "id": "BMC-06-SAFE-REVERSE-COUNTDOWN-FIXED",
+    "label": "SAFE",
+    "violated_at_step": null,
+    "witness": null,
+    "explanation": "Khong tim thay vi pham trong 5 buoc unwind dau tien (SAFE-UP-TO-BOUND, khong phai chung minh an toan vo han).",
+    "expected_label": "SAFE",
+    "matches_expectation": true,
+    "description": "Tu them: ban sua cua BMC-05 doc danhSachLop[MAX_LOP - 1 - i], i = 0..4 (symbolic_reverse_fixed) -> chi so chay 9,8,7,6,5 deu hop le."
+  }
+]

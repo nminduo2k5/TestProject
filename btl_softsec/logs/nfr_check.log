@@ -1,0 +1,27 @@
+=================================================================
+  KIEM CHUNG THUC NGHIEM NFR-1 (HIEU NANG) VA NFR-2 (ON DINH BO NHO)
+  (bo sung cho Chuong 2 - dac ta tai chuong2.tex Bang 2, tab:nfr)
+=================================================================
+
+=================================================================
+  NFR-1 + NFR-2: BAN VULN (salary_calc.exe), N=10000
+=================================================================
+--- E2E NFR BENCH VULN: N=10000 lan lap ---
+[NFR-1 PERF] 10000 lan calculate_e2e_salary_VULN: tong=0.109 ms, trung binh=0.000011 ms/lan (nguong <10ms/lan) -> PASS (acc=-1344640256)
+[NFR-2 MEMORY] 10000 lan tao/xoa GiangVien+LopHocPhan: WorkingSet truoc=3132 KB, sau=3136 KB, drift=4 KB (nguong |drift|<1024 KB) -> PASS
+
+
+
+=================================================================
+  NFR-1 + NFR-2: BAN FIXED (salary_calc_fixed.exe), N=10000
+=================================================================
+--- E2E NFR BENCH SAFE: N=10000 lan lap ---
+[NFR-1 PERF] 10000 lan calculate_e2e_salary_SAFE: tong=0.141 ms, trung binh=0.000014 ms/lan (nguong <10ms/lan) -> PASS (acc=68850000000, chi de tranh bi toi uu hoa mat vong lap)
+[NFR-2 MEMORY] 10000 lan tao/xoa GiangVien+LopHocPhan: WorkingSet truoc=3136 KB, sau=3136 KB, drift=0 KB (nguong |drift|<1024 KB) -> PASS
+
+
+
+=================================================================
+  KET LUAN
+=================================================================
+  --> NFR-1 (hieu nang <10ms/lan) va NFR-2 (drift bo nho <1024KB sau 10000 lan) deu PASS tren CA HAI ban VULN va FIXED - xac nhan bang thuc nghiem thay vi chi lap luan ly thuyet O(1) nhu ban dac ta truoc do.

@@ -36,6 +36,8 @@ long long calculate_e2e_salary_SAFE(LopHocPhan *lhp, Config *cfg) {
         return 0;
     }
 
+    // CON-11: nguong quy mo lop (50 sinh vien) la literal cung ngay trong cong thuc, khong
+    // phai #define hay field Config co ten (REQ-7.6/7.7).
     double heSoQuyMo = (lhp->soLuongSinhVien > 50) ? 0.2 : 0.0;
     // FIX CWE-190: 64-bit double & long long arithmetic preventing integer overflow
     double soTietQuyDoi = (double)lhp->soTiet * ((double)lhp->heSoHocPhan + heSoQuyMo);
@@ -44,6 +46,9 @@ long long calculate_e2e_salary_SAFE(LopHocPhan *lhp, Config *cfg) {
     return (long long)tienDayDouble;
 }
 
+// CON-10: khong co co trang thai "da tinh luong" - tienDay truyen vao day nhu 1 tham so
+// doc lap; thu tu create->calculate->export chi duoc dam bao boi trinh tu goi ham viet tay
+// trong main(), khong co kiem tra bat bien runtime (REQ-2.0).
 void export_report_SAFE(GiangVien *gv, LopHocPhan *lhp, long long tienDay) {
     printf("[MOD-E2E SAFE REPORT] GV: %s (%s) | Lop: %s | Tiet: %d | Tien: %lld VND\n",
            gv ? gv->hoTen : "UNASSIGNED",

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  14 SEP 2026 20:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  19 SEP 2026 12:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -639,23 +639,28 @@ File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 127.
- [1
 
-{C:/Users/HP/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (diagram3_data_
-flow.aux)
+Overfull \hbox (61.28703pt too wide) in paragraph at lines 227--228
+ [][][]\OT1/cmr/bx/n/9 pack[]class[]size[]byte[]VULN(soLuongSinhVien) 
+ []
+
+[1
+
+{C:/Users/HP/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+(diagram3_data_flow.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 16089 strings out of 474485
- 349620 string characters out of 5745150
- 1953542 words of memory out of 5000000
- 38068 multiletter control sequences out of 15000+600000
+ 16106 strings out of 474485
+ 349900 string characters out of 5745150
+ 1957542 words of memory out of 5000000
+ 38085 multiletter control sequences out of 15000+600000
  564714 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,11n,121p,422b,770s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 117i,11n,121p,422b,772s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
 x12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmbx7.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
@@ -669,7 +674,7 @@ KTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/HP/AppData/Local/Progra
 ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Users/HP/AppData/Local/P
 rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/HP/AppData/Lo
 cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on diagram3_data_flow.pdf (1 page, 168945 bytes).
+Output written on diagram3_data_flow.pdf (1 page, 175779 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

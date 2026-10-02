@@ -1,0 +1,66 @@
+{
+  "description": "Cac dac ta chuong trinh don gian mo phong truy cap mang danhSachLop[MAX_LOP=10] trong Module 2 (Quan ly Lop hoc phan) cua DuongUniversity Management System, dung cho dong co Bounded Model Checking (BMC) tu viet o python/bmc_engine.py. Moi giang vien phu trach toi da 10 lop hoc phan / hoc ky; chuc nang 'xuat bang ke thu lao theo trang' (Module 3) doc PAGE_SIZE=5 lop lien tiep tu offset trang base_index do nguoi dung nhap. Moi chuong trinh mo ta mot vong lap truy cap danhSachLop[index] voi i la bien vong lap duoc 'unwind' (mo cuon) toi da 'unwind_bound' buoc; cong thuc index do 'index_formula' quy dinh (base_plus_i | size_minus_i | size_minus_1_minus_i). Neu 'symbolic_base' = true, base_index la BIEN TUONG TRUNG (symbolic) bi rang buoc trong [0, array_size), va BMC dung Z3 tim xem CO TON TAI gia tri base_index nao lam truy cap vuot bien hay khong (bai toan EXISTS, phu hop SAT solving). Neu 'symbolic_base' = false, base_index la hang so 'fixed_base'.",
+  "programs": [
+    {
+      "id": "BMC-01-SAFE-FULL-SCAN",
+      "description": "Tong hop thu lao ca hoc ky: for (i = 0; i < MAX_LOP; i++) doc danhSachLop[i]. Vong lap dung chinh xac bang kich thuoc mang (safe_full_scan).",
+      "array_size": 10,
+      "unwind_bound": 10,
+      "symbolic_base": false,
+      "fixed_base": 0,
+      "index_formula": "base_plus_i",
+      "expected_label": "SAFE"
+    },
+    {
+      "id": "BMC-02-UNSAFE-OFFBYONE",
+      "description": "Loi off-by-one kinh dien: for (i = 0; i <= MAX_LOP; i++) doc danhSachLop[i] - dieu kien dung '<=' thay vi '<', doc danhSachLop[10] la vuot bien (offbyone_scan).",
+      "array_size": 10,
+      "unwind_bound": 11,
+      "symbolic_base": false,
+      "fixed_base": 0,
+      "index_formula": "base_plus_i",
+      "expected_label": "UNSAFE"
+    },
+    {
+      "id": "BMC-03-UNSAFE-SYMBOLIC-OFFSET",
+      "description": "Xuat bang ke theo trang: doc danhSachLop[base_index + i], i = 0..4, voi base_index la offset trang nguoi dung nhap, KHONG duoc kiem tra truoc vong lap (symbolic_unsafe) - CWE-125 Out-of-bounds Read, soTiet rac di vao cong thuc tien day.",
+      "array_size": 10,
+      "unwind_bound": 5,
+      "symbolic_base": true,
+      "fixed_base": null,
+      "index_formula": "base_plus_i",
+      "expected_label": "UNSAFE"
+    },
+    {
+      "id": "BMC-04-SAFE-SYMBOLIC-OFFSET-BOUNDED",
+      "description": "Giong BMC-03 nhung da them tien dieu kien base_index <= MAX_LOP - PAGE_SIZE (= 5) kiem tra truoc vong lap (symbolic_safe) -> an toan trong pham vi unwind da cho.",
+      "array_size": 10,
+      "unwind_bound": 5,
+      "symbolic_base": true,
+      "fixed_base": null,
+      "index_formula": "base_plus_i",
+      "precondition_max_base": 5,
+      "expected_label": "SAFE"
+    },
+    {
+      "id": "BMC-05-UNSAFE-REVERSE-COUNTDOWN",
+      "description": "Tu them (Buoc 5): in bang ke theo thu tu NGUOC (lop moi nhat truoc) doc danhSachLop[MAX_LOP - i], i = 0..4 (symbolic_reverse). Vi pham NGAY buoc i = 0 vi MAX_LOP - 0 = 10 = array_size nam ngoai bien.",
+      "array_size": 10,
+      "unwind_bound": 5,
+      "symbolic_base": false,
+      "fixed_base": null,
+      "index_formula": "size_minus_i",
+      "expected_label": "UNSAFE"
+    },
+    {
+      "id": "BMC-06-SAFE-REVERSE-COUNTDOWN-FIXED",
+      "description": "Tu them: ban sua cua BMC-05 doc danhSachLop[MAX_LOP - 1 - i], i = 0..4 (symbolic_reverse_fixed) -> chi so chay 9,8,7,6,5 deu hop le.",
+      "array_size": 10,
+      "unwind_bound": 5,
+      "symbolic_base": false,
+      "fixed_base": null,
+      "index_formula": "size_minus_1_minus_i",
+      "expected_label": "SAFE"
+    }
+  ]
+}

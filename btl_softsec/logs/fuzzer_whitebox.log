@@ -22,7 +22,7 @@
 --> BẢNG KẾT QUẢ WHITE-BOX FUZZING E2E 3-MODULE:
     - Tổng số lần thử (Attempts):     7 lần (Giải ràng buộc Z3)
     - Số target phát hiện crash/vulnerability: 7 / 7 target
-    - Thời gian thực thi:             0.4138 giây
+    - Thời gian thực thi:             0.3412 giây
     - Độ chính xác:                    100% (Constraint-based exact SAT trên 7 target đã xác định trước, không phải coverage-guided tự động)
-    - Tốc độ tăng tốc so với Blackbox: ~152.9x speedup (dựa trên logs/fuzzer_blackbox.log: 63.25s)
+    - Tốc độ tăng tốc so với Blackbox: ~28.9x speedup (dựa trên logs/fuzzer_blackbox.log: 9.86s)
 

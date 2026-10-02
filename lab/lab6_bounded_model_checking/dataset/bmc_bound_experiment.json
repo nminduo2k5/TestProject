@@ -1,0 +1,24 @@
+[
+  {
+    "id": "BMC-01-SAFE-FULL-SCAN",
+    "label": "SAFE",
+    "violated_at_step": null,
+    "witness": null,
+    "explanation": "Khong tim thay vi pham trong 5 buoc unwind dau tien (SAFE-UP-TO-BOUND, khong phai chung minh an toan vo han).",
+    "original_bound": 10,
+    "reduced_bound": 5,
+    "expected_label_with_full_bound": "SAFE",
+    "false_negative": false
+  },
+  {
+    "id": "BMC-02-UNSAFE-OFFBYONE",
+    "label": "SAFE",
+    "violated_at_step": null,
+    "witness": null,
+    "explanation": "Khong tim thay vi pham trong 5 buoc unwind dau tien (SAFE-UP-TO-BOUND, khong phai chung minh an toan vo han).",
+    "original_bound": 11,
+    "reduced_bound": 5,
+    "expected_label_with_full_bound": "UNSAFE",
+    "false_negative": true
+  }
+]

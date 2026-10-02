@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  19 SEP 2026 09:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.6.19)  19 SEP 2026 19:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -806,35 +806,35 @@ LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 1
 File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Trying to load font information for T5+cmss on input line 1
-65.
+67.
 
 (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/vntex\t5cmss.fd
 File: t5cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T5/cmtt/bx/n' in size <7> not available
-(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 213.
+(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 216.
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
 []$[] \OT1/cmr/m/n/7 = 
  []
 
 
 LaTeX Font Warning: Font shape `T5/cmss/m/it' in size <7> not available
-(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 216.
+(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 219.
 
 
 LaTeX Font Warning: Font shape `T5/cmss/m/it' in size <5> not available
-(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 216.
+(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 219.
 
 LaTeX Font Info:    Font shape `T5/cmtt/bx/n' in size <5> not available
-(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 254.
+(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 266.
 
 LaTeX Font Warning: Font shape `T5/cmss/m/it' in size <8> not available
-(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 304.
+(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 321.
 
 
 LaTeX Font Warning: Font shape `T5/cmss/bx/it' undefined
-(Font)              using `T5/cmss/bx/n' instead on input line 304.
+(Font)              using `T5/cmss/bx/n' instead on input line 321.
 
 [1
 
@@ -850,13 +850,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 16841 strings out of 474485
- 351780 string characters out of 5745150
- 1968542 words of memory out of 5000000
- 38801 multiletter control sequences out of 15000+600000
- 591725 words of font info for 106 fonts, out of 8000000 for 9000
+ 16845 strings out of 474485
+ 351776 string characters out of 5745150
+ 1969542 words of memory out of 5000000
+ 38804 multiletter control sequences out of 15000+600000
+ 592700 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,16n,121p,439b,1283s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 117i,16n,121p,439b,1166s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
 x5.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmbx6.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
@@ -883,16 +883,17 @@ public/amsfonts/cm/cmsy9.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/symbols/msam10.pfb><C:/Users/HP/AppData/Local/Programs/MiK
 TeX/fonts/type1/public/amsfonts/symbols/msam7.pfb><C:/Users/HP/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/vntex/vnr/vnbx12.pfb><C:/Users/HP/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/vntex/vnr/vnbx7.pfb><C:/Users/HP/AppData/Local/Programs/
-MiKTeX/fonts/type1/vntex/vnr/vnr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTe
-X/fonts/type1/vntex/vnr/vnss8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fo
-nts/type1/vntex/vnr/vnss9.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/
-type1/vntex/vnr/vnssbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/vntex/vnr/vnssi8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type
-1/vntex/vnr/vntt8.pfb>
-Output written on diagram1_state_transition.pdf (1 page, 351424 bytes).
+ams/MiKTeX/fonts/type1/vntex/vnr/vnbx5.pfb><C:/Users/HP/AppData/Local/Programs/
+MiKTeX/fonts/type1/vntex/vnr/vnbx7.pfb><C:/Users/HP/AppData/Local/Programs/MiKT
+eX/fonts/type1/vntex/vnr/vnr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fo
+nts/type1/vntex/vnr/vnss8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/
+type1/vntex/vnr/vnss9.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type
+1/vntex/vnr/vnssbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1
+/vntex/vnr/vnssi8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/vn
+tex/vnr/vntt8.pfb>
+Output written on diagram1_state_transition.pdf (1 page, 357422 bytes).
 PDF statistics:
- 300 PDF objects out of 1000 (max. 8388607)
+ 305 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  445 words of extra memory for PDF output out of 10000 (max. 10000000)
 

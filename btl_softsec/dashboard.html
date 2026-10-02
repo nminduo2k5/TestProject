@@ -952,15 +952,287 @@
     </div>
 
     <div class="summary">
+      <a href="#req"><span class="num">REQ</span><span class="label">Đặc tả Yêu cầu</span><span class="result">36 REQ
+          · 7 NFR · 13 CON</span></a>
       <a href="#ch1"><span class="num">CH.1</span><span class="label">Kripke &amp; BMC</span><span class="result">5
           thuộc tính LTL, k=5</span></a>
       <a href="#ch2"><span class="num">CH.2</span><span class="label">Pattern Scanner</span><span class="result">9 cảnh
           báo / 3 file</span></a>
-      <a href="#ch3"><span class="num">CH.3</span><span class="label">Z3 SMT Solver</span><span class="result">5
+      <a href="#ch3"><span class="num">CH.3</span><span class="label">Z3 SMT Solver</span><span class="result">7
           checks E2E</span></a>
       <a href="#ch4"><span class="num">CH.4</span><span class="label">Fuzzing</span><span class="result">7/7 target
           Z3</span></a>
+      <a href="#trace"><span class="num">TC</span><span class="label">Truy vết Test Case</span><span
+          class="result">34 mã TC · IEEE 829</span></a>
     </div>
+
+    <section style="margin-bottom:48px;" id="req">
+      <div class="chapter-head">
+        <span class="idx">REQ</span>
+        <h2 style="font-size:19px;">Đặc tả Yêu cầu: REQ / NFR / CON</h2>
+      </div>
+      <div class="tool lede">report_latex/chapters/chuong2.tex — Bảng 2.1 (REQ), 2.2 (NFR), 2.4 (CON)</div>
+      <p class="explain" style="margin:10px 0 16px;">Quy trình 8 bước <b>tham số → bắt buộc/tùy chọn → tổ hợp → rời
+          rạc hóa thành trạng thái → ràng buộc giữa tham số → statement → REQ → test case</b> áp dụng lên
+        <code>calculate_e2e_salary()</code>: <b>9 tham số</b> gốc → đối chiếu với code thật lộ ra
+        <b>2 tham số phân loại sai</b> (<code>cfg-&gt;heSoQuyMoLop</code> là dead field không hề được đọc;
+        <code>soLuongSinhVien</code> mới thực sự quyết định hệ số quy mô lớp, không phải field cấu hình) → 8 tham số
+        bắt buộc thật → <b>15.000 tổ hợp thô</b> → 9 ràng buộc liên tham số → 15 statement → <b>36 REQ</b> (10 REQ tổng
+        quan + 26 REQ con REQ-X.Y). Bảng dưới đây là tầng tổng quan; xem đầy đủ REQ-X.Y trong báo cáo .tex.</p>
+
+      <div style="overflow-x:auto;">
+      <table class="props" style="margin-bottom:22px; min-width:640px;">
+        <thead>
+          <tr>
+            <th>Mã REQ</th>
+            <th>Loại</th>
+            <th>Ưu tiên</th>
+            <th>Nội dung</th>
+            <th>Kiểm chứng chính</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prop-name mono">REQ-1</td>
+            <td>Safety</td>
+            <td><span class="pill critical">HIGH</span></td>
+            <td>Không được tính tiền khi chưa phân công giảng viên</td>
+            <td>Ch1 BMC P₁</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-2</td>
+            <td>Safety</td>
+            <td><span class="pill critical">HIGH</span></td>
+            <td>Không được xuất báo cáo khi chưa tính tiền</td>
+            <td>Ch1 BMC P₂</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-3</td>
+            <td>Memory</td>
+            <td><span class="pill critical">HIGH</span></td>
+            <td>Các buffer chuỗi không tràn khi input vượt giới hạn (CWE-120)</td>
+            <td>Ch2 <code>strcpy</code>; Ch4 Target 1/2</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-4</td>
+            <td>Memory</td>
+            <td><span class="pill critical">HIGH</span></td>
+            <td><code>gv_ptr</code> không được truy cập sau khi <code>free()</code> (CWE-416 UAF)</td>
+            <td>Ch2 <code>dangling_free</code>; Ch3 Check 3</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-5</td>
+            <td>Memory</td>
+            <td><span class="pill critical">HIGH</span></td>
+            <td><code>gv_ptr</code> phải được kiểm tra NULL trước khi đọc (CWE-476)</td>
+            <td>Ch2 <code>unchecked_nested_deref</code>; Ch4 Target 4</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-6</td>
+            <td>Memory</td>
+            <td><span class="pill critical">HIGH</span></td>
+            <td>Phép nhân dồn không tràn số nguyên 32-bit (CWE-190)</td>
+            <td>Ch3 Check 1/2</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-7</td>
+            <td>Functional</td>
+            <td><span class="pill warn">MEDIUM</span></td>
+            <td>Công thức tính thù lao 2 bước đúng với mọi input hợp lệ</td>
+            <td>Ch3 Check 1/2 — <i>thiếu oracle tự động (xem Trace)</i></td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-8</td>
+            <td>Integrity</td>
+            <td><span class="pill critical">HIGH</span></td>
+            <td>Đóng gói audit log không sai lệch kiểu <code>char</code> (CWE-197)</td>
+            <td>Ch3 Check 4/5/6; Ch4 BVA 17/17</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-9</td>
+            <td>Functional</td>
+            <td><span class="pill warn">MEDIUM</span></td>
+            <td><code>bangCap</code> phải thuộc danh mục hợp lệ (CWE-1288)</td>
+            <td>Ch3 Check 7 — <i>thiếu oracle tự động (xem Trace)</i></td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">REQ-10</td>
+            <td>Memory</td>
+            <td><span class="pill critical">HIGH</span></td>
+            <td>Con trỏ <code>cfg</code> (<code>Config*</code>) phải kiểm tra NULL trước khi đọc</td>
+            <td>Ch2 dòng 30 (<code>tinh_tien_day.c</code>)</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="chart-caption">Yêu cầu phi chức năng (NFR) — đo thực nghiệm bằng <code>ch2_memsafe/nfr_check.py</code>
+      </div>
+      <div style="overflow-x:auto;">
+      <table class="props" style="margin-bottom:22px; min-width:560px;">
+        <thead>
+          <tr>
+            <th>Mã</th>
+            <th>Thuộc tính</th>
+            <th>Nội dung</th>
+            <th>Kết quả</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prop-name mono">NFR-1</td>
+            <td>Hiệu năng</td>
+            <td>Thời gian tính lương 1 lớp &lt; 10ms (không tính I/O)</td>
+            <td><span class="pill good">PASS</span> — 0,000014 ms/lần (10.000 lần lặp,
+              <code>QueryPerformanceCounter</code>)</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">NFR-2</td>
+            <td>Ổn định bộ nhớ</td>
+            <td>Không rò rỉ bộ nhớ khi lặp E2E ≥ 10.000 lần</td>
+            <td><span class="pill good">PASS</span> — drift 4 KB / 10.000 lần tạo-xoá (ngưỡng 1024 KB)</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">NFR-3</td>
+            <td>Tính di động</td>
+            <td>Biên dịch sạch (0 warning <code>-Wall</code>) trên ≥ 2 toolchain</td>
+            <td><span class="pill good">PASS</span> — GCC/UCRT64 và Clang64 (§Ch2.1)</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">NFR-4</td>
+            <td>Chịu lỗi (Robustness)</td>
+            <td>Input vượt đặc tả phải bị từ chối có kiểm soát, không crash</td>
+            <td><span class="pill good">PASS</span> — 0/200 crash bản FIXED; 146/200 chặn an toàn (CWE-197)</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">NFR-5</td>
+            <td>Toàn vẹn (Audit)</td>
+            <td>2 <code>soLuongSinhVien</code> khác nhau không được map trùng 1 byte</td>
+            <td><span class="pill warn">PASS trên FIXED</span> — Check 6/Target 7 tái hiện va chạm trên VULN, FIXED
+              chặn trước khi ép kiểu</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">NFR-6</td>
+            <td>Tính tất định</td>
+            <td>Cùng input, kết quả BMC/SMT/fuzzing nhất quán mọi lần chạy</td>
+            <td><span class="pill warn">PASS một phần</span> — BMC/SMT tất định tuyệt đối; số đếm crash fuzzing dao
+              động 60–72/200 do ASLR Windows (kết luận định tính không đổi)</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">NFR-7</td>
+            <td>Không có dead field</td>
+            <td>Mọi field cấu hình phải được ít nhất 1 hàm đọc lại</td>
+            <td><span class="pill critical">FAIL</span> — 2/3 field <code>Config</code> chết:
+              <code>heSoQuyMoLop</code>, <code>nam</code></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="chart-caption">Ràng buộc thiết kế/công nghệ (CON-x) — tách riêng khỏi miền giá trị nghiệp vụ</div>
+      <p class="explain" style="margin:0 0 12px;">Khác với miền giá trị <b>nghiệp vụ</b> (vd <code>soLuongSinhVien
+          ∈[0,300]</code>, do người phân tích đặc tả đặt ra), bảng dưới là giới hạn do chính <b>cách hiện thực</b> áp
+        đặt (kích thước buffer C, phạm vi kiểu dữ liệu). Phần lớn CWE của đề tài phát sinh đúng ở <b>khoảng cách</b>
+        giữa 2 miền này — ví dụ CON-5 (<code>char</code> chỉ an toàn tới 127) trong khi nghiệp vụ cho phép tới 300.</p>
+      <div style="overflow-x:auto;">
+      <table class="props" style="margin-bottom:10px; min-width:640px;">
+        <thead>
+          <tr>
+            <th>Mã</th>
+            <th>Ràng buộc kỹ thuật</th>
+            <th>Vị trí trong code</th>
+            <th>REQ liên quan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prop-name mono">CON-1</td>
+            <td>Buffer <code>hoTen</code> tối đa <b>80</b> byte</td>
+            <td class="mono">giang_vien.h:4 <code>#define MAX_NAME 80</code></td>
+            <td>REQ-3.1</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-2</td>
+            <td>Buffer <code>maGiangVien</code> tối đa <b>20</b> byte (hằng số trực tiếp)</td>
+            <td class="mono">giang_vien.h:9</td>
+            <td>REQ-3.3</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-3</td>
+            <td>Buffer <code>bangCap</code> tối đa <b>20</b> byte (hằng số trực tiếp)</td>
+            <td class="mono">giang_vien.h:11</td>
+            <td>REQ-3.3</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-4</td>
+            <td>Buffer <code>maLop</code> tối đa <b>20</b> byte</td>
+            <td class="mono">lop_hoc_phan.h:6 <code>#define MAX_MALOP 20</code></td>
+            <td>REQ-3.2</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-5</td>
+            <td>Kiểu <code>char</code> (signed 8-bit) chỉ an toàn trong [0,127]</td>
+            <td class="mono">tinh_tien_day.c:67,75</td>
+            <td>REQ-8.1–8.5</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-6</td>
+            <td>Kiểu <code>int</code> 32-bit giới hạn kết quả nhân dồn (bản VULN)</td>
+            <td class="mono">tinh_tien_day.c:12–13</td>
+            <td>REQ-6.1–6.4</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-7</td>
+            <td><code>gv_ptr</code> cho phép NULL — C không có kiểu non-null</td>
+            <td class="mono">lop_hoc_phan.h:15</td>
+            <td>REQ-1.0, REQ-5.1/5.2</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-8</td>
+            <td><code>cfg</code> (<code>Config*</code>) cho phép NULL, cùng nguyên nhân như CON-7</td>
+            <td class="mono">tinh_tien_day.h:17,20</td>
+            <td>REQ-10.1/10.2</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-9</td>
+            <td><code>GiangVien</code> cấp phát/giải phóng thủ công — không RAII/GC</td>
+            <td class="mono">giang_vien.c:35</td>
+            <td>REQ-4.1–4.4</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-10</td>
+            <td>Không có cờ "đã tính lương" — thứ tự chỉ đảm bảo bởi trình tự gọi hàm viết tay</td>
+            <td class="mono">tinh_tien_day.h:23</td>
+            <td>REQ-2.0</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-11</td>
+            <td>Ngưỡng quy mô lớp (50 SV) là literal cứng, không phải hằng số có tên</td>
+            <td class="mono">tinh_tien_day.c:9,41</td>
+            <td>REQ-7.6/7.7</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-12</td>
+            <td><code>soTiet</code> chỉ có guard 1 chiều (kẹp về 0 nếu ≤0), không có trần ≤500</td>
+            <td class="mono">lop_hoc_phan.c:31</td>
+            <td>REQ-7.3–7.5</td>
+          </tr>
+          <tr>
+            <td class="prop-name mono">CON-13</td>
+            <td><code>bangCap</code> là chuỗi tự do, không phải <code>enum</code></td>
+            <td class="mono">giang_vien.c:19–23</td>
+            <td>REQ-9.1/9.2</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:11.5px; color:var(--ink-muted); margin-top:0;">Đúng như kỳ vọng: kích thước buffer
+        <b>{80, 20, 20}</b> (CON-1, CON-4, và CON-2/CON-3) khớp <i>tường minh, từng con số</i> với 3 định nghĩa struct
+        thật (<code>giang_vien.h</code>, <code>lop_hoc_phan.h</code>) — không phải số minh hoạ. CON-7–13 (nhóm mới) là
+        giới hạn về <b>biểu diễn trạng thái</b> (C không có non-null/enum/RAII), khác hẳn nhóm CON-1–6 vốn là giới hạn
+        <b>kích thước/kiểu số</b>.
+      </p>
+    </section>
 
     <section style="margin-bottom:48px;">
       <div class="chapter-head">
@@ -1139,7 +1411,7 @@
           </li>
           <li><b>Đối chiếu tự động với Chương 2:</b> script còn tự gọi lại <span class="mono">pattern_scanner.py</span>
             để xác nhận trạng thái lỗi S4_ERROR và S3_EXPORTED_TRUNCATED khớp với đúng lỗ hổng thật (CWE-416 tại <span
-              class="mono">giang_vien.c:32</span>, CWE-197 tại <span class="mono">tinh_tien_day.c:63</span>) — tránh
+              class="mono">giang_vien.c:35</span>, CWE-197 tại <span class="mono">tinh_tien_day.c:68</span>) — tránh
             việc mô hình Kripke chỉ tồn tại trên giấy, tách rời code thật.</li>
         </ul>
       </div>
@@ -1708,8 +1980,316 @@
       </div>
     </section>
 
+    <section style="margin-bottom:48px;" id="trace">
+      <div class="chapter-head">
+        <span class="idx">TC</span>
+        <h2 style="font-size:19px;">Ma trận truy vết Test Case → Yêu cầu (IEEE 829)</h2>
+      </div>
+      <div class="tool lede">report_latex/chapters/chuong5.tex — Mục 5.5 (tab:trace), chuẩn IEEE 829-2008</div>
+      <p class="explain" style="margin:10px 0 16px;">Các mục CH.1–CH.4 và REQ ở trên trình bày kết quả <b>theo từng
+          chương/kỹ thuật</b>. Bảng dưới tổ chức lại đúng cùng số liệu đó theo chiều ngược lại — <b>theo từng yêu
+          cầu</b> — theo tinh thần Test Case Specification của IEEE 829: mã test case, input/điều kiện, kết quả mong
+        đợi, kết quả thực tế đối chiếu ngược lại log thật, và kết luận. <span class="mono">FAIL*</span> trên bản
+        BUGGY/VULN là <i>đúng như thiết kế</i> (bug injection có chủ đích để minh chứng công cụ phát hiện được lỗi
+        thật) — không phải lỗi của test case.</p>
+
+      <div style="overflow-x:auto;">
+        <table class="props" style="min-width:760px; font-size:12.5px;">
+          <thead>
+            <tr>
+              <th>Mã TC</th>
+              <th>REQ</th>
+              <th>Input / Điều kiện</th>
+              <th>Kỳ vọng</th>
+              <th>Thực tế (log)</th>
+              <th>KL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="prop-name mono">TC-K1-01</td>
+              <td>REQ-1</td>
+              <td>BMC P₁, bản BUGGY (nhảy thẳng sang tính tiền)</td>
+              <td>UNSAT</td>
+              <td><b>SAT</b> — phản ví dụ S₀→S₅→S₄</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K1-02</td>
+              <td>REQ-1</td>
+              <td>BMC P₁, bản FIXED</td>
+              <td>UNSAT</td>
+              <td>UNSAT</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K1-03</td>
+              <td>REQ-2</td>
+              <td>BMC P₂, cả 2 bản</td>
+              <td>UNSAT</td>
+              <td>UNSAT cả 2 bản</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K2-01</td>
+              <td>REQ-3</td>
+              <td>Scanner quét <code>strcpy</code> trên 3 file VULN</td>
+              <td>Phát hiện đủ CWE-120</td>
+              <td>5 cảnh báo đúng vị trí</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K2-02</td>
+              <td>REQ-3</td>
+              <td>Scanner quét <code>main_fixed.c</code></td>
+              <td>0 cảnh báo</td>
+              <td>0 cảnh báo — [CLEAN]</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-01</td>
+              <td>REQ-3</td>
+              <td>White-box Target 1: <code>hoTen</code> dài 81 &gt; CON-1 (80)</td>
+              <td>Tìm điều kiện tràn</td>
+              <td>SAT ở lần thử 1</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-02</td>
+              <td>REQ-3</td>
+              <td>White-box Target 2: <code>maLop</code> dài 21 &gt; CON-4 (20)</td>
+              <td>Tìm điều kiện tràn</td>
+              <td>SAT ở lần thử 2</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-03</td>
+              <td>REQ-3</td>
+              <td>Black-box 200 lần ngẫu nhiên trên VULN</td>
+              <td>0/200 crash</td>
+              <td>72/200 crash, <code>0xC0000374</code></td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-04</td>
+              <td>REQ-3</td>
+              <td>Black-box 200 lần trên FIXED</td>
+              <td>0/200 crash</td>
+              <td>0/200 crash</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K2-03</td>
+              <td>REQ-4</td>
+              <td>Scanner quét <code>dangling_free</code> trên VULN</td>
+              <td>Phát hiện CWE-416 tại <code>giang_vien.c:35</code></td>
+              <td>Phát hiện đúng vị trí</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-05</td>
+              <td>REQ-4</td>
+              <td>White-box Target 3: <code>free(gv)</code> rồi vẫn đọc qua <code>gv_ptr</code></td>
+              <td>Tìm điều kiện UAF</td>
+              <td>SAT ở lần thử 3</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K2-04</td>
+              <td>REQ-4</td>
+              <td>ASan-VULN: đọc <code>gv->hoTen</code> sau <code>free()</code></td>
+              <td>ASan phải bắt lỗi</td>
+              <td><code>heap-use-after-free</code>, offset +24 = <code>hoTen</code></td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K2-05</td>
+              <td>REQ-4</td>
+              <td>ASan-FIXED (<code>gv_ptr=NULL</code> trước free)</td>
+              <td>0 vi phạm</td>
+              <td>0 vi phạm</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K2-06</td>
+              <td>REQ-5</td>
+              <td>Scanner quét <code>unchecked_nested_deref</code> trên VULN</td>
+              <td>Phát hiện CWE-476 tại <code>tinh_tien_day.c:13</code></td>
+              <td>Phát hiện đúng vị trí</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-06</td>
+              <td>REQ-5</td>
+              <td>White-box Target 4: <code>gv_ptr=NULL</code> rồi tính lương</td>
+              <td>Tìm điều kiện NULL deref</td>
+              <td>SAT ở lần thử 4</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K3-01</td>
+              <td>REQ-6</td>
+              <td>Check 1 (Z3): ∃ input hợp lệ tràn int32</td>
+              <td>SAT dự kiến (VULN)</td>
+              <td>SAT — numClasses=20, soTiet=120</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K3-02</td>
+              <td>REQ-6</td>
+              <td>Check 2 (Z3): cùng câu hỏi trên <code>long long</code></td>
+              <td>UNSAT</td>
+              <td>UNSAT</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-07</td>
+              <td>REQ-6</td>
+              <td>White-box Target 5: soTiet=16694179, dmt=2147583020</td>
+              <td>SAT dự kiến</td>
+              <td>SAT ở lần thử 5</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K1-04</td>
+              <td>REQ-8</td>
+              <td>BMC P₅, bản VULN</td>
+              <td>UNSAT</td>
+              <td>SAT — S₃ mang nhãn byte_truncated</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K1-05</td>
+              <td>REQ-8</td>
+              <td>BMC P₅, bản FIXED</td>
+              <td>UNSAT</td>
+              <td>UNSAT</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K3-03</td>
+              <td>REQ-8</td>
+              <td>Check 4 (Z3): ∃ n∈[0,300] ép <code>char</code> sai</td>
+              <td>SAT dự kiến</td>
+              <td>SAT — n=128 → byte=-128</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K3-04</td>
+              <td>REQ-8</td>
+              <td>Check 5 (Z3): cùng câu hỏi với guard [0,127]</td>
+              <td>UNSAT</td>
+              <td>UNSAT</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K3-05</td>
+              <td>REQ-8, NFR-5</td>
+              <td>Check 6 (Z3): ∃ a≠b∈[0,300] cùng cho 1 byte</td>
+              <td>UNSAT mong muốn</td>
+              <td>SAT — a=0, b=256 cùng byte=0</td>
+              <td><span class="pill warn">FAIL**</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-08</td>
+              <td>REQ-8</td>
+              <td>Black-box CWE-197, 200 lần trên VULN</td>
+              <td>0/200 sai lệch</td>
+              <td>120/200 sai lệch (60%)</td>
+              <td><span class="pill critical">FAIL*</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-09</td>
+              <td>REQ-8</td>
+              <td>Black-box CWE-197, 200 lần trên FIXED</td>
+              <td>0/200 sai lệch</td>
+              <td>0/200 (146/200 chặn an toàn)</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-10</td>
+              <td>REQ-8, NFR-5</td>
+              <td>BVA 17 giá trị biên trên VULN</td>
+              <td>Khớp lý thuyết 17/17; không nên trùng</td>
+              <td>17/17 khớp, nhưng lộ 6 nhóm trùng byte</td>
+              <td><span class="pill warn">PASS/FAIL**</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-11</td>
+              <td>REQ-8, NFR-5</td>
+              <td>BVA 17 giá trị biên trên FIXED</td>
+              <td>0 nhóm trùng</td>
+              <td>0 nhóm trùng</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K3-06</td>
+              <td>REQ-9</td>
+              <td>Check 7 (Z3): ∃ 2 danh mục <code>bangCap</code> khác nhau cùng 1 <code>heSoBangCap</code></td>
+              <td>UNSAT mong muốn</td>
+              <td>SAT — cả 2 rơi vào fallback 1.0</td>
+              <td><span class="pill warn">FAIL**</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K4-12</td>
+              <td>REQ-9</td>
+              <td>Black-box: <code>bangCap</code> ngẫu nhiên gồm giá trị không hợp lệ, trên VULN</td>
+              <td>Cần oracle xác nhận đúng</td>
+              <td>74/200 input không hợp lệ, không crash — chưa assert đúng/sai</td>
+              <td><span class="pill warn">QS†</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-K2-07</td>
+              <td>REQ-7</td>
+              <td>(chưa có test case riêng)</td>
+              <td>Công thức tính lương đúng mọi input hợp lệ</td>
+              <td>Check 1/2 chỉ chứng minh không tràn số, không chứng minh đúng giá trị nghiệp vụ</td>
+              <td><span class="pill warn">QS†</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-N01</td>
+              <td>NFR-1</td>
+              <td><code>e2e_nfr_bench 10000</code> trên bản FIXED (<code>QueryPerformanceCounter</code>)</td>
+              <td>&lt; 10 ms/lần</td>
+              <td>0,000014 ms/lần</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-N02</td>
+              <td>NFR-1</td>
+              <td><code>e2e_nfr_bench 10000</code> trên bản VULN (đối chứng)</td>
+              <td>&lt; 10 ms/lần</td>
+              <td>0,000011 ms/lần</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-N03</td>
+              <td>NFR-2</td>
+              <td>10.000 lần tạo/xoá trên bản FIXED, đo <code>GetProcessMemoryInfo</code></td>
+              <td>Drift &lt; 1024 KB</td>
+              <td>Drift = 4 KB</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+            <tr>
+              <td class="prop-name mono">TC-N04</td>
+              <td>NFR-2</td>
+              <td>Cùng kịch bản trên bản VULN (CWE-416 là dangling pointer, không phải leak)</td>
+              <td>Drift &lt; 1024 KB</td>
+              <td>Drift = 4 KB</td>
+              <td><span class="pill good">PASS</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px; color:var(--ink-muted); margin-top:10px;"><span class="mono">FAIL*</span> trên bản
+        BUGGY/VULN = đúng như thiết kế (bug injection có chủ đích). <span class="mono">FAIL**</span> = phản ánh giới
+        hạn thiết kế thật (1 byte cho audit log / fallback bắt buộc phải có giá trị), không phải lỗi vá được bằng
+        guard đơn giản. <span class="mono">QS†</span> = Quan sát: đề tài <b>chưa có oracle tự động</b> cho REQ-7 và
+        REQ-9 — khoảng hở truy vết thật, tự lộ ra chính nhờ việc lập ma trận theo chiều REQ → Test Case.</p>
+    </section>
+
     <footer>
-      <span>Nguồn: btl_softsec/logs/{kripke_bmc,pattern_scanner,smt_verify,fuzzer_blackbox,fuzzer_whitebox}.log</span>
+      <span>Nguồn: btl_softsec/logs/{kripke_bmc,pattern_scanner,smt_verify,fuzzer_blackbox,fuzzer_whitebox,nfr_check}.log</span>
       <span>Sinh viên: Nguyễn Minh Duong · DuongUniversity CNTT K68</span>
     </footer>
 

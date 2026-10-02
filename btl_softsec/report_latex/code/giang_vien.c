@@ -26,6 +26,9 @@ GiangVien* add_lecturer_VULN(int id, const char *maGV, const char *hoTen, const 
     return gv;
 }
 
+// CON-9: GiangVien cap phat bang malloc()/giai phong bang free() thu cong - C khong co
+// RAII/GC/reference counting theo doi vong doi con tro dung chung giua Module 1 va 2
+// (REQ-4.1-4.4 / CWE-416).
 void delete_lecturer_VULN(GiangVien *gv) {
     if (gv) {
         gv->is_deleted = 1;
@@ -47,6 +50,8 @@ GiangVien* add_lecturer_SAFE(int id, const char *maGV, const char *hoTen, const 
     snprintf(gv->hoTen, sizeof(gv->hoTen), "%s", hoTen);
 
     // FIX CWE-1288: Strict degree validation
+    // CON-13: bangCap la char[20] tu do (chuoi), khong phai enum - tap gia tri hop le chi
+    // duoc ep bang chuoi if/strcmp, khong co rang buoc o tang kieu du lieu (REQ-9.1/9.2).
     if (strcmp(bangCap, "GS") == 0)           gv->heSoBangCap = 2.0f;
     else if (strcmp(bangCap, "PGS") == 0)     gv->heSoBangCap = 1.8f;
     else if (strcmp(bangCap, "TIEN_SI") == 0) gv->heSoBangCap = 1.5f;

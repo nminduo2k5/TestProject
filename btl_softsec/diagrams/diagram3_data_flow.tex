@@ -191,7 +191,7 @@
   $\Rightarrow$ \textcolor{CTeal600}{\textbf{UNSAT}} --- an toan\\[6pt]
   \textbf{Fuzzing (Ch4):}\\
   input vuot range:\\
-  $\bullet$ 93/200 crash (VULN)\\
+  $\bullet$ 72/200 crash (VULN)\\
   $\bullet$ 0/200 crash (SAFE)
 };
 
@@ -200,24 +200,38 @@
 \node[dfd process, fill=CAmber50, draw=CAmber600, text=CAmber600] (config) at (-6.0, -6.6)
 {
   \textbf{Config (RAM)}\\
-  \texttt{\small heSoQuyMoLop = 0.2f}\\
+  \texttt{\small heSoQuyMoLop} \textcolor{CGray500}{\scriptsize (khong dung, dead field)}\\
   \texttt{\small dinhMucTienChuan = 85000}
 };
 
 %% calculate_e2e_salary_VULN() (Center)
 \node[dfd process, fill=CCoral50, draw=CCoral600, text=CCoral600,
-  text width=5.6cm] (calc) at (0, -6.6)
+  text width=6.0cm] (calc) at (0, -6.6)
 {
   \textbf{calculate\_e2e\_salary\_VULN(lhp, cfg)}\\
+  \texttt{\small heSoQM = (soLuongSinhVien>50)?0.2:0.0}\\
   \texttt{\small soTietQD = (int)(soTiet x (heSoHP + heSoQM))}\\
   \texttt{\small tien = (int)soTietQD x (int)gv\_ptr->heSoBC x (int)dmt}\\
-  \textit{\scriptsize tinh\_tien\_day.c dong 12--14}
+  \textit{\scriptsize dong 9,12--14 -- heSoQM tu soLuongSinhVien, KHONG tu Config!}
 };
 
-\node[dfd cwe, fill=CRed400, text=CWhite, text width=2.6cm] (cwe190) at (-1.5, -8.2)
+\node[dfd cwe, fill=CRed400, text=CWhite, text width=2.6cm] (cwe190) at (-1.5, -9.0)
   {CWE-190:\\ep kieu int tran so};
-\node[dfd cwe, fill=CRed400, text=CWhite, text width=2.6cm] (cwe476) at (1.5, -8.2)
+\node[dfd cwe, fill=CRed400, text=CWhite, text width=2.6cm] (cwe476) at (1.5, -9.0)
   {CWE-476:\\gv\_ptr NULL};
+
+%% pack_class_size_byte_VULN() -- ham RIENG (khong phai calculate()), dung soLuongSinhVien
+%% de dong goi audit log, doc lap voi cong thuc tinh luong o tren
+\node[dfd process, fill=CCoral50, draw=CCoral600, text=CCoral600,
+  text width=5.4cm] (pack) at (6.2, -6.6)
+{
+  \textbf{pack\_class\_size\_byte\_VULN(soLuongSinhVien)}\\
+  \texttt{\small return (char)soLuongSinhVien;}\\
+  \textit{\scriptsize tinh\_tien\_day.c dong 62--63 -- HAM RIENG, khong phai 1 phan cua calculate()}
+};
+\node[dfd cwe, fill=CRed400, text=CWhite, text width=2.6cm] (cwe197) at (6.2, -9.0)
+  {CWE-197:\\ep kieu char sai lech};
+\draw[arr red] (cwe cls.east) -- ++(1.0,0) |- node[edge label, pos=0.3, above] {soLuongSinhVien} (pack.north);
 
 %% ===== CONNECTING ARROWS TO CALCULATE =====
 %% From delete_lecturer to calculate
@@ -242,6 +256,7 @@
 
 \draw[arr teal] (cwe190.south) -- (cwe190.south |- export.north);
 \draw[arr teal] (cwe476.south) -- (cwe476.south |- export.north);
+\draw[arr teal] (cwe197.south) .. controls +(0,-1.2) and +(2,-1.2) .. (export.east);
 
 \end{tikzpicture}
 \end{document}

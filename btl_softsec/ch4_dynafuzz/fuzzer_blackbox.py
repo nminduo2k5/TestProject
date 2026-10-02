@@ -242,6 +242,10 @@ def run_bva_truncation_test(exe_name):
 
 
 if __name__ == '__main__':
+    # Seed co dinh: bao dam ket qua tai lap duoc giua cac lan chay (so crash/sai lech
+    # dung lam bang chung dinh luong trong report.pdf phai on dinh, khong doi ngau nhien
+    # moi lan chay lai script).
+    random.seed(42)
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     log_file = os.path.join(base_dir, "logs", "fuzzer_blackbox.log")
     sys.stdout = TeeLogger(log_file)

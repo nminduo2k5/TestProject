@@ -1,0 +1,320 @@
+\documentclass[tikz,border=16pt]{standalone}
+\usepackage{fontspec}
+\setmainfont{DejaVu Sans}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{
+  shapes.geometric,
+  shapes.multipart,
+  arrows.meta,
+  positioning,
+  fit,
+  backgrounds,
+  shadows.blur,
+  calc,
+  matrix
+}
+
+%% ===== MODERN CURATED PALETTE =====
+\definecolor{Slate900}{HTML}{0F172A}
+\definecolor{Slate800}{HTML}{1E293B}
+\definecolor{Slate700}{HTML}{334155}
+\definecolor{Slate600}{HTML}{475569}
+\definecolor{Slate400}{HTML}{94A3B8}
+\definecolor{Slate300}{HTML}{CBD5E1}
+\definecolor{Slate200}{HTML}{E2E8F0}
+\definecolor{Slate100}{HTML}{F1F5F9}
+\definecolor{Slate50}{HTML}{F8FAFC}
+
+%% Emerald (Init / Exported / Success)
+\definecolor{Emerald700}{HTML}{047857}
+\definecolor{Emerald600}{HTML}{059669}
+\definecolor{Emerald500}{HTML}{10B981}
+\definecolor{Emerald100}{HTML}{D1FAE5}
+\definecolor{Emerald50}{HTML}{ECFDF5}
+
+%% Indigo (Assigned / Module 1-2)
+\definecolor{Indigo700}{HTML}{4338CA}
+\definecolor{Indigo600}{HTML}{4F46E5}
+\definecolor{Indigo500}{HTML}{6366F1}
+\definecolor{Indigo100}{HTML}{E0E7FF}
+\definecolor{Indigo50}{HTML}{EEF2FF}
+
+%% Amber (Calculation / Business rules)
+\definecolor{Amber800}{HTML}{92400E}
+\definecolor{Amber600}{HTML}{D97706}
+\definecolor{Amber500}{HTML}{F59E0B}
+\definecolor{Amber100}{HTML}{FEF3C7}
+\definecolor{Amber50}{HTML}{FFFBEB}
+
+%% Rose / Red (Error / Vulnerability)
+\definecolor{Rose700}{HTML}{BE123C}
+\definecolor{Rose600}{HTML}{E11D48}
+\definecolor{Rose500}{HTML}{F43F5E}
+\definecolor{Rose100}{HTML}{FFE4E6}
+\definecolor{Rose50}{HTML}{FFF1F2}
+
+%% Sky / Blue (Accents)
+\definecolor{Sky700}{HTML}{0369A1}
+\definecolor{Sky600}{HTML}{0284C7}
+\definecolor{Sky100}{HTML}{E0F2FE}
+\definecolor{Sky50}{HTML}{F0F9FF}
+
+%% ===== TIKZ STYLES =====
+\tikzset{
+  font=\sffamily,
+  >={Stealth[round, scale=1.05]},
+  %% --- State node styles ---
+  kstate/.style={
+    circle,
+    line width=1.1pt,
+    minimum size=1.65cm,
+    inner sep=2pt,
+    align=center,
+    blur shadow={shadow blur steps=4, shadow opacity=0.12, shadow xshift=1pt, shadow yshift=-1.5pt}
+  },
+  stInit/.style={
+    kstate, double, double distance=2pt,
+    draw=Emerald600, fill=Emerald50, text=Emerald700
+  },
+  stAssigned/.style={
+    kstate,
+    draw=Indigo600, fill=Indigo50, text=Indigo700
+  },
+  stCalc/.style={
+    kstate,
+    draw=Amber600, fill=Amber50, text=Amber800
+  },
+  stExported/.style={
+    kstate,
+    draw=Emerald600, fill=Emerald50, text=Emerald700
+  },
+  stError/.style={
+    kstate,
+    draw=Rose600, fill=Rose50, text=Rose700
+  },
+  stBuggy/.style={
+    kstate, dashed,
+    draw=Rose600, fill=Rose100, text=Rose700
+  },
+  %% --- Prop Pills ---
+  propPill/.style={
+    rectangle, rounded corners=3pt,
+    font=\scriptsize\ttfamily,
+    inner sep=2.5pt,
+    draw=Slate200, fill=white,
+    blur shadow={shadow blur steps=2, shadow opacity=0.08, shadow xshift=0.5pt, shadow yshift=-0.5pt}
+  },
+  %% --- Edge label pills ---
+  edgePill/.style={
+    rectangle, rounded corners=3pt,
+    font=\scriptsize\bfseries,
+    inner sep=2.5pt,
+    fill=white, draw=Slate200,
+    text=Slate700,
+    blur shadow={shadow blur steps=2, shadow opacity=0.06, shadow xshift=0.5pt, shadow yshift=-0.5pt}
+  },
+  edgePillRed/.style={
+    edgePill,
+    fill=Rose50, draw=Rose500!40, text=Rose700
+  },
+  edgePillAmber/.style={
+    edgePill,
+    fill=Amber50, draw=Amber500!40, text=Amber800
+  },
+  edgePillIndigo/.style={
+    edgePill,
+    fill=Indigo50, draw=Indigo500!40, text=Indigo700
+  },
+  edgePillEmerald/.style={
+    edgePill,
+    fill=Emerald50, draw=Emerald500!40, text=Emerald700
+  }
+}
+
+%% Macro for table status badges
+\newcommand{\badgePass}[1]{%
+  \begingroup\setlength{\fboxsep}{2.5pt}%
+  \colorbox{Emerald100}{\textcolor{Emerald700}{\textbf{\footnotesize #1}}}%
+  \endgroup%
+}
+\newcommand{\badgeFail}[1]{%
+  \begingroup\setlength{\fboxsep}{2.5pt}%
+  \colorbox{Rose100}{\textcolor{Rose700}{\textbf{\footnotesize #1}}}%
+  \endgroup%
+}
+\newcommand{\badgeWarn}[1]{%
+  \begingroup\setlength{\fboxsep}{2.5pt}%
+  \colorbox{Amber100}{\textcolor{Amber800}{\textbf{\footnotesize #1}}}%
+  \endgroup%
+}
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.4cm and 3.4cm]
+
+  %% ================= STATES ĐƯỢC ĐỊNH NGHĨA TRƯỚC để header có thể neo an toàn phía trên chúng =================
+  %% (khối trạng thái được đặt bên dưới; header dùng positioning tương đối nên luôn nằm trên đủ xa)
+
+  %% ================= STATES (tọa độ tuyệt đối, khoảng cách rộng, không còn chồng lấn) =================
+  %% S0: INIT
+  \node[stInit] (S0) at (0, 5.2)
+    {\textbf{S0}\\[-1pt]\footnotesize INIT};
+  \node[propPill, text=Emerald700, above=0.35cm of S0] (L0)
+    {\{init\}};
+
+  %% S1: GV_ASSIGNED
+  \node[stAssigned] (S1) at (5, 5.2)
+    {\textbf{S1}\\[-1pt]\footnotesize GV\_ASSIGNED};
+  \node[propPill, text=Indigo700, above=0.35cm of S1] (L1)
+    {\{assigned\}};
+
+  %% S2A: CALC_THUONG
+  \node[stCalc] (S2A) at (10.2, 8.4)
+    {\textbf{S2A}\\[-1pt]\footnotesize CALC\_THUONG};
+  \node[propPill, text=Amber800, right=0.3cm of S2A, align=left] (L2A)
+    {\{assigned,\\ \ calculated,\\ \ lop\_thuong\}};
+
+  %% S2B: CALC_DONG
+  \node[stCalc] (S2B) at (10.2, 2.0)
+    {\textbf{S2B}\\[-1pt]\footnotesize CALC\_DONG};
+  \node[propPill, text=Amber800, right=0.3cm of S2B, align=left] (L2B)
+    {\{assigned,\\ \ calculated,\\ \ lop\_dong\}};
+
+  %% S3: EXPORTED
+  \node[stExported] (S3) at (15.4, 5.2)
+    {\textbf{S3}\\[-1pt]\footnotesize EXPORTED};
+  \node[propPill, text=Emerald700, right=0.3cm of S3] (L3)
+    {\{exported\}};
+
+  %% S4: ERROR
+  \node[stError] (S4) at (0, -1.4)
+    {\textbf{S4}\\[-1pt]\footnotesize ERROR};
+  \node[propPill, text=Rose700, left=0.35cm of S4] (L4)
+    {\{error\}};
+
+  %% S5: INVALID_CALC (BUGGY ONLY)
+  \node[stBuggy] (S5) at (5, -1.4)
+    {\textbf{S5}\\[-1pt]\footnotesize INVALID\_CALC\\[-2pt]{\tiny\color{Rose600}(BUGGY ONLY)}};
+  \node[propPill, text=Rose700, right=0.35cm of S5, align=left] (L5)
+    {\{error,\\ calculated\}};
+
+  %% ================= VÒNG RESET (đặt cao hẳn phía trên đỉnh S2A, không chạm vào S2A) =================
+  \coordinate (loopY) at ($(S2A.north)+(0,0.9)$);
+
+  %% ================= HEADER: khung ghi chú, tiêu đề phụ, tiêu đề chính =================
+  %% Đặt cách S2A đủ xa (cao hơn cả vòng reset) để không bao giờ đè lên sơ đồ
+  \node[
+    draw=Amber600, fill=Amber50, line width=1pt, rounded corners=5pt,
+    inner sep=8pt, text width=7cm, align=left,
+    above=1.5cm of S2A, xshift=1.2cm
+  ] (statementBox) {
+    \textcolor{Amber800}{\textbf{\normalsize $\blacktriangleright$ Rẽ nhánh nghiệp vụ (\texttt{tinh\_tien\_day.c}):}}\\[3pt]
+    \footnotesize
+    $\text{heSoQuyMo} = \begin{cases} 0.0 & \text{khi } \text{soLuongSinhVien} \le 50 \implies \mathbf{S_{2A}} \\ 0.2 & \text{khi } \text{soLuongSinhVien} > 50 \implies \mathbf{S_{2B}} \end{cases}$\\[3pt]
+    \textcolor{Slate600}{\textit{Hai tham số \texttt{soTiet} và \texttt{soLuongSinhVien} gộp thành tham số tổng hợp tăng dần đơn điệu.}}
+  };
+  \draw[->, Amber600, line width=1.1pt, dashed]
+    (statementBox.south) .. controls +(0,-0.6) and +(0.6,0.9) .. (S2A.north);
+
+  \node[font=\footnotesize, text=Slate600, align=center, text width=17cm,
+        above=1.0cm of statementBox] (subtitle)
+    {Mô hình $M = (S, S_0, R, L)$ cho Luồng E2E 3-Module (DuongUniversity) -- Đối chiếu trực tiếp với \texttt{kripke\_bmc.py}};
+  \node[font=\Large\bfseries, text=Slate900, align=center,
+        above=0.2cm of subtitle] (title)
+    {SƠ ĐỒ CHUYỂN TRẠNG THÁI KRIPKE \& KIỂM CHỨNG BMC ($k=5$)};
+
+  %% ================= TRANSITIONS (FIXED / NORMAL FLOW) =================
+  %% S0 -> S1
+  \draw[->, line width=1.2pt, color=Indigo600]
+    (S0) -- node[edgePillIndigo, above] {\texttt{add\_lecturer()}} (S1);
+
+  %% S1 -> S2A
+  \draw[->, line width=1.2pt, color=Amber600]
+    (S1) -- node[edgePillAmber, above, sloped, pos=0.42] {\texttt{calculate()} [$\le 50$ SV]} (S2A);
+
+  %% S1 -> S2B
+  \draw[->, line width=1.2pt, color=Amber600]
+    (S1) -- node[edgePillAmber, below, sloped, pos=0.42] {\texttt{calculate()} [$> 50$ SV]} (S2B);
+
+  %% S2A -> S3
+  \draw[->, line width=1.2pt, color=Emerald600]
+    (S2A) -- node[edgePillEmerald, above, sloped, pos=0.4] {\texttt{export\_report()}} (S3);
+
+  %% S2B -> S3
+  \draw[->, line width=1.2pt, color=Emerald600]
+    (S2B) -- node[edgePillEmerald, below, sloped, pos=0.4] {\texttt{export\_report()}} (S3);
+
+  %% S3 -> S0 (Loop reset) -- đi ngay dưới khung ghi chú, cách hẳn đỉnh S2A (dùng loopY đã định nghĩa ở trên)
+  \draw[->, line width=1.1pt, color=Slate400, rounded corners=8pt]
+    (S3.north) -- (S3.north |- loopY) -- node[edgePill, pos=0.32, above] {\texttt{reset / new\_cycle}} (S0.north |- loopY) -- (S0.north);
+
+  %% S1 -> S4 (Error) -- nhãn đặt lệch về phía S4 để tránh giao điểm với đường S0->S5
+  \draw[->, line width=1.1pt, color=Rose500, dashed]
+    (S1) -- node[edgePillRed, right, pos=0.78, sloped] {\texttt{NULL / overflow}} (S4);
+
+  %% S4 -> S0 (Error recovery)
+  \draw[->, line width=1.1pt, color=Slate400, dashed]
+    (S4) -- node[edgePill, left] {\texttt{system\_reset}} (S0);
+
+  %% S2A/S2B -> S4 (Stub chỉ báo lỗi) -- rút ngắn, đưa vào khoảng trống giữa hình thoi S1-S2A-S3-S2B,
+  %% KHÔNG còn cắt xuyên qua S1 hay các nhãn calculate()/export_report() như bản trước
+  \draw[->, line width=1pt, color=Rose500, dashed] (S2A.south) -- ++(-0.3,-1.15) coordinate (errA);
+  \node[font=\tiny\bfseries, text=Rose700, fill=Rose50, draw=Rose500!30, rounded corners=2pt,
+        inner sep=2pt, align=center, below=0.05cm of errA]
+    {error $\to$ S4\\(\texttt{is\_deleted})};
+
+  \draw[->, line width=1pt, color=Rose500, dashed] (S2B.north) -- ++(-0.3,1.15) coordinate (errB);
+  \node[font=\tiny\bfseries, text=Rose700, fill=Rose50, draw=Rose500!30, rounded corners=2pt,
+        inner sep=2pt, align=center, above=0.05cm of errB]
+    {error $\to$ S4\\(\texttt{is\_deleted})};
+
+  %% ================= BUGGY PATH (CWE EXPLOIT) =================
+  %% S0 -> S5 (Skip assigned shortcut) -- nhãn lệch về phía S0, tránh giao điểm với đường S1->S4
+  \draw[->, line width=1.6pt, color=Rose600, dashed]
+    (S0) -- node[edgePillRed, above, pos=0.24, sloped] {\textbf{SKIP ASSIGNED!} (Lỗ hổng)} (S5);
+
+  %% S5 -> S4
+  \draw[->, line width=1.2pt, color=Rose600, dashed]
+    (S5) -- node[edgePillRed, below] {\texttt{crash / error}} (S4);
+
+  %% ================= BMC RESULTS SUMMARY CARD (đặt hẳn xuống dưới cùng, đủ khoảng trống) =================
+  \node[
+    draw=Slate300, fill=Slate50, line width=1pt, rounded corners=6pt,
+    inner sep=10pt, anchor=north
+  ] (bmcCard) at (7.7, -4.0) {
+    \parbox{16.6cm}{
+      \centering
+      {\large\bfseries\color{Slate900} BẢNG ĐỐI CHỨNG KẾT QUẢ BOUNDED MODEL CHECKING (BMC, $k=5$)}\\[6pt]
+      \small
+      \renewcommand{\arraystretch}{1.3}
+      \begin{tabular}{@{}c l l l@{}}
+        \toprule
+        \textbf{Mã} & \textbf{Thuộc tính LTL/CTL} & \textbf{Mô hình BUGGY (7 states)} & \textbf{Mô hình FIXED (6 states)} \\
+        \midrule
+        $\mathbf{P_1}$ & $G(\text{calculated} \to \text{assigned})$ (Safety)
+          & \badgeFail{SAT (Phát hiện vết $S_0 \to S_5$)}
+          & \badgePass{UNSAT \checkmark (An toàn)} \\
+        $\mathbf{P_2}$ & $G(\text{exported} \to \text{calculated})$ (Safety)
+          & \badgePass{UNSAT \checkmark (Thỏa mãn)}
+          & \badgePass{UNSAT \checkmark (Thỏa mãn)} \\
+        $\mathbf{P_3}$ & $G(\text{assigned} \to F\,\text{calculated})$ (Liveness)
+          & \badgeWarn{SAT (Giới hạn $k=5$)}
+          & \badgeWarn{SAT (Giới hạn $k=5$)} \\
+        $\mathbf{P_4}$ & $G(\text{error} \to \neg\,\text{exported})$ (Safety)
+          & \badgePass{UNSAT \checkmark (Thỏa mãn)}
+          & \badgePass{UNSAT \checkmark (Thỏa mãn)} \\
+        $\mathbf{P_5}$ & $G(\text{exported} \to \neg\,\text{byte\_truncated})$ (Safety, CWE-197)
+          & \badgeFail{SAT (Qua $S_{2B}$, rò rỉ audit log)}
+          & \badgePass{UNSAT \checkmark (An toàn)} \\
+        \bottomrule
+      \end{tabular}\\[6pt]
+      \raggedright
+      \footnotesize\color{Slate600}
+      \textit{\textbf{Ghi chú:}} $P_3$ Liveness báo SAT ở cả hai bản do đặc thù BMC hữu hạn $k=5$ (cần $k$-induction vô hạn để chứng minh triệt để). Việc phân tách trạng thái $S_{2A}$/$S_{2B}$ phản ánh tường minh đặc tả nghiệp vụ và giữ nguyên tính nhất quán E2E của toàn bộ thuộc tính $P_1$--$P_5$.
+    }
+  };
+
+\end{tikzpicture}
+\end{document}

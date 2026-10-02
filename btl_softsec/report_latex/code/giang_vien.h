@@ -1,14 +1,14 @@
 #ifndef GIANG_VIEN_H
 #define GIANG_VIEN_H
 
-#define MAX_NAME 80
+#define MAX_NAME 80  // CON-1: buffer hoTen toi da 80 byte (REQ-3.1 / CWE-120, xem chuong2.tex tab:con)
 
 // MODULE 1: QUẢN LÝ GIẢNG VIÊN (Lecturer Management Struct)
 typedef struct {
     int   id;
-    char  maGiangVien[20];
-    char  hoTen[MAX_NAME];      // CWE-120: Buffer overflow if input > 80 chars
-    char  bangCap[20];          // "CU_NHAN", "THAC_SI", "TIEN_SI", "PGS", "GS"
+    char  maGiangVien[20];      // CON-2: buffer toi da 20 byte, hang so truc tiep (REQ-3.3 / CWE-120)
+    char  hoTen[MAX_NAME];      // CWE-120: Buffer overflow if input > 80 chars (CON-1)
+    char  bangCap[20];          // CON-3: buffer toi da 20 byte (REQ-3.3 / CWE-120); "CU_NHAN", "THAC_SI", "TIEN_SI", "PGS", "GS"
     float heSoBangCap;
     int   is_deleted;
 } GiangVien;

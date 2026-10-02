@@ -1,0 +1,214 @@
+{
+  "partial": {
+    "tests_passed": 2,
+    "tests_total": 2,
+    "coverage": {
+      "lines_total": 86,
+      "lines_covered": 62,
+      "coverage_percent": 72.09,
+      "branches_total": 61,
+      "branches_taken": 27,
+      "branch_coverage_percent": 44.26,
+      "uncovered_lines": [
+        [
+          71,
+          "return SALARY_INVALID_SOTIET;"
+        ],
+        [
+          74,
+          "return SALARY_INVALID_HESO;"
+        ],
+        [
+          77,
+          "return SALARY_INVALID_SV;"
+        ],
+        [
+          83,
+          "heSoBangCap = 2.0f;"
+        ],
+        [
+          85,
+          "heSoBangCap = 1.8f;"
+        ],
+        [
+          88,
+          "} else if (strcmp(bangCap, \"THAC_SI\") == 0) {"
+        ],
+        [
+          89,
+          "heSoBangCap = 1.2f;"
+        ],
+        [
+          90,
+          "} else if (strcmp(bangCap, \"CU_NHAN\") == 0) {"
+        ],
+        [
+          91,
+          "heSoBangCap = 1.0f;"
+        ],
+        [
+          93,
+          "return SALARY_INVALID_DEGREE;"
+        ],
+        [
+          102,
+          "audit_byte_ok = 0;   /* pack_class_size_byte_SAFE() se tu choi */"
+        ],
+        [
+          107,
+          "heSoQuyMo = 0.0;"
+        ],
+        [
+          108,
+          "audit_byte_ok = 1;       /* <= 50 luon nam trong [0,127] */"
+        ],
+        [
+          125,
+          "return SALARY_APPROVAL_REQUIRED;"
+        ],
+        [
+          133,
+          "case SALARY_INVALID_SOTIET: return \"INVALID_SOTIET\";"
+        ],
+        [
+          134,
+          "case SALARY_INVALID_HESO: return \"INVALID_HESO\";"
+        ],
+        [
+          135,
+          "case SALARY_INVALID_SV: return \"INVALID_SV\";"
+        ],
+        [
+          136,
+          "case SALARY_INVALID_DEGREE: return \"INVALID_DEGREE\";"
+        ],
+        [
+          137,
+          "case SALARY_APPROVAL_REQUIRED: return \"APPROVAL_REQUIRED\";"
+        ],
+        [
+          138,
+          "default: return \"UNKNOWN\";"
+        ],
+        [
+          147,
+          "fprintf(stderr, \"Cach dung: %s <test_inputs.csv>\\n\", argv[0]);"
+        ],
+        [
+          148,
+          "return 1;"
+        ],
+        [
+          152,
+          "fprintf(stderr, \"[LOI] Khong mo duoc file: %s\\n\", argv[1]);"
+        ],
+        [
+          153,
+          "return 1;"
+        ]
+      ]
+    }
+  },
+  "full": {
+    "tests_passed": 13,
+    "tests_total": 13,
+    "coverage": {
+      "lines_total": 86,
+      "lines_covered": 81,
+      "coverage_percent": 94.19,
+      "branches_total": 61,
+      "branches_taken": 47,
+      "branch_coverage_percent": 77.05,
+      "uncovered_lines": [
+        [
+          138,
+          "default: return \"UNKNOWN\";"
+        ],
+        [
+          147,
+          "fprintf(stderr, \"Cach dung: %s <test_inputs.csv>\\n\", argv[0]);"
+        ],
+        [
+          148,
+          "return 1;"
+        ],
+        [
+          152,
+          "fprintf(stderr, \"[LOI] Khong mo duoc file: %s\\n\", argv[1]);"
+        ],
+        [
+          153,
+          "return 1;"
+        ]
+      ]
+    }
+  },
+  "combinatorial": {
+    "tests_passed": 450,
+    "tests_total": 450,
+    "coverage": {
+      "lines_total": 86,
+      "lines_covered": 81,
+      "coverage_percent": 94.19,
+      "branches_total": 61,
+      "branches_taken": 47,
+      "branch_coverage_percent": 77.05,
+      "uncovered_lines": [
+        [
+          138,
+          "default: return \"UNKNOWN\";"
+        ],
+        [
+          147,
+          "fprintf(stderr, \"Cach dung: %s <test_inputs.csv>\\n\", argv[0]);"
+        ],
+        [
+          148,
+          "return 1;"
+        ],
+        [
+          152,
+          "fprintf(stderr, \"[LOI] Khong mo duoc file: %s\\n\", argv[1]);"
+        ],
+        [
+          153,
+          "return 1;"
+        ]
+      ]
+    }
+  },
+  "combinatorial_extended": {
+    "tests_passed": 630,
+    "tests_total": 630,
+    "coverage": {
+      "lines_total": 86,
+      "lines_covered": 81,
+      "coverage_percent": 94.19,
+      "branches_total": 61,
+      "branches_taken": 47,
+      "branch_coverage_percent": 77.05,
+      "uncovered_lines": [
+        [
+          138,
+          "default: return \"UNKNOWN\";"
+        ],
+        [
+          147,
+          "fprintf(stderr, \"Cach dung: %s <test_inputs.csv>\\n\", argv[0]);"
+        ],
+        [
+          148,
+          "return 1;"
+        ],
+        [
+          152,
+          "fprintf(stderr, \"[LOI] Khong mo duoc file: %s\\n\", argv[1]);"
+        ],
+        [
+          153,
+          "return 1;"
+        ]
+      ]
+    }
+  }
+}

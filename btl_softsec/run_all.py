@@ -25,12 +25,15 @@ def main():
     gcc_path = r"C:\msys64\ucrt64\bin\gcc.exe" if os.path.exists(r"C:\msys64\ucrt64\bin\gcc.exe") else "gcc"
     
     # Compile 4 modular files for BUGGY version
+    # -lpsapi: can cho GetProcessMemoryInfo() dung boi subcommand e2e_nfr_bench (NFR-2,
+    # xem main.c/main_fixed.c va ch2_memsafe/nfr_check.py)
     run_cmd([
         gcc_path, "-Wall", "-g", "-o", os.path.join(ch2_dir, "salary_calc.exe"),
         os.path.join(ch2_dir, "giang_vien.c"),
         os.path.join(ch2_dir, "lop_hoc_phan.c"),
         os.path.join(ch2_dir, "tinh_tien_day.c"),
-        os.path.join(ch2_dir, "main.c")
+        os.path.join(ch2_dir, "main.c"),
+        "-lpsapi"
     ])
     # Compile cùng 3 module (dùng chung hàm *_SAFE) cho bản FIXED, chỉ khác main_fixed.c
     run_cmd([
@@ -38,7 +41,8 @@ def main():
         os.path.join(ch2_dir, "giang_vien.c"),
         os.path.join(ch2_dir, "lop_hoc_phan.c"),
         os.path.join(ch2_dir, "tinh_tien_day.c"),
-        os.path.join(ch2_dir, "main_fixed.c")
+        os.path.join(ch2_dir, "main_fixed.c"),
+        "-lpsapi"
     ])
 
     # Uu tien python co san z3-solver (vd Anaconda) thay vi sys.executable, vi PATH tren may
@@ -50,8 +54,10 @@ def main():
     run_cmd([python_exe, os.path.join(base_dir, "ch1_models", "kripke_bmc.py")])
 
     # 3. Run Chapter 2: Pattern Scanner (static) + Memory Trace Demo (dynamic, bo sung)
+    #    + NFR Check (thuc nghiem NFR-1 hieu nang / NFR-2 on dinh bo nho, bo sung)
     run_cmd([python_exe, os.path.join(base_dir, "ch2_memsafe", "pattern_scanner.py")])
     run_cmd([python_exe, os.path.join(base_dir, "ch2_memsafe", "memory_trace_demo.py")])
+    run_cmd([python_exe, os.path.join(base_dir, "ch2_memsafe", "nfr_check.py")])
 
     # 4. Run Chapter 3: SMT Verify (ch3_staticsat)
     run_cmd([python_exe, os.path.join(base_dir, "ch3_staticsat", "smt_verify.py")])

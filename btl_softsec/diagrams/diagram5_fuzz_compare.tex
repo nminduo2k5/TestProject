@@ -16,19 +16,19 @@
 %% (Bang 5.3, tab:fuzz)
 %% ===========================================================
 \begin{tikzpicture}
-  % ---- (a) Thoi gian thuc thi (s): Black-box 11.90s vs White-box 0.39s ----
-  \begin{scope}[x=1.2cm,y=0.36cm]
-    \node[font=\small\bfseries] at (1.6,14.2) {(a) Thời gian thực thi (s)};
-    \draw[gray!70,-{Triangle[length=2mm]}] (-0.3,0) -- (-0.3,13.4);
+  % ---- (a) Thoi gian thuc thi (s): Black-box 9.86s vs White-box 0.34s ----
+  \begin{scope}[x=1.2cm,y=0.33cm]
+    \node[font=\small\bfseries] at (1.6,11.3) {(a) Thời gian thực thi (s)};
+    \draw[gray!70,-{Triangle[length=2mm]}] (-0.3,0) -- (-0.3,10.7);
     \draw[gray!70,-{Triangle[length=2mm]}] (0,-0.3) -- (3.2,-0.3);
     \foreach \y in {2,4,6,8,10} {
       \draw[gray!25,dashed] (0,\y) -- (3,\y);
       \node[left,font=\tiny,gray!50!black] at (-0.15,\y) {\y};
     }
-    \draw[fill=sevhigh] (0.65,0) rectangle (1.35,11.90);
-    \draw[fill=accentteal] (1.85,0) rectangle (2.55,0.39);
-    \node[above,font=\scriptsize\bfseries] at (1,11.90) {11.90};
-    \node[above,font=\scriptsize\bfseries] at (2.2,0.39) {0.39};
+    \draw[fill=sevhigh] (0.65,0) rectangle (1.35,9.86);
+    \draw[fill=accentteal] (1.85,0) rectangle (2.55,0.34);
+    \node[above,font=\scriptsize\bfseries] at (1,9.86) {9.86};
+    \node[above,font=\scriptsize\bfseries] at (2.2,0.34) {0.34};
     \node[below,font=\scriptsize] at (1,-0.45) {Black-box};
     \node[below,font=\scriptsize] at (2.2,-0.45) {White-box};
   \end{scope}

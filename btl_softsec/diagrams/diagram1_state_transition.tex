@@ -154,12 +154,14 @@
 \begin{tikzpicture}
 
   %% ================= HEADER (TOP CENTERED) =================
-  \node[font=\Large\bfseries, text=Slate900, align=center] (title) at (6.8, 6.6)
+  \node[font=\Large\bfseries, text=Slate900, align=center] (title) at (8, 9.3)
     {SƠ ĐỒ CHUYỂN TRẠNG THÁI KRIPKE \& KIỂM CHỨNG BMC ($k=5$)};
-  \node[font=\footnotesize, text=Slate600, align=center] (subtitle) at (6.8, 6.0)
+  \node[font=\footnotesize, text=Slate600, align=center] (subtitle) at (8, 8.7)
     {Mô hình $M = (S, S_0, R, L)$ cho Luồng E2E 3-Module (DuongUniversity) -- Đối chiếu trực tiếp với \texttt{kripke\_bmc.py}};
 
   %% ================= STATES (MAIN FLOW: LEFT TO RIGHT) =================
+  %% Bo cuc moi: tang khoang cach doc giua S2A/S2B va day S4/S5 xuong xa hon, de mo hinh
+  %% "kim cuong" S1-S2A-S3-S2B khong con vung nao bi 3 duong/label khac nhau cham vao.
   %% S0: INIT
   \node[stInit] (S0) at (0, 0)
     {\textbf{S0}\\[-1pt]\footnotesize INIT};
@@ -167,38 +169,39 @@
     {\{init\}};
 
   %% S1: GV_ASSIGNED
-  \node[stAssigned] (S1) at (4.4, 0)
+  \node[stAssigned] (S1) at (5.2, 0)
     {\textbf{S1}\\[-1pt]\footnotesize GV\_ASSIGNED};
   \node[propPill, text=Indigo700, below=0.18cm of S1] (L1)
     {\{assigned\}};
 
-  %% S2A: CALC_THUONG
-  \node[stCalc] (S2A) at (9.2, 1.8)
+  %% S2A: CALC_THUONG -- day xa hon S1 theo truc x (11.2 thay vi 9.2) de canh
+  %% calculate()/export_report() thoai hon, do doc tang len 3.2 (thay vi 1.8)
+  \node[stCalc] (S2A) at (11.2, 3.2)
     {\textbf{S2A}\\[-1pt]\footnotesize CALC\_THUONG};
-  \node[propPill, text=Amber800, right=0.2cm of S2A, align=left] (L2A)
-    {\{assigned,\\ \ calculated,\\ \ lop\_thuong\}};
+  \node[propPill, text=Amber800, above=0.22cm of S2A, align=center] (L2A)
+    {\{assigned, calculated,\\ lop\_thuong\}};
 
   %% S2B: CALC_DONG
-  \node[stCalc] (S2B) at (9.2, -1.8)
+  \node[stCalc] (S2B) at (11.2, -3.2)
     {\textbf{S2B}\\[-1pt]\footnotesize CALC\_DONG};
-  \node[propPill, text=Amber800, right=0.2cm of S2B, align=left] (L2B)
-    {\{assigned,\\ \ calculated,\\ \ lop\_dong\}};
+  \node[propPill, text=Amber800, below=0.22cm of S2B, align=center] (L2B)
+    {\{assigned, calculated,\\ lop\_dong\}};
 
   %% S3: EXPORTED
-  \node[stExported] (S3) at (14.0, 0)
+  \node[stExported] (S3) at (17.0, 0)
     {\textbf{S3}\\[-1pt]\footnotesize EXPORTED};
   \node[propPill, text=Emerald700, right=0.2cm of S3] (L3)
     {\{exported\}};
 
-  %% ================= STATES (ERROR / VULNERABILITY: LOWER ROW) =================
-  %% S5: INVALID_CALC (BUGGY ONLY) - Placed directly under S0
-  \node[stBuggy] (S5) at (0, -4.0)
+  %% ================= STATES (ERROR / VULNERABILITY: LOWER ROW, DAY HAN XUONG) =================
+  %% S5: INVALID_CALC (BUGGY ONLY) - Placed directly under S0, cach xa S0 hon (truoc -4.0)
+  \node[stBuggy] (S5) at (0, -7.4)
     {\textbf{S5}\\[-1pt]\footnotesize INVALID\_CALC\\[-2pt]{\tiny\color{Rose600}(BUGGY ONLY)}};
   \node[propPill, text=Rose700, below=0.18cm of S5, align=center] (L5)
     {\{error, calculated\}};
 
   %% S4: ERROR - Placed directly under S1
-  \node[stError] (S4) at (4.4, -4.0)
+  \node[stError] (S4) at (5.2, -7.4)
     {\textbf{S4}\\[-1pt]\footnotesize ERROR};
   \node[propPill, text=Rose700, below=0.18cm of S4] (L4)
     {\{error\}};
@@ -206,8 +209,8 @@
   %% ================= STATEMENT CALLOUT BOX =================
   \node[
     draw=Amber600, fill=Amber50, line width=1.1pt, rounded corners=5pt,
-    inner sep=7pt, text width=6.6cm, align=left,
-    at={(9.2, 4.5)},
+    inner sep=7pt, text width=6.8cm, align=left,
+    at={(11.2, 7.2)},
     blur shadow={shadow blur steps=4, shadow opacity=0.08, shadow xshift=1pt, shadow yshift=-1pt}
   ] (statementBox) {
     \textcolor{Amber800}{\textbf{\scriptsize $\blacktriangleright$ Rẽ nhánh nghiệp vụ (\texttt{tinh\_tien\_day.c}):}}\\[2pt]
@@ -221,58 +224,72 @@
   \draw[->, line width=1.2pt, color=Indigo600]
     (S0) -- node[edgePillIndigo, above] {\texttt{add\_lecturer()}} (S1);
 
-  %% S1 -> S2A
+  %% S1 -> S2A (label dat gan S1, truoc khi cham nhanh is_deleted stub cua S2A)
   \draw[->, line width=1.2pt, color=Amber600]
-    (S1) -- node[edgePillAmber, above, sloped, pos=0.42] {\texttt{calculate()} [$\le 50$ SV]} (S2A);
+    (S1) -- node[edgePillAmber, above, sloped, pos=0.32] {\texttt{calculate()} [$\le 50$ SV]} (S2A);
 
   %% S1 -> S2B
   \draw[->, line width=1.2pt, color=Amber600]
-    (S1) -- node[edgePillAmber, below, sloped, pos=0.42] {\texttt{calculate()} [$> 50$ SV]} (S2B);
+    (S1) -- node[edgePillAmber, below, sloped, pos=0.32] {\texttt{calculate()} [$> 50$ SV]} (S2B);
 
   %% S2A -> S3
   \draw[->, line width=1.2pt, color=Emerald600]
-    (S2A) -- node[edgePillEmerald, above, sloped, pos=0.52] {\texttt{export\_report()}} (S3);
+    (S2A) -- node[edgePillEmerald, above, sloped, pos=0.58] {\texttt{export\_report()}} (S3);
 
   %% S2B -> S3
   \draw[->, line width=1.2pt, color=Emerald600]
-    (S2B) -- node[edgePillEmerald, below, sloped, pos=0.52] {\texttt{export\_report()}} (S3);
+    (S2B) -- node[edgePillEmerald, below, sloped, pos=0.58] {\texttt{export\_report()}} (S3);
 
-  %% S3 -> S0 (Loop reset passes at y=3.0, between S2A and statementBox)
+  %% S3 -> S0 (Loop reset di hoan toan phia tren S2A va duoi statementBox, khong cham node nao)
   \draw[->, line width=1.1pt, color=Slate400, rounded corners=8pt]
-    (S3.north) -- (14.0, 3.0) -- node[edgePill, pos=0.5, above] {\texttt{reset / new\_cycle}} (0, 3.0) -- (S0.north);
+    (S3.north) -- (17.0, 5.4) -- node[edgePill, pos=0.5, above] {\texttt{reset / new\_cycle}} (0, 5.4) -- (S0.north);
 
-  %% S1 -> S4 (Error when input invalid or NULL deref)
+  %% S1 -> S4 (Error khi NULL/overflow) -- thang dung, khong cham duong nao khac
   \draw[->, line width=1.1pt, color=Rose500, dashed]
-    (S1) -- node[edgePillRed, fill=white, inner sep=2.5pt, pos=0.45] {\texttt{NULL / overflow}} (S4);
+    (S1) -- node[edgePillRed, fill=white, inner sep=2.5pt, pos=0.5] {\texttt{NULL / overflow}} (S4);
 
-  %% S4 -> S0 (System Reset)
+  %% S4 -> S0 (System Reset) -- duong thang cheo don gian, khong con can dung curve
+  %% vi khong co node/duong nao nam giua sau khi day S4/S5 xuong xa
   \draw[->, line width=1.1pt, color=Slate400, dashed]
-    (S4.west) to[out=155, in=-60] node[edgePill, fill=white, inner sep=2.5pt, pos=0.55] {\texttt{system\_reset}} (S0.south east);
+    (S4.north west) -- node[edgePill, fill=white, inner sep=2.5pt, pos=0.45, sloped, above] {\texttt{system\_reset}} (S0.south east);
 
-  %% S2A/S2B -> S4 (Error transitions)
+  %% S2A -> S4 va S2B -> S4 (is_deleted): VE STUB NGAN thay vi ke thang toi S4 --
+  %% ly do thiet ke: 1 duong thang tu S2A/S2B toi S4 se phai cat xuyen qua chinh giua
+  %% 2 nhan calculate()/export_report() (day la nguyen nhan gay "diu diu, trong cheo"
+  %% o ban truoc). Stub ngan + tag ro nghia "$\Rightarrow S_4$" truyen dat dung 1 quan he
+  %% (S2A,S4) va (S2B,S4) trong add_transition() cua kripke_bmc.py ma khong ve duong dai
+  %% cat qua vung nhan khac; tuong tu ky thuat "self-loop danh dau" pho bien trong so do
+  %% Kripke/automata co nhieu canh loi cung do ve 1 sink state.
   \draw[->, line width=1pt, color=Rose500, dashed]
-    (S2B.south west) -- node[edgePillRed, above, sloped, pos=0.45] {\tiny \texttt{is\_deleted}} (S4.north east);
+    (S2A.south) -- ++(0,-1.3) coordinate (stubA);
+  \node[edgePillRed, font=\tiny\bfseries, below=0pt of stubA, align=center]
+    {\texttt{is\_deleted}\\$\Rightarrow S_4$ (ERROR)};
 
   \draw[->, line width=1pt, color=Rose500, dashed]
-    (S2A.south) to[out=-105, in=70] node[edgePillRed, pos=0.4, sloped] {\tiny \texttt{is\_deleted}} (S2B.north);
+    (S2B.north) -- ++(0,1.3) coordinate (stubB);
+  \node[edgePillRed, font=\tiny\bfseries, above=0pt of stubB, align=center]
+    {\texttt{is\_deleted}\\$\Rightarrow S_4$ (ERROR)};
 
   %% ================= BUGGY PATH (CWE EXPLOIT) =================
   %% S0 -> S5 (Straight vertical down)
   \draw[->, line width=1.5pt, color=Rose600, dashed]
-    (S0) -- node[edgePillRed, fill=Rose50, pos=0.45] {\textbf{SKIP ASSIGNED!}} (S5);
+    (S0) -- node[edgePillRed, fill=Rose50, pos=0.45, sloped] {\textbf{SKIP ASSIGNED!}} (S5);
 
   %% S5 -> S4 (Straight horizontal right)
   \draw[->, line width=1.2pt, color=Rose600, dashed]
     (S5) -- node[edgePillRed, below, pos=0.5] {\texttt{crash / error}} (S4);
 
   %% ================= BMC RESULTS SUMMARY CARD =================
+  %% Neo TREN vao dung 1 diem co toa do biet truoc (goc duoi-trai cua vung state, qua
+  %% below=... cua propPill S4/S5) thay vi doan mot toa do y tuyet doi -- tranh lai loi
+  %% chong lan da xay ra khi doi lai vi tri S4/S5.
   \node[
     draw=Slate300, fill=Slate50, line width=1pt, rounded corners=6pt,
-    inner sep=8pt,
-    at={(7.0, -8.6)},
+    inner sep=8pt, anchor=north, xshift=8.5cm,
+    below=1.1cm of L5,
     blur shadow={shadow blur steps=6, shadow opacity=0.1, shadow xshift=1pt, shadow yshift=-2pt}
   ] (bmcCard) {
-    \parbox{17.2cm}{
+    \parbox{17.8cm}{
       \centering
       {\large\bfseries\color{Slate900} BẢNG ĐỐI CHỨNG KẾT QUẢ BOUNDED MODEL CHECKING (BMC, $k=5$)}\\[5pt]
       \small

@@ -6,7 +6,7 @@
 
 \textbf{Module:} \texttt{ch1\_models/kripke\_bmc.py}.
 
-Kripke structure $M = (S, S_0, R, L)$ được dựng với \textbf{6 trạng thái ở bản FIXED} ($S_0$ INIT $\to$ $S_1$ GV\_ASSIGNED $\to$ \{$S_{2A}$ CALC\_THUONG $\mid$ $S_{2B}$ CALC\_DONG\} $\to$ $S_3$ EXPORTED, và $S_4$ ERROR) và \textbf{7 trạng thái ở bản BUGGY} (thêm $S_5$ INVALID\_CALC -- đường tắt nhảy trực tiếp từ $S_0$ sang tính tiền, bỏ qua bước phân công giảng viên). \Cref{fig:kripke} minh họa sơ đồ chuyển trạng thái cùng kết quả BMC $P_1$--$P_4$ trên phiên bản gốc trước khi bổ sung $P_5$ và tách $S_{2A}$/$S_{2B}$ (xem giải thích dưới hình và bảng kết quả cập nhật đầy đủ tại \Cref{sec:ketqua}).
+Kripke structure $M = (S, S_0, R, L)$ được dựng với \textbf{6 trạng thái ở bản FIXED} ($S_0$ INIT $\to$ $S_1$ GV\_ASSIGNED $\to$ \{$S_{2A}$ CALC\_THUONG $\mid$ $S_{2B}$ CALC\_DONG\} $\to$ $S_3$ EXPORTED, và $S_4$ ERROR) và \textbf{7 trạng thái ở bản BUGGY} (thêm $S_5$ INVALID\_CALC -- đường tắt nhảy trực tiếp từ $S_0$ sang tính tiền, bỏ qua bước phân công giảng viên). \Cref{fig:kripke} minh họa đầy đủ sơ đồ chuyển trạng thái (đã tách $S_{2A}$/$S_{2B}$) cùng bảng kết quả BMC $P_1$--$P_5$ trên cả 2 bản BUGGY/FIXED (bảng kết quả số liệu đầy đủ, đối chiếu lại tại \Cref{sec:ketqua}).
 
 Hai trạng thái $S_{2A}$ CALC\_THUONG và $S_{2B}$ CALC\_DONG (thay cho 1 $S_2$ SALARY\_CALC duy nhất trước đây) mô hình hóa đúng nhánh rẽ \emph{thật} trong \texttt{tinh\_tien\_day.c}: \texttt{heSoQuyMo = (soLuongSinhVien > 50) ? 0.2 : 0.0} -- tức là kết hợp \textbf{2 tham số đầu vào} \texttt{soTiet} và \texttt{soLuongSinhVien} thành 1 tham số tổng hợp \texttt{soTietQuyDoi} \emph{tăng dần theo cả hai tham số} (xem chứng minh đơn điệu tại \Cref{sec:params}), và vì \emph{rất nhiều} giá trị \texttt{soLuongSinhVien} khác nhau ($0..50$ hoặc $51..300$) cùng rơi vào 1 trong 2 trạng thái này, mỗi trạng thái được gắn với đúng 1 \textbf{statement} (predicate) tường minh:
 \begin{align*}
@@ -17,8 +17,8 @@ Cả 2 nhánh đều mang nhãn \texttt{assigned}+\texttt{calculated} như nhau 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth]{diagram1_state_transition_fixed.png}
-  \caption{Sơ đồ chuyển trạng thái Kripke và kết quả BMC $k=5$ (thuộc tính $P_1$--$P_4$; hình vẽ ở phiên bản gốc trước khi bổ sung $P_5$ và tách $S_2$ thành $S_{2A}$/$S_{2B}$ -- xem văn bản và \Cref{sec:ketqua} để có mô hình và bảng kết quả đầy đủ, cập nhật)}
+  \includegraphics[width=\linewidth]{diagram1_state_transition.png}
+  \caption{Sơ đồ chuyển trạng thái Kripke (7 trạng thái, đã tách $S_{2A}$/$S_{2B}$) và kết quả BMC $k=5$ đầy đủ $P_1$--$P_5$ trên cả bản BUGGY và FIXED, đối chiếu trực tiếp với \texttt{kripke\_bmc.py} và \texttt{logs/kripke\_bmc.log}}
   \label{fig:kripke}
 \end{figure}
 
