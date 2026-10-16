@@ -1,0 +1,27 @@
+=================================================================
+  LAB 8 - BLACK-BOX FUZZING (DuongUniversity Module 3 Tinh tien day)
+=================================================================
+
+[Ngan sach 1000 lan thu, seed=42]
+  Corpus cuoi cung        : 39 mau
+  So lan cham nhanh GVADM: : 124
+  So crash tim duoc        : 0
+
+[Ngan sach 3000 lan thu, seed=42]
+  Corpus cuoi cung        : 131 mau
+  So lan cham nhanh GVADM: : 233
+  So crash tim duoc        : 0
+
+[Ngan sach 5000 lan thu, seed=42]
+  Corpus cuoi cung        : 219 mau
+  So lan cham nhanh GVADM: : 333
+  So crash tim duoc        : 0
+
+--> Nhan xet: voi ngan sach thap (1000), fuzzer hop den thuong tim duoc 0 crash
+    vi phai ghep ngau nhien dung 'GVADM:' + '!' + payload du dai (>=16). Tang ngan
+    sach len 5000+ co the tinh co tim ra (nho dictionary ho tro), nhung cham hon han
+    fuzzer hop trang (xem whitebox_fuzzer.py).
+
+real	29m3.725s
+user	0m0.000s
+sys	0m0.015s

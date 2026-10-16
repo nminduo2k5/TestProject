@@ -1,0 +1,12 @@
+[PASS] test_normal_inputs_do_not_crash
+[PASS] test_known_crash_input_triggers_asan
+[PASS] test_whitebox_fuzzer_finds_crash_within_budget
+[PASS] test_blackbox_fuzzer_fails_within_same_budget
+[PASS] test_saved_crash_files_reproduce
+
+5/5 test da PASS
+
+real	6m20.015s
+user	0m0.031s
+sys	0m0.000s
+exit=0

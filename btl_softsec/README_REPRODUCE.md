@@ -44,6 +44,22 @@ python run_all.py
 
 ---
 
+## 3b. DASHBOARD DEMO TƯƠNG TÁC (STREAMLIT)
+
+Để demo trực quan thay vì đọc log thô, chạy dashboard Streamlit (đọc trực tiếp `logs/*.log`, có nút **Chạy lại** gọi đúng script gốc và trang **Demo E2E trực tiếp** chạy cả 2 binary với input tự nhập):
+
+```bash
+run_dashboard.bat
+# hoac:
+C:\Users\HP\anaconda3\python.exe -m streamlit run dashboard_streamlit.py
+```
+
+Mở trình duyệt tại `http://localhost:8501`. Các trang: Tổng quan (metrics 4 chương, pipeline, CVSS-lite, REQ/NFR) · Ch1 (bảng P1–P5 SAT/UNSAT, đồ thị Kripke tô đậm phản ví dụ) · Ch2 (cảnh báo scanner theo file/CWE, memory trace ASan, NFR, chạy 7 subcommand `e2e_*` trên VULN vs FIXED) · Ch3 (7 check Z3, cặp VULN→FIXED) · Ch4 (biểu đồ crash hộp đen, CWE-197, BVA, 7 target hộp trắng, speedup) · Demo E2E trực tiếp (nhập hoTen/bangCap/maLop, preset tràn buffer) · CWE & Ma trận truy vết (lọc theo REQ/KL) · Logs & `run_all.py`.
+
+Yêu cầu: `pip install streamlit plotly pandas` (Anaconda trên máy này đã có sẵn: streamlit 1.65, plotly 5.24, pandas 2.2). `dashboard.html` vẫn là bản tĩnh để nộp kèm báo cáo.
+
+---
+
 ## 4. HƯỚNG DẪN CHẠY TỪNG BƯỚC (STEP-BY-STEP EXECUTION)
 
 ### Bước 1: Biên dịch Mã nguồn C E2E

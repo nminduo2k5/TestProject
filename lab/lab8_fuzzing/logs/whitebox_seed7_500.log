@@ -1,0 +1,23 @@
+=================================================================
+  LAB 8 - WHITE-BOX COVERAGE-GUIDED FUZZING (DuongUniversity Module 3)
+=================================================================
+
+[Ngan sach 501 lan thu, seed=7]
+  Tong so dong lenh da phu: 27
+  Cac su kien 'coverage moi' (dan duong tim kiem tung buoc):
+    Lan   1: input='GVADM:GVADM:inchaoCRDLSB'                    -> phu them dong [42, 43, 48, 49, 50, 51, 56, 59, 60, 62, 64, 65, 73, 75, 76, 80, 81, 82]
+    Lan   5: input='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGVADM:xinchao' -> phu them dong [68, 71]
+    Lan  27: input='LHP:CNLHP:TT2!24AAAAAAAAAAAAAAAAGV:AAAAAAAAAAAAAAAAAAAA_01' -> phu them dong [69, 70]
+    Lan  42: input='GV:NguynVa3nARMQJWGHKGWXUEMLBEACUNFBCVMQVJTHWJ' -> phu them dong [66, 67]
+    Lan 472: input='GVADM:!xi9chao'                              -> phu them dong [53, 54, 55]
+
+  So crash tim duoc: 2
+    Lan 395: input='GVADM:!xinchaoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' -> K:\TestProject\lab\lab8_fuzzing\crashes\whitebox_crash_0.txt
+    Lan 477: input='GVADM:!xi9LHP:cGVADM:haso' -> K:\TestProject\lab\lab8_fuzzing\crashes\whitebox_crash_1.txt
+
+--> Fuzzer hop trang 'leo' qua tung lop nhanh (GVADM: -> GVADM:! -> do dai tran)
+    nho phan hoi coverage, tim ra crash dau tien o lan thu 395.
+
+real	2m5.219s
+user	0m0.000s
+sys	0m0.031s
